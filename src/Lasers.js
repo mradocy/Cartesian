@@ -63,8 +63,8 @@ FullGame.Lasers = {
 
 //make graphics object to handle all lasers
 FullGame.Lasers.makeGraphics = function() {
-    FullGame.Lasers.graphics = game.add.graphics(0, 0, FullGame.GI.laserGroup);
-    return FullGame.Lasers.graphics;
+    this.graphics = game.add.graphics(0, 0, FullGame.GI.laserGroup);
+    return this.graphics;
 };
 
 /* Call this function to fire a laser.
@@ -249,9 +249,9 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             if ((x0-plr.x)*(x0-plr.x) + (y0-plr.y)*(y0-plr.y) <= plr.RADIUS*plr.RADIUS){
                 //can still hit player, even if it starts from inside
                 //fixing a glitch
-                pt = FullGame.Lasers.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x, plr.y, plr.RADIUS*3/4);
+                pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x, plr.y, plr.RADIUS*3/4);
             } else {
-                pt = FullGame.Lasers.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x, plr.y, plr.RADIUS);
+                pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x, plr.y, plr.RADIUS);
             }
             if (pt != null) {
                 var d = Math.sqrt((pt.x-x0)*(pt.x-x0)+(pt.y-y0)*(pt.y-y0));
@@ -270,7 +270,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         for (i=0; i<FullGame.GI.eyebots.length; i++){
             var eb = FullGame.GI.eyebots[i];
             if (eb.dead) continue;
-            var pt = FullGame.Lasers.laserHitCirclePoint(x0, y0, xHit, yHit, eb.x, eb.y, eb.RADIUS);
+            var pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, eb.x, eb.y, eb.RADIUS);
             if (pt != null) {
                 var d = Math.sqrt((pt.x-x0)*(pt.x-x0)+(pt.y-y0)*(pt.y-y0));
                 if (d < dToHit){
@@ -302,7 +302,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     y += obj.y;
                     ly2 += obj.y;
                 }
-                var pt = FullGame.Lasers.laserHitLinePoint(x0, y0, xHit, yHit, x, y, lx2, ly2);
+                var pt = this.laserHitLinePoint(x0, y0, xHit, yHit, x, y, lx2, ly2);
                 if (pt == null) continue;
                 var d = Math.sqrt((pt.x-x0)*(pt.x-x0)+(pt.y-y0)*(pt.y-y0));
                 if (d < dToHit){
@@ -328,8 +328,8 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         
         //create render for laser
         var r;
-        if (FullGame.Lasers.recycledRenders.length > 0){
-            r = FullGame.Lasers.recycledRenders.pop();
+        if (this.recycledRenders.length > 0){
+            r = this.recycledRenders.pop();
         } else {
             r = {};
         }
@@ -340,7 +340,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         r.color = c;
         r.type = laserType;
         r.t = 0; //for LASER_FADEOUT type
-        FullGame.Lasers.renders.push(r);
+        this.renders.push(r);
         
         //check if laser passed through any orbs
         if (laserType == FullGame.Til.LASER_NORMAL || laserType == FullGame.Til.LASER_THICK ||
@@ -349,7 +349,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 var orb = FullGame.GI.orbs[i];
                 if (orb.type == undefined || orb.type != "orb") continue;
                 if (orb.color != c) continue;
-                var pt = FullGame.Lasers.laserHitCirclePoint(x0, y0, xHit, yHit, orb.x, orb.y, orb.radius);
+                var pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, orb.x, orb.y, orb.radius);
                 if (pt == null) continue;
                 
                 //at this point, confirmed orb has been passed through
@@ -440,7 +440,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         }
         
         //particles
-        FullGame.Lasers.spawnParticles(xHit, yHit, c, laserType, reflect, normalHit);
+        this.spawnParticles(xHit, yHit, c, laserType, reflect, normalHit);
         
         if (reflect){
             //create new laser
@@ -473,7 +473,7 @@ FullGame.Lasers.laserHitLinePoint = function(startX, startY, endX, endY, lineX1,
     if (Math.min(startY, endY) > Math.max(lineY1, lineY2)) return null;
     
     //intersection
-    var pt = FullGame.Lasers.linesIntersectPoint(startX, startY, endX, endY, lineX1, lineY1, lineX2, lineY2);
+    var pt = this.linesIntersectPoint(startX, startY, endX, endY, lineX1, lineY1, lineX2, lineY2);
     if (pt == null) return null;
     
     //doesn't count if too close to the starting point
@@ -508,7 +508,7 @@ FullGame.Lasers.laserHitCirclePoint = function(startX, startY, endX, endY, circl
         return null;
     
     //intersection
-    var pts = FullGame.Lasers.lineIntersectCirclePoints(startX, startY, endX, endY, circleX, circleY, circleRadius);
+    var pts = this.lineIntersectCirclePoints(startX, startY, endX, endY, circleX, circleY, circleRadius);
     if (pts == null) return null;
     //getting point closest to start
     var pt;
@@ -581,44 +581,44 @@ FullGame.Lasers.lineIntersectCirclePoints = function(x1, y1, x2, y2, cx, cy, r) 
 FullGame.Lasers.updateGraphics = function() {
     
     var dt = game.time.physicsElapsed;
-    FullGame.Lasers.flicker = (FullGame.Lasers.flicker+1) % 2;
+    this.flicker = (this.flicker+1) % 2;
     //purposefully applying particle time threshold out of order so particles get a chance to spawn
-    FullGame.Lasers.particleTime -= FullGame.Lasers.PARTICLE_SPAWN_DURATION * Math.floor(FullGame.Lasers.particleTime / FullGame.Lasers.PARTICLE_SPAWN_DURATION);
-    FullGame.Lasers.particleTime += dt;
+    this.particleTime -= this.PARTICLE_SPAWN_DURATION * Math.floor(this.particleTime / this.PARTICLE_SPAWN_DURATION);
+    this.particleTime += dt;
     
-    FullGame.Lasers.graphics.clear();
+    this.graphics.clear();
     var color1, thickness1, alpha1, color2, thickness2, alpha2;
-    for (var i=0; i<FullGame.Lasers.renders.length; i++){
-        var r = FullGame.Lasers.renders[i];
-        r.t = Math.min(FullGame.Lasers.FADEOUT_DURATION, r.t + game.time.physicsElapsed);
+    for (var i=0; i<this.renders.length; i++){
+        var r = this.renders[i];
+        r.t = Math.min(this.FADEOUT_DURATION, r.t + game.time.physicsElapsed);
         
         //color from color
         switch (r.color){
         case FullGame.Til.RED:
-            if (FullGame.Lasers.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
-                color1 = FullGame.Lasers.COLOR_RED1_F1;
-                color2 = FullGame.Lasers.COLOR_RED2_F1;
+            if (this.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
+                color1 = this.COLOR_RED1_F1;
+                color2 = this.COLOR_RED2_F1;
             } else {
-                color1 = FullGame.Lasers.COLOR_RED1;
-                color2 = FullGame.Lasers.COLOR_RED2;
+                color1 = this.COLOR_RED1;
+                color2 = this.COLOR_RED2;
             }
             break;
         case FullGame.Til.BLUE:
-            if (FullGame.Lasers.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
-                color1 = FullGame.Lasers.COLOR_BLUE1_F1;
-                color2 = FullGame.Lasers.COLOR_BLUE2_F1;
+            if (this.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
+                color1 = this.COLOR_BLUE1_F1;
+                color2 = this.COLOR_BLUE2_F1;
             } else {
-                color1 = FullGame.Lasers.COLOR_BLUE1;
-                color2 = FullGame.Lasers.COLOR_BLUE2;
+                color1 = this.COLOR_BLUE1;
+                color2 = this.COLOR_BLUE2;
             }
             break;
         case FullGame.Til.GREEN:
-            if (FullGame.Lasers.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
-                color1 = FullGame.Lasers.COLOR_GREEN1_F1;
-                color2 = FullGame.Lasers.COLOR_GREEN2_F1;
+            if (this.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
+                color1 = this.COLOR_GREEN1_F1;
+                color2 = this.COLOR_GREEN2_F1;
             } else {
-                color1 = FullGame.Lasers.COLOR_GREEN1;
-                color2 = FullGame.Lasers.COLOR_GREEN2;
+                color1 = this.COLOR_GREEN1;
+                color2 = this.COLOR_GREEN2;
             }
             break;
         }
@@ -626,59 +626,59 @@ FullGame.Lasers.updateGraphics = function() {
         //thickness and alpha from type
         switch (r.type){
         case FullGame.Til.LASER_NORMAL:
-            thickness1 = FullGame.Lasers.THICKNESS_NORMAL1;
-            thickness2 = FullGame.Lasers.THICKNESS_NORMAL2;
-            alpha1 = FullGame.Lasers.ALPHA_NORMAL1;
-            alpha2 = FullGame.Lasers.ALPHA_NORMAL2;
+            thickness1 = this.THICKNESS_NORMAL1;
+            thickness2 = this.THICKNESS_NORMAL2;
+            alpha1 = this.ALPHA_NORMAL1;
+            alpha2 = this.ALPHA_NORMAL2;
             break;
         case FullGame.Til.LASER_TRANSPARENT:
-            thickness1 = FullGame.Lasers.THICKNESS_TRANSPARENT;
+            thickness1 = this.THICKNESS_TRANSPARENT;
             thickness2 = 0;
-            alpha1 = FullGame.Lasers.ALPHA_TRANSPARENT;
+            alpha1 = this.ALPHA_TRANSPARENT;
             alpha2 = 0;
             break;
         case FullGame.Til.LASER_THICK:
-            thickness1 = FullGame.Lasers.THICKNESS_THICK1;
-            thickness2 = FullGame.Lasers.THICKNESS_THICK2;
-            alpha1 = FullGame.Lasers.ALPHA_THICK1;
-            alpha2 = FullGame.Lasers.ALPHA_THICK2;
+            thickness1 = this.THICKNESS_THICK1;
+            thickness2 = this.THICKNESS_THICK2;
+            alpha1 = this.ALPHA_THICK1;
+            alpha2 = this.ALPHA_THICK2;
             break;
         case FullGame.Til.LASER_FADEOUT:
-            thickness1 = FullGame.Lasers.THICKNESS_FADEOUT * (1 - r.t / FullGame.Lasers.FADEOUT_DURATION);
+            thickness1 = this.THICKNESS_FADEOUT * (1 - r.t / this.FADEOUT_DURATION);
             thickness2 = 0;
-            alpha1 = FullGame.Lasers.ALPHA_THICK1 * (1 - r.t / FullGame.Lasers.FADEOUT_DURATION);
+            alpha1 = this.ALPHA_THICK1 * (1 - r.t / this.FADEOUT_DURATION);
             alpha2 = 0;
             break;
         }
         
         //draw
-        FullGame.Lasers.graphics.lineStyle(thickness1, color1, alpha1);
-        FullGame.Lasers.graphics.moveTo(r.x0, r.y0);
-        FullGame.Lasers.graphics.lineTo(r.x1, r.y1);
+        this.graphics.lineStyle(thickness1, color1, alpha1);
+        this.graphics.moveTo(r.x0, r.y0);
+        this.graphics.lineTo(r.x1, r.y1);
         if (thickness2 > 0){
-            FullGame.Lasers.graphics.lineStyle(thickness2, color2, alpha2);
-            FullGame.Lasers.graphics.moveTo(r.x0, r.y0);
-            FullGame.Lasers.graphics.lineTo(r.x1, r.y1);
+            this.graphics.lineStyle(thickness2, color2, alpha2);
+            this.graphics.moveTo(r.x0, r.y0);
+            this.graphics.lineTo(r.x1, r.y1);
         }
         
     }
     
     //recycle renders
-    for (i=0; i<FullGame.Lasers.renders.length; i++){
-        var r = FullGame.Lasers.renders[i];
+    for (i=0; i<this.renders.length; i++){
+        var r = this.renders[i];
         //only keep renders of fadeout lasers, until they completely fade out
-        if (r.type == FullGame.Til.LASER_FADEOUT && r.t < FullGame.Lasers.FADEOUT_DURATION){
+        if (r.type == FullGame.Til.LASER_FADEOUT && r.t < this.FADEOUT_DURATION){
             continue;
         }
         //recycle everything else
-        FullGame.Lasers.recycledRenders.push(r);
-        FullGame.Lasers.renders.splice(i, 1);
+        this.recycledRenders.push(r);
+        this.renders.splice(i, 1);
         i--;
     }
     
     //draw particles
-    for (i=0; i<FullGame.Lasers.particles.length; i++){
-        var p = FullGame.Lasers.particles[i];
+    for (i=0; i<this.particles.length; i++){
+        var p = this.particles[i];
         //move particle
         p.t += dt;
         p.vx += p.ax * dt;
@@ -686,85 +686,85 @@ FullGame.Lasers.updateGraphics = function() {
         p.x += p.vx * dt;
         p.y += p.vy * dt;
         
-        alpha1 = FullGame.Lasers.PARTICLE_ALPHA1;
-        alpha2 = FullGame.Lasers.PARTICLE_ALPHA2;
-        thickness1 = FullGame.Lasers.PARTICLE_THICKNESS1_MIN + Math.random() * (FullGame.Lasers.PARTICLE_THICKNESS1_MAX-FullGame.Lasers.PARTICLE_THICKNESS1_MIN);
-        thickness2 = FullGame.Lasers.PARTICLE_THICKNESS2;
+        alpha1 = this.PARTICLE_ALPHA1;
+        alpha2 = this.PARTICLE_ALPHA2;
+        thickness1 = this.PARTICLE_THICKNESS1_MIN + Math.random() * (this.PARTICLE_THICKNESS1_MAX-this.PARTICLE_THICKNESS1_MIN);
+        thickness2 = this.PARTICLE_THICKNESS2;
         switch (p.color){
         case FullGame.Til.RED:
             if (p.flicker == 1){
-                color1 = FullGame.Lasers.COLOR_RED1_F1;
-                color2 = FullGame.Lasers.COLOR_RED2_F1;
+                color1 = this.COLOR_RED1_F1;
+                color2 = this.COLOR_RED2_F1;
             } else {
-                color1 = FullGame.Lasers.COLOR_RED1;
-                color2 = FullGame.Lasers.COLOR_RED2;
+                color1 = this.COLOR_RED1;
+                color2 = this.COLOR_RED2;
             }
             break;
         case FullGame.Til.BLUE:
             if (p.flicker == 1){
-                color1 = FullGame.Lasers.COLOR_BLUE1_F1;
-                color2 = FullGame.Lasers.COLOR_BLUE2_F1;
+                color1 = this.COLOR_BLUE1_F1;
+                color2 = this.COLOR_BLUE2_F1;
             } else {
-                color1 = FullGame.Lasers.COLOR_BLUE1;
-                color2 = FullGame.Lasers.COLOR_BLUE2;
+                color1 = this.COLOR_BLUE1;
+                color2 = this.COLOR_BLUE2;
             }
             break;
         case FullGame.Til.GREEN:
             if (p.flicker == 1){
-                color1 = FullGame.Lasers.COLOR_GREEN1_F1;
-                color2 = FullGame.Lasers.COLOR_GREEN2_F1;
+                color1 = this.COLOR_GREEN1_F1;
+                color2 = this.COLOR_GREEN2_F1;
             } else {
-                color1 = FullGame.Lasers.COLOR_GREEN1;
-                color2 = FullGame.Lasers.COLOR_GREEN2;
+                color1 = this.COLOR_GREEN1;
+                color2 = this.COLOR_GREEN2;
             }
             break;
         }
         
         //draw
-        FullGame.Lasers.graphics.lineStyle(0);
-        FullGame.Lasers.graphics.beginFill(color1, alpha1);
-        FullGame.Lasers.graphics.drawRect(p.x-thickness1/2, p.y-thickness1/2, thickness1, thickness1);
-        FullGame.Lasers.graphics.endFill();
-        FullGame.Lasers.graphics.beginFill(color2, alpha2);
-        FullGame.Lasers.graphics.drawRect(p.x-thickness2/2, p.y-thickness2/2, thickness2, thickness2);
-        FullGame.Lasers.graphics.endFill();
+        this.graphics.lineStyle(0);
+        this.graphics.beginFill(color1, alpha1);
+        this.graphics.drawRect(p.x-thickness1/2, p.y-thickness1/2, thickness1, thickness1);
+        this.graphics.endFill();
+        this.graphics.beginFill(color2, alpha2);
+        this.graphics.drawRect(p.x-thickness2/2, p.y-thickness2/2, thickness2, thickness2);
+        this.graphics.endFill();
     }
     
     //recycle particles
-    for (i=0; i<FullGame.Lasers.particles.length; i++){
-        p = FullGame.Lasers.particles[i];
+    for (i=0; i<this.particles.length; i++){
+        p = this.particles[i];
         if (p.t >= p.d){
-            FullGame.Lasers.particles.splice(i, 1);
+            this.particles.splice(i, 1);
             i--;
-            FullGame.Lasers.recycledParticles.push(p);
+            this.recycledParticles.push(p);
         }
     }
     
     //draw sights
-    while (FullGame.Lasers.sights.length > 0){
-        var s = FullGame.Lasers.sights.pop();
+    while (this.sights.length > 0){
+        var s = this.sights.pop();
         
-        alpha1 = FullGame.Lasers.SIGHT_ALPHA;
-        var rad = FullGame.Lasers.SIGHT_RADIUS;
+        alpha1 = this.SIGHT_ALPHA;
+        var rad = this.SIGHT_RADIUS;
         switch (s.color){
         case FullGame.Til.RED:
-            color1 = FullGame.Lasers.COLOR_RED2;
+            color1 = this.COLOR_RED2;
             break;
         case FullGame.Til.BLUE:
-            color1 = FullGame.Lasers.COLOR_BLUE2;
+            color1 = this.COLOR_BLUE2;
             break;
         case FullGame.Til.GREEN:
-            color1 = FullGame.Lasers.COLOR_GREEN2;
+            color1 = this.COLOR_GREEN2;
             break;
         }
         
         //draw
-        FullGame.Lasers.graphics.lineStyle(0);
-        FullGame.Lasers.graphics.beginFill(color1, alpha1);
-        FullGame.Lasers.graphics.drawCircle(s.x, s.y, rad);
-        FullGame.Lasers.graphics.endFill();
+        this.graphics.lineStyle(0);
+        this.graphics.beginFill(color1, alpha1);
+        this.graphics.drawCircle(s.x, s.y, rad);
+        this.graphics.endFill();
         
-        FullGame.Lasers.recycledSights.push(s);
+        this.recycledSights.push(s);
     }
     
 };
@@ -776,8 +776,8 @@ FullGame.Lasers.spawnParticles = function(x, y, color, laserType, reflected, nor
     if (laserType == FullGame.Til.LASER_TRANSPARENT){
         //todo: make laser sight
         var sight;
-        if (FullGame.Lasers.recycledSights.length > 0){
-            sight = FullGame.Lasers.recycledSights.pop();
+        if (this.recycledSights.length > 0){
+            sight = this.recycledSights.pop();
         } else {
             sight = {};
         }
@@ -785,23 +785,23 @@ FullGame.Lasers.spawnParticles = function(x, y, color, laserType, reflected, nor
         sight.y = y;
         sight.color = color;
         
-        FullGame.Lasers.sights.push(sight);
+        this.sights.push(sight);
         return;
     }
     
    
-    for (var i=FullGame.Lasers.PARTICLE_SPAWN_DURATION; i<FullGame.Lasers.particleTime; i += FullGame.Lasers.PARTICLE_SPAWN_DURATION){
+    for (var i=this.PARTICLE_SPAWN_DURATION; i<this.particleTime; i += this.PARTICLE_SPAWN_DURATION){
         
         var part;
-        if (FullGame.Lasers.recycledParticles.length > 0){
-            part = FullGame.Lasers.recycledParticles.pop();
+        if (this.recycledParticles.length > 0){
+            part = this.recycledParticles.pop();
         } else {
             part = {};
         }
         
         var angle = normal + Math.random()*Math.PI - Math.PI/2;
-        var speed = FullGame.Lasers.PARTICLE_SPEED_MIN + Math.random() * (FullGame.Lasers.PARTICLE_SPEED_MAX - FullGame.Lasers.PARTICLE_SPEED_MIN);
-        var gravity = FullGame.Lasers.PARTICLE_GRAVITY;
+        var speed = this.PARTICLE_SPEED_MIN + Math.random() * (this.PARTICLE_SPEED_MAX - this.PARTICLE_SPEED_MIN);
+        var gravity = this.PARTICLE_GRAVITY;
         part.x = x;
         part.y = y;
         part.vx = speed * Math.cos(angle);
@@ -810,10 +810,10 @@ FullGame.Lasers.spawnParticles = function(x, y, color, laserType, reflected, nor
         part.ay = gravity;
         part.color = color;
         part.t = 0;
-        part.d = FullGame.Lasers.PARTICLE_LIFE_DURATION;
+        part.d = this.PARTICLE_LIFE_DURATION;
         part.flicker = Math.floor(Math.random() * 2);
         
-        FullGame.Lasers.particles.push(part);
+        this.particles.push(part);
         
     }
     
@@ -821,18 +821,18 @@ FullGame.Lasers.spawnParticles = function(x, y, color, laserType, reflected, nor
 
 
 FullGame.Lasers.destroy = function() {
-    FullGame.Lasers.graphics.clear();
-    FullGame.Lasers.graphics = null;
+    this.graphics.clear();
+    this.graphics = null;
     //recycle renders
-    while (FullGame.Lasers.renders.length > 0){
-        FullGame.Lasers.recycledRenders.push(FullGame.Lasers.renders.pop());
+    while (this.renders.length > 0){
+        this.recycledRenders.push(this.renders.pop());
     }
     //recylce particles
-    while (FullGame.Lasers.particles.length > 0){
-        FullGame.Lasers.recycledParticles.push(FullGame.Lasers.particles.pop());
+    while (this.particles.length > 0){
+        this.recycledParticles.push(this.particles.pop());
     }
     //recylce sights
-    while (FullGame.Lasers.sights.length > 0){
-        FullGame.Lasers.recycledSights.push(FullGame.Lasers.sights.pop());
+    while (this.sights.length > 0){
+        this.recycledSights.push(this.sights.pop());
     }
 };

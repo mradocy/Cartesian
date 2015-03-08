@@ -15,21 +15,21 @@ FullGame.Menus.UNSELECTED_COLOR = "#BBBBBB";
 
 //clears the currently displayed menu
 FullGame.Menus.clearMenu = function() {
-    if (FullGame.Menus.cursor != null){
-        FullGame.GI.hudGroup.remove(FullGame.Menus.cursor);
-        FullGame.Menus.cursor = null;
+    if (this.cursor != null){
+        FullGame.GI.hudGroup.remove(this.cursor);
+        this.cursor = null;
     }
-    if (FullGame.Menus.text != null){
-        for (var key in FullGame.Menus.text) {
-            FullGame.GI.hudGroup.remove(FullGame.Menus.text[key]);
+    if (this.text != null){
+        for (var key in this.text) {
+            FullGame.GI.hudGroup.remove(this.text[key]);
         }
-        FullGame.Menus.text = null;
+        this.text = null;
     }
-    FullGame.Menus.textSelected = null;
-    FullGame.Menus.prevTextSelected = null;
-    if (FullGame.Menus.bg != null){
-        FullGame.GI.hudGroup.remove(FullGame.Menus.bg);
-        FullGame.Menus.bg = null;
+    this.textSelected = null;
+    this.prevTextSelected = null;
+    if (this.bg != null){
+        FullGame.GI.hudGroup.remove(this.bg);
+        this.bg = null;
     }
 };
 
@@ -40,107 +40,107 @@ FullGame.Menus.pauseMenu = function() {
     game.paused = true;
     
     //background
-    FullGame.Menus.bg = game.add.graphics(0, 0, FullGame.GI.hudGroup);
-    var bg = FullGame.Menus.bg;
+    this.bg = game.add.graphics(0, 0, FullGame.GI.hudGroup);
+    var bg = this.bg;
     bg.beginFill(0x000000, .9);
     bg.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     bg.endFill();
     
     //text
-    /*FullGame.Menus.X = 400;
-    FullGame.Menus.Y = 200;
-    FullGame.Menus.H = 35;*/
-    FullGame.Menus.HIT_AREA.x = -5;
-    FullGame.Menus.HIT_AREA.y = -5;
-    FullGame.Menus.HIT_AREA.width = 200;
-    FullGame.Menus.HIT_AREA.height = FullGame.Menus.H;
-    FullGame.Menus.howToPlayImage = null;
-    FullGame.Menus.text = {};
-    var txt = FullGame.Menus.text;
+    /*this.X = 400;
+    this.Y = 200;
+    this.H = 35;*/
+    this.HIT_AREA.x = -5;
+    this.HIT_AREA.y = -5;
+    this.HIT_AREA.width = 200;
+    this.HIT_AREA.height = this.H;
+    this.howToPlayImage = null;
+    this.text = {};
+    var txt = this.text;
     txt.continueT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y,
+        this.X,
+        this.Y,
         "CONTINUE",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.optionsT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H,
+        this.X,
+        this.Y + this.H,
         "OPTIONS",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.howToPlayT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H*2,
+        this.X,
+        this.Y + this.H*2,
         "HOW TO PLAY",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.quitT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H*3,
+        this.X,
+        this.Y + this.H*3,
         "QUIT",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
-    FullGame.Menus.textSelected = txt.continueT;
+    this.textSelected = txt.continueT;
     
     //other text that won't be immediately visible
     txt.toggleFullscreenT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y,
+        this.X,
+        this.Y,
         "TOGGLE FULLSCREEN",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.toggleFullscreenT.visible = false;
     txt.toggleSFXT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H,
+        this.X,
+        this.Y + this.H,
         "MUTE SFX",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.toggleSFXT.visible = false;
     txt.toggleMusicT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H*2,
+        this.X,
+        this.Y + this.H*2,
         "MUTE MUSIC",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.toggleMusicT.visible = false;
     txt.backFromOptionsT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H*3,
+        this.X,
+        this.Y + this.H*3,
         "BACK",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.backFromOptionsT.visible = false;
     
     txt.quitSureT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y,
+        this.X,
+        this.Y,
         "QUIT THE GAME?",
-        { font: "24px Verdana", fill: FullGame.Menus.SELECTED_COLOR },
+        { font: "24px Verdana", fill: this.SELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.quitSureT.visible = false;
     txt.quitNoT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H*3,
+        this.X,
+        this.Y + this.H*3,
         "NO",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.quitNoT.visible = false;
     txt.quitYesT = game.add.text(
-        FullGame.Menus.X,
-        FullGame.Menus.Y + FullGame.Menus.H*2,
+        this.X,
+        this.Y + this.H*2,
         "YES",
-        { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR },
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.quitYesT.visible = false;
     
     //cursor
     var spriteKey = FullGame.HUD.reticleSpriteKey;
     if (spriteKey == "") spriteKey = "reticle_red";
-    FullGame.Menus.cursor = game.add.sprite(0, 0, spriteKey, 0, FullGame.HUD.group);
-    FullGame.Menus.cursor.anchor.setTo(.5, .5);
-    FullGame.Menus.cursor.scale.set(.5, .5);
+    this.cursor = game.add.sprite(0, 0, spriteKey, 0, FullGame.HUD.group);
+    this.cursor.anchor.setTo(.5, .5);
+    this.cursor.scale.set(.5, .5);
     
     
     FullGame.GI.pauseObj = {
