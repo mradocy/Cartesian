@@ -1,0 +1,53 @@
+
+-----
+
+New game:
+
+This game automatically saves data locally.  Note that if your browser cache is cleared, the save data will be lost.
+
+-----
+Game intro, with robot falling down very long hole
+
+A team of interstellar excavators were investigating various rock bodies in the asteroid belt.  They were searching for gemstones and other rare ores, but discovered something even greater. (musgravite)
+
+Deep within asteroid E-V15119 appeared to be the remnants of an ancient extraterrestrial civilization, with deliberately sculpted caves and passages.  Excited, many of the miners plunged deeper to see what other secrets the asteroid contained.
+
+But the excavators never returned.  All that remained was NUTO, a laser-equipped excavation robot roaming the surface of the asteroid.
+
+NUTO now has a new mission: plunge into the depths of E-V15119 and rescue the missing miners.
+
+-----
+
+firstLevel:
+
+That was quite the fall, NUTO!  Try moving around a bit to make sure everything is still functioning.
+
+It seems that's the case.  You're equipped with self-repair micromachines, so you'll be fine as long as you don't get hurt too badly.
+
+Ha, look at me talking with you like you're a human being.  I've been stuck here so long that I'm already desperate for companionship.
+
+
+firstOrb:
+
+I'm stuck in this room with really tall crystal walls; I don't know where the other guys are.  Do you see anything like that around?  I can't say how far away you are from where we dropped in.  
+
+It seems most of the walls here are impervious to your current laser.  Regardless, try shooting it at things that look interesting.  Maybe it'll help form a path forward.
+
+
+redEyebot:
+
+We saw some intriguing eye-like creatures on our way in, but they seem pretty harmless.  My theory is they were the ones that created these passages.
+
+It must have been pretty hard, like without limbs and all.  The inability to move probably didn't help either.  On second thought, it seems they'd be really lousy workers, huh?  Hmm...
+
+firstReflect:
+
+(after solving puzzle)
+A reminder: use ESC or ENTER to refresh yourself if you need it.
+
+Although I'd rather you not... the quicker you can get us out of here, the better.  I haven't eaten in a while and there's no food around here.
+
+I think it has been 20, maybe 30 entire minutes!  Please hurry, oh but don't be reckless either NUTO.  I know you can handle the journey ahead. 
+
+Oh yeah, and my oxygen isn't going to last forever either, probably.  Being a robot you may not understand, well actually you're pretty smart so you likely do.  Just in case you wanted something else to consider.
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="22" height="14" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg1"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <layer name="backTile" width="22" height="14" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="22" height="14">
+  <object type="OrbRed" x="767" y="95" width="64" height="64"/>
+  <object type="DoorRed" x="1216" y="256" width="64" height="128"/>
+  <object type="ShooterRed" x="640" y="224">
+   <polyline points="0,0 -128,0"/>
+  </object>
+  <object type="ShooterRed" x="960" y="224">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object type="ShooterRed" x="640" y="608">
+   <polyline points="0,0 448,32"/>
+  </object>
+ </objectgroup>
+ <layer name="tile" width="22" height="14">
+  <data encoding="csv">
+56,99,7,101,99,31,38,31,31,31,31,31,31,38,38,38,38,2,5,1,5,5,
+56,53,99,6,115,0,0,0,0,0,0,0,0,0,0,0,0,23,5,2,3,35,
+54,51,51,99,25,0,0,0,0,0,0,0,0,0,0,0,0,23,5,2,3,6,
+50,53,52,51,113,0,0,0,0,0,46,10,17,45,40,0,0,37,31,31,38,38,
+52,56,54,54,75,0,0,0,0,0,0,23,25,0,0,0,0,0,0,0,0,0,
+55,50,56,56,75,0,0,0,0,0,0,30,32,0,0,0,0,0,0,0,0,0,
+52,54,52,50,114,0,0,0,0,0,0,0,0,0,0,0,0,16,10,10,17,17,
+53,54,80,121,32,0,0,0,0,0,0,0,0,0,16,40,0,23,6,5,7,4,
+80,81,0,0,0,0,0,0,0,0,0,46,45,45,32,0,0,22,7,5,4,1,
+0,0,0,0,0,0,0,0,46,40,0,0,0,0,0,0,0,23,102,50,50,50,
+0,0,0,0,16,17,144,0,0,0,0,0,0,0,0,0,0,130,50,50,50,50,
+17,17,10,17,3,102,74,0,0,0,0,0,0,0,0,0,0,72,50,50,50,50,
+4,4,2,4,102,50,52,107,10,17,17,10,17,109,59,66,66,54,51,54,55,50,
+3,2,2,102,55,55,100,1,5,1,42,6,102,50,55,53,54,55,54,52,56,51
+</data>
+ </layer>
+ <objectgroup name="front" width="22" height="14">
+  <object type="Exit" x="1344" y="256" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="firstMultReflect"/>
+   </properties>
+  </object>
+  <object type="Exit" x="0" y="576" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="redEyebot"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

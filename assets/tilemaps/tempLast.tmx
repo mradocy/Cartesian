@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg_tempLast"/>
+  <property name="bgParallaxX" value=".6"/>
+  <property name="bgParallaxY" value=".6"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="16" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="16" height="9"/>
+ <layer name="tile" width="16" height="9">
+  <data encoding="csv">
+53,87,87,80,87,87,80,80,87,80,87,87,87,87,80,51,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+53,66,59,0,0,59,59,59,59,66,59,59,59,59,59,56
+</data>
+ </layer>
+ <objectgroup name="front" width="16" height="9">
+  <object type="Exit" x="192" y="512" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="sandTrek"/>
+    <property name="right" value="true"/>
+    <property name="springJump" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

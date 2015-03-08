@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="14" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg2"/>
+  <property name="bgParallaxX" value=".6"/>
+  <property name="bgParallaxY" value=".6"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="16" height="14" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="16" height="14">
+  <object type="DoorBlue" x="224" y="128" width="64" height="128"/>
+  <object type="OrbBlue" x="352" y="96" width="64" height="64"/>
+  <object type="ShooterBlue" x="768" y="468">
+   <polyline points="0,0 -251,131"/>
+  </object>
+  <object type="Spring" x="832" y="640" width="128" height="64"/>
+  <object type="RoplateBlue" x="464" y="537">
+   <polygon points="0,0 21,125 -15,75"/>
+  </object>
+  <object type="Spring" x="64" y="192" width="128" height="64"/>
+ </objectgroup>
+ <layer name="tile" width="16" height="14">
+  <data encoding="csv">
+26,0,0,23,5,31,31,5,3,2,7,5,1,6,1,5,
+25,0,0,37,39,0,0,22,3,2,3,3,1,5,7,6,
+25,0,0,0,0,0,0,37,38,38,38,31,31,38,31,6,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,
+2,10,17,17,18,0,0,0,0,0,0,0,0,0,0,23,
+2,1,5,7,26,0,0,0,0,0,0,0,0,0,0,22,
+28,28,28,7,2,211,211,212,221,45,45,45,11,0,0,22,
+28,5,1,31,32,0,0,0,0,0,0,0,47,0,0,23,
+3,35,26,0,0,0,0,0,0,0,0,0,0,0,0,23,
+14,35,26,0,0,0,0,0,0,0,0,0,0,0,0,22,
+28,28,26,0,0,0,0,0,0,0,0,0,33,0,0,22,
+49,35,26,0,0,0,0,0,0,0,16,17,6,17,17,21,
+2,35,25,0,0,0,0,0,0,0,23,1,6,5,5,35,
+7,14,25,0,0,16,10,17,17,17,5,14,2,2,3,3
+</data>
+ </layer>
+ <objectgroup name="front" width="16" height="14">
+  <object type="Exit" x="192" y="832" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="split"/>
+   </properties>
+  </object>
+  <object type="Exit" x="64" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="roplate2"/>
+    <property name="right" value="true"/>
+    <property name="springJump" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

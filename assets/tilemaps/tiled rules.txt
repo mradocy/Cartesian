@@ -1,0 +1,66 @@
+Minimum room size: 16x9 tiles
+
+Only the layer labelled "mid" will be inspected when determining tileCols
+
+After making a new level, update Preloader.js with the tilemap JSON and main.js with the level state.
+
+The following properties can be given to tilesets:
+- allType: sets the default type for all tiles in the set.
+	If not given, default type is FullGame.Til.NO_COL.
+- allColor: sets the default topColor, rightColor, bottomColor, and leftColor
+	for all tiles in the set.
+	If not given, default colors are FullGame.Til.BLACK.
+- allTopColor: sets the default topColor for all tiles in the set.
+- allRightColor: sets the default rightColor for all tiles in the set.
+- allBottomColor: sets the default bottomColor for all tiles in the set.
+- allLeftColor: sets the default leftColor for all tiles in the set.
+
+The following properties can be given to tiles (will override properties given to tiles from its tileset):
+- type: sets the type of the tile.
+- color: sets the topColor, rightColor, bottomColor, and leftColor of the tile.
+- topColor: sets the topColor of the tile.
+- rightColor: sets the rightColor of the tile.
+- bottomColor: sets the bottomColor of the tile.
+- leftColor: sets the leftColor of the tile.
+
+Tiled maps contain the following layers:
+3. front (Object layer) (optional)
+2. tile (Tile layer)
+1. obj (Object layer)
+0. backTile (Tile layer, no collision) (optional)
+
+The Map iteself can be given the following properties in Tiled:
+- bg: The key for the background image of the level
+- bgParallaxX: Number in [0, 1] representing the horizontal parallax effect of the bg image.
+- bgParallaxY: Number in [0, 1] representing the vertical parallax effect of the bg image.
+
+Every level should have an Exit object (rectangle), which is how the player will leave and enter the room at the start
+- Set 'mapTo' property with the map to go to (map connected to)
+- Set 'noExit' property to false to make it JUST and entrance, and can't exit that way
+- 2 ways of getting into the same adjacent room is NOT ALLOWED
+- Touching the left border of the level indicates player will enter from left to right at that point.
+- Touching the right border of the level indicates player will enter from right to left at that point.
+- Touching the top border indicates player will fall in from the top.
+- Touching the bottom border indicates player will jump in from the bottom
+	- Set custom property 'right' to false to indicate jump will be to the left
+	- Set custom property 'springJump' to true to indicate jump will be bigger
+- Otherwise player will just spawn there with no behavior
+
+Path
+- Make a Path from a polygon or polyline.
+- Give the Path a name so it can be referenced by other objects
+
+ShooterRed
+- Set property 'type' to 'transparent' for a transparent laser
+- Set property 'type' to 'thick' for a thick laser
+- Set property 'mobile' to true to enable movement (and give it another sprite)
+- Set property 'path' to the name of the Path for it to follow.
+	- It will attempt to snap position to the path, but it will only work right if the shooter is between the 1st and 2nd points of the path.
+- Set property 'speed' to set the speed along the path.
+- Set property 'rotationSpeed' to set rotation speed
+- Set properties 'rotationMin' and 'rotationMax' to bound the rotation between two values
+
+
+
+
+

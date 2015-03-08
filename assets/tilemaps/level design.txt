@@ -1,0 +1,147 @@
+- Interrupt every 1 or 2 puzzle levels with a more action-y level
+
+- Moving, jumping - horizontal scroll level
+- Lasers exist
+- Lasers can hurt
+- Shoot laser at orb to open door - no scroll level
+- Mirrors reflect lasers
+- Use mirror to help reach orb
+- Lasers can go through glass
+- Need to intersect 2 orbs at once to open door
+- Vertical scroll level
+- Moving lasers
+- Use glass to hit 2 orbs
+- Use mirror to hit 2 orbs
+- Camera movement
+	- See orb kinda offscreen, move cursor toward it, reveals something else
+- Solution is easy but requires laser to bounce off many mirrors
+- Solution is almost vertical shot
+- Solution is almost horizontal shot
+
+- Secret area
+
+- Jump spring
+
+- Moving orbs
+
+- Switches
+
+- Room with many mirrors to play around in
+
+
+- Reflect off door to solve puzzle
+
+
+
+
+
+
+- Naive way to hit orb is to also hurt yourself
+
+
+- Fall into trap (fake walls) that leads to next level.
+- Tiny room with glass on right and bottom walls.  Many indestrutable red eyebots stare at the player (red eyebots and red player = transparent laser)
+- Escape by hitting breakable wall on left, which leads to more obvious breakable walls. (introduction to the "sand" tile type)
+- After playing with sand for a bit, need to go around indestructable blue eyebots (blue eyebot and red player = normal laser)
+- 2 paths, but one is blocked by blue eyebot that's impossible to get by.  Take the other path (this path has a red eyebot in the very next room).
+- First encounter with blue eyebot that isn't indestructable (back is black).  Destroy it to move on.
+- Show off the "death pit": blatently obvious pit that you can't escape from, and need to kill yourself.
+- A level or two of trekking through sand tiles
+- Get blue laser equip, become blue player.  Now blue eyebots can be passed (blue eyebots and blue player = transparent).
+- Find yourself back in the room with 2 paths.  Go to the path blocked by the blue eyebot.
+
+
+
+- Thing that splits lasers up
+
+- Use laser to provide power; charge something up -> move something.
+	- When it's not getting power, it moves back.
+
+
+
+
+
+- Reflect own laser off roplate
+- Reflect off spring
+- Custom roplate with colors on half an edge, etc.
+- Use roplates to make a 5 pointed star
+
+- Get colorchip guarded by eyebot in certain direction and continue going in that direction to not get caught.
+
+Level order:
+
+- Third orb hiding behind sand
+- Red roplates
+- Find red colorchip, then solve with red laser.
+- Need to destroy eyebot to get through level
+- Open red door to get blue colorchip, then can open blue door.
+
+- Make path through a lot of sand
+- 5 pointed star
+
+- Boss - green laser introduction, thick laser introduction
+	- Phase 1:
+		- Need to hit boss in the back
+	- Phase 2:
+		- Need to get boss's laser to hit itself in the back
+
+- Using moving laser to hit 1 of several orbs
+- Need to go to previous level to get colorchip to pass level
+- Laser slowly rotates, eventually will hit row of sand tiles and make level unwinnable
+- Blast through stuff
+- Backtrack through previous levels blasting through it
+
+- Portals introduction
+
+- Pushing platforms introduction
+
+- Musgravite (non-secret) introduction
+	- Shining laser into musgravite splits it up.
+
+- Boss: in sparkly cave
+	- Boss moves up/down/left/right on a grid
+	- When shining laser at boss, it will instantly teleport to another spot on the grid
+		- Tiny delay to ensure player isn't also hitting itself
+	- goal is to have lasers go through every space on the grid 
+	- Phase 1: Simple room with left and right walls all reflective
+		- Simply go to a corner and shoot nearly horizontal to take up the entire room
+	- Phase 2: Complex room with some musgravite
+		- Need to stand in correct spot to shoot in such a way that gets the entire room but not self
+
+- Get thick laser
+- Escape sequence section (with thick laser)
+	- Encourages player to be quick, but only last two levels are actually timed.
+- Second to last level in this section is timed
+	- Running out of time will be the same as a normal death, and level will simply reset like usual
+- Last level in this section "continues" where the previous level left off, but will run out of time no matter what.
+	- Explosion stuff happens, but will still move on to the next section
+
+- Section where use laser to navigate in zero gravity
+
+- Black laser introduction
+	- reflects off black, doesn't reflect off anything else.
+	- reflects off yourself, so safe to use.
+
+- White laser introduction: reflects off everything except black
+	- colors player white, so everything (except black) reflects off player
+	- when reflecting off colored tiles, reflected laser is the same color as that tile.
+	- can illuminate any color orb -> important to know for final boss
+	- these few levels leading up to final boss are easy power trips
+
+- Final boss
+	- Uses thick black laser, hits player currently colored white
+	- Weakpoint is 4 green eyes
+		- Act as 4 orbs; need to make them all glow at the same time
+		- eyes can open, close, and rearrange themselves
+	- Has hand smash attack where hand flashes white right before it attacks
+		- Hand can be reflected off of at that moment, need to do this to defeat final form
+
+
+
+
+Tips:
+	- Sometimes it's best to think backwards.  Determine how the laser should go through the orbs, then figure out where the laser should start.
+	- Puzzle solutions rarely require the usage of every reflectable surface in a room.  It can help to figure out ahead of time which surfaces are too "out of the way" to be used.
+	- No solution requires pixel-perfect accuracy or taking damage.  If you find yourself trying to squeeze the laser into awkward angles, you may want to try a different position entirely.
+	- Some rooms are expansive, but orbs are usually in close proximity to each other.  You can trust that all the orbs will be on-screen when solving a puzzle.
+	

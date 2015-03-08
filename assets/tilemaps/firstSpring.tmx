@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="18" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg1"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <layer name="backTile" width="16" height="18" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="16" height="18">
+  <object type="OrbRed" x="832" y="384" width="64" height="64"/>
+  <object type="DoorRed" x="448" y="192" width="128" height="64"/>
+  <object type="Spring" x="704" y="960" width="128" height="64"/>
+  <object type="Spring" x="768" y="192" width="128" height="64"/>
+  <object type="Spring" x="448" y="448" width="128" height="64"/>
+  <object type="Spring" x="256" y="704" width="128" height="64"/>
+ </objectgroup>
+ <layer name="tile" width="16" height="18">
+  <data encoding="csv">
+6,1,3,3,2,2,3,38,38,31,31,32,0,0,23,5,
+6,6,1,1,2,3,25,0,0,0,0,0,0,0,23,5,
+42,7,4,1,1,5,25,0,0,0,0,0,0,0,23,4,
+2,31,31,31,123,87,148,0,0,58,66,141,0,0,23,28,
+25,0,0,0,0,0,0,0,0,129,51,51,169,45,38,28,
+25,0,0,0,0,0,0,0,0,30,101,74,0,0,0,23,
+25,0,0,0,0,0,0,0,0,0,30,150,0,0,0,23,
+101,17,11,0,0,0,0,0,0,0,0,0,0,0,0,127,
+2,7,25,0,0,0,0,0,0,0,0,199,94,94,66,51,
+7,49,26,0,0,0,0,0,0,0,0,0,0,0,72,51,
+6,2,26,0,0,0,0,0,0,0,0,0,0,0,129,51,
+7,2,25,0,0,0,0,0,46,40,0,0,0,0,23,101,
+6,2,26,0,0,0,0,0,0,0,0,0,0,0,22,14,
+6,7,26,0,0,0,0,0,0,0,0,0,0,0,22,49,
+4,31,39,0,0,0,0,0,0,0,0,0,0,0,22,5,
+25,0,0,0,0,16,17,18,0,0,0,0,0,0,22,7,
+26,0,0,0,0,22,2,5,17,10,10,17,10,10,5,3,
+25,0,0,16,17,1,1,5,5,3,6,6,7,49,49,4
+</data>
+ </layer>
+ <objectgroup name="front" width="16" height="18">
+  <object type="Exit" x="768" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="firstGlass"/>
+    <property name="right" value="false"/>
+    <property name="springJump" value="true"/>
+   </properties>
+  </object>
+  <object type="Exit" x="64" y="1088" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="firstMultReflect"/>
+    <property name="right" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
