@@ -57,7 +57,9 @@ FullGame.Lasers = {
     PARTICLE_THICKNESS2:1,
     
     SIGHT_ALPHA:.9,
-    SIGHT_RADIUS:7
+    SIGHT_RADIUS:7,
+    
+    MAX_LASER_DIST:20000 //maximum distance reflected laser can travel
         
 };
 
@@ -86,7 +88,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
     var c = color;
     var x=0; var y=0; var i=0; var j=0;
     var tileStr;
-    while (dist < 10000){
+    while (dist < this.MAX_LASER_DIST){
         
         var dToHit = 9999999999; //distance; used when comparing what the laser hit first
         var xHit = 0;
