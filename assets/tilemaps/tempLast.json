@@ -14,7 +14,20 @@
         {
          "height":9,
          "name":"obj",
-         "objects":[],
+         "objects":[
+                {
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"AlienRed",
+                 "visible":true,
+                 "width":0,
+                 "x":259,
+                 "y":192
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

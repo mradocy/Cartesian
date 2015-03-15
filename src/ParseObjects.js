@@ -186,6 +186,17 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj = FullGame.makeColorchip(cx, cy, color, laserType);
             FullGame.GI.objs.push(obj);
             
+        } else if (type == "Alien" || type == "AlienRed"){
+            var color = FullGame.Til.RED;
+            if (type == "AlienRed"){
+                color = FullGame.Til.RED;
+            }
+            obj = FullGame.makeAlien(cx, cy, color);
+            FullGame.GI.objs.push(obj);
+            FullGame.GI.objs.push(obj.eyes);
+            FullGame.GI.objs.push(obj.backHand);
+            FullGame.GI.objs.push(obj.frontHand);
+            
         } else if (type == "Exit"){
             if (od.properties == undefined){
                 console.log("WARNING: need to have properties when making an Exit object in Tiled");
