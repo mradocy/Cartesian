@@ -111,8 +111,8 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("colorchip_red", 'assets/img/colorchip_red.png', 32, 32, 20);
         game.load.spritesheet("colorchip_green", 'assets/img/colorchip_green.png', 32, 32, 20);
         
-        game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 3);
-        game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 1);
+        game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 4);
+        game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 2);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_smoke_red", 'assets/img/alien_smoke_red.png', 16, 16, 8);

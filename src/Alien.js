@@ -9,6 +9,7 @@ FullGame.makeAlien = function(cx, cy, color) {
     var handKey;
     var eyesKey;
     var smokeKey;
+    var laserColor;
     
     switch (color){
     case FullGame.Til.RED:
@@ -17,23 +18,27 @@ FullGame.makeAlien = function(cx, cy, color) {
         handKey = "alien_hand_red";
         eyesKey = "alien_eyes_red";
         smokeKey = "alien_smoke_red";
+        laserColor = FullGame.Til.RED;
         break;
     }
     
     backHand = game.add.sprite(cx, cy, handKey, undefined, FullGame.GI.objGroup);
     backHand.animations.add("idle", [0], 30, true);
+    backHand.animations.add("glow", [1], 30, true);
     backHand.animations.play("idle");
     backHand.anchor.setTo(.5, .5); //sprite is centered
     al = game.add.sprite(cx, cy, key, undefined, FullGame.GI.objGroup);
     al.animations.add("idle", [0], 30, true);
-    al.animations.add("mouth", [0, 1, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0], 8, true);
+    al.animations.add("mouth", [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0], 15, false);
+    al.animations.add("damage", [3, 4], 30, true);
     al.animations.play("idle");
     eyes = game.add.sprite(cx, cy, eyesKey, undefined, FullGame.GI.objGroup);
     eyes.animations.add("idle", [0], 30, true);
-    eyes.animations.add("blink", [1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0], 30, true);
+    eyes.animations.add("blink", [1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0], 90, false);
     eyes.animations.play("idle");
     frontHand = game.add.sprite(cx, cy, handKey, undefined, FullGame.GI.objGroup);
     frontHand.animations.add("idle", [0], 30, true);
+    frontHand.animations.add("glow", [1], 30, true);
     frontHand.animations.play("idle");
     frontHand.anchor.setTo(.5, .5); //sprite is centered
     
@@ -43,11 +48,16 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.backHand = backHand;
     al.frontHand = frontHand;
     al.smokeKey = smokeKey;
+    al.laserColor = laserColor;
     al.isAlien = true;
     al.x = cx;
     al.y = cy;
     al.EYES_X = 53 - 41;
     al.EYES_Y = 23 - 71;
+    al.blinkTime = 0;
+    al.blinkPeriod = 0;
+    al.mouthTime = 0;
+    al.mouthPeriod = 0;
     al.vx = 0;
     al.vy = 0;
     al.MAX_SPEED = 150;
@@ -77,20 +87,20 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.SMOKE_PERIOD = .012;
     al.smokeTime = 0;
     al.smokeCache = []; //recycles smoke particles
-    
-    al.FRONT_HAND_X = 55 - 41;
+    al.FRONT_HAND_X = 65 - 41;
     al.FRONT_HAND_Y = 85 - 71;
-    al.BACK_HAND_X = 84 - 41;
+    al.BACK_HAND_X = 94 - 41;
     al.BACK_HAND_Y = 65 - 71;
     al.HAND_PERIOD = 3;
     al.HAND_AMPLITUDE = 14;
     al.backHand.bobTime = al.HAND_PERIOD / 4;
     al.backHand.bobOffset = 0;
     al.backHand.smokeTime = 0;
+    al.backHand.startAngle = 0;
     al.frontHand.bobTime = 0;
     al.frontHand.bobOffset = 0;
     al.frontHand.smokeTime = 0;
-    
+    al.frontHand.startAngle = 0;
     al.HAND_SMOKE_PERIOD = .1;
     al.HAND_SMOKE_SPAWN_BOX = {
         x:7 - 23,
@@ -99,7 +109,19 @@ FullGame.makeAlien = function(cx, cy, color) {
         h:5,
         r:Math.PI/2
     };
-    
+    al.laserState = "idle"; //"preAim", "aim", "fire", "postFire"
+    al.laserTime = 0;
+    al.IDLE_DURATION = 2.5;
+    al.PRE_AIM_DURATION = .5;
+    al.AIM_DURATION = 1.5;
+    al.FIRE_DURATION = .2;//1.0;
+    al.POST_FIRE_DURATION = .5;
+    al.AIM_SPREAD_INITIAL = 40 *Math.PI/180;
+    al.AIM_SPREAD_FINAL = 1 *Math.PI/180;
+    //al.knockbackTime = 0;
+    //al.KNOCKBACK_DURATION 
+    al.invincibleTime = 99999;
+    al.INVINCIBLE_DURATION = 2.0;
     
     //base laser lines are when alien isn't transformed
     var cFront = FullGame.Til.WHITE;
@@ -223,8 +245,12 @@ FullGame.makeAlien = function(cx, cy, color) {
                 sm.x = x;
                 sm.y = y;
                 sm.visible = true;
+                sm.animations.stop();
             }
             sm.animations.play("play");
+            if (source == this.backHand){
+                FullGame.GI.objGroup.setChildIndex(sm, 0);
+            }
             sm.t = 0;
             sm.duration = 8 / 15.0;
             sm.anchor.setTo(.5, .5);
@@ -244,6 +270,15 @@ FullGame.makeAlien = function(cx, cy, color) {
         this.state = "move";
         this.targetX = x;
         this.targetY = y;
+    };
+    
+    al.damage = function() {
+        
+        if (this.invincibleTime < this.INVINCIBLE_DURATION){
+        }
+        
+        this.state = "damage";
+        
     };
     
     al.update = function() {
@@ -285,21 +320,27 @@ FullGame.makeAlien = function(cx, cy, color) {
                 this.TARGET_RADIUS*this.TARGET_RADIUS){
                 this.state = "idle";
             }
+        } else if (this.state == "damage") {
+            
+            
+            
         }
         
         //adjust to look at player
         var plr = FullGame.GI.player;
         if (plr != null){
             var dist = Math.sqrt((this.x-plr.x)*(this.x-plr.x) + (this.y-plr.y)*(this.y-plr.y));
-            if (this.scale.x > 0){
-                if (this.x > plr.x+16){
-                    this.scale.x *= -1;
-                    this.rotation *= -1;
-                }
-            } else {
-                if (this.x < plr.x-16){
-                    this.scale.x *= -1;
-                    this.rotation *= -1;
+            if (this.canFlipAround()){
+                if (this.scale.x > 0){
+                    if (this.x > plr.x+16){
+                        this.scale.x *= -1;
+                        this.rotation *= -1;
+                    }
+                } else {
+                    if (this.x < plr.x-16){
+                        this.scale.x *= -1;
+                        this.rotation *= -1;
+                    }
                 }
             }
             
@@ -350,7 +391,9 @@ FullGame.makeAlien = function(cx, cy, color) {
             hand.y = y;
             hand.scale.x = this.scale.x;
             hand.scale.y = this.scale.y;
-            hand.rotation = this.rotation;
+            if (this.laserState == "idle"){
+                hand.rotation = this.rotation;
+            }
             
             //spawn smoke
             hand.smokeTime += dt;
@@ -375,6 +418,7 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.afterCollision = function() {
         
         var dt = game.time.physicsElapsed;
+        var plr = FullGame.GI.player;
         
         //spawning smoke
         this.smokeTime += dt;
@@ -383,8 +427,178 @@ FullGame.makeAlien = function(cx, cy, color) {
             this.spawnSmoke(smokes, this);
             this.smokeTime -= this.SMOKE_PERIOD * smokes;
         }
+        //blinking
+        this.blinkTime += dt;
+        if (this.blinkTime >= this.blinkPeriod){
+            this.eyes.animations.play("blink");
+            this.blinkTime = 0;
+            this.blinkPeriod = 2 + Math.random()*1;
+        }
+        //moving mouth
+        this.mouthTime += dt;
+        if (this.mouthTime >= this.mouthPeriod){
+            this.animations.play("mouth");
+            this.mouthTime = 0;
+            this.mouthPeriod = 3 + Math.random()*1.5;
+        }
+        
+        //firing lasers
+        this.laserTime += dt;
+        var frontHandAngle = 0;
+        var backHandAngle = 0;
+        if (plr != null){
+            frontHandAngle = Math.atan2(plr.y - this.frontHand.y, plr.x - this.frontHand.x);
+            backHandAngle = Math.atan2(plr.y - this.backHand.y, plr.x - this.backHand.x);
+        }
+        
+        var diffF0, diffF1, diffB0, diffB1;
+        if (this.scale.x > 0){
+            diffF0 = -this.AIM_SPREAD_INITIAL/2;
+            diffF1 = -this.AIM_SPREAD_FINAL/2;
+            diffB0 = this.AIM_SPREAD_INITIAL/2;
+            diffB1 = this.AIM_SPREAD_FINAL/2;
+        } else {
+            diffF0 = this.AIM_SPREAD_INITIAL/2;
+            diffF1 = this.AIM_SPREAD_FINAL/2;
+            diffB0 = -this.AIM_SPREAD_INITIAL/2;
+            diffB1 = -this.AIM_SPREAD_FINAL/2;
+        }
+        if (this.laserState == "idle"){
+            if (this.laserTime >= this.IDLE_DURATION){
+                this.laserState = "preAim";
+                this.laserTime = 0;
+                this.frontHand.startAngle = this.frontHand.rotation;
+                this.backHand.startAngle = this.backHand.rotation;
+                if (this.scale.x < 0){
+                    this.frontHand.startAngle -= Math.PI;
+                    this.backHand.startAngle -= Math.PI;
+                }
+            }
+        } else if (this.laserState == "preAim") {
+            
+            var diff = Math.angleDiff(frontHandAngle + diffF0, this.frontHand.startAngle);
+            frontHandAngle = this.frontHand.startAngle + Math.easeInOutQuad(
+                this.laserTime, 0, diff, this.PRE_AIM_DURATION);
+            diff = Math.angleDiff(backHandAngle + diffB0, this.backHand.startAngle);
+            backHandAngle = this.backHand.startAngle + Math.easeInOutQuad(
+                this.laserTime, 0, diff, this.PRE_AIM_DURATION);
+            if (this.scale.x > 0){
+                this.frontHand.rotation = frontHandAngle;
+                this.backHand.rotation = backHandAngle;
+            } else {
+                this.frontHand.rotation = frontHandAngle + Math.PI;
+                this.backHand.rotation = backHandAngle + Math.PI;
+            }
+            
+            if (this.laserTime >= this.PRE_AIM_DURATION){
+                this.laserState = "aim";
+                this.laserTime = 0;
+                this.frontHand.animations.play("glow");
+                this.backHand.animations.play("glow");
+            }
+        } else if (this.laserState == "aim") {
+            
+            frontHandAngle = frontHandAngle + Math.easeInOutQuad(
+                this.laserTime, diffF0, diffF1-diffF0, this.AIM_DURATION);
+            backHandAngle = backHandAngle + Math.easeInOutQuad(
+                this.laserTime, diffB0, diffB1-diffB0, this.AIM_DURATION);
+            FullGame.Lasers.fireLaser(
+                frontHand.x, frontHand.y,
+                Math.cos(frontHandAngle), Math.sin(frontHandAngle),
+                this.laserColor, FullGame.Til.LASER_TRANSPARENT);
+            FullGame.Lasers.fireLaser(
+                backHand.x, backHand.y,
+                Math.cos(backHandAngle), Math.sin(backHandAngle),
+                this.laserColor, FullGame.Til.LASER_TRANSPARENT);
+            if (this.scale.x > 0){
+                this.frontHand.rotation = frontHandAngle;
+                this.backHand.rotation = backHandAngle;
+            } else {
+                this.frontHand.rotation = frontHandAngle + Math.PI;
+                this.backHand.rotation = backHandAngle + Math.PI;
+            }
+            
+            if (this.laserTime >= this.AIM_DURATION){
+                this.laserState = "fire";
+                this.laserTime = 0;
+            }
+        } else if (this.laserState == "fire") {
+            
+            frontHandAngle = frontHandAngle + diffF1;
+            backHandAngle = backHandAngle + diffB1;
+            var laserType = FullGame.Til.LASER_NORMAL;
+            if (this.laserTime >= this.FIRE_DURATION){
+                laserType = FullGame.Til.LASER_FADEOUT;
+            }
+            FullGame.Lasers.fireLaser(
+                frontHand.x, frontHand.y,
+                Math.cos(frontHandAngle), Math.sin(frontHandAngle),
+                this.laserColor, laserType);
+            FullGame.Lasers.fireLaser(
+                backHand.x, backHand.y,
+                Math.cos(backHandAngle), Math.sin(backHandAngle),
+                this.laserColor, laserType);
+            if (this.scale.x > 0){
+                this.frontHand.rotation = frontHandAngle;
+                this.backHand.rotation = backHandAngle;
+            } else {
+                this.frontHand.rotation = frontHandAngle + Math.PI;
+                this.backHand.rotation = backHandAngle + Math.PI;
+            }
+            
+            if (this.laserTime >= this.FIRE_DURATION){
+                this.laserState = "postFire";
+                this.laserTime = 0;
+                this.frontHand.animations.play("idle");
+                this.backHand.animations.play("idle");
+                this.frontHand.startAngle = this.frontHand.rotation;
+                this.backHand.startAngle = this.backHand.rotation;
+                if (this.scale.x < 0){
+                    this.frontHand.startAngle -= Math.PI;
+                    this.backHand.startAngle -= Math.PI;
+                }
+            }
+        } else if (this.laserState == "postFire") {
+            
+            var rot = this.rotation;
+            if (this.scale.x < 0) rot -= Math.PI;
+            var diff = Math.angleDiff(rot, this.frontHand.startAngle);
+            frontHandAngle = this.frontHand.startAngle + Math.easeInOutQuad(
+                this.laserTime, 0, diff, this.PRE_AIM_DURATION);
+            diff = Math.angleDiff(rot, this.backHand.startAngle);
+            backHandAngle = this.backHand.startAngle + Math.easeInOutQuad(
+                this.laserTime, 0, diff, this.PRE_AIM_DURATION);
+            if (this.scale.x > 0){
+                this.frontHand.rotation = frontHandAngle;
+                this.backHand.rotation = backHandAngle;
+            } else {
+                this.frontHand.rotation = frontHandAngle + Math.PI;
+                this.backHand.rotation = backHandAngle + Math.PI;
+            }
+            
+            if (this.laserTime >= this.POST_FIRE_DURATION){
+                this.laserState = "idle";
+                this.laserTime = 0;
+            }
+        }
+        
+        
         
     };
     
+    al.canFlipAround = function() {
+        var ret = this.laserState != "preAim" && this.laserState != "fire" &&
+            this.laserState != "postFire";
+        return ret;
+    };
+    
     return al;
+};
+
+//finds x-y in [-Math.PI, Math.PI]
+Math.angleDiff = function(x, y) {
+    var d = x - y;
+    d -= Math.PI*2 * Math.floor(d / (Math.PI*2));
+    if (d > Math.PI) d -= Math.PI*2;
+    return d;
 };
