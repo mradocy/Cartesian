@@ -95,7 +95,8 @@ FullGame.makeEyebot = function(x, y, laserColor, coating) {
             if (this.damageDuration >= this.DURATION_DAMAGE_FOR_DEATH){
                 this.dead = true;
                 this.visible = false;
-                FullGame.playSFX("death");
+                FullGame.playSFX("damage_flesh");
+                FullGame.playSFX("eyebot_death");
                 
                 for (var i=0; i<8; i++){
                     var part = game.add.sprite(this.x, this.y, this.deathParticleKey, undefined, FullGame.GI.objGroup);

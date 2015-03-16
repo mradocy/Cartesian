@@ -396,6 +396,7 @@ FullGame.Game.prototype = {
             this.backTileLayer.destroy(true);
             this.backTileLayer = null;
         }
+        FullGame.AlienPath.clear();
         this.tileLayer.destroy(true);
         this.tileLayer = null;
         this.tileMap.destroy();

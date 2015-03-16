@@ -436,6 +436,12 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     objHit.applyThickForce(xHit, yHit, Math.atan2(yHit-y0, xHit-x0));
                 }
             }
+        } else if (objHit.isAlien != undefined && objHit.isAlien) {
+            //hit alien, can damage it
+            if (!reflect && laserType == FullGame.Til.LASER_NORMAL &&
+                colorHit == FullGame.Til.BLACK){
+                objHit.damage();
+            }
         } else if (objHit.isWorldBounds != undefined && objHit.isWorldBounds){
             //is going out of bounds
             break;

@@ -92,7 +92,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj = FullGame.makeSpring(cx, cy);
             FullGame.GI.objs.push(obj);
             
-        } else if (type == "Path"){
+        } else if (type == "Path" || type == "AlienPath"){
             
             var points;
             var loop = false;
@@ -103,7 +103,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 points = od.polyline;
                 loop = false;
             } else {
-                console.log("Path object needs to be a polygon or polyline");
+                console.log(type + " object needs to be a polygon or polyline");
                 continue;
             }
             var pts = [];
@@ -111,8 +111,12 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 pts.push({x:(x+points[j].x), y:(y+points[j].y)});
             }
             
-            obj = FullGame.makePath(od.name, pts, loop);
-            FullGame.GI.objs.push(obj);
+            if (type == "Path"){
+                obj = FullGame.makePath(od.name, pts, loop);
+                FullGame.GI.objs.push(obj);
+            } else if (type == "AlienPath"){
+                FullGame.AlienPath.addPolyline(pts, loop);
+            }
             
         } else if (type == "EyebotRed" || type == "EyebotBlue"){
             

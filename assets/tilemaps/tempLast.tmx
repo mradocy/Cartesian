@@ -34,8 +34,8 @@
 51,50,0,0,0,0,0,0,0,0,0,0,0,0,56,50,
 54,54,0,0,0,0,0,0,0,0,0,0,0,0,55,55,
 55,54,0,0,0,0,0,0,0,0,0,0,0,0,56,52,
-55,52,0,0,0,0,0,0,0,0,0,0,0,0,50,51,
-101,52,0,0,0,0,0,0,0,0,0,0,0,0,53,51,
+55,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+101,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 6,101,54,52,0,0,0,0,0,0,0,0,50,53,56,52,
 7,7,101,52,52,99,1,0,0,7,102,54,54,50,53,53
 </data>
@@ -46,6 +46,11 @@
     <property name="mapTo" value="sandTrek"/>
     <property name="right" value="true"/>
     <property name="springJump" value="false"/>
+   </properties>
+  </object>
+  <object type="Exit" x="960" y="320" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="arena"/>
    </properties>
   </object>
  </objectgroup>

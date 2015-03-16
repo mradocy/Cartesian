@@ -45,7 +45,9 @@ var rooms = [
     "hiddenOrb",
     "redRoplate",
     "multEyebots",
-    "sandTrek"
+    "sandTrek",
+    
+    "arena"
 ];
 
 //add a state for each level
