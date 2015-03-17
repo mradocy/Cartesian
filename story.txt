@@ -20,20 +20,19 @@ Sibro now has a new mission: plunge into the depths of E-V15119 and rescue the m
 
 firstLevel:
 
-Use the 
+That was quite the fall, Sibro!
+Try moving around a bit to make sure everything is still functioning.
 
-That was quite the fall, Sibro!  Try moving around a bit to make sure everything is still functioning.
+It seems that's the case.  You're equipped with self-repair micro-machines, so you'll be fine as long as you don't get hurt too badly.
 
-It seems that's the case.  You're equipped with self-repair micromachines, so you'll be fine as long as you don't get hurt too badly.
-
-Ha, look at me talking with you like you're a human being.  I've been stuck here so long that I'm already desperate for companionship.
+Ha, look at me talking with a robot.  I didn't think being alone in this room would make me go crazy that fast.  But with you walking around, there's still some hope for us!
 
 
 firstOrb:
 
 I'm stuck in this room with really tall crystal walls; I don't know where the other guys are.  Do you see anything like that around?  I can't say how far away you are from where we dropped in.  
 
-It seems most of the walls here are impervious to your current laser.  Regardless, try shooting it at things that look interesting.  Maybe it'll help form a path forward.
+It seems most of the walls here are would impervious to your current laser.  But try shooting it at things that look interesting anyway.  That's always worked for us in the past, hasn't it?
 
 
 redEyebot:
@@ -42,14 +41,55 @@ We saw some intriguing eye-like creatures on our way in, but they seem pretty ha
 
 It must have been pretty hard, like without limbs and all.  The inability to move probably didn't help either.  On second thought, it seems they'd be really lousy workers, huh?  Hmm...
 
+
 firstReflect:
 
 (after solving puzzle)
 A reminder: use ESC or ENTER to refresh yourself if you need it.
 
-Although I'd rather you not... the quicker you can get us out of here, the better.  I haven't eaten in a while and there's no food around here.
+Well with nothing better to do, I guess I'll lie down myself.  Ahh...
 
-I think it has been 20, maybe 30 entire minutes!  Please hurry, oh but don't be reckless either NUTO.  I know you can handle the journey ahead. 
+Wait, what is this red circular thing on the ceiling?
 
-Oh yeah, and my oxygen isn't going to last forever either, probably.  Being a robot you may not understand, well actually you're pretty smart so you likely do.  Just in case you wanted something else to consider.
+
+firstMultReflect:
+
+(after solving puzzle)
+Hey Sibro, check out what I discovered!  By pointing my laser pistol at this orb up there, I was able to open the door leading out of my room!  Wow!
+
+Impressive how quickly I was able to escape, isn't it?  Try doing something similar if you come across an orb like that!
+Anyway, I'm going to take a look around.
+
+
+firstSpring:
+
+(after solving puzzle)
+Great, I managed to open up another door!  Busting through these dead-ends really gets me giddy.  Ha, I guess it doesn't take much to excite me.
+
+Being trapped underground on some foreign world is supposed to be scary, isn't it?  But those kinds of bad emotions aren't going to help anyone.  I prefer to think more positively about these situations.
+
+A robot like yourself wouldn't have to worry about that huh?  
+
+
+
+
+platforming1:
+
+
+
+
+DRAFTS:
+
+Hey Sibro, what do you think the purpose of all these rooms are?
+
+If it wasn't obvious Sibro, I am freaked out.  It feels like I'm constantly being watched.
+
+
+
+
+
+
+
+
+
 

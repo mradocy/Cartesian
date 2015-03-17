@@ -32,7 +32,7 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door1.HEIGHT = 64;
     door1.OPEN_DURATION = 1.0;
     door1.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND = .5;
-    door1.CLOSE_DURATION = .16;
+    door1.CLOSE_DURATION = .5;
     
     door1.anchor.setTo(.5, .5); //sprite is centered
     door2.anchor.setTo(.5, .5); //sprite is centered
@@ -76,7 +76,7 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door1.autoClose = autoClose;
     door1.cannotOpen = false;
     door1.autoCloseTime = 0;
-    door1.AUTO_CLOSE_DELAY = .45;
+    door1.AUTO_CLOSE_DELAY = .6;
     door1.lastSetX = 0;
     door1.lastSetY = 0;
     

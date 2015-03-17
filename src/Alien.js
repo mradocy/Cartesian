@@ -117,9 +117,11 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.IDLE_DURATION = 2.5;
     al.PRE_AIM_DURATION = .5;
     al.AIM_DURATION_H3 = 2.2;
-    al.AIM_DURATION_H2 = 1.7;
-    al.AIM_DURATION_H1 = 1.2;
-    al.FIRE_DURATION = .8;
+    al.AIM_DURATION_H2 = 1.8;
+    al.AIM_DURATION_H1 = 1.4;
+    al.FIRE_DURATION_H3 = .1;
+    al.FIRE_DURATION_H2 = .5;
+    al.FIRE_DURATION_H1 = .9;
     al.POST_FIRE_DURATION = .5;
     al.AIM_SPREAD_INITIAL = 20 *Math.PI/180;
     al.AIM_SPREAD_FINAL = 1 *Math.PI/180;
@@ -730,7 +732,13 @@ FullGame.makeAlien = function(cx, cy, color) {
             frontHandAngle = frontHandAngle + diffF1;
             backHandAngle = backHandAngle + diffB1;
             var laserType = FullGame.Til.LASER_NORMAL;
-            if (this.laserTime >= this.FIRE_DURATION){
+            var fireDuration = this.FIRE_DURATION_H3;
+            switch (this.health){
+            case 3: fireDuration = this.FIRE_DURATION_H3; break;
+            case 2: fireDuration = this.FIRE_DURATION_H2; break;
+            case 1: fireDuration = this.FIRE_DURATION_H1; break;
+            }
+            if (this.laserTime >= fireDuration){
                 laserType = FullGame.Til.LASER_FADEOUT;
             }
             FullGame.Lasers.fireLaser(
@@ -749,7 +757,7 @@ FullGame.makeAlien = function(cx, cy, color) {
                 this.backHand.rotation = backHandAngle + Math.PI;
             }
             
-            if (this.laserTime >= this.FIRE_DURATION){
+            if (this.laserTime >= fireDuration){
                 this.laserState = "postFire";
                 this.laserTime = 0;
                 this.frontHand.animations.play("idle");

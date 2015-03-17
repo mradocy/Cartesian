@@ -13,7 +13,7 @@ FullGame.Messages.onLevelStart = function() {
     var vms = FullGame.Vars.messagesSaid;
     
     if (sm == "firstLevel" && vms.indexOf(sm) == -1){
-        msg = "That was quite the fall, NUTO!  "
+        msg = "That was quite the fall, Sibro!  "
         msg += "Try moving around a bit to make sure everything is still functioning.";
         msgs.push(msg);
         
@@ -21,8 +21,9 @@ FullGame.Messages.onLevelStart = function() {
         msg += "so you'll be fine as long as you don't get hurt too badly.";
         msgs.push(msg);
         
-        msg = "Ha, look at me talking with you like you're a human being.  ";
-        msg += "I've been stuck here so long that I'm already desperate for companionship.";
+        msg = "Ha, look at me talking with a robot.  ";
+        msg += "I didn't think being alone in this room would make me go crazy that fast.  ";
+        msg += "But with you walking around, there's still some hope for us!";
         msgs.push(msg);
         
         msgName = "Baz";
@@ -35,8 +36,8 @@ FullGame.Messages.onLevelStart = function() {
         msgs.push(msg);
         
         msg = "It seems most of the walls here are impervious to your current laser.  ";
-        msg += "Regardless, try shooting it at things that look interesting.  ";
-        msg += "Maybe it'll help create a path forward.";
+        msg += "But try shooting it at things that look interesting anyway.  ";
+        msg += "That's always worked for us in the past, hasn't it?";
         msgs.push(msg);
         
         msgName = "Baz";
@@ -83,20 +84,28 @@ FullGame.Messages.onDoorOpen = function() {
         msg = "A reminder: use ESC or ENTER to refresh yourself if you need it.";
         msgs.push(msg);
         
-        msg = "Although I'd rather you not... the quicker you can get us out of here, the better.  ";
-        msg += "I haven't eaten in a while and there's no food around here.";
+        msg = "Well with nothing better to do, I guess I'll lie down myself.  Ahh...\n";
+        msg += "                    \n";
+        msg += "Wait, what is this red circular thing on the ceiling?";
         msgs.push(msg);
         
-        msg = "I think it has been 20, maybe 30 entire minutes!  ";
-        msg += "Please hurry, oh but don't be reckless either NUTO.  I know you can handle the journey ahead.";
+        msgName = "Baz";
+        
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "firstMultReflect" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        msg = "Hey Sibro, check out what I discovered!  ";
+        msg += "By pointing my laser pistol at this orb up there, ";
+        msg += "I was able to open the door leading out of my room!  Wow!";
         msgs.push(msg);
         
-        msg = "Oh yeah, and my oxygen isn't going to last forever either, probably.  ";
-        msg += "Being a robot you may not understand, well actually you're pretty smart so you likely do.  ";
-        msg += "Just in case you wanted something else to consider.";
+        msg = "Impressive how quickly I was able to escape, isn't it?  ";
+        msg += "Try doing something similar if you come across an orb like that!\n";
+        msg += "Anyway, I'm going to take a look around.";
         msgs.push(msg);
         
-        msgName = "Baz"
+        msgName = "Baz";
         
         vms.push(sm+"doorOpen"); //ensures message won't be said again
         
