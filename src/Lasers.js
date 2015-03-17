@@ -76,6 +76,7 @@ FullGame.Lasers.makeGraphics = function() {
  */
 FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, color, laserType){
     var game = FullGame.GI;
+    var dt = game.time.physicsElapsed;
     
     //todo: world wrap
     var worldWrap = false;
@@ -251,9 +252,9 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             if ((x0-plr.x)*(x0-plr.x) + (y0-plr.y)*(y0-plr.y) <= plr.RADIUS*plr.RADIUS){
                 //can still hit player, even if it starts from inside
                 //fixing a glitch
-                pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x, plr.y, plr.RADIUS*3/4);
+                pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x+(plr.body.velocity.x*dt), plr.y+(plr.body.velocity.y*dt), plr.RADIUS*3/4);
             } else {
-                pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x, plr.y, plr.RADIUS);
+                pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, plr.x+(plr.body.velocity.x*dt), plr.y+(plr.body.velocity.y*dt), plr.RADIUS);
             }
             if (pt != null) {
                 var d = Math.sqrt((pt.x-x0)*(pt.x-x0)+(pt.y-y0)*(pt.y-y0));

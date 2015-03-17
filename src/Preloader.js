@@ -101,6 +101,12 @@ FullGame.Preloader.prototype = {
         game.load.image('door_red_2', 'assets/img/door_red_2.png');
         game.load.image('door_blue_1', 'assets/img/door_blue_1.png');
         game.load.image('door_blue_2', 'assets/img/door_blue_2.png');
+        
+        game.load.image('door_green_1', 'assets/img/door_green_1.png');
+        game.load.image('door_green_2', 'assets/img/door_green_2.png');
+        game.load.image('door_black_1', 'assets/img/door_black_1.png');
+        game.load.image('door_black_2', 'assets/img/door_black_2.png');
+        
         game.load.image('low_health_fg', 'assets/img/low_health_fg.png');
         game.load.image('shooter_red', 'assets/img/shooter_red.png');
         game.load.image('shooter_blue', 'assets/img/shooter_blue.png');

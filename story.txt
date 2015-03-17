@@ -12,15 +12,17 @@ A team of interstellar excavators were investigating various rock bodies in the 
 
 Deep within asteroid E-V15119 appeared to be the remnants of an ancient extraterrestrial civilization, with deliberately sculpted caves and passages.  Excited, many of the miners plunged deeper to see what other secrets the asteroid contained.
 
-But the excavators never returned.  All that remained was NUTO, a laser-equipped excavation robot roaming the surface of the asteroid.
+But the excavators never returned.  All that remained was Sibro, a laser-equipped excavation robot roaming the surface of the asteroid.
 
-NUTO now has a new mission: plunge into the depths of E-V15119 and rescue the missing miners.
+Sibro now has a new mission: plunge into the depths of E-V15119 and rescue the missing miners.
 
 -----
 
 firstLevel:
 
-That was quite the fall, NUTO!  Try moving around a bit to make sure everything is still functioning.
+Use the 
+
+That was quite the fall, Sibro!  Try moving around a bit to make sure everything is still functioning.
 
 It seems that's the case.  You're equipped with self-repair micromachines, so you'll be fine as long as you don't get hurt too badly.
 

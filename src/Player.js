@@ -77,7 +77,7 @@ FullGame.makePlayer = function(game) {
     p.CAMERA_VERT_BORDER = 90; //move mouse into upper or lower part of screen to start vertical camera offset
     p.CAMERA_VERT_OFFSET_MAX_SPEED = 400;
     
-    //varaibales
+    //variables
     p.state = p.STATE_NORMAL;
     p.laserType = laserType;
     p.laserColor = laserColor;
@@ -449,7 +449,7 @@ FullGame.makePlayer = function(game) {
         
         //detect step sound effect
         this.timeSinceStepSoundFX += dt;
-        if (this.timeSinceStepSoundFX > .1){
+        if (this.timeSinceStepSoundFX > .1 && this.visible){
             if (onFloor && this.prevVY > 90){
                 FullGame.playSFX("step");
                 this.timeSinceStepSoundFX = 0;
@@ -624,10 +624,10 @@ FullGame.makePlayer = function(game) {
     p.setBehavior = function(behavior) {
         if (behavior == "walkLeft"){
             this.behaviorTime = 0;
-            this.behaviorDuration = .4;
+            this.behaviorDuration = .43;
         } else if (behavior == "walkRight"){
             this.behaviorTime = 0;
-            this.behaviorDuration = .4;
+            this.behaviorDuration = .43;
         } else if (behavior == "fall"){
             this.behaviorTime = 0;
             this.behaviorDuration = .4;

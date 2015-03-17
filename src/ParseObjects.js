@@ -26,16 +26,30 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj.orb);
             FullGame.GI.orbs.push(obj.orb);
             
-        } else if (type == "DoorRed" || type == "DoorBlue"){ //have box be wider than it is tall to put the door on its side
+        } else if (type == "DoorRed" || type == "DoorBlue" ||
+                   type == "DoorGreen" || type == "DoorBlack"){ //have box be wider than it is tall to put the door on its side
             var color = FullGame.Til.RED;
             if (type == "DoorRed"){
                 color = FullGame.Til.RED;
             } else if (type == "DoorBlue"){
                 color = FullGame.Til.BLUE;
+            } else if (type == "DoorGreen"){
+                color = FullGame.Til.GREEN;
+            } else if (type == "DoorBlack"){
+                color = FullGame.Til.BLACK;
             }
-            obj = FullGame.makeDoor(game, (width > height), color);
+            var autoClose = false;
+            var cannotOpen = false;
+            if (od.properties != undefined){
+                if (od.properties.autoClose != undefined)
+                    autoClose = (od.properties.autoClose == "true");
+                if (od.properties.cannotOpen != undefined)
+                    cannotOpen = (od.properties.cannotOpen == "true");
+            }
+            obj = FullGame.makeDoor(game, (width > height), color, autoClose);
             obj.door1.setX(cx);
             obj.door1.setY(cy);
+            obj.door1.cannotOpen = cannotOpen;
             FullGame.GI.objs.push(obj.door1);
             FullGame.GI.objs.push(obj.door2); //this is required for lasers to hit door2
             
@@ -257,12 +271,12 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 //this is the Exit player entered from, so set properties for player starting
                 if (x < FullGame.GI.tileWidth){
                     FullGame.Vars.startBehavior = "walkRight";
-                    FullGame.Vars.startX = x;
-                    FullGame.Vars.startY = sY;
+                    FullGame.Vars.startX = x +10;
+                    FullGame.Vars.startY = sY -10;
                 } else if (x+width > FullGame.GI.worldWidth - FullGame.GI.tileWidth){
                     FullGame.Vars.startBehavior = "walkLeft";
-                    FullGame.Vars.startX = x + width;
-                    FullGame.Vars.startY = sY;
+                    FullGame.Vars.startX = x + width -10;
+                    FullGame.Vars.startY = sY -10;
                 } else if (y < FullGame.GI.tileHeight){
                     FullGame.Vars.startBehavior = "fall";
                     FullGame.Vars.startX = x + width/2;

@@ -268,7 +268,6 @@ FullGame.Game.prototype = {
         //making player
         this.player = FullGame.makePlayer(game);
         this.objs.push(this.player);
-        //this.recreatePlayer();
         
         //making lasers
         this.laserG = FullGame.Lasers.makeGraphics();

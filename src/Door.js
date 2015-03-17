@@ -1,5 +1,5 @@
 //returns made doors, but doesn't add them to FullGame.GI.objs (will be done in ParseObjects)
-FullGame.makeDoor = function(game, horizontally, color) {
+FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     //initialization
     var door1;
     var door2;
@@ -9,6 +9,14 @@ FullGame.makeDoor = function(game, horizontally, color) {
     case FullGame.Til.BLUE:
         spriteKey1 = "door_blue_1";
         spriteKey2 = "door_blue_2";
+        break;
+    case FullGame.Til.GREEN:
+        spriteKey1 = "door_green_1";
+        spriteKey2 = "door_green_2";
+        break;
+    case FullGame.Til.BLACK:
+        spriteKey1 = "door_black_1";
+        spriteKey2 = "door_black_2";
         break;
     case FullGame.Til.RED:
     default:
@@ -24,6 +32,7 @@ FullGame.makeDoor = function(game, horizontally, color) {
     door1.HEIGHT = 64;
     door1.OPEN_DURATION = 1.0;
     door1.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND = .5;
+    door1.CLOSE_DURATION = .16;
     
     door1.anchor.setTo(.5, .5); //sprite is centered
     door2.anchor.setTo(.5, .5); //sprite is centered
@@ -63,6 +72,13 @@ FullGame.makeDoor = function(game, horizontally, color) {
     door1.color = color;
     door1.opening = false;
     door1.opened = false;
+    door1.closing = false;
+    door1.autoClose = autoClose;
+    door1.cannotOpen = false;
+    door1.autoCloseTime = 0;
+    door1.AUTO_CLOSE_DELAY = .45;
+    door1.lastSetX = 0;
+    door1.lastSetY = 0;
     
     door1.setX = function(x) {
         if (this.horiz){
@@ -72,6 +88,7 @@ FullGame.makeDoor = function(game, horizontally, color) {
             this.x = x;
             this.door2.x = x;
         }
+        this.lastSetX = x;
     };
     door1.setY = function(y) {
         if (this.horiz){
@@ -81,10 +98,12 @@ FullGame.makeDoor = function(game, horizontally, color) {
             this.y = y - this.HEIGHT/2;
             this.door2.y = y + this.HEIGHT/2;
         }
+        this.lastSetY = y;
     };
     
     door1.open = function() {
         if (this.opening) return;
+        if (this.cannotOpen) return;
         
         //play sound effect
         FullGame.playSFX("door_open");
@@ -101,8 +120,28 @@ FullGame.makeDoor = function(game, horizontally, color) {
         this.opening = true;
     };
     
+    door1.close = function(delay) {
+        if (this.closing) return;
+        
+        if (this.horiz){
+            this.body.x -= this.HEIGHT;
+            this.door2.body.x += this.HEIGHT;
+        } else {
+            this.body.y -= this.HEIGHT;
+            this.door2.body.y += this.HEIGHT;
+        }
+        this.openTime = -delay;
+        
+        this.closing = true;
+    };
+    
     door1.update = function() {
         var dt = game.time.physicsElapsed;
+        
+        if (this.autoClose){
+            this.close(this.AUTO_CLOSE_DELAY);
+            this.autoClose = false;
+        }
         
         if (this.opening && !this.opened){
             if (this.openTime < this.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND &&
@@ -123,6 +162,33 @@ FullGame.makeDoor = function(game, horizontally, color) {
                 
                 this.opened = true;
             }
+        } else if (this.closing){
+            
+            if (this.openTime <= 0 && this.openTime+dt > 0){
+                //actually begin closing
+                if (this.horiz){
+                    this.body.velocity.x = this.HEIGHT / this.CLOSE_DURATION;
+                    this.door2.body.velocity.x = -this.HEIGHT / this.CLOSE_DURATION;
+                } else {
+                    this.body.velocity.y = this.HEIGHT / this.CLOSE_DURATION;
+                    this.door2.body.velocity.y = -this.HEIGHT / this.CLOSE_DURATION;
+                }
+            }
+            this.openTime += dt;
+            
+            if (this.openTime >= this.CLOSE_DURATION - .02){
+                //done closing
+                this.body.velocity.set(0, 0);
+                this.door2.body.velocity.set(0, 0);
+                this.setX(this.lastSetX);
+                this.setY(this.lastSetY);
+                this.closing = false;
+                FullGame.playSFX("door_open");
+            }
+            
+        } else {
+            this.setX(this.lastSetX);
+            this.setY(this.lastSetY);
         }
     };
     

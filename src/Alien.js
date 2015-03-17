@@ -60,7 +60,10 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.mouthPeriod = 0;
     al.vx = 0;
     al.vy = 0;
-    al.MAX_SPEED = 125;
+    al.timeSinceMove = 0;
+    al.MAX_SPEED_H3 = 95; //max speed when health=3
+    al.MAX_SPEED_H2 = 125;
+    al.MAX_SPEED_H1 = 155;
     al.ACCEL = 400;
     al.FRICTION = 400;
     al.ROTATE_ZENO = .05;
@@ -113,7 +116,9 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.laserTime = 0;
     al.IDLE_DURATION = 2.5;
     al.PRE_AIM_DURATION = .5;
-    al.AIM_DURATION = 1.5;
+    al.AIM_DURATION_H3 = 2.2;
+    al.AIM_DURATION_H2 = 1.7;
+    al.AIM_DURATION_H1 = 1.2;
     al.FIRE_DURATION = .8;
     al.POST_FIRE_DURATION = .5;
     al.AIM_SPREAD_INITIAL = 20 *Math.PI/180;
@@ -311,6 +316,7 @@ FullGame.makeAlien = function(cx, cy, color) {
             this.TARGET_RADIUS * this.TARGET_RADIUS)
             return;
         this.state = "move";
+        this.timeSinceMove = 0;
     };
     
     al.damage = function() {
@@ -327,12 +333,8 @@ FullGame.makeAlien = function(cx, cy, color) {
             this.smokeTime = 0;
             FullGame.playSFX("damage_flesh");
             FullGame.playSFX("alien_death");
-            if (this.scale.x < 0){
-                this.vx = -this.KNOCKBACK_VX;
-            } else {
-                this.vx = this.KNOCKBACK_VX;
-            }
-            this.vy = this.KNOCKBACK_VY;
+            this.vx = 0;
+            this.vy = 0;
             delete this.laserLines;
             this.laserState = "idle";
             this.laserTime = 0; //use this to keep track of time
@@ -394,18 +396,26 @@ FullGame.makeAlien = function(cx, cy, color) {
             
         } else if (this.state == "move"){
             //move state; moving to target point
+            this.timeSinceMove += dt;
             var a = Math.atan2(this.targetY - this.y, this.targetX - this.x);
             this.vx += Math.cos(a) * this.ACCEL * dt;
             this.vy += Math.sin(a) * this.ACCEL * dt;
             var s2 = this.vx*this.vx + this.vy*this.vy;
-            if (s2 > this.MAX_SPEED*this.MAX_SPEED){
-                var mult = Math.sqrt(this.MAX_SPEED*this.MAX_SPEED / s2);
+            var maxSpeed = this.MAX_SPEED_H3;
+            switch (this.health){
+            case 3: maxSpeed = this.MAX_SPEED_H3; break;
+            case 2: maxSpeed = this.MAX_SPEED_H2; break;
+            case 1: maxSpeed = this.MAX_SPEED_H1; break;
+            }
+            if (s2 > maxSpeed*maxSpeed){
+                var mult = Math.sqrt(maxSpeed*maxSpeed / s2);
                 this.vx *= mult;
                 this.vy *= mult;
             }
             //detect when at the target
             if ((this.targetX-this.x)*(this.targetX-this.x) + (this.targetY-this.y)*(this.targetY-this.y) <
-                this.TARGET_RADIUS*this.TARGET_RADIUS){
+                this.TARGET_RADIUS*this.TARGET_RADIUS ||
+               this.timeSinceMove > 5.0){
                 
                 var findNextPoint = true;
                 if (this.pathPoint == null)
@@ -477,6 +487,15 @@ FullGame.makeAlien = function(cx, cy, color) {
                 this.backHand.visible = false;
                 this.eyes.visible = false;
                 this.state = "dead2";
+                
+                //open black doors
+                for (var i=0; i<FullGame.GI.objs.length; i++){
+                    var door = FullGame.GI.objs[i];
+                    if (door.type == undefined || door.type != "door") continue;
+                    if (door.color != FullGame.Til.BLACK) continue;
+                    if (door.opening) continue;
+                    door.open();
+                }
             }
         }
         
@@ -494,12 +513,12 @@ FullGame.makeAlien = function(cx, cy, color) {
             var dist = Math.sqrt((this.x-plr.x)*(this.x-plr.x) + (this.y-plr.y)*(this.y-plr.y));
             if (this.canFlipAround()){
                 if (this.scale.x > 0){
-                    if (this.x > plr.x+16){
+                    if (this.x > plr.x+10){
                         this.scale.x *= -1;
                         this.rotation *= -1;
                     }
                 } else {
-                    if (this.x < plr.x-16){
+                    if (this.x < plr.x-10){
                         this.scale.x *= -1;
                         this.rotation *= -1;
                     }
@@ -675,10 +694,17 @@ FullGame.makeAlien = function(cx, cy, color) {
             }
         } else if (this.laserState == "aim") {
             
+            var aimDuration = this.AIM_DURATION_H3;
+            switch (this.health){
+            case 3: aimDuration = this.AIM_DURATION_H3; break;
+            case 2: aimDuration = this.AIM_DURATION_H2; break;
+            case 1: aimDuration = this.AIM_DURATION_H1; break;
+            }
+            
             frontHandAngle = frontHandAngle + Math.easeInOutQuad(
-                this.laserTime, diffF0, diffF1-diffF0, this.AIM_DURATION);
+                this.laserTime, diffF0, diffF1-diffF0, aimDuration);
             backHandAngle = backHandAngle + Math.easeInOutQuad(
-                this.laserTime, diffB0, diffB1-diffB0, this.AIM_DURATION);
+                this.laserTime, diffB0, diffB1-diffB0, aimDuration);
             FullGame.Lasers.fireLaser(
                 frontHand.x, frontHand.y,
                 Math.cos(frontHandAngle), Math.sin(frontHandAngle),
@@ -695,7 +721,7 @@ FullGame.makeAlien = function(cx, cy, color) {
                 this.backHand.rotation = backHandAngle + Math.PI;
             }
             
-            if (this.laserTime >= this.AIM_DURATION){
+            if (this.laserTime >= aimDuration){
                 this.laserState = "fire";
                 this.laserTime = 0;
             }
