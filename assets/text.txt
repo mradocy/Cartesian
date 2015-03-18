@@ -1,0 +1,137 @@
+
+-----
+
+New game:
+
+This game automatically saves data locally.  Note that if your browser cache is cleared, the save data will be lost.
+
+-----
+Game intro, with robot falling down very long hole
+
+A team of interstellar excavators were investigating various rock bodies in the asteroid belt.  They were searching for gemstones and other rare ores, but discovered something even greater. (musgravite)
+
+Deep within asteroid E-V15119 appeared to be the remnants of an ancient extraterrestrial civilization, with deliberately sculpted caves and passages.  Excited, many of the miners plunged deeper to see what other secrets the asteroid contained.
+
+But the excavators never returned.  All that remained was Sibro, a laser-equipped excavation robot roaming the surface of the asteroid.
+
+Sibro now has a new mission: plunge into the depths of E-V15119 and rescue the missing miners.
+
+-----
+
+%firstLevel% (Baz)
+[That was quite the fall, Sibro!
+Try moving around a bit to make sure everything is still functioning.
+
+It seems that's the case.  You're equipped with self-repair micro-machines, so you'll be fine as long as you don't get hurt too badly.
+
+Ha, look at me talking with a robot.  I didn't think being alone in this room would make me go crazy that fast.  But with you walking around, there's still some hope for us!]
+
+%firstOrb% (Baz)
+[I'm not sure how I got here... the last thing I remember is exploring a cavern with the other guys.  I don't even know how deep I am right now, nor how far apart we are from each other.
+
+It seems most of the walls here are would be impervious to a laser like yours.  But try shooting it at things that look interesting anyway.  That's always worked for us in the past, hasn't it?]
+
+%redEyebot% (Baz)
+[We saw some intriguing eye-like creatures on our way in, but they seem pretty harmless.  My theory is they were the ones that created these passages.
+
+It must have been pretty hard, like without limbs and all.  The inability to move probably didn't help either.  On second thought, it seems they'd be really lousy workers, huh?  Hmm...]
+
+%firstReflect% (Baz)
+[A reminder: use ESC or ENTER to refresh yourself if you need it.
+
+Well with nothing better to do, I guess I'll lie down myself.  Ahh...
+
+Wait, what is this red circular thing on the ceiling?]
+
+
+%firstMultReflect% (Baz)
+[Hey Sibro, check out what I discovered!  By pointing my laser pistol at this orb up there, I was able to open the door leading out of my room!  Wow!
+
+Impressive how quickly I was able to escape, isn't it?  Try doing something similar if you come across an orb like that!
+Anyway, I'm going to take a look around.]
+
+
+%firstSpring% (Baz)
+[Great, I managed to open up another door!  Ha, I guess it doesn't take much to excite me.
+
+Being trapped underground on some foreign world is supposed to be scary, isn't it?  But those kinds of bad emotions aren't going to help anyone.  I prefer to think more positively about these situations.
+
+But a robot like yourself wouldn't have to worry about that huh?]
+
+
+%firstGlass% (Baz)
+[Hey Sibro, have you been contacted by any of the other miners yet?  I'm sure Foll and Rob are handling themselves just fine, but some communication would be nice.
+
+Maybe they're too deep within the asteroid for a signal to reach, or their communicators' batteries died.
+
+Watch, we're going to run into each other just walking around here, I just know it.]
+
+
+%firstMultOrb% (Baz)
+[It's been about 5 months since Foll, Rob and I started this adventure into the unknown together.  Personal space travel has been getting popular lately, and it's something we've always wanted to do.
+
+So we all pitched in and bought a ship.  A flyer of reasonable quality with room to transport a few passengers and cargo.  Rob even spent a bit on machinery to build you, Sibro.
+
+All in all it was quite a heavy investment!]
+
+
+%firstSand% (Baz)
+[We needed a way to pay back the money we owed, so we decided to enter the interstellar excavation market.  It was my idea, since I had some experience from the mining I had done back on Earth.
+
+It was neither Foll nor Rob's strong suit, but they had other useful skills.  Foll with his flight skills became our team's navigator, and Rob became an all-purpose mechanic that did repairs.
+
+Including you, this team of four was all it took to form an interstellar excavation squad!  Our small group wasn't the best, but we made it work, didn't we?]
+
+
+%numbers% (Baz)
+[Whew, I managed to open another door.  That was certainly more challenging than the last one.
+What are these rooms even for anyway?
+
+It's clear this was the work of intelligent extraterrestrials, but they serve no purpose.  There's no storage, appliances, or life, save for the occasional eyeball thing.
+
+And yet, there are still signs of deliberateness in how these rooms were constructed.  It's strange and unsettling.]
+
+
+%platforming1% (Baz)
+[I also can't get over the feeling that I'm being watched.  It's like I'm some hamster in a playpen, and everyone around is just silently observing everything I do.
+
+It's probably just those weird eyeballs freaking me out--
+Wait, am I getting another call?
+
+This could be Foll or Rob!  I'll talk with you later Sibro.]
+
+
+
+
+
+%backtrack% (Baz)
+[Out of curiosity I tried going back to my original room, but the door closed while I was gone.  I suppose whatever put us here wants us to keep moving forward.]
+
+
+DRAFTS:
+
+Hey Sibro, what do you think the purpose of all these rooms are?
+
+If it wasn't obvious Sibro, I am freaked out.  It feels like I'm constantly being watched.  It's affecting my concentration too.
+
+
+
+
+
+(Foll)
+[Sibro, you're here!  It's good to see you here bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
+
+I wish I was a robot, then I'd never have to worry about running out of steam.  My instinct tells me we're real close to our ship here, so go on ahead!  I'll catch up in a few minutes.
+
+Oh, and look!  A while back I managed to snag some musgravite!  All those months of searching, and we'll finally have something to show for it.  Don't you think it's just beautiful?]
+(Then throws musgravite into the air, where it just hovers.  Need to shine laser through it to solve the puzzle)
+
+
+
+
+
+
+
+
+
+

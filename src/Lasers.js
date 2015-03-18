@@ -14,6 +14,9 @@ FullGame.Lasers = {
     flicker:0, //this number will slightly alter the color of the lasers. It cycles every frame
     particleTime:0,
     
+    //for special levels
+    number6Rendered:false,
+    
     //laser color constants
     COLOR_RED1:0xFF0000, //outer part of red laser
     COLOR_RED2:0xFF1919, //inner part of red laser
@@ -670,6 +673,24 @@ FullGame.Lasers.updateGraphics = function() {
             this.graphics.lineTo(r.x1, r.y1);
         }
         
+    }
+    
+    //check if anything special was drawn
+    this.number6Rendered = false;
+    var plr = FullGame.GI.player;
+    if (plr != null){
+        if (FullGame.Vars.startMap == "numbers"){
+            for (var i=0; i<this.renders.length; i++){
+                var r = this.renders[i];
+                if (r.type != FullGame.Til.LASER_NORMAL) continue;
+                
+                if (Math.abs(r.x0 - 1536) < .1 &&
+                    (192 < r.y1 && r.y1 < 256.1) &&
+                     1504 < plr.x){
+                    this.number6Rendered = true;
+                }
+            }
+        }
     }
     
     //recycle renders

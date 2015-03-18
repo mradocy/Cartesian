@@ -14,7 +14,7 @@ FullGame.HUD = {
     TEXT_AREA_NUM_LINES:3,
     TEXT_AREA_NUM_CHARACTERS:80,
     MESSAGE_SPEED:85,
-    MESSAGE_FINISH_DELAY:9999999, //new: need to press down to advance message
+    MESSAGE_FINISH_DELAY:6.0, //new: need to press down to advance message
     textArea:null, //large text object
     textBG:null, //bg for textArea
     textNameArea:null, //small text object for the name
@@ -68,6 +68,7 @@ FullGame.HUD.haltMsg = function(immediatelyHideTextArea) {
         this.textNameArea.text = "";
         this.textBG.visible = false;
         this.textNameBG.visible = false;
+        this.messageAdvanceIcon.visible = false;
     } else {
         if (this.textBG.visible && !this.textAreaTransitioning()){
             this.textAreaOutro();

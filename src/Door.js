@@ -79,6 +79,7 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door1.AUTO_CLOSE_DELAY = .6;
     door1.lastSetX = 0;
     door1.lastSetY = 0;
+    door1.specialTime = 0;
     
     door1.setX = function(x) {
         if (this.horiz){
@@ -137,6 +138,21 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     
     door1.update = function() {
         var dt = game.time.physicsElapsed;
+        
+        
+        //check for special conditions that would open the door
+        if (FullGame.Vars.startMap == "numbers"){
+            if (FullGame.Lasers.number6Rendered){
+                this.specialTime += dt;
+                if (this.specialTime > .4){
+                    this.open();
+                }
+            } else {
+                this.specialTime = 0;
+            }
+        }
+        
+        
         
         if (this.autoClose){
             this.close(this.AUTO_CLOSE_DELAY);

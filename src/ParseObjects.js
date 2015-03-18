@@ -106,6 +106,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj = FullGame.makeSpring(cx, cy);
             FullGame.GI.objs.push(obj);
             
+        } else if (type == "SmallStar"){
+            game.add.image(cx, cy, "small_star", undefined, FullGame.GI.frontGroup);
+            
         } else if (type == "Path" || type == "AlienPath"){
             
             var points;

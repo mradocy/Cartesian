@@ -13,62 +13,51 @@ FullGame.Messages.onLevelStart = function() {
     var vms = FullGame.Vars.messagesSaid;
     
     if (sm == "firstLevel" && vms.indexOf(sm) == -1){
-        msg = "That was quite the fall, Sibro!  "
-        msg += "Try moving around a bit to make sure everything is still functioning.";
-        msgs.push(msg);
-        
-        msg = "It seems that's the case.  You're equipped with self-repair micro-machines, ";
-        msg += "so you'll be fine as long as you don't get hurt too badly.";
-        msgs.push(msg);
-        
-        msg = "Ha, look at me talking with a robot.  ";
-        msg += "I didn't think being alone in this room would make me go crazy that fast.  ";
-        msg += "But with you walking around, there's still some hope for us!";
-        msgs.push(msg);
-        
-        msgName = "Baz";
-        
+        this.msgFromText(sm);
         vms.push(sm); //ensures message won't be said again
-        
     } else if (sm == "firstOrb" && vms.indexOf(sm) == -1){
-        msg = "I'm stuck in this room with really tall crystal walls; I don't know where the other guys are.  "
-        msg += "Do you see anything like that around?  I can't say how far away you are from where we dropped in. ";
-        msgs.push(msg);
-        
-        msg = "It seems most of the walls here are impervious to your current laser.  ";
-        msg += "But try shooting it at things that look interesting anyway.  ";
-        msg += "That's always worked for us in the past, hasn't it?";
-        msgs.push(msg);
-        
-        msgName = "Baz";
-        
+        this.msgFromText(sm);
         vms.push(sm); //ensures message won't be said again
-        
     } else if (sm == "redEyebot" && vms.indexOf(sm) == -1){
-        msg = "We saw some intriguing eye-like creatures on our way in, but they seemed pretty harmless.  ";
-        msg += "My theory is they were the ones that created these passages.";
+        this.msgFromText(sm);
+        vms.push(sm); //ensures message won't be said again
+    } else if (sm == "trapped2" && vms.indexOf(sm) == -1){
+        this.msgFromText(sm);
+        
+        msgName = "???";
+        
+        msg = "You are doing very well, robot.  ";
+        msg += "It has been a while since we found someone that made it this far.";
+        msgs.push(msg);
+        var playTime = FullGame.Vars.totalPlayTime;
+        var mins = Math.floor(playTime / 60);
+        if (playTime >= 3600*2){
+            msg = "Your speed isn't that impressive, but making it here in one piece is still an accomplishment.";
+        } else if (mins >= 100){
+            msg = "And you've been playing for less than 2 hours.  That is no easy feat.";
+        } else if (mins >= 10) {
+            msg = "And it has only been " + mins + " minutes so far!  That might just be a new record.";
+        } else {
+            var secs = Math.floor(playTime - (mins*60));
+            msg = "Your current time is " + mins + ":" + secs + "!  That's incredible!";
+        }
+        msgs.push(msg);
+        msg = "Keep up the good work little robot.  You are certainly proving your worth.";
         msgs.push(msg);
         
-        msg = "It must have been pretty hard, like without limbs and all.  ";
-        msg += "The inability to move probably didn't help either.  ";
-        msg += "On second thought, it seems they'd be really lousy workers, huh?  Hmm...";
-        msgs.push(msg);
-        
-        msgName = "Baz";
+        FullGame.HUD.msg(msgs, msgName); //display message
         
         vms.push(sm); //ensures message won't be said again
-        
-    } else if (sm == "firstReflect" && vms.indexOf(sm) == -1){
-        
     }
     
-    
-    if (msgs.length == 0){
-        if (msg == "")
-            return;
-        msgs.push(msg);
+    //message when backtracking
+    if (FullGame.rooms.indexOf(lm) > FullGame.rooms.indexOf(sm) && vms.indexOf("backtrack") == -1 &&
+        (sm=="firstMultReflect" || sm=="firstSpring" || sm=="firstGlass" || sm=="firstMultOrb" || sm=="firstSand")){
+        
+        this.msgFromText("backtrack");
+        vms.push("backtrack");
     }
-    FullGame.HUD.msg(msgs, msgName);
+    
 };
 
 FullGame.Messages.onDoorOpen = function() {
@@ -81,33 +70,43 @@ FullGame.Messages.onDoorOpen = function() {
     
     if (sm == "firstReflect" && vms.indexOf(sm+"doorOpen") == -1){
         
-        msg = "A reminder: use ESC or ENTER to refresh yourself if you need it.";
-        msgs.push(msg);
-        
-        msg = "Well with nothing better to do, I guess I'll lie down myself.  Ahh...\n";
-        msg += "                    \n";
-        msg += "Wait, what is this red circular thing on the ceiling?";
-        msgs.push(msg);
-        
-        msgName = "Baz";
-        
+        this.msgFromText(sm);
         vms.push(sm+"doorOpen"); //ensures message won't be said again
         
     } else if (sm == "firstMultReflect" && vms.indexOf(sm+"doorOpen") == -1){
         
-        msg = "Hey Sibro, check out what I discovered!  ";
-        msg += "By pointing my laser pistol at this orb up there, ";
-        msg += "I was able to open the door leading out of my room!  Wow!";
-        msgs.push(msg);
-        
-        msg = "Impressive how quickly I was able to escape, isn't it?  ";
-        msg += "Try doing something similar if you come across an orb like that!\n";
-        msg += "Anyway, I'm going to take a look around.";
-        msgs.push(msg);
-        
-        msgName = "Baz";
-        
+        this.msgFromText(sm);
         vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "firstSpring" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "firstGlass" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "firstMultOrb" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "firstSand" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "numbers" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if ((sm == "platforming1" || sm == "secret1") && vms.indexOf("platforming1"+"doorOpen") == -1){
+        
+        this.msgFromText("platforming1");
+        vms.push("platforming1"+"doorOpen"); //ensures message won't be said again
         
     }
     
@@ -127,10 +126,15 @@ FullGame.Messages.onLevelLeave = function(mapTo) {
     var lm = FullGame.Vars.lastMap;
     var vms = FullGame.Vars.messagesSaid;
     
+    var haltMessage = false;
     //cease message if going to another map (but not to a previous map)
     var mapToIndex = FullGame.rooms.indexOf(mapTo);
     var startIndex = FullGame.rooms.indexOf(FullGame.HUD.messageMapStartedIn);
     if (mapToIndex != -1 && mapToIndex > startIndex){
+        haltMessage = true;
+    }
+    haltMessage = false;
+    if (haltMessage){
         FullGame.HUD.haltMsg(false);
     }
 };
@@ -158,4 +162,20 @@ FullGame.Messages.onPlayerDeath = function() {
             FullGame.Vars.messagesSaid.splice(index, 1);
         }
     }
+};
+
+FullGame.Messages.textFile = "";
+FullGame.Messages.msgFromText = function(label) {
+    //label identified with % symbol on left and right
+    var index = this.textFile.indexOf('%' + label + '%');
+    var left = this.textFile.indexOf('(', index);
+    var right = this.textFile.indexOf(')', left);
+    var msgName = this.textFile.substring(left+1, right);
+    left = this.textFile.indexOf('[', right);
+    right = this.textFile.indexOf(']', left);
+    var msg = this.textFile.substring(left+1, right);
+    var msgs = msg.split("\r\n\r\n");
+    
+    
+    FullGame.HUD.msg(msgs, msgName);
 };

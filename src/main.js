@@ -27,6 +27,7 @@ var rooms = [
     "firstGlass",
     "firstMultOrb",
     "firstSand",
+    "numbers",
     "platforming1",
     "secret1",
     "firstMovingLasers",

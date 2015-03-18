@@ -172,7 +172,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"firstSand"
+                     "mapTo":"numbers"
                     },
                  "type":"Exit",
                  "visible":true,
@@ -759,6 +759,13 @@
                  "leftColor":"2",
                  "rightColor":"0",
                  "topColor":"0"
+                },
+             "1":
+                {
+                 "bottomColor":"0",
+                 "leftColor":"2",
+                 "rightColor":"0",
+                 "topColor":"2"
                 },
              "10":
                 {

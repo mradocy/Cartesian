@@ -21,6 +21,10 @@ FullGame.Preloader.prototype = {
         // LOADING ALL GAME ASSETS //
         /////////////////////////////
         
+        //loading game text
+        game.load.text('text', 'assets/text.txt');
+        
+        
         //load tilemaps (in JSON format)
         for (var i=0; i<rooms.length; i++){
             var rm = rooms[i];
@@ -28,8 +32,6 @@ FullGame.Preloader.prototype = {
         }
         game.load.json('testmap', 'assets/tilemaps/testmap.json');
         game.load.json('tempLast', 'assets/tilemaps/tempLast.json');
-        
-        
         
         //Loading the images containing the tiles (simply loading images)
         //Make sure image name is exactly the same as the file name, without the extension
@@ -73,12 +75,10 @@ FullGame.Preloader.prototype = {
         game.load.audio('msg_on', ['assets/sfx/msg_on.ogg', 'assets/sfx/msg_on.mp3'], true);
         game.load.audio('msg_off', ['assets/sfx/msg_off.ogg', 'assets/sfx/msg_off.mp3'], true);
         game.load.audio('msg_advance', ['assets/sfx/msg_advance.ogg', 'assets/sfx/msg_advance.mp3'], true);
-        
         game.load.audio('eyebot_death', ['assets/sfx/eyebot_death.ogg', 'assets/sfx/eyebot_death.mp3'], true);
         game.load.audio('damage_flesh', ['assets/sfx/damage_flesh.ogg', 'assets/sfx/damage_flesh.mp3'], true);
         game.load.audio('alien_damage', ['assets/sfx/alien_damage.ogg', 'assets/sfx/alien_damage.mp3'], true);
         game.load.audio('alien_death', ['assets/sfx/alien_death.ogg', 'assets/sfx/alien_death.mp3'], true);
-        
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);
         game.load.audio('boop2', ['assets/sfx/boop2.ogg', 'assets/sfx/boop2.mp3'], true);
         game.load.audio('boop3', ['assets/sfx/boop3.ogg', 'assets/sfx/boop3.mp3'], true);
@@ -101,12 +101,10 @@ FullGame.Preloader.prototype = {
         game.load.image('door_red_2', 'assets/img/door_red_2.png');
         game.load.image('door_blue_1', 'assets/img/door_blue_1.png');
         game.load.image('door_blue_2', 'assets/img/door_blue_2.png');
-        
         game.load.image('door_green_1', 'assets/img/door_green_1.png');
         game.load.image('door_green_2', 'assets/img/door_green_2.png');
         game.load.image('door_black_1', 'assets/img/door_black_1.png');
         game.load.image('door_black_2', 'assets/img/door_black_2.png');
-        
         game.load.image('low_health_fg', 'assets/img/low_health_fg.png');
         game.load.image('shooter_red', 'assets/img/shooter_red.png');
         game.load.image('shooter_blue', 'assets/img/shooter_blue.png');
@@ -122,14 +120,15 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("colorchip_blue", 'assets/img/colorchip_blue.png', 32, 32, 20);
         game.load.spritesheet("colorchip_red", 'assets/img/colorchip_red.png', 32, 32, 20);
         game.load.spritesheet("colorchip_green", 'assets/img/colorchip_green.png', 32, 32, 20);
-        
+        game.load.image("small_star", 'assets/img/small_star.png');
         game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 4);
         game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 2);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_smoke_red", 'assets/img/alien_smoke_red.png', 16, 16, 8);
-        
         game.load.spritesheet("msg_advance_icon", 'assets/img/msg_advance_icon.png', 22, 20, 2);
+        
+        
         
 
 	},
@@ -141,6 +140,9 @@ FullGame.Preloader.prototype = {
 		this.preloadBar.cropEnabled = false; //since loading is done, no need for preload bar
         
         game.input.keyboard.onDownCallback = toggleFullscreen;
+        
+        //give text file to Messages
+        FullGame.Messages.textFile = game.cache.getText("text");
         
     },
 
