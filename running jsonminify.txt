@@ -1,0 +1,3 @@
+open command line here, then run
+
+java -jar jsonminify.jar

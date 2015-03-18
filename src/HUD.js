@@ -15,6 +15,8 @@ FullGame.HUD = {
     TEXT_AREA_NUM_CHARACTERS:80,
     MESSAGE_SPEED:85,
     MESSAGE_FINISH_DELAY:6.0, //new: need to press down to advance message
+    MESSAGE_COLOR_NORMAL:"#00FF21",
+    MESSAGE_COLOR_UNKNOWN:"#CCCCCC",
     textArea:null, //large text object
     textBG:null, //bg for textArea
     textNameArea:null, //small text object for the name
@@ -100,7 +102,7 @@ FullGame.HUD.makeGroup = function() {
     this.textArea = game.add.text(
         172, //x of text area
         496, //y of text area
-        "", { font: "17px 'Lucida Console'", fill: "#00FF21" },
+        "", { font: "17px 'Lucida Console'", fill: this.MESSAGE_COLOR_NORMAL },
         this.group);
     this.textArea.lineSpacing = 7;
     this.TEXT_NAME_BG_X = 15;
@@ -117,7 +119,7 @@ FullGame.HUD.makeGroup = function() {
         15, //x of text name area
         518, //y of text name area
         "???\n             ", //extra spaces are to keep text centered
-        { font: "17px 'Lucida Console'", fill: "#00FF21" },
+        { font: "17px 'Lucida Console'", fill: this.MESSAGE_COLOR_NORMAL },
         this.group);
     this.textNameArea.align = 'center';
     this.messageAdvanceIcon = game.add.sprite(
@@ -282,6 +284,19 @@ FullGame.HUD.update = function() {
             this.messageIndex += this.MESSAGE_SPEED * dt;
             this.displayText(messageStr, Math.floor(this.messageIndex));
             this.textNameArea.text = this.messageName + "\n             "; //extra space is needed to keep text centered
+            //changing text color based on message name
+            if (this.messageName == "???"){
+                this.textArea.clearColors();
+                this.textArea.addColor(this.MESSAGE_COLOR_UNKNOWN, 0);
+                this.textNameArea.clearColors();
+                this.textNameArea.addColor(this.MESSAGE_COLOR_UNKNOWN, 0);
+            } else {
+                this.textArea.clearColors();
+                this.textArea.addColor(this.MESSAGE_COLOR_NORMAL, 0);
+                this.textNameArea.clearColors();
+                this.textNameArea.addColor(this.MESSAGE_COLOR_NORMAL, 0);
+            }
+            
             //skipping dialogue
             this.messageAdvanceIcon.visible = (this.messageIndex >= maxIndex);
             var moveDown = ((this.messageIndex-maxIndex)/this.MESSAGE_SPEED - Math.floor((this.messageIndex-maxIndex)/this.MESSAGE_SPEED / 1.0)*1.0 > .5);

@@ -39,7 +39,9 @@ FullGame.Messages.onLevelStart = function() {
             msg = "And it has only been " + mins + " minutes so far!  That might just be a new record.";
         } else {
             var secs = Math.floor(playTime - (mins*60));
-            msg = "Your current time is " + mins + ":" + secs + "!  That's incredible!";
+            msg = "Your current time is " + mins + ":";
+            if (secs < 10) msg += "0";
+            msg += secs + "!  That's incredible!";
         }
         msgs.push(msg);
         msg = "Keep up the good work little robot.  You are certainly proving your worth.";
