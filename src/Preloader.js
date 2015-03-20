@@ -128,6 +128,12 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("alien_smoke_red", 'assets/img/alien_smoke_red.png', 16, 16, 8);
         game.load.spritesheet("msg_advance_icon", 'assets/img/msg_advance_icon.png', 22, 20, 2);
         
+        game.load.image("gem_red", 'assets/img/gem_red.png');
+        game.load.image("gem_blue", 'assets/img/gem_blue.png');
+        game.load.image("gem_green", 'assets/img/gem_green.png');
+        game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
+        
+        
         
         
 

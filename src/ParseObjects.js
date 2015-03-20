@@ -218,6 +218,19 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj.backHand);
             FullGame.GI.objs.push(obj.frontHand);
             
+        } else if (type == "GemRed" || type == "GemBlue" || type == "GemGreen"){
+            var color = FullGame.Til.RED;
+            if (type == "GemRed"){
+                color = FullGame.Til.RED;
+            } else if (type == "GemBlue"){
+                color = FullGame.Til.BLUE;
+            } else if (type == "GemGreen"){
+                color = FullGame.Til.GREEN;
+            }
+            obj = FullGame.makeGem(cx, cy, color);
+            FullGame.GI.objs.push(obj);
+            FullGame.GI.gems.push(obj);
+            
         } else if (type == "Exit"){
             if (od.properties == undefined){
                 console.log("WARNING: need to have properties when making an Exit object in Tiled");

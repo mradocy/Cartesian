@@ -43,6 +43,7 @@ var rooms = [
     "roplate2",
     "useEyebot",
     "destroyEyebot",
+    "firstGem",
     "hiddenOrb",
     "redRoplate",
     "multEyebots",

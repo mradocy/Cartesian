@@ -370,6 +370,23 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             }
         }
         
+        //check if laser passed through any gems
+        if (laserType == FullGame.Til.LASER_NORMAL || laserType == FullGame.Til.LASER_THICK ||
+            laserType == FullGame.Til.LASER_TRANSPARENT){
+            for (i=0; i<FullGame.GI.gems.length; i++){
+                var gem = FullGame.GI.gems[i];
+                if (!gem.isGem) continue;
+                if (gem.color != c) continue;
+                
+                var pts = this.laserHitCirclePoint(x0, y0, xHit, yHit, gem.x, gem.y, gem.radius, true);
+                if (pts == null) continue;
+                
+                //at this point, confirmed gem has been passed through
+                gem.spawnLasers(c, laserType, pts.p1.x, pts.p1.y, pts.p2.x, pts.p2.y);
+                
+            }
+        }
+        
         //(if thick laser) destroy sand tiles it passed through immediately
         if (laserType == FullGame.Til.LASER_THICK){
             console.log("Thick laser going through sand NOT TESTED!!!");
@@ -507,7 +524,7 @@ FullGame.Lasers.laserHitLinePoint = function(startX, startY, endX, endY, lineX1,
     
 
 //returns {x, y} where laser segment would hit circle, or null if it wouldn't hit
-FullGame.Lasers.laserHitCirclePoint = function(startX, startY, endX, endY, circleX, circleY, circleRadius) {
+FullGame.Lasers.laserHitCirclePoint = function(startX, startY, endX, endY, circleX, circleY, circleRadius, returnBothPoints) {
     
     //bounds checking
     if (Math.max(startX, endX) < circleX - circleRadius) return null;
@@ -533,7 +550,12 @@ FullGame.Lasers.laserHitCirclePoint = function(startX, startY, endX, endY, circl
     //last check to see if point is actually on the line
     if (Math.min(startX, endX)-.00001 < pt.x && pt.x < Math.max(startX, endX)+.00001 &&
         Math.min(startY, endY)-.00001 < pt.y && pt.y < Math.max(startY, endY)+.00001){
-        return pt;
+        if (returnBothPoints != undefined && returnBothPoints){
+            if (pt == pts.p1) return {p1:pts.p1, p2:pts.p2};
+            else return {p1:pts.p2, p2:pts.p1};
+        } else {
+            return pt;
+        }
     }
     return null;
 };

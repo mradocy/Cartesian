@@ -79,11 +79,8 @@ Level order:
 - Make path through a lot of sand
 - 5 pointed star
 
-- Boss - green laser introduction, thick laser introduction
-	- Phase 1:
-		- Need to hit boss in the back
-	- Phase 2:
-		- Need to get boss's laser to hit itself in the back
+- Boss - green laser introduction
+	- Need to hit boss in the back
 
 - Using moving laser to hit 1 of several orbs
 - Need to go to previous level to get colorchip to pass level

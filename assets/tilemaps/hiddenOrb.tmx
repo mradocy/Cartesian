@@ -67,7 +67,7 @@
  <objectgroup name="front" width="22" height="18">
   <object type="Exit" x="0" y="64" width="64" height="128">
    <properties>
-    <property name="mapTo" value="split"/>
+    <property name="mapTo" value="firstGem"/>
    </properties>
   </object>
   <object type="Exit" x="1344" y="128" width="64" height="128">

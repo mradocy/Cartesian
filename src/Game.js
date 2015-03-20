@@ -42,6 +42,7 @@ FullGame.Game.prototype = {
     player:null, //the player
     orbs:[], //array of orbs in the level
     eyebots:[], //array of eyebots in the level
+    gems:[], //array of gems in the level
     miscObjs:[], //array of objects that don't get update() called by Phaser (so we call their update() instead)
     pauseObj:null, //object for pauseUpdate() to be called during the pause update phase
     tileLayer:null, //TilemapLayer for tileGroup, used for collision
@@ -405,6 +406,7 @@ FullGame.Game.prototype = {
         this.objs.splice(0, this.objs.length);
         this.orbs.splice(0, this.orbs.length);
         this.eyebots.splice(0, this.eyebots.length);
+        this.gems.splice(0, this.gems.length);
         this.miscObjs.splice(0, this.miscObjs.length);
         this.tileCols.splice(0, this.tileCols.length); this.tileCols = null;
         this.pauseObj = null;

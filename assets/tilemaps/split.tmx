@@ -48,7 +48,7 @@
  <objectgroup name="front" width="16" height="9">
   <object type="Exit" x="960" y="320" width="64" height="128">
    <properties>
-    <property name="mapTo" value="hiddenOrb"/>
+    <property name="mapTo" value="firstGem"/>
    </properties>
   </object>
   <object type="Exit" x="640" y="0" width="128" height="64">
