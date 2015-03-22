@@ -50,6 +50,9 @@ FullGame.Messages.onLevelStart = function() {
         FullGame.HUD.msg(msgs, msgName); //display message
         
         vms.push(sm); //ensures message won't be said again
+    } else if (sm == "firstGem" && vms.indexOf(sm) == -1){
+        this.msgFromText("minerSitting");
+        //sm is NOT pushed to vms here; the MinerSitting object in the room will do this once the gem is placed
     }
     
     //message when backtracking
@@ -130,12 +133,17 @@ FullGame.Messages.onLevelLeave = function(mapTo) {
     
     var haltMessage = false;
     //cease message if going to another map (but not to a previous map)
+    /*
     var mapToIndex = FullGame.rooms.indexOf(mapTo);
     var startIndex = FullGame.rooms.indexOf(FullGame.HUD.messageMapStartedIn);
     if (mapToIndex != -1 && mapToIndex > startIndex){
         haltMessage = true;
     }
-    haltMessage = false;
+    */
+    if (sm == "firstGem" && mapTo == "split"){ //special case where message will be reapeated again upon reentering the room
+        haltMessage = true;
+    }
+    
     if (haltMessage){
         FullGame.HUD.haltMsg(false);
     }

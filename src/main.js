@@ -49,6 +49,7 @@ var rooms = [
     "multEyebots",
     "sandTrek",
     
+    "star",
     "arena"
 ];
 

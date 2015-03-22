@@ -7,6 +7,9 @@ FullGame.makeRoplate = function(cx, cy, rotation, color1, color2) {
     case FullGame.Til.RED:
         spriteKey = "roplate_red";
         break;
+    case FullGame.Til.GREEN:
+        spriteKey = "roplate_green";
+        break;
     case FullGame.Til.BLUE:
     default:
         spriteKey = "roplate_blue";

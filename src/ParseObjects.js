@@ -53,13 +53,15 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj.door1);
             FullGame.GI.objs.push(obj.door2); //this is required for lasers to hit door2
             
-        } else if (type == "ShooterRed" || type == "ShooterBlue"){ //have box be wider than it is tall to put the door on its side
+        } else if (type == "ShooterRed" || type == "ShooterBlue" || type == "ShooterGreen"){
             var laserColor = FullGame.Til.RED;
             var laserType;
             if (type == "ShooterRed"){
                 laserColor = FullGame.Til.RED;
             } else if (type == "ShooterBlue"){
                 laserColor = FullGame.Til.BLUE;
+            } else if (type == "ShooterGreen"){
+                laserColor = FullGame.Til.GREEN;
             }
             laserType = FullGame.Til.LASER_NORMAL;
             if (od.properties != undefined && od.properties.type != undefined){
@@ -154,7 +156,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj);
             FullGame.GI.eyebots.push(obj);
             
-        } else if (type == "RoplateRed" || type == "RoplateBlue"){
+        } else if (type == "RoplateRed" || type == "RoplateBlue" || type == "RoplateGreen"){
             
             var color1 = FullGame.Til.RED;
             var color2 = FullGame.Til.BLACK;
@@ -162,6 +164,8 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 color1 = FullGame.Til.RED;
             } else if (type == "RoplateBlue"){
                 color1 = FullGame.Til.BLUE;
+            } else if (type == "RoplateGreen"){
+                color1 = FullGame.Til.GREEN;
             }
             
             if (od.properties != undefined){
@@ -230,6 +234,10 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj = FullGame.makeGem(cx, cy, color);
             FullGame.GI.objs.push(obj);
             FullGame.GI.gems.push(obj);
+            
+        } else if (type == "MinerSitting"){
+            obj = FullGame.makeMinerSitting();
+            FullGame.GI.objs.push(obj);
             
         } else if (type == "Exit"){
             if (od.properties == undefined){

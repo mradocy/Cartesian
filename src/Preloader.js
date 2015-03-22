@@ -108,15 +108,18 @@ FullGame.Preloader.prototype = {
         game.load.image('low_health_fg', 'assets/img/low_health_fg.png');
         game.load.image('shooter_red', 'assets/img/shooter_red.png');
         game.load.image('shooter_blue', 'assets/img/shooter_blue.png');
+        game.load.image('shooter_green', 'assets/img/shooter_green.png');
         game.load.spritesheet("spring", 'assets/img/spring_sheet.png', 128, 80, 14);
         game.load.image('mobile_shooter_path', 'assets/img/mobile_shooter_path.png');
         game.load.image('mobile_shooter_red', 'assets/img/mobile_shooter_red.png');
         game.load.image('mobile_shooter_blue', 'assets/img/mobile_shooter_blue.png');
+        game.load.image('mobile_shooter_green', 'assets/img/mobile_shooter_green.png');
         game.load.image('eyebot_red', 'assets/img/eyebot_red.png');
         game.load.image('eyebot_blue', 'assets/img/eyebot_blue.png');
         game.load.spritesheet("sand_crumble", 'assets/img/sand_crumble.png', 64, 64, 6);
         game.load.image("roplate_blue", 'assets/img/roplate_blue.png');
         game.load.image("roplate_red", 'assets/img/roplate_red.png');
+        game.load.image("roplate_green", 'assets/img/roplate_green.png');
         game.load.spritesheet("colorchip_blue", 'assets/img/colorchip_blue.png', 32, 32, 20);
         game.load.spritesheet("colorchip_red", 'assets/img/colorchip_red.png', 32, 32, 20);
         game.load.spritesheet("colorchip_green", 'assets/img/colorchip_green.png', 32, 32, 20);
@@ -133,7 +136,7 @@ FullGame.Preloader.prototype = {
         game.load.image("gem_green", 'assets/img/gem_green.png');
         game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
         
-        
+        game.load.spritesheet("miner_sitting", 'assets/img/miner_sitting.png', 78, 78, 6);
         
         
 

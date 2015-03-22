@@ -118,12 +118,12 @@ If it wasn't obvious Sibro, I am freaked out.  It feels like I'm constantly bein
 
 
 
-(Foll)
-[Sibro, you're here!  It's good to see you here bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
+%minerSitting% (Foll)
+[Sibro, you're here!  I like the new look; blue suits you well.  Anyway, it's good to see you here bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
 
-I wish I was a robot, then I'd never have to worry about running out of steam.  My instinct tells me we're real close to our ship here, so go on ahead!  I'll catch up in a few minutes.
+I'm gonna take a breather for a little while.  My instinct tells me we don't have much longer to go until we reach the ship!  Then all we'd have to do is find Baz and Rob.
 
-Oh, and look!  A while back I managed to snag some musgravite!  All those months of searching, and we'll finally have something to show for it.  Don't you think it's just beautiful?]
+Oh, and check out this musgravite I managed to snag a while back!  All those months of searching, and we'll finally have something to show for it.  It's simply beautiful!]
 (Then throws musgravite into the air, where it just hovers.  Need to shine laser through it to solve the puzzle)
 
 
