@@ -48,10 +48,12 @@ var rooms = [
     "redRoplate",
     "multEyebots",
     "sandTrek",
-    
     "useShooter",
     "star",
-    "arena"
+    "arena",
+    
+    "openArea",
+    "firstSlider"
 ];
 
 //add a state for each level

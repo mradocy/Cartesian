@@ -46,12 +46,11 @@
     <property name="cannotOpen" value="true"/>
    </properties>
   </object>
-  <object type="DoorRed" x="1536" y="256" width="64" height="128"/>
  </objectgroup>
  <layer name="tile" width="26" height="13">
   <data encoding="csv">
-122,87,120,35,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,130,52,49,
-0,0,0,127,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,100,49,
+122,87,120,35,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,127,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,107,10,
 0,0,0,71,113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,6,2,
 18,0,0,129,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,156,38,38,
 26,0,0,30,150,0,0,0,0,0,0,16,144,0,0,0,95,94,183,0,0,0,0,0,0,0,
@@ -68,7 +67,7 @@
  <objectgroup name="front" width="26" height="13">
   <object type="Exit" x="1600" y="256" width="64" height="128">
    <properties>
-    <property name="mapTo" value="someMap"/>
+    <property name="mapTo" value="openArea"/>
    </properties>
   </object>
   <object type="Exit" x="0" y="64" width="64" height="128">

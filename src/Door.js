@@ -164,7 +164,11 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
         
         
         if (this.autoClose){
-            this.close(this.AUTO_CLOSE_DELAY);
+            //only close if coming from back
+            if (FullGame.rooms.indexOf(FullGame.Vars.lastMap) <
+                FullGame.rooms.indexOf(FullGame.Vars.startMap)){
+                this.close(this.AUTO_CLOSE_DELAY);
+            }
             this.autoClose = false;
         }
         

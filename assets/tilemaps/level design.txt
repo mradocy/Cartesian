@@ -77,20 +77,20 @@ Level order:
 - Open red door to get blue colorchip, then can open blue door.
 
 - Make path through a lot of sand
+- Using moving laser to hit 1 of several orbs
 - 5 pointed star
 
 - Boss - green laser introduction
 	- Need to hit boss in the back
 
-- Using moving laser to hit 1 of several orbs
 - Need to go to previous level to get colorchip to pass level
 - Laser slowly rotates, eventually will hit row of sand tiles and make level unwinnable
 - Blast through stuff
 - Backtrack through previous levels blasting through it
 
-- Portals introduction
-
 - Pushing platforms introduction
+
+- Portals introduction
 
 - Musgravite (non-secret) introduction
 	- Shining laser into musgravite splits it up.

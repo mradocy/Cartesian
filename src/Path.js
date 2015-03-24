@@ -42,9 +42,6 @@ FullGame.makePath = function(name, points, loop) {
     p.positionFromDist = function(dist) {
         var cycles = Math.floor(dist / this.totalDist);
         var d = dist - cycles*this.totalDist;
-        /*if (!this.loop && cycles % 2 == 1){
-            d = this.totalDist - d; //since when not loop, goes in reverse
-        }*/
         if (!this.loop){
             d = Math.max(0, Math.min(this.totalDist-.1, dist));
         }
@@ -81,6 +78,54 @@ FullGame.makePath = function(name, points, loop) {
         
     };
     
+    /* returns {p1, p2}, the 2 points that the dist is directly between
+     */
+    p.pointsFromDist = function(dist){
+        var cycles = Math.floor(dist / this.totalDist);
+        var d = dist - cycles*this.totalDist;
+        if (!this.loop){
+            d = Math.max(0, Math.min(this.totalDist-.1, dist));
+        }
+        
+        var tot = 0;
+        var p1 = {x:0, y:0};
+        var p2 = {x:0, y:0};
+        var ret = {p1:p1, p2:p2};
+        for (var i=0; i<this.points.length; i++){
+            
+            if (i >= this.points.length-1 && !loop){
+                //this shouldn't happen
+                ret.p1.x = this.points[this.points.length-2].x;
+                ret.p1.y = this.points[this.points.length-2].y;
+                ret.p2.x = this.points[this.points.length-1].x;
+                ret.p2.y = this.points[this.points.length-1].y;
+                return ret;
+            }
+            if (i >= this.points.length && loop){
+                //this shouldn't happen
+                ret.p1.x = this.points[this.points.length-1].x;
+                ret.p1.y = this.points[this.points.length-1].y;
+                ret.p2.x = this.points[0].x;
+                ret.p2.y = this.points[0].y;
+                return ret;
+            }
+            var pPrev = this.points[i];
+            var pNext;
+            if (i == this.points.length-1 && loop)
+                pNext = this.points[0];
+            else 
+                pNext = this.points[i+1];
+            if (tot <= d && d < tot+pPrev.d){
+                ret.p1.x = pPrev.x;
+                ret.p1.y = pPrev.y;
+                ret.p2.x = pNext.x;
+                ret.p2.y = pNext.y;
+                return ret;
+            } else {
+                tot += pPrev.d;
+            }
+        }
+    };
     
     
     

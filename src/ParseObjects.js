@@ -216,15 +216,20 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj);
             
         } else if (type == "Alien" || type == "AlienRed"){
-            var color = FullGame.Til.RED;
-            if (type == "AlienRed"){
-                color = FullGame.Til.RED;
+            //do not add alien if already defeated it
+            if (FullGame.rooms.indexOf(FullGame.Vars.lastMap) <
+                FullGame.rooms.indexOf(FullGame.Vars.startMap)){
+                
+                var color = FullGame.Til.RED;
+                if (type == "AlienRed"){
+                    color = FullGame.Til.RED;
+                }
+                obj = FullGame.makeAlien(cx, cy, color);
+                FullGame.GI.objs.push(obj);
+                FullGame.GI.objs.push(obj.eyes);
+                FullGame.GI.objs.push(obj.backHand);
+                FullGame.GI.objs.push(obj.frontHand);
             }
-            obj = FullGame.makeAlien(cx, cy, color);
-            FullGame.GI.objs.push(obj);
-            FullGame.GI.objs.push(obj.eyes);
-            FullGame.GI.objs.push(obj.backHand);
-            FullGame.GI.objs.push(obj.frontHand);
             
         } else if (type == "GemRed" || type == "GemBlue" || type == "GemGreen"){
             var color = FullGame.Til.RED;
@@ -241,6 +246,22 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             
         } else if (type == "MinerSitting"){
             obj = FullGame.makeMinerSitting();
+            FullGame.GI.objs.push(obj);
+            
+        } else if (type == "SliderRed" || type == "SliderBlue" || type == "SliderGreen"){
+            var color = FullGame.Til.RED;
+            if (type == "SliderRed"){
+                color = FullGame.Til.RED;
+            } else if (type == "SliderBlue"){
+                color = FullGame.Til.BLUE;
+            } else if (type == "SliderGreen"){
+                color = FullGame.Til.GREEN;
+            }
+            obj = FullGame.makeSlider(cx, cy, color);
+            if (od.properties != undefined){
+                if (od.properties.path != undefined)
+                    obj.pathName = od.properties.path;
+            }
             FullGame.GI.objs.push(obj);
             
         } else if (type == "Exit"){

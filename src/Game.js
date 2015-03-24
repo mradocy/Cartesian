@@ -486,6 +486,8 @@ FullGame.Game.prototype = {
             this.player.cameraVertOffset = cVO;
             this.player.cameraXWhenStartedFiring = cXWSF;
             this.player.cameraYWhenStartedFiring = cYWSF;
+            //player was already added, so it should not be locked in a behavior
+            this.player.setBehavior("none");
         }
         
     },

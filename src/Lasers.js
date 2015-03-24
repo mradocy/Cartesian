@@ -321,12 +321,13 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     var angle = Math.atan2(ly2-y, lx2-x);
                     var normal1 = angle + Math.PI/2;
                     var normal2 = angle - Math.PI/2;
-                    if ((10*Math.cos(normal1)-x0)*(10*Math.cos(normal1)-x0)+(10*Math.sin(normal1)-y0)*(10*Math.sin(normal1)-y0) <
-                        (10*Math.cos(normal2)-x0)*(10*Math.cos(normal2)-x0)+(10*Math.sin(normal2)-y0)*(10*Math.sin(normal2)-y0)){
+                    
+                    if (Math.abs(Math.angleDiff(normal1, Math.atan2(y0-yHit, x0-xHit))) < Math.PI/2){
                         normalHit = normal1;
                     } else {
                         normalHit = normal2;
                     }
+                    
                 }
             }
         }
