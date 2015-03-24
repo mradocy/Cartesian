@@ -53,6 +53,32 @@ FullGame.Messages.onLevelStart = function() {
     } else if (sm == "firstGem" && vms.indexOf(sm) == -1){
         this.msgFromText("minerSitting");
         //sm is NOT pushed to vms here; the MinerSitting object in the room will do this once the gem is placed
+    } else if (sm == "useShooter" && vms.indexOf("useShooterText") == -1){
+        
+        msgName = "???";
+        
+        msg = "Leaving so soon?  ";
+        var playTime = FullGame.Vars.totalPlayTime;
+        var hours = Math.floor(playTime / 3600);
+        var mins = Math.floor(playTime / 60);
+        if (hours >= 3){
+            msg += "You seemed to be enjoying it here.";
+        } else if (mins >= 100){
+            msg += "It has only been an hour or two!";
+        } else {
+            msg += "It has only been " + mins + " minutes since you started!";
+        }
+        msgs.push(msg);
+        msg = "We highly recommend you stay.  ";
+        msg += "You are preforming at a much higher level than those three humans scurrying about.";
+        msgs.push(msg);
+        msg = "One of our kind will be meeting with you personally to further incentivize you."; 
+        msgs.push(msg);
+        
+        FullGame.HUD.msg(msgs, msgName); //display message
+        
+        //using a different name so that message won't be repeated if player dies
+        vms.push("useShooterText"); //ensures message won't be said again
     }
     
     //message when backtracking
@@ -112,6 +138,21 @@ FullGame.Messages.onDoorOpen = function() {
         
         this.msgFromText("platforming1");
         vms.push("platforming1"+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "blueEyebot2" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "revisit" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "firstRoplate" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
         
     }
     

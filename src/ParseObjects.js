@@ -111,6 +111,10 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
         } else if (type == "SmallStar"){
             game.add.image(cx, cy, "small_star", undefined, FullGame.GI.frontGroup);
             
+        } else if (type == "MediumStar"){
+            obj = game.add.image(cx, cy, "medium_star", undefined, FullGame.GI.frontGroup);
+            obj.anchor.setTo(.5, .5); //sprite is centered
+            
         } else if (type == "Path" || type == "AlienPath"){
             
             var points;

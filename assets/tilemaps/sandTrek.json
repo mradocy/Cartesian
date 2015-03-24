@@ -71,7 +71,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"star",
+                     "mapTo":"useShooter",
                      "right":"true",
                      "springJump":"false"
                     },
@@ -104,9 +104,9 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "bg":"bg2",
-     "bgParallaxX":".6",
-     "bgParallaxY":".6"
+     "bg":"bg_tall",
+     "bgParallaxX":".8",
+     "bgParallaxY":".8"
     },
  "tileheight":64,
  "tilesets":[

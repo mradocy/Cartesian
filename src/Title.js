@@ -58,7 +58,19 @@ FullGame.Title.prototype = {
         
         
         //creating reticle
-        var reticleSpriteKey = "reticle_red";
+        var reticleSpriteKey = "";
+        var playerKey = "";
+        switch (FullGame.Vars.playerLaserColor){
+        case FullGame.Til.BLUE:
+            reticleSpriteKey = "reticle_blue";
+            playerKey = "player_blue";
+            break;
+        case FullGame.Til.RED:
+        default:
+            reticleSpriteKey = "reticle_red";
+            playerKey = "player_red";
+            break;
+        }
         this.reticle = game.add.sprite(0, 0, reticleSpriteKey, 0);
         this.reticle.anchor.setTo(.5, .5);
         this.reticle.scale.set(.5, .5);
@@ -67,7 +79,6 @@ FullGame.Title.prototype = {
         var bgKey = "space1";
         var dustKey1 = "dust_red1";
         var dustKey2 = "dust_red2";
-        var playerKey = "player_red";
         this.bg = game.add.image(0, 0, bgKey);
         this.bgDust1.push(game.add.image(0, 0, dustKey1));
         this.bgDust1.push(game.add.image(0, 0, dustKey1));
@@ -204,8 +215,8 @@ FullGame.Title.prototype = {
         var dt = game.time.physicsElapsed;
         
         //moving bg dust
-        var dust1Speed = -110;
-        var dust2Speed = -50;
+        var dust1Speed = -200;//-110;
+        var dust2Speed = -70;//-50;
         var dust = this.bgDust1[0];
         var w = dust.width;
         dust.x += dust1Speed * dt;

@@ -228,9 +228,9 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "bg":"bg2",
-     "bgParallaxX":".6",
-     "bgParallaxY":".6"
+     "bg":"bg_top",
+     "bgParallaxX":".8",
+     "bgParallaxY":".8"
     },
  "tileheight":64,
  "tilesets":[

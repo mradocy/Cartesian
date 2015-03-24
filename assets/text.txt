@@ -108,18 +108,9 @@ This could be Foll or Rob!  I'll talk with you later Sibro.]
 [Out of curiosity I tried going back to my original room, but the door closed while I was gone.  I suppose whatever put us here wants us to keep moving forward.]
 
 
-DRAFTS:
-
-Hey Sibro, what do you think the purpose of all these rooms are?
-
-If it wasn't obvious Sibro, I am freaked out.  It feels like I'm constantly being watched.  It's affecting my concentration too.
-
-
-
-
 
 %minerSitting% (Foll)
-[Sibro, you're here!  I like the new look; blue suits you well.  Anyway, it's good to see you here bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
+[Sibro, you're here!  I like the new look; blue suits you well.  Anyway, it's good to see you here 'bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
 
 I'm gonna take a breather for a little while.  My instinct tells me we don't have much longer to go until we reach the ship!  Then all we'd have to do is find Baz and Rob.
 
@@ -129,8 +120,39 @@ Oh, and check out this musgravite I managed to snag a while back!  All those mon
 
 
 
+%blueEyebot2% (Foll)
+[...is this Sibro?  It's Foll, I've been trying to contact you guys for a while now.  Guess what?  I finally found some musgravite!  Awesome, right?
+
+Oh, these gems are even more radiant than they appear in pictures.  Rob and Baz need to see these as soon as they can.
+
+On that note, where are those guys anyway?  Did they get lost?]
+
+%revisit% (Foll)
+[...yeah yeah, admittedly I'm a little lost too.  One moment I'm in a cavern with shiny rocks, and the next I'm in some dim passageway.  I'm not really sure how that happened.
+
+Now we have to group up and find the way out of here.  We can contact each other Sibro, so us two must be close together.  But I have no idea where Rob and Baz went.]
+
+%firstRoplate% (Foll)
+[I am slowly forging a path forward.  Getting through these colored doors can be so exhausting though...
+
+I might just take a break for a bit.  You're not tired yet, right 'bro?  I'm sure you'll be able to find me soon enough.
+
+The great thing about Robots is that they don't get tired!]
 
 
+
+DRAFTS:
+
+Hey Sibro, what do you think the purpose of all these rooms are?
+
+If it wasn't obvious Sibro, I am freaked out.  It feels like I'm constantly being watched.  It's affecting my concentration too.
+
+(Foll)
+I was following right behind you 'bro and I heard some weird noises... Is everything okay?
+
+Sibro just got attacked!  What's going on?
+
+...everybody needs 
 
 
 

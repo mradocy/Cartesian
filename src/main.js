@@ -1,8 +1,8 @@
 
 
 //creates the Game object
-var SCREEN_WIDTH = 1024;//840; 1280
-var SCREEN_HEIGHT = 576;//480; 720
+var SCREEN_WIDTH = 1024;
+var SCREEN_HEIGHT = 576;
 var DOMElement = 'game';
 /* param 1: width of game in pixels
  * param 2: height of game in pixels
@@ -49,6 +49,7 @@ var rooms = [
     "multEyebots",
     "sandTrek",
     
+    "useShooter",
     "star",
     "arena"
 ];

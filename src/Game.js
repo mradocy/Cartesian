@@ -102,6 +102,12 @@ FullGame.Game.prototype = {
             var props = this.mapJSON.properties;
             var bg;
             if (props.bg != undefined){
+                
+                //add space back-background for some bgs
+                if (props.bg == "bg_top"){
+                    FullGame.addSpaceBackground();
+                }
+                
                 if (props.bgParallaxX == undefined) this.bgGroup.parallaxX = 1;
                 else this.bgGroup.parallaxX = Number(props.bgParallaxX);
                 if (props.bgParallaxY == undefined) this.bgGroup.parallaxY = 1;
@@ -361,8 +367,14 @@ FullGame.Game.prototype = {
         for (i=0; i<this.bgGroup.children.length; i++){
             var bg = this.bgGroup.children[i];
             if (bg.startX == undefined) continue;
-            bg.x = bg.startX + (1 - this.bgGroup.parallaxX) * (cx - this.worldWidth/2);
-            bg.y = bg.startY + (1 - this.bgGroup.parallaxY) * (cy - this.worldHeight/2);
+            var px = this.bgGroup.parallaxX;
+            var py = this.bgGroup.parallaxY;
+            if (bg.customParallaxX != undefined)
+                px = bg.customParallaxX;
+            if (bg.customParallaxY != undefined)
+                py = bg.customParallaxY;
+            bg.x = bg.startX + (1 - px) * (cx - this.worldWidth/2);
+            bg.y = bg.startY + (1 - py) * (cy - this.worldHeight/2);
         }
         
         if (this.recreatePlayerAtFrameEnd){

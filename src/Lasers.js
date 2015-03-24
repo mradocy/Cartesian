@@ -16,6 +16,7 @@ FullGame.Lasers = {
     
     //for special levels
     number6Rendered:false,
+    starRendered:false,
     
     //laser color constants
     COLOR_RED1:0xFF0000, //outer part of red laser
@@ -612,6 +613,10 @@ FullGame.Lasers.lineIntersectCirclePoints = function(x1, y1, x2, y2, cx, cy, r) 
 
 };
 
+FullGame.Lasers.withinDist = function(x0, y0, x1, y1, dist){
+    return (x0-x1)*(x0-x1) + (y0-y1)*(y0-y1) < dist*dist;
+};
+
 FullGame.Lasers.updateGraphics = function() {
     
     var dt = game.time.physicsElapsed;
@@ -699,6 +704,7 @@ FullGame.Lasers.updateGraphics = function() {
     
     //check if anything special was drawn
     this.number6Rendered = false;
+    this.starRendered = false;
     var plr = FullGame.GI.player;
     if (plr != null){
         if (FullGame.Vars.startMap == "numbers"){
@@ -712,6 +718,38 @@ FullGame.Lasers.updateGraphics = function() {
                     this.number6Rendered = true;
                 }
             }
+        } else if (FullGame.Vars.startMap == "star"){
+            var line2 = false;
+            var line3 = false;
+            var line4 = false;
+            var line5 = false;
+            for (var i=0; i<this.renders.length; i++){
+                var r = this.renders[i];
+                if (r.type != FullGame.Til.LASER_NORMAL) continue;
+                if (r.color != FullGame.Til.GREEN) continue;
+                var radius = 125; //roplate width is 115
+                if (this.withinDist(448, 384, r.x0, r.y0, radius) &&
+                    Math.abs(r.y1 - 64) < .1)
+                    line2 = true;
+                else if (Math.abs(r.y0 - 64) < .1 &&
+                    this.withinDist(704, 384, r.x1, r.y1, radius))
+                    line3 = true;
+                else if (this.withinDist(704, 384, r.x0, r.y0, radius) &&
+                    this.withinDist(384, 153, r.x1, r.y1, radius))
+                    line4 = true;
+                else if (this.withinDist(384, 153, r.x0, r.y0, radius) &&
+                    Math.abs(r.x1 - 768) < .1 &&
+                    128 <= r.y1 && r.y1 <= 192)
+                    line5 = true;
+                /*     xx,64
+                
+                384,153     768,128-192
+                
+                448,384     704,384
+                */
+            }
+            if (line2 && line3 && line4 && line5)
+                this.starRendered = true;
         }
     }
     

@@ -53,10 +53,11 @@ FullGame.Preloader.prototype = {
         game.load.image('title_fg', 'assets/img/bgs/title_fg.png');
         game.load.image('dust_red1', 'assets/img/bgs/dust_red1.png');
         game.load.image('dust_red2', 'assets/img/bgs/dust_red2.png');
-        //game.load.image('bg1', 'assets/img/bgs/bg1.png');
         game.load.image('bg1', 'assets/img/bgs/bg1.jpg');
-        //game.load.image('bg2', 'assets/img/bgs/bg2.png');
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
+        game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
+        //game.load.image('bg_top', 'assets/img/bgs/bg_top.jpg');
+        game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
         game.load.image('controls', 'assets/img/bgs/controls.png');
         game.load.image('bg_tempLast', 'assets/img/bgs/bg_tempLast.png');
         
@@ -124,6 +125,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("colorchip_red", 'assets/img/colorchip_red.png', 32, 32, 20);
         game.load.spritesheet("colorchip_green", 'assets/img/colorchip_green.png', 32, 32, 20);
         game.load.image("small_star", 'assets/img/small_star.png');
+        game.load.image("medium_star", 'assets/img/medium_star.png');
         game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 4);
         game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 2);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);

@@ -14,7 +14,7 @@ FullGame.HUD = {
     TEXT_AREA_NUM_LINES:3,
     TEXT_AREA_NUM_CHARACTERS:80,
     MESSAGE_SPEED:85,
-    MESSAGE_FINISH_DELAY:6.0, //new: need to press down to advance message
+    MESSAGE_FINISH_DELAY:8.0, //new: need to press down to advance message
     MESSAGE_COLOR_NORMAL:"#00FF21",
     MESSAGE_COLOR_UNKNOWN:"#CCCCCC",
     textArea:null, //large text object
@@ -314,11 +314,12 @@ FullGame.HUD.update = function() {
             }
             
             if (this.messageIndex > maxIndex + this.MESSAGE_FINISH_DELAY*this.MESSAGE_SPEED){
-                if (this.messageStrs.length > 1){
-                    //move on to the next message
+                //move on to the next message
+                if (this.messageStrs.length > 0){
                     this.messageStrs.splice(0, 1);
-                    this.messageIndex = 0;
-                } else {
+                }
+                this.messageIndex = 0;
+                if (this.messageStrs.length < 1){
                     //go to outro
                     this.textAreaOutro();
                     this.messageDisplaying = false;
