@@ -309,6 +309,12 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     y += obj.y;
                     ly2 += obj.y;
                 }
+                if (obj.body != undefined && obj.body.velocity != undefined){
+                    x += obj.body.velocity.x * dt;
+                    y += obj.body.velocity.y * dt;
+                    lx2 += obj.body.velocity.x * dt;
+                    ly2 += obj.body.velocity.y * dt;
+                }
                 var pt = this.laserHitLinePoint(x0, y0, xHit, yHit, x, y, lx2, ly2);
                 if (pt == null) continue;
                 var d = Math.sqrt((pt.x-x0)*(pt.x-x0)+(pt.y-y0)*(pt.y-y0));
@@ -321,13 +327,11 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     var angle = Math.atan2(ly2-y, lx2-x);
                     var normal1 = angle + Math.PI/2;
                     var normal2 = angle - Math.PI/2;
-                    
                     if (Math.abs(Math.angleDiff(normal1, Math.atan2(y0-yHit, x0-xHit))) < Math.PI/2){
                         normalHit = normal1;
                     } else {
                         normalHit = normal2;
                     }
-                    
                 }
             }
         }
@@ -457,6 +461,15 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     objHit.applyForce(xHit, yHit, Math.atan2(yHit-y0, xHit-x0));
                 } else if (laserType == FullGame.Til.LASER_THICK){
                     objHit.applyThickForce(xHit, yHit, Math.atan2(yHit-y0, xHit-x0));
+                }
+            }
+        } else if (objHit.isSlider != undefined && objHit.isSlider){
+            //hit slider, can move it
+            if (!reflect){
+                if (laserType == FullGame.Til.LASER_NORMAL){
+                    objHit.applyForce(normalHit+Math.PI, Math.atan2(yHit-y0, xHit-x0));
+                } else if (laserType == FullGame.Til.LASER_THICK){
+                    objHit.applyThickForce(normalHit+Math.PI, Math.atan2(yHit-y0, xHit-x0));
                 }
             }
         } else if (objHit.isAlien != undefined && objHit.isAlien) {

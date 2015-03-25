@@ -12,12 +12,14 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
         var cx = x + width/2;
         var cy = y + height/2;
         
-        if (type == "OrbRed" || type == "OrbBlue"){
+        if (type == "OrbRed" || type == "OrbBlue" || type == "OrbGreen"){
             var color = FullGame.Til.RED;
             if (type == "OrbRed"){
                 color = FullGame.Til.RED;
             } else if (type == "OrbBlue"){
                 color = FullGame.Til.BLUE;
+            } else if (type == "OrbGreen"){
+                color = FullGame.Til.GREEN;
             }
             obj = FullGame.makeOrb(game, color);
             obj.orb.setX(cx);

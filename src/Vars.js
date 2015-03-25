@@ -22,16 +22,16 @@ FullGame.Vars = {
 
 FullGame.Vars.fillDefaultValues = function() {
     //FullGame.Vars.startMap = "firstLevel"; //first level
-    //FullGame.Vars.startMap = "star"; //last level made
-    FullGame.Vars.startMap = "useShooter"; //work on this too
+    FullGame.Vars.startMap = "openArea"; //last level made
+    //FullGame.Vars.startMap = "useShooter"; //work on this too
     //FullGame.Vars.startMap = "blueEyebot";
     //startX, startY, startBehavior are set through a Entrance object in Tiled
     //FullGame.Vars.lastMap = "none"; //first level
-    //FullGame.Vars.lastMap = "sandTrek"; //last level made
-    FullGame.Vars.lastMap = "sandTrek"; //work on this too
+    FullGame.Vars.lastMap = "arena"; //last level made
+    //FullGame.Vars.lastMap = "sandTrek"; //work on this too
     //FullGame.Vars.lastMap = "reflectOffDoor";
-    //FullGame.Vars.playerLaserColor = FullGame.Til.RED;
-    FullGame.Vars.playerLaserColor = FullGame.Til.BLUE;
+    FullGame.Vars.playerLaserColor = FullGame.Til.RED;
+    //FullGame.Vars.playerLaserColor = FullGame.Til.BLUE;
     FullGame.Vars.playerLaserType = FullGame.Til.LASER_NORMAL;
     FullGame.Vars.messagesSaid.splice(0, FullGame.Vars.messagesSaid.length);
     FullGame.Vars.totalPlayTime = 0;

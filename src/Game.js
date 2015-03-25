@@ -253,7 +253,8 @@ FullGame.Game.prototype = {
          * param3: the layer to operate on
          * param4: (bool) recalculate tile faces after the update */
         this.tileMap.setCollision(setCollisionIndexes, true, "tile", true);
-        this.physics.arcade.TILE_BIAS = 100;
+        this.physics.arcade.TILE_BIAS = 50;//100;
+        game.physics.arcade.OVERLAP_BIAS = 15; //original value is 4
         //this.tileLayer.debug = true;
         
         // images from tilesets
@@ -270,7 +271,7 @@ FullGame.Game.prototype = {
         }
         
         game.stage.backgroundColor = '#787878';
-        game.physics.arcade.OVERLAP_BIAS = 40;
+        
         
         //making player
         this.player = FullGame.makePlayer(game);

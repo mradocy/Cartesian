@@ -55,6 +55,7 @@ FullGame.Preloader.prototype = {
         game.load.image('dust_red2', 'assets/img/bgs/dust_red2.png');
         game.load.image('bg1', 'assets/img/bgs/bg1.jpg');
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
+        game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
         //game.load.image('bg_top', 'assets/img/bgs/bg_top.jpg');
         game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
@@ -98,6 +99,8 @@ FullGame.Preloader.prototype = {
         game.load.image('orb_red_glow', 'assets/img/orb_red_glow.png');
         game.load.image('orb_blue', 'assets/img/orb_blue.png');
         game.load.image('orb_blue_glow', 'assets/img/orb_blue_glow.png');
+        game.load.image('orb_green', 'assets/img/orb_green.png');
+        game.load.image('orb_green_glow', 'assets/img/orb_green_glow.png');
         game.load.image('door_red_1', 'assets/img/door_red_1.png');
         game.load.image('door_red_2', 'assets/img/door_red_2.png');
         game.load.image('door_blue_1', 'assets/img/door_blue_1.png');

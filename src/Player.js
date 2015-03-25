@@ -75,7 +75,7 @@ FullGame.makePlayer = function(game) {
     p.CAMERA_HORIZ_OFFSET_MAX_SPEED = 400;
     p.CAMERA_MAX_VERT_OFFSET = SCREEN_HEIGHT/2 - 128; //maximum vertical part of camera will move from the center (player)
     p.CAMERA_VERT_BORDER = 90; //move mouse into upper or lower part of screen to start vertical camera offset
-    p.CAMERA_VERT_OFFSET_MAX_SPEED = 400;
+    p.CAMERA_VERT_OFFSET_MAX_SPEED = 300;
     
     //variables
     p.state = p.STATE_NORMAL;

@@ -10,6 +10,10 @@ FullGame.makeOrb = function(game, color) {
         spriteKey = "orb_blue";
         glowSpriteKey = "orb_blue_glow";
         break;
+    case FullGame.Til.GREEN:
+        spriteKey = "orb_green";
+        glowSpriteKey = "orb_green_glow";
+        break;
     case FullGame.Til.RED:
     default:
         spriteKey = "orb_red";

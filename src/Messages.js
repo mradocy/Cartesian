@@ -79,6 +79,9 @@ FullGame.Messages.onLevelStart = function() {
         
         //using a different name so that message won't be repeated if player dies
         vms.push("useShooterText"); //ensures message won't be said again
+    } else if (sm == "openArea" && vms.indexOf(sm) == -1){
+        this.msgFromText(sm);
+        vms.push(sm); //ensures message won't be said again
     }
     
     //message when backtracking
@@ -150,6 +153,11 @@ FullGame.Messages.onDoorOpen = function() {
         vms.push(sm+"doorOpen"); //ensures message won't be said again
         
     } else if (sm == "firstRoplate" && vms.indexOf(sm+"doorOpen") == -1){
+        
+        this.msgFromText(sm);
+        vms.push(sm+"doorOpen"); //ensures message won't be said again
+        
+    } else if (sm == "hiddenOrb" && vms.indexOf(sm+"doorOpen") == -1){
         
         this.msgFromText(sm);
         vms.push(sm+"doorOpen"); //ensures message won't be said again

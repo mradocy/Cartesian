@@ -88,7 +88,11 @@ Level order:
 - Blast through stuff
 - Backtrack through previous levels blasting through it
 
-- Pushing platforms introduction
+- Sliders (pushing platforms) introduction
+- Reflect lasers of other colors off them
+- Can stand on slider
+- Can ride on slider
+- Set up sliders with one color, switch colors, then fire with other color
 
 - Portals introduction
 
