@@ -54,7 +54,7 @@ FullGame.makeShooter = function(x, y, rotation, laserColor, laserType, mobile) {
                 for (var i=0; i<FullGame.GI.objs.length; i++){
                     var obj = FullGame.GI.objs[i];
                     if (obj.isPath != undefined && obj.isPath == true){
-                        if (obj.pathName != this.pathName) continue;
+                        if (obj.name != this.pathName) continue;
                         //found the path
                         this.path = obj;
                         //set distance on path to distance way from the path's first point

@@ -117,26 +117,26 @@ This could be Foll or Rob!  I'll talk with you later Sibro.]
 %blueEyebot2% (Foll)
 [...is this Sibro?  It's Foll, I've been trying to contact you guys for a while now.  Guess what?  I finally found some musgravite!  Awesome, right?
 
-Oh, these gems are even more radiant than they appear in pictures.  Rob and Baz need to see these as soon as they can.
+Oh, these gems are even more radiant than they appear in pictures.  Rob and Daz need to see these as soon as they can.
 
 On that note, where are those guys anyway?  Did they get lost?]
 
 %revisit% (Foll)
 [...yeah yeah, admittedly I'm a little lost too.  One moment I'm in a cavern with shiny rocks, and the next I'm in some dim passageway.  I'm not really sure how that happened.
 
-Now we have to group up and find the way out of here.  We can contact each other Sibro, so us two must be close together.  But I have no idea where Rob and Baz went.]
+Now we have to group up and find the way out of here.  We can contact each other Sibro, so us two must be close together.  But I have no idea where Rob and Daz went.]
 
 %firstRoplate% (Foll)
 [I am slowly forging a path forward.  Getting through these colored doors can be so exhausting though...
 
 I might just take a break for a bit.  You're not tired yet, right 'bro?  I'm sure you'll be able to find me soon enough.
 
-The great thing about Robots is that they don't get tired!]
+The great thing about robots is that they don't get tired!]
 
 %minerSitting% (Foll)
 [Sibro, you're here!  I like the new look; blue suits you well.  Anyway, it's good to see you here 'bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
 
-I'm gonna take a breather for a little while.  My instinct tells me we don't have much longer to go until we reach the ship!  Then all we'd have to do is find Baz and Rob.
+I'm gonna take a breather for a little while.  My instinct tells me we don't have much longer to go until we reach the ship!  Then all we'd have to do is find Daz and Rob.
 
 Oh, and check out this musgravite I managed to snag a while back!  All those months of searching, and we'll finally have something to show for it.  It's simply beautiful!]
 (Then throws musgravite into the air, where it just hovers.  Need to shine laser through it to solve the puzzle)
@@ -160,11 +160,11 @@ They attacked you!  Those weird alien creatures attacked you!  Is everything oka
 
 It seems to me that they're trying to prevent you from leaving.  They want you to stay here, and continue the maze.  Well I for one do not intend to stay any longer!
 
-But Rob and Baz are still out missing.  We're not leaving without them.  From where we stand now, our options are limited...
+But Rob and Daz are still out missing.  We're not leaving without them.  From where we stand now, our options are limited...
 
 Sibro, I'll have to ask you to continue searching for them.  I'm going to guard the ship and plan a flight out of this place.
 
-I don't like going along with the aliens' little game they have here, but it's our only chance of saving Rob and Baz.  Show 'em what you can do, Sibro!]
+I don't like going along with the aliens' little game they have here, but it's our only chance of saving Rob and Daz.  Show 'em what you can do, Sibro!]
 
 
 

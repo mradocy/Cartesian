@@ -53,7 +53,8 @@ var rooms = [
     "arena",
     
     "openArea",
-    "firstSlider"
+    "firstSlider",
+    "slider2"
 ];
 
 //add a state for each level

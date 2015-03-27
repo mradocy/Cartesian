@@ -41,8 +41,8 @@ FullGame.Vars.fillDefaultValues = function() {
     
     //test start at later level
     if (FullGame.Keys.downHeld){
-        FullGame.Vars.startMap = "arena";
-        FullGame.Vars.lastMap = "tempLast";
+        FullGame.Vars.startMap = "useShooter";
+        FullGame.Vars.lastMap = "sandTrek";
         FullGame.Vars.playerLaserColor = FullGame.Til.BLUE;
     }
 };
