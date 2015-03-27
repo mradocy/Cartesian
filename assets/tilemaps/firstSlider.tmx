@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="16" height="17" tilewidth="64" tileheight="64">
  <properties>
-  <property name="bg" value="bg3"/>
+  <property name="bg" value="bg_to3"/>
   <property name="bgParallaxX" value=".6"/>
   <property name="bgParallaxY" value=".6"/>
  </properties>

@@ -57,6 +57,7 @@ FullGame.Preloader.prototype = {
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
         game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
+        game.load.image('bg_to3', 'assets/img/bgs/bg_to3.jpg');
         //game.load.image('bg_top', 'assets/img/bgs/bg_top.jpg');
         game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
         game.load.image('controls', 'assets/img/bgs/controls.png');

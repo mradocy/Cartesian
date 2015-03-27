@@ -9,6 +9,8 @@ FullGame.HUD = {
     BLACK_SCREEN_FADE_DURATION:.5,
     blackScreenFadeTime:0,
     blackScreenFadeIn:false,
+    solveFlashG:null,
+    solveFlashTime:9999,
     lowHealthFG:null, //large overlay that changes the screen when player is low on health
     LOW_HEALTH_FG_FADEOUT_DURATION:.5, //extra time for overlay to exist after player's health recharged
     TEXT_AREA_NUM_LINES:3,
@@ -143,6 +145,11 @@ FullGame.HUD.makeGroup = function() {
         { font: "14px 'Lucida Console'", fill: "#FEFEFE" },
         this.group);
     this.timerText.visible = false;
+    this.solveFlashG = game.add.graphics(0, 0, this.group);
+    this.solveFlashG.beginFill(0xF0F0F0, .1);
+    this.solveFlashG.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    this.solveFlashG.endFill();
+    this.solveFlashG.visible = false;
     this.blackScreen = game.add.graphics(0, 0, this.group);
     this.blackScreen.beginFill(0x000000, 1);
     this.blackScreen.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -150,6 +157,7 @@ FullGame.HUD.makeGroup = function() {
     this.blackScreen.visible = false;
     this.blackScreenFadeTime = 0;
     this.blackScreenFadeIn = false;
+    
     
     return this.group;
 };
@@ -206,6 +214,17 @@ FullGame.HUD.update = function() {
             if (this.blackScreen.alpha <= .0001){
                 this.blackScreen.visible = false;
             }
+        }
+    }
+    
+    //door open flash
+    if (this.solveFlashTime < .32){
+        this.solveFlashTime += dt;
+        if (this.solveFlashTime >= .32 ||
+            Math.floor(this.solveFlashTime / .08) % 2 == 1){
+            this.solveFlashG.visible = false;
+        } else {
+            this.solveFlashG.visible = true;
         }
     }
     
@@ -439,6 +458,10 @@ FullGame.HUD.textAreaOutro = function() {
     FullGame.playSFX("msg_off");
 };
 
+FullGame.HUD.solveFlash = function() {
+    this.solveFlashTime = 0;
+};
+
 //if text area in a transition phase
 FullGame.HUD.textAreaTransitioning = function() {
     return (this.textAreaTransitionTime < this.textAreaTransitionDuration);
@@ -523,6 +546,9 @@ FullGame.HUD.destroy = function() {
     this.blackScreen = null;
     this.blackScreenFadeTime = 0;
     this.blackScreenFadeIn = false;
+    this.solveFlashG.clear();
+    this.solveFlashG = null;
+    this.solveFlashtime = 0;
     this.lowHealthFG = null;
     this.textBG.clear();
     this.textBG = null;

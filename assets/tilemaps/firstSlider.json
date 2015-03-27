@@ -215,7 +215,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "bg":"bg3",
+     "bg":"bg_to3",
      "bgParallaxX":".6",
      "bgParallaxY":".6"
     },

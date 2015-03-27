@@ -41,7 +41,7 @@
   </object>
   <object type="OrbRed" x="732" y="408" width="64" height="64"/>
   <object type="OrbRed" x="768" y="608" width="64" height="64"/>
-  <object type="OrbRed" x="256" y="512" width="64" height="64"/>
+  <object type="OrbRed" x="224" y="512" width="64" height="64"/>
   <object name="p1" type="Path" x="928" y="288">
    <polyline points="0,0 0,448"/>
   </object>

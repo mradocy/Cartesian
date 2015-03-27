@@ -108,6 +108,7 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
         
         //play sound effect
         FullGame.playSFX("door_open");
+        FullGame.HUD.solveFlash();
         
         if (this.horiz){
             this.body.velocity.x = -this.HEIGHT / this.OPEN_DURATION;
