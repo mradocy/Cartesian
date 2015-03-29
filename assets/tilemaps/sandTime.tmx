@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="21" height="16" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg3"/>
+  <property name="bgParallaxX" value=".6"/>
+  <property name="bgParallaxY" value=".6"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="21" height="16" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="21" height="16">
+  <object type="DoorRed" x="1152" y="640" width="64" height="128"/>
+  <object type="OrbRed" x="928" y="160" width="64" height="64"/>
+  <object type="ShooterBlue" x="478" y="356">
+   <properties>
+    <property name="mobile" value="true"/>
+    <property name="path" value="p1"/>
+    <property name="speed" value="18"/>
+   </properties>
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object name="p1" type="Path" x="478" y="356">
+   <polyline points="0,0 0,448"/>
+  </object>
+  <object type="ShooterBlue" x="320" y="928">
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object type="OrbRed" x="1184" y="220" width="64" height="64"/>
+  <object type="Portal" x="156" y="226" width="64" height="64">
+   <properties>
+    <property name="mapTo" value="firstSlider"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="por3" type="Portal" x="638" y="130" width="64" height="64">
+   <properties>
+    <property name="portalTo" value="por4"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object name="por4" type="Portal" x="832" y="384" width="64" height="64">
+   <properties>
+    <property name="portalTo" value="por3"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <layer name="tile" width="21" height="16">
+  <data encoding="csv">
+262,261,260,262,262,261,262,261,260,261,262,262,262,262,262,261,260,262,260,260,261,
+262,262,28,14,102,54,87,87,121,38,38,3,3,38,123,87,56,121,31,31,264,
+262,260,123,80,54,114,0,0,0,0,0,22,25,0,0,0,214,0,0,0,270,
+260,272,0,0,316,315,311,313,313,314,0,23,116,0,0,0,214,0,0,0,270,
+260,272,0,0,314,314,317,313,310,314,0,23,50,317,17,17,315,0,0,0,270,
+276,277,0,0,312,21,26,0,0,44,0,158,80,315,312,312,315,0,0,0,270,
+0,0,0,0,310,35,26,0,0,44,0,0,0,0,0,211,216,0,0,0,270,
+0,0,0,0,316,14,26,0,0,22,18,0,0,0,0,214,216,310,310,266,269,
+266,266,266,10,7,14,25,0,0,23,35,17,310,17,17,214,216,314,314,262,260,
+262,262,260,5,4,35,26,0,0,23,315,314,310,4,21,35,38,38,276,276,276,
+262,262,262,261,260,21,26,0,0,23,315,38,31,38,31,39,0,0,0,0,0,
+262,261,260,260,261,261,272,0,0,44,0,0,0,0,0,0,0,0,0,0,0,
+261,262,262,262,263,276,277,0,0,315,311,316,310,313,316,314,314,317,266,266,266,
+260,262,262,262,272,0,0,0,0,0,0,0,0,0,0,0,0,0,270,262,262,
+260,261,261,262,272,0,0,0,0,0,0,0,0,0,0,0,0,0,270,261,260,
+260,260,261,262,268,266,266,266,266,266,266,266,266,266,266,266,266,266,269,261,260
+</data>
+ </layer>
+ <objectgroup name="front" width="21" height="16">
+  <object type="Exit" x="1280" y="640" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="someMap"/>
+   </properties>
+  </object>
+  <object type="Exit" x="0" y="384" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="slider2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

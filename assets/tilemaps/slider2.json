@@ -168,7 +168,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"otherMap"
+                     "mapTo":"sandTime"
                     },
                  "type":"Exit",
                  "visible":true,

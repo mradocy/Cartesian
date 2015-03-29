@@ -82,6 +82,7 @@ FullGame.Preloader.prototype = {
         game.load.audio('damage_flesh', ['assets/sfx/damage_flesh.ogg', 'assets/sfx/damage_flesh.mp3'], true);
         game.load.audio('alien_damage', ['assets/sfx/alien_damage.ogg', 'assets/sfx/alien_damage.mp3'], true);
         game.load.audio('alien_death', ['assets/sfx/alien_death.ogg', 'assets/sfx/alien_death.mp3'], true);
+        game.load.audio('teleport', ['assets/sfx/teleport.ogg', 'assets/sfx/teleport.mp3'], true);
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);
         game.load.audio('boop2', ['assets/sfx/boop2.ogg', 'assets/sfx/boop2.mp3'], true);
         game.load.audio('boop3', ['assets/sfx/boop3.ogg', 'assets/sfx/boop3.mp3'], true);
@@ -139,6 +140,7 @@ FullGame.Preloader.prototype = {
         game.load.image("slider_red", 'assets/img/slider_red.png');
         game.load.image("slider_blue", 'assets/img/slider_blue.png');
         game.load.image("slider_green", 'assets/img/slider_green.png');
+        game.load.spritesheet("portal", 'assets/img/portal.png', 90, 90, 9);
         
         game.load.image("gem_red", 'assets/img/gem_red.png');
         game.load.image("gem_blue", 'assets/img/gem_blue.png');

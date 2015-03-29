@@ -68,6 +68,7 @@ FullGame.makePlayer = function(game) {
     p.STATE_NORMAL = 0;
     p.STATE_DAMAGE_KNOCKBACK = 1;
     p.STATE_DEATH = 2;
+    p.STATE_PORTAL = 3;
     
     //camera constants
     p.CAMERA_MAX_HORIZ_OFFSET = SCREEN_WIDTH/2 - 128; //maximum horizontal part of camera will move from the center (player)
@@ -319,6 +320,9 @@ FullGame.makePlayer = function(game) {
                 FullGame.GI.restart();
             }
             
+            break;
+            
+        case this.STATE_PORTAL:
             break;
         }
         
@@ -624,10 +628,10 @@ FullGame.makePlayer = function(game) {
     p.setBehavior = function(behavior) {
         if (behavior == "walkLeft"){
             this.behaviorTime = 0;
-            this.behaviorDuration = .43;
+            this.behaviorDuration = .44;
         } else if (behavior == "walkRight"){
             this.behaviorTime = 0;
-            this.behaviorDuration = .43;
+            this.behaviorDuration = .44;
         } else if (behavior == "fall"){
             this.behaviorTime = 0;
             this.behaviorDuration = .4;
@@ -641,6 +645,13 @@ FullGame.makePlayer = function(game) {
             this.springSpriteSpinClockwise = (behavior == "springJumpRight");
             this.behaviorTime = 0;
             this.behaviorDuration = .35;
+        } else if (behavior == "portal"){
+            this.behaviorTime = 0;
+            this.behaviorDuration = .44;
+            this.visible = false;
+            this.body.velocity.x = 0;
+            this.body.velocity.y = 0;
+            this.state = this.STATE_PORTAL;
         } else if (behavior == "none"){
             this.behaviorTime = 0;
             this.behaviorDuration = 0;
@@ -661,11 +672,17 @@ FullGame.makePlayer = function(game) {
         this.startLevelAfterDur = duration;
     };
     
+    p.teleport = function(x, y) {
+        this.x = x;
+        this.y = y;
+    };
+    
     p.dead = function() {
         return (this.state == this.STATE_DEATH);
     };
     p.damageInvincible = function() {
-        return (this.damageInvincibleTime < this.DAMAGE_INVINCIBILITY_DURATION || this.dead());
+        return (this.damageInvincibleTime < this.DAMAGE_INVINCIBILITY_DURATION || this.dead()
+               || this.behavior == "portal");
     };
     p.lowHealth = function() {
         return (this.lowHealthTime < this.HEALTH_RECHARGE_DURATION || this.dead());

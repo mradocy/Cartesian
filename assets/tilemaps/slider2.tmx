@@ -73,7 +73,7 @@
   </object>
   <object type="Exit" x="1408" y="768" width="64" height="128">
    <properties>
-    <property name="mapTo" value="otherMap"/>
+    <property name="mapTo" value="sandTime"/>
    </properties>
   </object>
  </objectgroup>

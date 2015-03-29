@@ -54,7 +54,8 @@ var rooms = [
     
     "openArea",
     "firstSlider",
-    "slider2"
+    "slider2",
+    "sandTime"
 ];
 
 //add a state for each level

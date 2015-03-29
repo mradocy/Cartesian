@@ -1,0 +1,19 @@
+{
+  "name": "Cartesian",
+  "version": "0.0.1",
+  "description": "Puzzle game",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Radocy",
+  "window": {
+    "toolbar": false,
+    "width": 1024,
+    "height": 576
+  },
+  "license": "ISC",
+  "dependencies": {
+    "pretty-bytes": "^1.0.2"
+  }
+}

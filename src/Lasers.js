@@ -291,6 +291,25 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             }
         }
         
+        //time until hit portal
+        for (i=0; i<FullGame.GI.portals.length; i++){
+            var por = FullGame.GI.portals[i];
+            var pts = this.laserHitCirclePoint(x0, y0, xHit, yHit, por.x, por.y, por.RADIUS, true);
+            if (pts != null) {
+                var ptx = (pts.p1.x+pts.p2.x)/2;
+                var pty = (pts.p1.y+pts.p2.y)/2;
+                var d = Math.sqrt((ptx-x0)*(ptx-x0)+(pty-y0)*(pty-y0));
+                if (d < dToHit){
+                    dToHit = d;
+                    xHit = ptx;
+                    yHit = pty;
+                    objHit = por;
+                    normalHit = Math.atan2(yHit-por.y, xHit-por.x);
+                    colorHit = FullGame.Til.BLACK;
+                }
+            }
+        }
+        
         //time until hit another object
         for (i=0; i<FullGame.GI.objs.length; i++){
             var obj = FullGame.GI.objs[i];
@@ -483,10 +502,22 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             break;
         }
         
-        //particles
-        this.spawnParticles(xHit, yHit, c, laserType, reflect, normalHit);
+        var wentThroughPortal = (objHit != null && objHit.isPortal != undefined && objHit.isPortal
+            && (objHit.portalTo != null || objHit.mapTo != ""));
         
-        if (reflect){
+        //particles
+        if (!wentThroughPortal){
+            this.spawnParticles(xHit, yHit, c, laserType, reflect, normalHit);
+        }
+        
+        
+        if (wentThroughPortal && objHit.portalTo != null) {
+            //hit portal, make new laser out other side
+            x0 = objHit.portalTo.x + (xHit - objHit.x);
+            y0 = objHit.portalTo.y + (yHit - objHit.y);
+            //angle stays the same
+            
+        } else if (reflect){
             //create new laser
             var angleDiff = normalHit - Math.atan2(-sin, -cos);
             var angle = normalHit + angleDiff;

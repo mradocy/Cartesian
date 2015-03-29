@@ -266,6 +266,32 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             }
             FullGame.GI.objs.push(obj);
             
+        } else if (type == "Portal"){
+            var portalTo = "";
+            var mapTo = "";
+            var goRight = true;
+            if (od.properties != undefined){
+                if (od.properties.portalTo != undefined)
+                    portalTo = od.properties.portalTo;
+                if (od.properties.mapTo != undefined)
+                    mapTo = od.properties.mapTo;
+                if (od.properties.right != undefined)
+                    goRight = (od.properties.right == "right");
+            }
+            obj = FullGame.makePortal(cx, cy, od.name, portalTo, mapTo);
+            FullGame.GI.objs.push(obj);
+            FullGame.GI.portals.push(obj);
+            
+            if (mapTo == FullGame.Vars.lastMap){
+                //this is the Portal player entered from, so set properties for player starting
+                if (goRight)
+                    FullGame.Vars.startBehavior = "walkRight";
+                else
+                    FullGame.Vars.startBehavior = "walkLeft";
+                FullGame.Vars.startX = cx;
+                FullGame.Vars.startY = cy;
+            }
+            
         } else if (type == "Exit"){
             if (od.properties == undefined){
                 console.log("WARNING: need to have properties when making an Exit object in Tiled");
