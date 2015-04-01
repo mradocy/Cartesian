@@ -55,7 +55,11 @@ var rooms = [
     "openArea",
     "firstSlider",
     "slider2",
-    "sandTime"
+    "sandTime",
+    "firstPortal",
+    "platforming2",
+    "portalEyebots",
+    "redStart"
 ];
 
 //add a state for each level

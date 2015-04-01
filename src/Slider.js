@@ -52,10 +52,17 @@ FullGame.makeSlider = function(cx, cy, color) {
         var wx = dot * Math.cos(edgeNormal);
         var wy = dot * Math.sin(edgeNormal);
         
+        //project force onto path
+        var pathAngle = Math.atan2(this.pathP2.y-this.pathP1.y, this.pathP2.x-this.pathP1.x);
+        var dot = wx*Math.cos(pathAngle) + wy*Math.sin(pathAngle);
+        wx = dot * Math.cos(pathAngle);
+        wy = dot * Math.sin(pathAngle);
+        
         this.body.velocity.x += wx;
         this.body.velocity.y += wy;
-        this.forceApplied = true;
         
+        if (Math.abs(wx) > 1 || Math.abs(wy) > 1)
+            this.forceApplied = true;
     };
     
     sl.applyThickForce = function(edgeNormal, angle) {

@@ -122,6 +122,7 @@ FullGame.Preloader.prototype = {
         game.load.image('mobile_shooter_green', 'assets/img/mobile_shooter_green.png');
         game.load.image('eyebot_red', 'assets/img/eyebot_red.png');
         game.load.image('eyebot_blue', 'assets/img/eyebot_blue.png');
+        game.load.image('eyebot_green', 'assets/img/eyebot_green.png');
         game.load.spritesheet("sand_crumble", 'assets/img/sand_crumble.png', 64, 64, 6);
         game.load.image("roplate_blue", 'assets/img/roplate_blue.png');
         game.load.image("roplate_red", 'assets/img/roplate_red.png');

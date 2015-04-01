@@ -97,7 +97,9 @@ Level order:
 - Portals introduction
 
 - Use portal to have Eyebot kill itself
-- Super Meat Boy reference
+- Need to go back and get certain colorchip
+
+
 
 - Another alien boss fight (but with portals?)
 	- Uses thick laser in final forms
@@ -105,6 +107,9 @@ Level order:
 
 - Musgravite (non-secret) introduction
 	- Shining laser into musgravite splits it up.
+
+- Super Meat Boy reference
+- Laser bounces in way that it goes through portal twice
 
 - Pre-boss level: Navigate through fake blocks
 - Boss: in sparkly cave

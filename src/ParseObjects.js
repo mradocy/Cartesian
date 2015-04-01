@@ -143,13 +143,15 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 FullGame.AlienPath.addPolyline(pts, loop);
             }
             
-        } else if (type == "EyebotRed" || type == "EyebotBlue"){
+        } else if (type == "EyebotRed" || type == "EyebotBlue" || type == "EyebotGreen"){
             
             var color = FullGame.Til.RED;
             if (type == "EyebotRed"){
                 color = FullGame.Til.RED;
             } else if (type == "EyebotBlue"){
                 color = FullGame.Til.BLUE;
+            } else if (type == "EyebotGreen"){
+                color = FullGame.Til.GREEN;
             }
             
             var coating = "normal";

@@ -57,13 +57,6 @@
   <object type="ShooterGreen" x="448" y="979">
    <polyline points="0,0 276,20"/>
   </object>
-  <object type="Portal" x="192" y="512" width="64" height="64">
-   <properties>
-    <property name="mapTo" value="sandTime"/>
-    <property name="right" value="false"/>
-   </properties>
-   <ellipse/>
-  </object>
  </objectgroup>
  <layer name="tile" width="16" height="17">
   <data encoding="csv">

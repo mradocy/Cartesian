@@ -18,6 +18,14 @@ FullGame.makeEyebot = function(x, y, laserColor, coating) {
         }
         deathParticleKey = "player_blue_death_particle";
         break;
+    case FullGame.Til.GREEN:
+        if (coating == "normal" || true){
+            spriteKey = "eyebot_green";
+            frontColor = FullGame.Til.WHITE;
+            backColor = FullGame.Til.BLACK;
+        }
+        deathParticleKey = "player_green_death_particle";
+        break;
     case FullGame.Til.RED:
     default:
         if (coating == "normal" || true){

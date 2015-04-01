@@ -49,24 +49,6 @@
    <polyline points="0,0 192,0"/>
   </object>
   <object type="OrbRed" x="1184" y="220" width="64" height="64"/>
-  <object type="Portal" x="156" y="226" width="64" height="64">
-   <properties>
-    <property name="mapTo" value="firstSlider"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="por3" type="Portal" x="638" y="130" width="64" height="64">
-   <properties>
-    <property name="portalTo" value="por4"/>
-   </properties>
-   <ellipse/>
-  </object>
-  <object name="por4" type="Portal" x="832" y="384" width="64" height="64">
-   <properties>
-    <property name="portalTo" value="por3"/>
-   </properties>
-   <ellipse/>
-  </object>
  </objectgroup>
  <layer name="tile" width="21" height="16">
   <data encoding="csv">
@@ -91,7 +73,7 @@
  <objectgroup name="front" width="21" height="16">
   <object type="Exit" x="1280" y="640" width="64" height="128">
    <properties>
-    <property name="mapTo" value="someMap"/>
+    <property name="mapTo" value="firstPortal"/>
    </properties>
   </object>
   <object type="Exit" x="0" y="384" width="64" height="128">
