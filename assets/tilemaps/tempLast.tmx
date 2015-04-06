@@ -27,21 +27,21 @@
  <objectgroup name="obj" width="16" height="9"/>
  <layer name="tile" width="16" height="9">
   <data encoding="csv">
-53,99,3,6,5,6,1,7,2,3,1,1,2,1,102,54,
+53,99,3,6,5,6,1,7,2,3,1,1,0,0,102,54,
 56,50,0,0,0,0,0,0,0,0,0,0,0,0,56,53,
 51,50,0,0,0,0,0,0,0,0,0,0,0,0,56,50,
 54,54,0,0,0,0,0,0,0,0,0,0,0,0,55,55,
 55,54,0,0,0,0,0,0,0,0,0,0,0,0,56,52,
-55,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-101,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+55,52,0,0,0,0,0,0,0,0,0,0,0,0,51,53,
+101,52,0,0,0,0,0,0,0,0,0,0,0,0,54,53,
 6,101,54,52,0,0,0,0,0,0,0,0,50,53,56,52,
 7,7,101,52,52,99,1,1,1,7,102,54,54,50,53,53
 </data>
  </layer>
  <objectgroup name="front" width="16" height="9">
-  <object type="Exit" x="960" y="320" width="64" height="128">
+  <object type="Exit" x="768" y="0" width="128" height="64">
    <properties>
-    <property name="mapTo" value="firstSlider"/>
+    <property name="mapTo" value="redStart"/>
    </properties>
   </object>
  </objectgroup>

@@ -19,15 +19,18 @@ Sibro now has a new mission: plunge into the depths of E-V15119 and rescue the m
 -----
 
 %firstLevel% (Daz)
-[That was quite the fall, Sibro!
-Try moving around a bit to make sure everything is still functioning.
+[That was quite the fall, Sibro!  Try moving around a bit to make sure everything is still functioning.
 
-It seems that's the case.  You're equipped with self-repair micro-machines, so you'll be fine as long as you don't get hurt too badly.
+Press A or ← to move left;
+press D or → to move right;
+press W, SPACE, or ↑ to jump.
+
+It seems everything is working fine.  You're equipped with self-repair micro-machines, so you'll be fine as long as you don't get hurt too badly.
 
 Ha, look at me talking with a robot.  I didn't think being alone in this room would make me go crazy that fast.  But with you walking around, there's still some hope for us!]
 
 %firstOrb% (Daz)
-[I'm not sure how I got here... the last thing I remember is exploring a cavern with the other guys.  I don't even know how deep I am right now, nor how far apart we are from each other.
+[I'm not sure how I got here... the last thing I remember is exploring a cavern with Foll and Rob, yet I don't see them here.  I must have gotten knocked out some point, somehow.
 
 It seems most of the walls here are would be impervious to a laser like yours.  But try shooting it at things that look interesting anyway.  That's always worked for us in the past, hasn't it?]
 
@@ -37,34 +40,19 @@ It seems most of the walls here are would be impervious to a laser like yours.  
 It must have been pretty hard, like without limbs and all.  The inability to move probably didn't help either.  On second thought, it seems they'd be really lousy workers, huh?  Hmm...]
 
 %firstReflect% (Daz)
-[A reminder: use ESC or ENTER to refresh yourself if you need it.
+[You can also fire a 'preview' laser that won't damage you if reflected back.
+Hold the right mouse button or SHIFT to fire the 'preview' laser.
 
-Well with nothing better to do, I guess I'll lie down myself.  Ahh...
+And press ESC or ENTER to refresh yourself if you need it.  Well with nothing better to do, I suppose I'll lie down myself.  Ahh...
 
-Wait, what is this red circular thing on the ceiling?]
-
-
-%firstMultReflect% (Daz)
-[Hey Sibro, check out what I discovered!  By pointing my laser pistol at this orb up there, I was able to open the door leading out of my room!  Wow!
-
-Impressive how quickly I was able to escape, isn't it?  Try doing something similar if you come across an orb like that!
-Anyway, I'm going to take a look around.]
+Wait, what is this red circular thing on the ceiling?
+... I'll talk to you later.]
 
 
 %firstSpring% (Daz)
-[Great, I managed to open up another door!  Ha, I guess it doesn't take much to excite me.
+[Hey Sibro, check out what I discovered!  By pointing my laser pistol at this red orb up there, I was able to open the door leading out of my room!  Neat!
 
-Being trapped underground on some foreign world is supposed to be scary, isn't it?  But those kinds of bad emotions aren't going to help anyone.  I prefer to think more positively about these situations.
-
-But a robot like yourself wouldn't have to worry about that huh?]
-
-
-%firstGlass% (Daz)
-[Hey Sibro, have you been contacted by any of the other miners yet?  I'm sure Foll and Rob are handling themselves just fine, but some communication would be nice.
-
-Maybe they're too deep within the asteroid for a signal to reach, or their communicators' batteries died.
-
-Watch, we're going to run into each other just walking around here, I just know it.]
+Impressive how quickly I was able to escape, isn't it?  Try doing something similar if you come across an orb like that!  We're going to find Foll and Rob in no time.]
 
 
 %firstMultOrb% (Daz)
@@ -138,7 +126,7 @@ The great thing about robots is that they don't get tired!]
 
 I'm gonna take a breather for a little while.  My instinct tells me we don't have much longer to go until we reach the ship!  Then all we'd have to do is find Daz and Rob.
 
-Oh, and check out this musgravite I managed to snag a while back!  All those months of searching, and we'll finally have something to show for it.  It's simply beautiful!]
+Oh, and check out this musgravite I managed to snag a while back!  All those months of searching, and we'll finally have something to show for it.  It's beautiful!]
 (Then throws musgravite into the air, where it just hovers.  Need to shine laser through it to solve the puzzle)
 
 %hiddenOrb% (Foll)
@@ -208,4 +196,11 @@ Those passages you went through could barely be considered trials.  Becoming one
 
 Your evaluation was to become a lowly laborer.  Such Sub-Evrolians are beings that merely build what the mighty Evrolians design.  They were the ones that designed your evaluation chambers. 
 
+
+
+Hi, I'm ready to make my 'official' request for background music for Cartesian!  I wasn't following it up before but now I want to make a deadline for a game showcase my university is having.
+For now I want 2 tracks and 1 "puzzle solved" chime before April 17.
+I'll also pay for these.  Is $20 per song and $5 for the chime fair?
+
+Hi, are you still taking commissions?  
 

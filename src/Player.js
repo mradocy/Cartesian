@@ -434,6 +434,9 @@ FullGame.makePlayer = function(game) {
                 this.cameraXWhenStartedFiring = firePt.x + this.cameraHorizOffset;
                 this.cameraYWhenStartedFiring = firePt.y + this.cameraVertOffset;
             }
+            //going from lmb to rmb immediately
+            if (this.laserNormalSound.isPlaying)
+                this.laserNormalSound.stop();
         } else {
             this.firing = false;
             if (this.laserNormalSound.isPlaying)
@@ -454,7 +457,7 @@ FullGame.makePlayer = function(game) {
         //detect step sound effect
         this.timeSinceStepSoundFX += dt;
         if (this.timeSinceStepSoundFX > .1 && this.visible){
-            if (onFloor && this.prevVY > 90){
+            if (onFloor && this.prevVY > 100){
                 FullGame.playSFX("step");
                 this.timeSinceStepSoundFX = 0;
             }

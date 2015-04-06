@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="18" height="13" tilewidth="64" tileheight="64">
+<map version="1.0" orientation="orthogonal" width="18" height="14" tilewidth="64" tileheight="64">
  <properties>
   <property name="bg" value="bg3"/>
   <property name="bgParallaxX" value=".6"/>
@@ -10,8 +10,9 @@
  <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
  <tileset firstgid="211" source="tiles/blue_tiles.tsx"/>
  <tileset firstgid="260" source="tiles/blue_black_tiles.tsx"/>
- <layer name="backTile" width="18" height="13" visible="0">
+ <layer name="backTile" width="18" height="14" visible="0">
   <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -27,31 +28,23 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="obj" width="18" height="13">
-  <object type="DoorGreen" x="160" y="640" width="64" height="128"/>
+ <objectgroup name="obj" width="18" height="14">
+  <object type="DoorGreen" x="256" y="640" width="64" height="128"/>
   <object type="Spring" x="192" y="448" width="128" height="64"/>
-  <object type="OrbGreen" x="864" y="320" width="64" height="64"/>
-  <object type="ColorchipGreen" x="320" y="704"/>
-  <object type="SliderGreen" x="959" y="384" width="79" height="25">
+  <object type="OrbGreen" x="992" y="256" width="64" height="64"/>
+  <object type="ColorchipGreen" x="1024" y="576"/>
+  <object type="SliderGreen" x="411" y="372" width="79" height="25">
    <properties>
     <property name="path" value="p1"/>
    </properties>
   </object>
-  <object name="p1" type="Path" x="992" y="256">
-   <polyline points="0,0 0,256"/>
+  <object name="p1" type="Path" x="450" y="322">
+   <polyline points="-2,62 254,62"/>
   </object>
-  <object type="SliderGreen" x="557" y="399" width="83" height="27">
-   <properties>
-    <property name="path" value="p2"/>
-   </properties>
-  </object>
-  <object name="p2" type="Path" x="448" y="384">
-   <polyline points="8,3 320,64"/>
-  </object>
-  <object type="OrbGreen" x="704" y="288" width="64" height="64"/>
-  <object type="OrbGreen" x="832" y="512" width="64" height="64"/>
+  <object type="OrbGreen" x="800" y="288" width="64" height="64"/>
+  <object type="OrbGreen" x="864" y="480" width="64" height="64"/>
  </objectgroup>
- <layer name="tile" width="18" height="13">
+ <layer name="tile" width="18" height="14">
   <data encoding="csv">
 31,31,31,38,38,21,6,263,2,2,42,4,49,7,4,28,2,102,
 0,0,0,0,0,22,263,212,214,217,217,1,3,3,35,102,55,55,
@@ -62,16 +55,17 @@
 3,5,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
 28,2,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,
 35,7,7,17,17,10,45,40,0,0,0,0,0,0,0,0,0,23,
-38,38,31,38,31,39,0,0,0,0,0,0,0,0,0,0,0,23,
-0,0,0,0,0,0,0,0,0,0,9,10,10,10,10,17,10,7,
-0,0,0,0,0,0,0,0,16,17,6,6,14,14,14,5,6,49,
-17,17,10,10,17,10,17,17,28,2,21,7,5,3,21,6,2,7
+4,38,31,38,31,39,0,0,0,0,0,0,0,0,0,0,0,23,
+25,0,0,0,0,0,0,0,0,0,9,10,10,10,10,17,10,7,
+26,0,0,0,0,0,0,0,16,17,6,6,14,14,14,5,6,49,
+26,0,0,16,17,10,17,17,28,2,21,7,5,3,21,6,2,7,
+25,0,0,23,7,3,2,6,3,5,4,7,1,4,1,1,3,3
 </data>
  </layer>
- <objectgroup name="front" width="18" height="13">
-  <object type="Exit" x="0" y="640" width="64" height="128">
+ <objectgroup name="front" width="18" height="14">
+  <object type="Exit" x="64" y="832" width="128" height="64">
    <properties>
-    <property name="mapTo" value="someMap"/>
+    <property name="mapTo" value="tempLast"/>
    </properties>
   </object>
   <object type="Exit" x="0" y="64" width="64" height="128">

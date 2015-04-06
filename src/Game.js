@@ -113,6 +113,12 @@ FullGame.Game.prototype = {
                 else this.bgGroup.parallaxX = Number(props.bgParallaxX);
                 if (props.bgParallaxY == undefined) this.bgGroup.parallaxY = 1;
                 else this.bgGroup.parallaxY = Number(props.bgParallaxY);
+                
+                if (FullGame.Vars.screenshotMode){
+                    this.bgGroup.parallaxX = 1;
+                    this.bgGroup.parallaxY = 1;
+                }
+                
                 //get enough images to tile the background
                 for (var w=0; w < this.worldWidth; w += bg.width){
                     for (var h=0; h < this.worldHeight; h += bg.height){

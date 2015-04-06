@@ -73,7 +73,7 @@ FullGame.Keys.refresh = function() {
     if (temp) this.mmbPressed = false;
     else this.mmbPressed = this.mmbHeld;
     temp = this.rmbHeld;
-    this.rmbHeld = (game.input.mouse.button == Phaser.Mouse.RIGHT_BUTTON);
+    this.rmbHeld = (game.input.mouse.button == Phaser.Mouse.RIGHT_BUTTON || game.input.keyboard.isDown(Phaser.Keyboard.SHIFT));
     if (this.rmbHeld == null) this.rmbHeld = false;
     if (temp) this.rmbPressed = false;
     else this.rmbPressed = this.rmbHeld;

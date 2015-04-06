@@ -13,16 +13,15 @@ FullGame.Messages.onLevelStart = function() {
     var vms = FullGame.Vars.messagesSaid;
     
     if (sm == "firstLevel" && vms.indexOf(sm) == -1){
-        this.msgFromText(sm);
-        vms.push(sm); //ensures message won't be said again
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     } else if (sm == "firstOrb" && vms.indexOf(sm) == -1){
-        this.msgFromText(sm);
-        vms.push(sm); //ensures message won't be said again
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     } else if (sm == "redEyebot" && vms.indexOf(sm) == -1){
-        this.msgFromText(sm);
-        vms.push(sm); //ensures message won't be said again
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     } else if (sm == "trapped2" && vms.indexOf(sm) == -1){
-        this.msgFromText(sm);
         
         msgName = "???";
         
@@ -65,8 +64,10 @@ FullGame.Messages.onLevelStart = function() {
             msg += "You seemed to be enjoying it here.";
         } else if (mins >= 100){
             msg += "It has only been an hour or two!";
-        } else {
+        } else if (mins >= 2) {
             msg += "It has only been " + mins + " minutes since you started!";
+        } else {
+            msg += "You just started!";
         }
         msgs.push(msg);
         msg = "We highly recommend you stay.  ";
@@ -80,16 +81,16 @@ FullGame.Messages.onLevelStart = function() {
         //using a different name so that message won't be repeated if player dies
         vms.push("useShooterText"); //ensures message won't be said again
     } else if (sm == "openArea" && vms.indexOf(sm) == -1){
-        this.msgFromText(sm);
-        vms.push(sm); //ensures message won't be said again
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     }
     
     //message when backtracking
     if (FullGame.rooms.indexOf(lm) > FullGame.rooms.indexOf(sm) && vms.indexOf("backtrack") == -1 &&
         (sm=="firstMultReflect" || sm=="firstSpring" || sm=="firstGlass" || sm=="firstMultOrb" || sm=="firstSand")){
         
-        this.msgFromText("backtrack");
-        vms.push("backtrack");
+        if (this.msgFromText("backtrack"))
+            vms.push("backtrack");
     }
     
 };
@@ -103,65 +104,41 @@ FullGame.Messages.onDoorOpen = function() {
     var vms = FullGame.Vars.messagesSaid;
     
     if (sm == "firstReflect" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstMultReflect" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstSpring" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstGlass" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstMultOrb" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstSand" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "numbers" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if ((sm == "platforming1" || sm == "secret1") && vms.indexOf("platforming1"+"doorOpen") == -1){
-        
-        this.msgFromText("platforming1");
-        vms.push("platforming1"+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText("platforming1"))
+            vms.push("platforming1"+"doorOpen"); //ensures message won't be said again
     } else if (sm == "blueEyebot2" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "revisit" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstRoplate" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "hiddenOrb" && vms.indexOf(sm+"doorOpen") == -1){
-        
-        this.msgFromText(sm);
-        vms.push(sm+"doorOpen"); //ensures message won't be said again
-        
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     }
     
     if (msgs.length == 0){
@@ -224,9 +201,11 @@ FullGame.Messages.onPlayerDeath = function() {
 };
 
 FullGame.Messages.textFile = "";
+//retruns true if message found, false otherwise
 FullGame.Messages.msgFromText = function(label) {
     //label identified with % symbol on left and right
     var index = this.textFile.indexOf('%' + label + '%');
+    if (index == -1) return false;
     var left = this.textFile.indexOf('(', index);
     var right = this.textFile.indexOf(')', left);
     var msgName = this.textFile.substring(left+1, right);
@@ -237,4 +216,5 @@ FullGame.Messages.msgFromText = function(label) {
     
     
     FullGame.HUD.msg(msgs, msgName);
+    return true;
 };
