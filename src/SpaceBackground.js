@@ -70,22 +70,83 @@ FullGame.addSpaceBackground = function() {
             this.bgDust2.push(dust);
         }
         
-        
-        /*
-        dust = this.bgDust2[0];
-        w = dust.width;
-        dust.x += dust2Speed * dt;
-        for (var i=1; i<this.bgDust2.length; i++){
-            this.bgDust2[i].x = this.bgDust2[i-1].x + w;
-        }
-        if (dust.x+w < 0){
-            this.bgDust2.shift();
-            dust.x = this.bgDust2[this.bgDust2.length-1].x + w;
-            this.bgDust2.push(dust);
-        }*/
-        
     };
     
+    
+    FullGame.GI.miscObjs.push(obj);
+    
+};
+
+
+//adds background stuff to FullGame.GI.bgGroup
+FullGame.addSandParticles = function() {
+    
+    var obj = {
+        
+        key:"sand_parts",
+        parts:[],
+        recycledParts:[],
+        time:0,
+        nextSpawn:(1*Math.random()),
+        
+        makePart:function() {
+            var part = null;
+            if (this.recycledParts.length > 0){
+                part = this.recycledParts.pop();
+                part.visible = true;
+            } else {
+                part = game.add.sprite(0, 0, this.key, undefined, FullGame.GI.bgGroup);
+                part.anchor.setTo(.5, .5); //sprite is centered
+            }
+            part.animations.frame = Math.floor(Math.random()*5);
+            part.rotation = Math.PI*2 * Math.random();
+            
+            part.startX = FullGame.GI.worldWidth * Math.random();
+            part.startY = 0;
+            part.vy = 100;
+            part.ay = 100;
+            part.vx = 0;
+            part.ax = 0;
+            part.vr = Math.random() * 4;
+            
+            this.parts.push(part);
+            return part;
+        },
+        
+        update:function() {
+            var dt = game.time.physicsElapsed;
+            //use startX and startY for movement, and games will take care of adjusting it to the camera
+            
+            //spawn parts
+            this.time += dt;
+            if (this.time >= this.nextSpawn){
+                this.makePart();
+                
+                this.time = 0;
+                this.nextSpawn = (.5 + Math.random()) * 2000/FullGame.GI.worldWidth;
+            }
+            
+            //move parts
+            for (var i=0; i<this.parts.length; i++){
+                var part = this.parts[i];
+                
+                part.vx += part.ax * dt;
+                part.vy += part.ay * dt;
+                part.startX += part.vx * dt;
+                part.startY += part.vy * dt;
+                part.rotation += part.vr * dt;
+                
+                if (part.startY > FullGame.GI.worldHeight){
+                    part.visible = false;
+                    this.recycledParts.push(part);
+                    this.parts.splice(i, 1);
+                    i--;
+                }
+            }
+            
+        }
+        
+    };
     
     FullGame.GI.miscObjs.push(obj);
     

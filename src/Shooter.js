@@ -16,6 +16,12 @@ FullGame.makeShooter = function(x, y, rotation, laserColor, laserType, mobile) {
         else
             spriteKey = "shooter_green";
         break;
+    case FullGame.Til.BLACK:
+        if (mobile)
+            spriteKey = "mobile_shooter_black";
+        else
+            spriteKey = "shooter_black";
+        break;
     case FullGame.Til.RED:
     default:
         if (mobile)

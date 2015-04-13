@@ -51,16 +51,28 @@ FullGame.Preloader.prototype = {
         //loading backgrounds
         game.load.image('space1', 'assets/img/bgs/space1.png');
         game.load.image('title_fg', 'assets/img/bgs/title_fg.png');
+        game.load.image('title_logo_red', 'assets/img/bgs/title_logo_red.png');
+        game.load.image('title_logo_blue', 'assets/img/bgs/title_logo_blue.png');
+        game.load.image('title_logo_green', 'assets/img/bgs/title_logo_green.png');
+        game.load.image('title_logo_white', 'assets/img/bgs/title_logo_white.png');
+        game.load.image('title_logo_black', 'assets/img/bgs/title_logo_black.png');
         game.load.image('dust_red1', 'assets/img/bgs/dust_red1.png');
         game.load.image('dust_red2', 'assets/img/bgs/dust_red2.png');
+        game.load.image('dust_blue1', 'assets/img/bgs/dust_blue1.png');
+        game.load.image('dust_blue2', 'assets/img/bgs/dust_blue2.png');
+        game.load.image('dust_green1', 'assets/img/bgs/dust_green1.png');
+        game.load.image('dust_green2', 'assets/img/bgs/dust_green2.png');
         game.load.image('bg1', 'assets/img/bgs/bg1.jpg');
+        game.load.spritesheet("sand_parts", 'assets/img/bgs/particles/sand_parts.png', 16, 16, 5);
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
         game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
         game.load.image('bg_to3', 'assets/img/bgs/bg_to3.jpg');
-        //game.load.image('bg_top', 'assets/img/bgs/bg_top.jpg');
         game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
         game.load.image('controls', 'assets/img/bgs/controls.png');
+        game.load.image('intro_bg', 'assets/img/bgs/intro_bg.jpg');
+        game.load.image('intro_fg', 'assets/img/bgs/intro_fg.png');
+        game.load.image('intro_lighting', 'assets/img/bgs/intro_lighting.png');
         game.load.image('bg_tempLast', 'assets/img/bgs/bg_tempLast.png');
         
         
@@ -115,11 +127,13 @@ FullGame.Preloader.prototype = {
         game.load.image('shooter_red', 'assets/img/shooter_red.png');
         game.load.image('shooter_blue', 'assets/img/shooter_blue.png');
         game.load.image('shooter_green', 'assets/img/shooter_green.png');
+        game.load.image('shooter_black', 'assets/img/shooter_black.png');
         game.load.spritesheet("spring", 'assets/img/spring_sheet.png', 128, 80, 14);
         game.load.image('mobile_shooter_path', 'assets/img/mobile_shooter_path.png');
         game.load.image('mobile_shooter_red', 'assets/img/mobile_shooter_red.png');
         game.load.image('mobile_shooter_blue', 'assets/img/mobile_shooter_blue.png');
         game.load.image('mobile_shooter_green', 'assets/img/mobile_shooter_green.png');
+        game.load.image('mobile_shooter_black', 'assets/img/mobile_shooter_black.png');
         game.load.image('eyebot_red', 'assets/img/eyebot_red.png');
         game.load.image('eyebot_blue', 'assets/img/eyebot_blue.png');
         game.load.image('eyebot_green', 'assets/img/eyebot_green.png');

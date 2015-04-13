@@ -31,6 +31,7 @@ FullGame.Title.prototype = {
     fg:null,
     bgDust1:[], //array of tiled images
     bgDust2:[], //array of tiled images
+    logo:null,
     text:null, //holds Text objects as options
     reticle:null,
     playerSprite:null,
@@ -46,6 +47,9 @@ FullGame.Title.prototype = {
     //jumpingAnimation:{active:false, t:0.0, vx:0.0, vy:0.0, ACCEL_X:0, SPEED_X:300, JUMP_V:-500, GRAVITY:1800, JUMP_DUR:.16},
     jumpingAnimation:{active:false, t:0.0, vx:0.0, vy:0.0, ACCEL_X:7000, SPEED_X:160, JUMP_V:-300, GRAVITY:800, JUMP_DUR:.20},
     beginGameAfterFadeToBlack:false,
+    goToIntro:false,
+    levelSelectScreen:false,
+    levelSelectMenu:null,
     
     preload: function () {
         
@@ -60,15 +64,27 @@ FullGame.Title.prototype = {
         //creating reticle
         var reticleSpriteKey = "";
         var playerKey = "";
+        var logoKey = "";
+        var dustKey = "";
         switch (FullGame.Vars.playerLaserColor){
         case FullGame.Til.BLUE:
             reticleSpriteKey = "reticle_blue";
             playerKey = "player_blue";
+            logoKey = "title_logo_blue";
+            dustKey = "dust_blue";
+            break;
+        case FullGame.Til.GREEN:
+            reticleSpriteKey = "reticle_green";
+            playerKey = "player_green";
+            logoKey = "title_logo_green";
+            dustKey = "dust_green";
             break;
         case FullGame.Til.RED:
         default:
             reticleSpriteKey = "reticle_red";
             playerKey = "player_red";
+            logoKey = "title_logo_red";
+            dustKey = "dust_red";
             break;
         }
         this.reticle = game.add.sprite(0, 0, reticleSpriteKey, 0);
@@ -77,8 +93,9 @@ FullGame.Title.prototype = {
         
         //setting up background animatons
         var bgKey = "space1";
-        var dustKey1 = "dust_red1";
-        var dustKey2 = "dust_red2";
+        var dustKey1, dustKey2;
+        dustKey1 = dustKey + "1";
+        dustKey2 = dustKey + "2";
         this.bg = game.add.image(0, 0, bgKey);
         this.bgDust1.push(game.add.image(0, 0, dustKey1));
         this.bgDust1.push(game.add.image(0, 0, dustKey1));
@@ -93,10 +110,14 @@ FullGame.Title.prototype = {
         this.bgDust2.push(game.add.image(0, 0, dustKey2));
         this.bgDust2.push(game.add.image(0, 0, dustKey2));
         
+        //title logo
+        this.logo = game.add.image(421, 32, logoKey);
+        
         //setting up text options
         var continueOption = FullGame.Vars.saveCreated;
         var creditsOption = false;
         var closeGameOption = false;
+        var levelSelectOption = true;
         this.text = {};
         var textA = [];
         if (continueOption){
@@ -106,6 +127,14 @@ FullGame.Title.prototype = {
                 "CONTINUE",
                 { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
             textA.push(this.text.continueT);
+        }
+        if (levelSelectOption){
+            this.text.levelSelectT = game.add.text(
+                this.TEXT_X,
+                0,
+                "LEVEL SELECT",
+                { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
+            textA.push(this.text.levelSelectT);
         }
         this.text.newGameT = game.add.text(
             this.TEXT_X,
@@ -248,7 +277,11 @@ FullGame.Title.prototype = {
                 this.blackScreen.alpha = this.blackScreenFadeTime / this.BLACK_SCREEN_FADE_DURATION;
                 if (this.blackScreen.alpha > .9999){
                     if (this.beginGameAfterFadeToBlack){
-                        this.state.start(FullGame.Vars.startMap);
+                        if (this.goToIntro){
+                            this.state.start("Intro");
+                        } else {
+                            this.state.start(FullGame.Vars.startMap);
+                        }
                     }
                 }
             } else {
@@ -283,13 +316,14 @@ FullGame.Title.prototype = {
             }
         }
         
-        
-        //cursor selecting other text
+        //move cursor
         var cursor = this.reticle;
         cursor.x = FullGame.Keys.mouseX;
         cursor.y = FullGame.Keys.mouseY;
+        
+        //cursor selecting other text
         this.textSelected = null;
-        if (!this.beginGameAfterFadeToBlack){
+        if (!this.beginGameAfterFadeToBlack && !this.levelSelectScreen){
             for (var key in this.text) {
                 var txt = this.text[key];
                 if (!txt.visible) continue;
@@ -314,8 +348,14 @@ FullGame.Title.prototype = {
             }
             this.prevTextSelected = this.textSelected;
         }
-
-
+        
+        //handling level select screen
+        if (this.levelSelectScreen){
+            this.levelSelectMenu.update();
+            return;
+        }
+        
+        //selecting options
         if (FullGame.Keys.lmbPressed && this.textSelected != null &&
             this.textSelected.visible){
             
@@ -326,6 +366,14 @@ FullGame.Title.prototype = {
                 this.blackScreenFadeIn = true;
                 FullGame.playSFX("colorchip");
                 this.beginGameAfterFadeToBlack = true;
+                
+            } else if (this.textSelected == this.text.levelSelectT){
+                
+                //open level select menu
+                this.levelSelectMenu = FullGame.makeLevelSelect(this, this.levelSelectBackF);
+                this.levelSelectMenu.create();
+                this.levelSelectScreen = true;
+                this.reticle.bringToTop();
                 
             } else if (this.textSelected == this.text.newGameT){
                 //new game pressed
@@ -383,7 +431,6 @@ FullGame.Title.prototype = {
                 
             } else if (this.textSelected == this.text.saveWarningYesT){
                 //begin new game
-                
                 this.saveWarningBlackScreen.visible = false;
                 this.text.saveWarningT.visible = false;
                 this.text.saveWarningNoT.visible = false;
@@ -407,6 +454,9 @@ FullGame.Title.prototype = {
                     FullGame.Vars.startMap = "firstRoplate";
                 }
                 
+                if (FullGame.Vars.startMap == "firstLevel"){
+                    this.goToIntro = true;
+                }
                 
             } else if (FullGame.Menus.textSelected == this.text.toggleFullscreenT){
                 
@@ -468,12 +518,30 @@ FullGame.Title.prototype = {
         this.blackScreen.visible = true;
     },
     
+    //pass this to the level select function
+    levelSelectBackF: function(title, startGame){
+        if (startGame){
+            //begin game after fading to black
+            title.blackScreenFadeTime = 0;
+            title.blackScreenFadeIn = true;
+            FullGame.playSFX("colorchip");
+            title.beginGameAfterFadeToBlack = true;
+        } else {
+        }
+        title.levelSelectScreen = false;
+        title.levelSelectMenu = null;
+        title.textSelected = null;
+        title.prevTextSelected = null;
+    },
+    
     shutdown: function () {
         //destroy stuff
         this.bg = null;
         this.fg = null;
         this.bgDust1.splice(0, this.bgDust1.length);
         this.bgDust2.splice(0, this.bgDust2.length);
+        this.logo.destroy();
+        this.logo = null;
         this.reticle = null;
         this.playerSprite = null;
         for (txt in this.text){
@@ -484,6 +552,9 @@ FullGame.Title.prototype = {
         this.blackScreen = null;
         this.saveWarningBlackScreen = null;
         this.beginGameAfterFadeToBlack = false;
+        this.goToIntro = false;
+        this.levelSelectScreen = false;
+        this.levelSelectMenu = null;
         
     },
     

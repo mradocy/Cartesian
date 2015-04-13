@@ -18,18 +18,18 @@ FullGame.Vars = {
     totalDeaths:0,
     totalDamages:0,
     showTimer:false,
-    screenshotMode:true
+    screenshotMode:false
 };
 
 FullGame.Vars.fillDefaultValues = function() {
     FullGame.Vars.startMap = "firstLevel"; //first level
     //FullGame.Vars.startMap = "openArea"; //last level made
-    //FullGame.Vars.startMap = "useShooter"; //work on this too
+    //FullGame.Vars.startMap = "suits"; //work on this too
     //FullGame.Vars.startMap = "blueEyebot";
     //startX, startY, startBehavior are set through a Entrance object in Tiled
     FullGame.Vars.lastMap = "none"; //first level
     //FullGame.Vars.lastMap = "arena"; //last level made
-    //FullGame.Vars.lastMap = "sandTrek"; //work on this too
+    //FullGame.Vars.lastMap = "platforming2"; //work on this too
     //FullGame.Vars.lastMap = "reflectOffDoor";
     FullGame.Vars.playerLaserColor = FullGame.Til.RED;
     //FullGame.Vars.playerLaserColor = FullGame.Til.BLUE;
@@ -109,3 +109,48 @@ FullGame.playSFX = function(key, volume, loop) {
     game.sound.play(key, volume, loop);
 };
 
+FullGame.currentMusicPlaying = "";
+FullGame.currentMusicSound = null;
+
+FullGame.stopMusic = function() {
+    if (FullGame.currentMusicPlaying != "")
+        return;
+    FullGame.currentMusicSound.stop();
+    FullGame.currentMusicPlaying = "";
+    FullGame.currentMusicSound = null;
+};
+
+/* music always loops.
+   if a key exists that is "intro_musicKey", then that song is played first once,
+   and then the musicKey song starts immediately after */
+FullGame.playMusic = function(musicKey, fadeDuration) {
+    if (FullGame.Vars.musicMuted)
+        return;
+    
+    FullGame.stopMusic();
+    
+    var introMusicKey = "";
+    if (game.cache.checkSoundKey("intro_" + musicKey)){
+        introMusicKey = "intro_" + musicKey;
+    }
+    
+    if (introMusicKey == ""){
+        FullGame.currentMusicPlaying = musicKey;
+        FullGame.currentMusicSound = game.sound.play(FullGame.currentMusicPlaying, 1, true);
+    } else {
+        FullGame.currentMusicPlaying = introMusicKey;
+        FullGame.currentMusicSound = game.sound.play(introMusicKey);
+        FullGame.currentMusicSound.onStop.add(function() {
+            if (FullGame.currentMusicPlaying != ""){
+                FullGame.currentMusicSound.onStop.removeAll();
+                FullGame.currentMusicPlaying = FullGame.currentMusicPlaying.substring(6);
+                FullGame.currentMusicSound = game.sound.play(FullGame.currentMusicPlaying, 1, true);
+            }
+        });
+    }
+    
+    if (fadeDuration > 0){
+        FullGame.currentMusicSound.fadeIn(fadeDuration, (introMusicKey == ""));
+    }
+    
+};

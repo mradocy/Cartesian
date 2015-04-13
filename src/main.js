@@ -22,15 +22,15 @@ var rooms = [
     "firstOrb",
     "redEyebot",
     "firstReflect",
-    "firstMultReflect",
+    "firstMultReflect", //5
     "firstSpring",
     "firstGlass",
     "firstMultOrb",
     "firstSand",
-    "numbers",
-    "platforming1",
+    "numbers", //10
+    "platforming1", //11
     "secret1",
-    "firstMovingLasers",
+    "firstMovingLasers", //12
     "trapped",
     "trapped2",
     "trapped3",
@@ -38,28 +38,31 @@ var rooms = [
     "blueEyebot",
     "blueEyebot2",
     "revisit",
-    "split",
+    "split", //20
     "firstRoplate",
     "roplate2",
     "useEyebot",
     "destroyEyebot",
-    "firstGem",
+    "firstGem", //25
     "hiddenOrb",
     "redRoplate",
     "multEyebots",
     "sandTrek",
-    "useShooter",
+    "useShooter", //30
     "star",
     "arena",
     
-    "openArea",
+    "openArea", //33
     "firstSlider",
     "slider2",
     "sandTime",
     "firstPortal",
     "platforming2",
-    "portalEyebots",
-    "redStart"
+    
+    "suits", //not using
+    
+    "portalEyebots", //39
+    "redStart" //40
 ];
 
 //add a state for each level
@@ -69,8 +72,9 @@ for (var i=0; i<rooms.length; i++){
 game.state.add('testmap', FullGame.Game);
 game.state.add("tempLast", FullGame.Game);
 
-//add title state
+//add other states
 game.state.add("Title", FullGame.Title);
+game.state.add("Intro", FullGame.Intro);
 
 // start the Boot state.
 game.state.add('Boot', FullGame.Boot, true);

@@ -111,6 +111,7 @@ FullGame.makePlayer = function(game) {
     p.springSpriteSpinClockwise = true;
     p.springJumping = false;
     p.timeSinceStepSoundFX = 99999;
+    p.stepSoundEffectCounter = 0;
     
     p.update = function() {
         
@@ -420,7 +421,7 @@ FullGame.makePlayer = function(game) {
             
             //camera shaking (testing for now)
             if (this.laserType == FullGame.Til.LASER_THICK){
-                this.camShakeAmplitude = Math.max(this.camShakeAmplitude, 3);
+                this.shakeCamera(3);
             }
             
         } else if (FullGame.Keys.rmbHeld && !this.laserFireInterrupt){
@@ -458,17 +459,27 @@ FullGame.makePlayer = function(game) {
         this.timeSinceStepSoundFX += dt;
         if (this.timeSinceStepSoundFX > .1 && this.visible){
             if (onFloor && this.prevVY > 100){
-                FullGame.playSFX("step");
+                //implement shake land either
+                if (false && this.stepSoundEffectCounter == 0 &&
+                    ((FullGame.Vars.startMap == "firstLevel" && FullGame.Vars.lastMap != "firstOrb"))){
+                    this.shakeCamera(6);
+                    FullGame.playSFX("step");
+                } else {
+                    FullGame.playSFX("step");
+                }
+                this.stepSoundEffectCounter++;
                 this.timeSinceStepSoundFX = 0;
             }
             if (this.animations.currentAnim.name == "walk_forward" &&
                 (this.animations.currentAnim.frame == 7 || this.animations.currentAnim.frame == 15)){
                 FullGame.playSFX("step");
+                this.stepSoundEffectCounter++;
                 this.timeSinceStepSoundFX = 0;
             }
             if (this.animations.currentAnim.name == "walk_backward" &&
                 (this.animations.currentAnim.frame == 8 || this.animations.currentAnim.frame == 1)){
                 FullGame.playSFX("step");
+                this.stepSoundEffectCounter++;
                 this.timeSinceStepSoundFX = 0;
             }
         }
@@ -486,6 +497,10 @@ FullGame.makePlayer = function(game) {
         }
         
         
+    };
+    
+    p.shakeCamera = function(amplitude){
+        this.camShakeAmplitude = Math.max(this.camShakeAmplitude, amplitude);
     };
     
     p.outOfBounds = function() {
@@ -631,10 +646,10 @@ FullGame.makePlayer = function(game) {
     p.setBehavior = function(behavior) {
         if (behavior == "walkLeft"){
             this.behaviorTime = 0;
-            this.behaviorDuration = .44;
+            this.behaviorDuration = .45;
         } else if (behavior == "walkRight"){
             this.behaviorTime = 0;
-            this.behaviorDuration = .44;
+            this.behaviorDuration = .45;
         } else if (behavior == "fall"){
             this.behaviorTime = 0;
             this.behaviorDuration = .4;

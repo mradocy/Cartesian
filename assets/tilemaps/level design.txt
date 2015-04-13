@@ -111,6 +111,9 @@ Level order:
 - Super Meat Boy reference
 - Laser bounces in way that it goes through portal twice
 
+- Need to get 3 musgravite "keys" to open a door
+- Backtracking, etc. to get them
+
 - Pre-boss level: Navigate through fake blocks
 - Boss: in sparkly cave
 	- Boss moves up/down/left/right on a grid

@@ -55,7 +55,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj.door1);
             FullGame.GI.objs.push(obj.door2); //this is required for lasers to hit door2
             
-        } else if (type == "ShooterRed" || type == "ShooterBlue" || type == "ShooterGreen"){
+        } else if (type == "ShooterRed" || type == "ShooterBlue" || type == "ShooterGreen" || type == "ShooterBlack"){
             var laserColor = FullGame.Til.RED;
             var laserType;
             if (type == "ShooterRed"){
@@ -64,6 +64,8 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 laserColor = FullGame.Til.BLUE;
             } else if (type == "ShooterGreen"){
                 laserColor = FullGame.Til.GREEN;
+            } else if (type == "ShooterBlack"){
+                laserColor = FullGame.Til.BLACK;
             }
             laserType = FullGame.Til.LASER_NORMAL;
             if (od.properties != undefined && od.properties.type != undefined){

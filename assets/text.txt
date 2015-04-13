@@ -16,6 +16,40 @@ But the excavators never returned.  All that remained was Sibro, a laser-equippe
 
 Sibro now has a new mission: plunge into the depths of E-V15119 and rescue the missing miners.
 
+
+%intro1%
+[A group of interstellar excavators
+were searching newly discovered
+asteroid E-V15119 for rare mineral
+deposits.
+                                 
+								 
+The three miners dug deep into the
+rock.  Curiously, the asteroid's
+interior contained what appeared
+to be deliberately sculpted caves
+and passages.  Was this place
+inhabited?]
+
+%intro2%
+[Unfortunately, the miners never
+returned.  All that remained was
+Sibro, their laser-equipped robot
+currently roaming the surface of
+the asteroid.
+                                
+								
+The robot plunged into the depths
+of E-V15119.  Sibro now has a new
+mission: solve the mysteries of the
+asteroid and rescue the excavation
+team!]
+
+  2
+ 1
+2
+   3
+
 -----
 
 %firstLevel% (Daz)
@@ -97,11 +131,6 @@ This could be Foll or Rob!  I'll talk with you later Sibro.]
 
 
 
-
-
-
-
-
 %blueEyebot2% (Foll)
 [...is this Sibro?  It's Foll, I've been trying to contact you guys for a while now.  Guess what?  I finally found some musgravite!  Awesome, right?
 
@@ -112,12 +141,8 @@ On that note, where are those guys anyway?  Did they get lost?]
 %revisit% (Foll)
 [...yeah yeah, admittedly I'm a little lost too.  One moment I'm in a cavern with shiny rocks, and the next I'm in some dim passageway.  I'm not really sure how that happened.
 
-Now we have to group up and find the way out of here.  We can contact each other Sibro, so us two must be close together.  But I have no idea where Rob and Daz went.]
-
-%firstRoplate% (Foll)
-[I am slowly forging a path forward.  Getting through these colored doors can be so exhausting though...
-
-I might just take a break for a bit.  You're not tired yet, right 'bro?  I'm sure you'll be able to find me soon enough.
+I am slowly forging a path forward.  But it's so exhausting...
+I might just take a break for a bit.  You're not tired yet, right Sibro?  You'll be able to find me soon enough.
 
 The great thing about robots is that they don't get tired!]
 
@@ -135,8 +160,7 @@ Oh, and check out this musgravite I managed to snag a while back!  All those mon
 Be on the lookout for them, okay 'bro?]
 
 %openArea% (Foll)
-[Sibro!  I've almost managed to catch up and I heard some strange noises...
-They attacked you!  Those weird alien creatures attacked you!  Is everything okay?
+[Sibro!  One of those weird alien creatures attacked you!  Is everything okay?
 
 It seems to me that they're trying to prevent you from leaving.  They want you to stay here, and continue the maze.  Well I for one do not intend to stay any longer!
 
@@ -147,6 +171,16 @@ Sibro, I'll have to ask you to continue searching for them.  I'm going to guard 
 I don't like going along with the aliens' little game they have here, but it's our only chance of saving Rob and Daz.  Show 'em what you can do, Sibro!]
 
 
+
+(Daz is tied up, acting scared.  Transmission ends with alien approaching him.  Find the room Daz is in, and the alien will start attacking you.  Fire the laser at Daz at some point to cut his ropes, after which he runs away.)
+
+The Evrolians were going to extract Daz's organs.  
+
+Evrolians evolve by taking the best 
+
+
+
+But we are not a wasteful species.  That human still had a sturdy skeletal structure and a beating heart.  These functional organs should be put to much better use than wasting away in a worthless body.
 
 
 
@@ -195,12 +229,4 @@ You will all meet your ends here.  Your execution will be carried out by Vela, t
 Those passages you went through could barely be considered trials.  Becoming one of the Evrolians?  The mere thought is revolting.
 
 Your evaluation was to become a lowly laborer.  Such Sub-Evrolians are beings that merely build what the mighty Evrolians design.  They were the ones that designed your evaluation chambers. 
-
-
-
-Hi, I'm ready to make my 'official' request for background music for Cartesian!  I wasn't following it up before but now I want to make a deadline for a game showcase my university is having.
-For now I want 2 tracks and 1 "puzzle solved" chime before April 17.
-I'll also pay for these.  Is $20 per song and $5 for the chime fair?
-
-Hi, are you still taking commissions?  
 

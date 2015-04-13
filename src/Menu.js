@@ -12,6 +12,8 @@ FullGame.Menus.H = 35;
 FullGame.Menus.HIT_AREA = {x:0, y:0, width:0, height:0};
 FullGame.Menus.SELECTED_COLOR = "#FEFEFE";
 FullGame.Menus.UNSELECTED_COLOR = "#BBBBBB";
+FullGame.Menus.levelSelectScreen = false;
+FullGame.Menus.levelSelectMenu = null;
 
 //clears the currently displayed menu
 FullGame.Menus.clearMenu = function() {
@@ -63,9 +65,15 @@ FullGame.Menus.pauseMenu = function() {
         "CONTINUE",
         { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
-    txt.optionsT = game.add.text(
+    /*txt.levelSelectT = game.add.text(
         this.X,
         this.Y + this.H,
+        "LEVEL SELECT",
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
+        FullGame.GI.hudGroup);*/
+    txt.optionsT = game.add.text(
+        this.X,
+        this.Y + this.H*1,
         "OPTIONS",
         { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
@@ -291,7 +299,7 @@ FullGame.Menus.pauseMenu = function() {
             txt.howToPlayT.visible = false;
             txt.quitT.visible = false;
             FullGame.Menus.textSelected = null;
-        },
+        }
         
         
     };

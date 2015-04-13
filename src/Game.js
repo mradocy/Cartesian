@@ -107,6 +107,8 @@ FullGame.Game.prototype = {
                 //add space back-background for some bgs
                 if (props.bg == "bg_top"){
                     FullGame.addSpaceBackground();
+                } else if (props.bg == "bg1"){
+                    FullGame.addSandParticles();
                 }
                 
                 if (props.bgParallaxX == undefined) this.bgGroup.parallaxX = 1;

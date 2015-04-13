@@ -31,6 +31,10 @@ FullGame.Lasers = {
     COLOR_GREEN2:0x14FF14,
     COLOR_GREEN1_F1:0x12FF12,
     COLOR_GREEN2_F1:0x26FF26,
+    COLOR_BLACK1:0x020202,
+    COLOR_BLACK2:0x262626,
+    COLOR_BLACK1_F1:0x080808,
+    COLOR_BLACK2_F1:0x2A2A2A,
     
     //laser thickness, alpha constants
     THICKNESS_NORMAL1:4, //outer part of normal laser
@@ -705,6 +709,15 @@ FullGame.Lasers.updateGraphics = function() {
                 color2 = this.COLOR_GREEN2;
             }
             break;
+        case FullGame.Til.BLACK:
+            if (this.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
+                color1 = this.COLOR_BLACK1_F1;
+                color2 = this.COLOR_BLACK2_F1;
+            } else {
+                color1 = this.COLOR_BLACK1;
+                color2 = this.COLOR_BLACK2;
+            }
+            break;
         }
         
         //thickness and alpha from type
@@ -853,6 +866,15 @@ FullGame.Lasers.updateGraphics = function() {
                 color2 = this.COLOR_GREEN2;
             }
             break;
+        case FullGame.Til.BLACK:
+            if (p.flicker == 1){
+                color1 = this.COLOR_BLACK1_F1;
+                color2 = this.COLOR_BLACK2_F1;
+            } else {
+                color1 = this.COLOR_BLACK1;
+                color2 = this.COLOR_BLACK2;
+            }
+            break;
         }
         
         //draw
@@ -890,6 +912,9 @@ FullGame.Lasers.updateGraphics = function() {
             break;
         case FullGame.Til.GREEN:
             color1 = this.COLOR_GREEN2;
+            break;
+        case FullGame.Til.BLACK:
+            color1 = this.COLOR_BLACK2;
             break;
         }
         
