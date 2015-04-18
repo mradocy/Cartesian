@@ -115,15 +115,15 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.laserState = "idle"; //"preAim", "aim", "fire", "postFire"
     al.laserTime = 0;
     al.IDLE_DURATION = 2.5;
-    al.PRE_AIM_DURATION = .5;
+    al.PRE_AIM_DURATION = .3;
     al.AIM_DURATION_H3 = 2.2;
     al.AIM_DURATION_H2 = 1.8;
     al.AIM_DURATION_H1 = 1.4;
     al.FIRE_DURATION_H3 = .1;
     al.FIRE_DURATION_H2 = .5;
     al.FIRE_DURATION_H1 = .9;
-    al.POST_FIRE_DURATION = .5;
-    al.AIM_SPREAD_INITIAL = 20 *Math.PI/180;
+    al.POST_FIRE_DURATION = .3;
+    al.AIM_SPREAD_INITIAL = 8 *Math.PI/180;
     al.AIM_SPREAD_FINAL = 1 *Math.PI/180;
     al.invincibleTime = 99999;
     al.INVINCIBLE_DURATION = 2.0;
@@ -146,6 +146,8 @@ FullGame.makeAlien = function(cx, cy, color) {
     al.DEAD_SMOKE_ACCEL = 0;
     al.DEAD_SMOKE_PERIOD = .008;
     al.DEAD_ROTATION = -25 *Math.PI/180;
+    al.laserTranspSound = game.sound.add("laser_transp_alien", 1, true);
+    al.laserNormalSound = game.sound.add("laser_alien", 1, true);
     
     //base laser lines are when alien isn't transformed
     var cFront = FullGame.Til.WHITE;
@@ -648,6 +650,16 @@ FullGame.makeAlien = function(cx, cy, color) {
             frontHandAngle = Math.atan2(plr.y - this.frontHand.y, plr.x - this.frontHand.x);
             backHandAngle = Math.atan2(plr.y - this.backHand.y, plr.x - this.backHand.x);
         }
+        if (this.laserState != "aim" ||
+           (plr != null && plr.dead())){
+            if (this.laserTranspSound.isPlaying)
+                this.laserTranspSound.stop();
+        }
+        if (this.laserState != "fire" ||
+           (plr != null && plr.dead())){
+            if (this.laserNormalSound.isPlaying)
+                this.laserNormalSound.stop();
+        }
         
         var diffF0, diffF1, diffB0, diffB1;
         if (this.scale.x > 0){
@@ -722,6 +734,9 @@ FullGame.makeAlien = function(cx, cy, color) {
                 this.frontHand.rotation = frontHandAngle + Math.PI;
                 this.backHand.rotation = backHandAngle + Math.PI;
             }
+            if (!this.laserTranspSound.isPlaying && !FullGame.Vars.sfxMuted &&
+                (plr != null && !plr.dead()))
+                this.laserTranspSound.play("", 0, 1, true);
             
             if (this.laserTime >= aimDuration){
                 this.laserState = "fire";
@@ -756,6 +771,9 @@ FullGame.makeAlien = function(cx, cy, color) {
                 this.frontHand.rotation = frontHandAngle + Math.PI;
                 this.backHand.rotation = backHandAngle + Math.PI;
             }
+            if (!this.laserNormalSound.isPlaying && !FullGame.Vars.sfxMuted &&
+                (plr != null && !plr.dead()))
+                this.laserNormalSound.play("", 0, 1, true);
             
             if (this.laserTime >= fireDuration){
                 this.laserState = "postFire";

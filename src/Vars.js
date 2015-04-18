@@ -18,7 +18,13 @@ FullGame.Vars = {
     totalDeaths:0,
     totalDamages:0,
     showTimer:false,
-    screenshotMode:false
+    screenshotMode:false,
+    
+    // desktop app stuff
+    desktopApp:true, //set to true when using node-webkit
+    nw:null, //reference to node-webkit things
+    win:null //reference to the window
+    //call FullGame.Vars.win.close(); to close window
 };
 
 FullGame.Vars.fillDefaultValues = function() {
@@ -111,13 +117,22 @@ FullGame.playSFX = function(key, volume, loop) {
 
 FullGame.currentMusicPlaying = "";
 FullGame.currentMusicSound = null;
+FullGame.currentMusicFadingOut = false;
 
 FullGame.stopMusic = function() {
-    if (FullGame.currentMusicPlaying != "")
+    if (FullGame.currentMusicPlaying == "")
         return;
     FullGame.currentMusicSound.stop();
     FullGame.currentMusicPlaying = "";
     FullGame.currentMusicSound = null;
+    FullGame.currentMusicFadingOut = false;
+};
+
+FullGame.fadeOutMusic = function(duration) {
+    if (FullGame.currentMusicPlaying == "")
+        return;
+    FullGame.currentMusicSound.fadeOut(duration);
+    FullGame.currentMusicFadingOut = true;
 };
 
 /* music always loops.
@@ -128,6 +143,9 @@ FullGame.playMusic = function(musicKey, fadeDuration) {
         return;
     
     FullGame.stopMusic();
+    
+    if (!game.cache.checkSoundKey(musicKey))
+        return;
     
     var introMusicKey = "";
     if (game.cache.checkSoundKey("intro_" + musicKey)){
@@ -152,5 +170,6 @@ FullGame.playMusic = function(musicKey, fadeDuration) {
     if (fadeDuration > 0){
         FullGame.currentMusicSound.fadeIn(fadeDuration, (introMusicKey == ""));
     }
+    FullGame.currentMusicFadingOut = false;
     
 };

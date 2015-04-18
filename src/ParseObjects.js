@@ -302,7 +302,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 continue;
             }
             var noSensor = false;
+            var fadeOutMusic = false;
             if (od.properties.noSensor != undefined) noSensor = (od.properties.noSensor == "true");
+            if (od.properties.fadeOutMusic != undefined) fadeOutMusic = (od.properties.fadeOutMusic == "true");
             var mapTo = "";
             if (od.properties.mapTo != undefined) mapTo = od.properties.mapTo;
             if (!noSensor && mapTo == ""){
@@ -344,6 +346,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 }
                 
                 var exit = FullGame.makeExit(x, y, width, height, plrBehavior, mapTo);
+                exit.fadeOutMusic = fadeOutMusic;
                 FullGame.GI.miscObjs.push(exit);
                 
             }

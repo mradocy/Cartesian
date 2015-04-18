@@ -51,15 +51,14 @@ var rooms = [
     "useShooter", //30
     "star",
     "arena",
-    
-    "openArea", //33
+    "openArea", //33 <- Need to still make space ship
     "firstSlider",
     "slider2",
     "sandTime",
     "firstPortal",
     "platforming2",
     
-    "suits", //not using
+    "suits", //not using (secret level?)
     
     "portalEyebots", //39
     "redStart" //40

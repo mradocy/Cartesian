@@ -6,7 +6,7 @@
          "name":"backTile",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":16,
          "x":0,
          "y":0
@@ -145,7 +145,8 @@
     {
      "bg":"bg1",
      "bgParallaxX":".7",
-     "bgParallaxY":".7"
+     "bgParallaxY":".7",
+     "music":"begin_red"
     },
  "tileheight":64,
  "tilesets":[

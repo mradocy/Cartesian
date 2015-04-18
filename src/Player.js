@@ -585,6 +585,7 @@ FullGame.makePlayer = function(game) {
             this.visible = false;
             this.knockbackTime = 0;
             FullGame.playSFX("death");
+            FullGame.stopMusic();
             FullGame.Vars.totalDeaths++;
             FullGame.Messages.onPlayerDeath();
             

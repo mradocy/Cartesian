@@ -8,6 +8,7 @@ FullGame.makeExit = function(x, y, width, height, playerBehavior, mapTo) {
         height:height,
         playerBehavior:playerBehavior,
         mapTo:mapTo,
+        fadeOutMusic:false,
         alreadyTriggered:false,
         update: function() {
             if (this.alreadyTriggered) return;
@@ -26,6 +27,9 @@ FullGame.makeExit = function(x, y, width, height, playerBehavior, mapTo) {
                 plr.setBehavior(playerBehavior);
                 plr.startLevelAfterDuration(this.mapTo, FullGame.HUD.BLACK_SCREEN_FADE_DURATION);
                 FullGame.HUD.fadeOut();
+                if (this.fadeOutMusic){
+                    FullGame.fadeOutMusic(FullGame.HUD.BLACK_SCREEN_FADE_DURATION);
+                }
                 
                 FullGame.Messages.onLevelLeave(this.mapTo);
                 

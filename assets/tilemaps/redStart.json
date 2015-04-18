@@ -188,7 +188,8 @@
     {
      "bg":"bg3",
      "bgParallaxX":".6",
-     "bgParallaxY":".6"
+     "bgParallaxY":".6",
+     "music":"level_green"
     },
  "tileheight":64,
  "tilesets":[

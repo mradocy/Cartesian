@@ -45,6 +45,7 @@ FullGame.Game.prototype = {
     gems:[], //array of gems in the level
     portals:[], //array of portals in the level
     miscObjs:[], //array of objects that don't get update() called by Phaser (so we call their update() instead)
+    bgMusic:"",
     pauseObj:null, //object for pauseUpdate() to be called during the pause update phase
     tileLayer:null, //TilemapLayer for tileGroup, used for collision
     backTileLayer:null, //TilemapLayer for backTileGroup, NOT used for collision
@@ -95,6 +96,26 @@ FullGame.Game.prototype = {
         this.worldHeight = this.mapJSON.height*this.tileHeight;
         this.tilesPressuredThisFrame = [];
         this.destroyTileCounters = {};
+        
+        
+        // background music
+        var music = "";
+        if (this.mapJSON.properties != undefined){
+            var props = this.mapJSON.properties;
+            if (props.music != undefined){
+                music = props.music;
+            }
+        }
+        this.bgMusic = music;
+        if (!FullGame.Vars.musicMuted){
+            if (this.bgMusic == ""){
+                FullGame.stopMusic();
+            } else if (FullGame.currentMusicPlaying == "" ||
+                FullGame.currentMusicPlaying != this.bgMusic ||
+                FullGame.currentMusicFadingOut){
+                FullGame.playMusic(this.bgMusic, FullGame.HUD.BLACK_SCREEN_FADE_DURATION);
+            }
+        }
         
         // adding background images
         this.bgGroup.parallaxX = 1;
@@ -425,6 +446,7 @@ FullGame.Game.prototype = {
         this.tileMap = null;
         this.mapJSON = null;
         this.player = null;
+        this.bgMusic = "";
         this.objs.splice(0, this.objs.length);
         this.orbs.splice(0, this.orbs.length);
         this.eyebots.splice(0, this.eyebots.length);
@@ -479,6 +501,8 @@ FullGame.Game.prototype = {
             cXWSF = this.player.cameraXWhenStartedFiring;
             cYWSF = this.player.cameraYWhenStartedFiring;
             propsSet = true;
+            if (this.player.laserNormalSound.isPlaying)
+                this.player.laserNormalSound.stop();
             var i = this.objs.indexOf(this.player);
             this.objs.splice(i, 1);
             this.player.destroy();

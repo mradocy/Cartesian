@@ -14,6 +14,7 @@ FullGame.Menus.SELECTED_COLOR = "#FEFEFE";
 FullGame.Menus.UNSELECTED_COLOR = "#BBBBBB";
 FullGame.Menus.levelSelectScreen = false;
 FullGame.Menus.levelSelectMenu = null;
+FullGame.Menus.musicWasMuted = false;
 
 //clears the currently displayed menu
 FullGame.Menus.clearMenu = function() {
@@ -47,6 +48,8 @@ FullGame.Menus.pauseMenu = function() {
     bg.beginFill(0x000000, .9);
     bg.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     bg.endFill();
+    
+    this.musicWasMuted = FullGame.Vars.musicMuted;
     
     //text
     /*this.X = 400;
@@ -90,6 +93,14 @@ FullGame.Menus.pauseMenu = function() {
         { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     this.textSelected = txt.continueT;
+    
+    //instructions on how to toggle fullscreen
+    txt.fullscreenInstructionsT = game.add.text(
+        380,
+        450,
+        "(Press F10 to toggle fullscreen modes)",
+        { font: "14px Verdana", fill: this.UNSELECTED_COLOR },
+        FullGame.GI.hudGroup);
     
     //other text that won't be immediately visible
     txt.toggleFullscreenT = game.add.text(
@@ -164,7 +175,8 @@ FullGame.Menus.pauseMenu = function() {
             for (var key in FullGame.Menus.text) {
                 var txt = FullGame.Menus.text[key];
                 if (!txt.visible) continue;
-                if (txt == FullGame.Menus.text.quitSureT) continue;
+                if (txt == FullGame.Menus.text.quitSureT ||
+                    txt == FullGame.Menus.text.fullscreenInstructionsT) continue;
                 if (txt.x+FullGame.Menus.HIT_AREA.x <= cursor.x &&
                     cursor.x <= txt.x+FullGame.Menus.HIT_AREA.x+FullGame.Menus.HIT_AREA.width &&
                     txt.y+FullGame.Menus.HIT_AREA.y <= cursor.y &&
@@ -189,6 +201,14 @@ FullGame.Menus.pauseMenu = function() {
                 if ((FullGame.Keys.pausePressed && FullGame.Menus.text.continueT.visible) ||
                     FullGame.Menus.textSelected == FullGame.Menus.text.continueT){
                     //continue pressed
+                    //update music
+                    if (FullGame.Menus.musicWasMuted != FullGame.Vars.musicMuted){
+                        if (FullGame.Vars.musicMuted){
+                            FullGame.stopMusic();
+                        } else {
+                            FullGame.playMusic(FullGame.GI.bgMusic, .5);
+                        }
+                    }
                     //clear visual stuff
                     FullGame.Menus.clearMenu();
                     //unpause game
@@ -277,6 +297,8 @@ FullGame.Menus.pauseMenu = function() {
                     
                 } else if (FullGame.Menus.textSelected == FullGame.Menus.text.quitYesT){
                     
+                    FullGame.stopMusic();
+                    FullGame.GI.sound.stopAll();
                     FullGame.HUD.haltMsg(true);
                     FullGame.GI.pauseObj = null;
                     game.paused = false;
@@ -290,6 +312,7 @@ FullGame.Menus.pauseMenu = function() {
             txt.optionsT.visible = true;
             txt.howToPlayT.visible = true;
             txt.quitT.visible = true;
+            txt.fullscreenInstructionsT.visible = true;
             FullGame.Menus.textSelected = null;
         },
         pauseMenuInvisible:function() {
@@ -298,6 +321,7 @@ FullGame.Menus.pauseMenu = function() {
             txt.optionsT.visible = false;
             txt.howToPlayT.visible = false;
             txt.quitT.visible = false;
+            txt.fullscreenInstructionsT.visible = false;
             FullGame.Menus.textSelected = null;
         }
         

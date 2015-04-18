@@ -4,12 +4,13 @@
   <property name="bg" value="bg1"/>
   <property name="bgParallaxX" value=".7"/>
   <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="begin_red"/>
  </properties>
  <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
  <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
  <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
  <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
- <layer name="backTile" width="16" height="18">
+ <layer name="backTile" width="16" height="18" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

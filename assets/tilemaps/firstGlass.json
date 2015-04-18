@@ -160,7 +160,8 @@
     {
      "bg":"bg1",
      "bgParallaxX":".7",
-     "bgParallaxY":".7"
+     "bgParallaxY":".7",
+     "music":"begin_red"
     },
  "tileheight":64,
  "tilesets":[

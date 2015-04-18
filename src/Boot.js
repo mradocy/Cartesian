@@ -17,6 +17,13 @@ FullGame.Boot.prototype = {
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
         
+        //node-webkit stuff
+        if (FullGame.Vars.desktopApp && FullGame.Vars.nw == null){
+            FullGame.Vars.nw = require("nw.gui");
+            FullGame.Vars.win = FullGame.Vars.nw.Window.get();
+        }
+    
+        
     },
 
     preload: function () {

@@ -116,7 +116,7 @@ FullGame.Title.prototype = {
         //setting up text options
         var continueOption = FullGame.Vars.saveCreated;
         var creditsOption = false;
-        var closeGameOption = false;
+        var closeGameOption = FullGame.Vars.desktopApp;
         var levelSelectOption = true;
         this.text = {};
         var textA = [];
@@ -166,7 +166,7 @@ FullGame.Title.prototype = {
             this.text.closeGameT = game.add.text(
                 this.TEXT_X,
                 0,
-                "CLOSE GAME",
+                "QUIT",
                 { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
             textA.push(this.text.closeGameT);
         }
@@ -217,6 +217,13 @@ FullGame.Title.prototype = {
             "MUTE MUSIC",
             { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
         this.text.toggleMusicT.visible = false;
+        //instructions on how to toggle fullscreen
+        this.text.fullscreenInstructionsT = game.add.text(
+            380,
+            450,
+            "(Press F10 to toggle fullscreen modes)",
+            { font: "14px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
+        this.text.fullscreenInstructionsT.visible = false;
         this.text.backFromOptionsT = game.add.text(
             FullGame.Menus.X,
             FullGame.Menus.Y + FullGame.Menus.H*3,
@@ -327,7 +334,8 @@ FullGame.Title.prototype = {
             for (var key in this.text) {
                 var txt = this.text[key];
                 if (!txt.visible) continue;
-                if (txt == this.text.saveWarningT) continue;
+                if (txt == this.text.saveWarningT ||
+                    txt == this.text.fullscreenInstructionsT) continue;
                 if (this.saveWarningBlackScreen.visible && cursor.x > this.TEXT_X+this.HIT_AREA.x-5) continue;
                 if (txt.x+this.HIT_AREA.x <= cursor.x &&
                     cursor.x <= txt.x+this.HIT_AREA.x+this.HIT_AREA.width &&
@@ -420,6 +428,7 @@ FullGame.Title.prototype = {
                     this.text.toggleMusicT.text = "MUTE MUSIC";
                 }
                 this.text.backFromOptionsT.visible = true;
+                this.text.fullscreenInstructionsT.visible = true;
                 
             } else if (this.textSelected == this.text.saveWarningNoT){
                 
@@ -488,9 +497,15 @@ FullGame.Title.prototype = {
                 txt.toggleFullscreenT.visible = false;
                 txt.toggleSFXT.visible = false;
                 txt.toggleMusicT.visible = false;
+                txt.fullscreenInstructionsT.visible = false;
                 txt.backFromOptionsT.visible = false;
                 this.saveWarningBlackScreen.visible = false;
 
+            } else if (this.textSelected == this.text.closeGameT){
+                
+                //close game
+                FullGame.Vars.win.close();
+                
             }
             
             

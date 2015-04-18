@@ -4,6 +4,7 @@
   <property name="bg" value="bg1"/>
   <property name="bgParallaxX" value=".7"/>
   <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="begin_red"/>
  </properties>
  <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
  <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
@@ -49,9 +50,9 @@
  </objectgroup>
  <layer name="tile" width="31" height="17">
   <data encoding="csv">
-6,38,38,31,31,38,31,38,276,31,31,276,31,31,276,276,276,38,38,276,276,276,276,276,264,262,262,261,261,260,262,
-26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,275,276,276,276,276,276,276,
-26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,38,38,31,31,38,31,38,276,31,31,276,31,31,276,276,276,38,38,276,276,276,263,264,264,262,262,261,261,260,262,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,275,276,276,276,276,264,263,276,276,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,275,277,0,0,
 25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 26,0,0,0,65,252,224,218,222,228,215,238,219,219,248,235,233,211,243,225,225,232,220,59,266,0,0,0,266,266,266,
 25,0,0,46,75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,261,0,0,0,262,261,262,
@@ -81,13 +82,9 @@
     <property name="mapTo" value="secret1"/>
    </properties>
   </object>
-  <object type="Exit" x="1920" y="128" width="64" height="128">
-   <properties>
-    <property name="mapTo" value="someMap"/>
-   </properties>
-  </object>
   <object type="Exit" x="1600" y="1024" width="192" height="64">
    <properties>
+    <property name="fadeOutMusic" value="true"/>
     <property name="mapTo" value="trapped"/>
    </properties>
   </object>

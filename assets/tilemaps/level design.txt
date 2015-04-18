@@ -102,7 +102,13 @@ Level order:
 
 
 - Another alien boss fight (but with portals?)
+- SWORDS
+	- To deflect lasers
+	- Similar to original design, but:
+		- Bigger
+		- Colors inverted (back is invulnerable, front isn't)
 	- Uses thick laser in final forms
+
 - Rescue Daz.  Daz leaves, and reveals path ahead is full of musgravite.
 
 - Musgravite (non-secret) introduction

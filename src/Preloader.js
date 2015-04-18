@@ -12,7 +12,7 @@ FullGame.Preloader.prototype = {
 
 		// add assets loaded in Boot.js
 		//this.background = this.add.sprite(0, 0, 'preloaderBackground');
-		this.preloadBar = this.add.sprite(300, 400, 'preloaderBar');
+		this.preloadBar = this.add.sprite(256, 280, 'preloaderBar');
         
         // preloader sprite that automatically crops according to how many files have loaded
 		this.load.setPreloadSprite(this.preloadBar);
@@ -76,11 +76,22 @@ FullGame.Preloader.prototype = {
         game.load.image('bg_tempLast', 'assets/img/bgs/bg_tempLast.png');
         
         
+        //loading background music
+        game.load.audio('begin_red', ['assets/music/begin_red.ogg', 'assets/music/begin_red.mp3'], true);
+        game.load.audio('level_blue', ['assets/music/level_blue.ogg', 'assets/music/level_blue.mp3'], true);
+        game.load.audio('boss1', ['assets/music/boss1.ogg', 'assets/music/boss1.mp3'], true);
+        game.load.audio('level_green', ['assets/music/level_green.ogg', 'assets/music/level_green.mp3'], true);
+        
+        
         //loading audio
         game.load.audio('step', ['assets/sfx/step.ogg', 'assets/sfx/step.mp3'], true);
         game.load.audio('jump', ['assets/sfx/jump.ogg', 'assets/sfx/jump.mp3'], true);
         game.load.audio('spring_bounce', ['assets/sfx/spring_bounce.ogg', 'assets/sfx/spring_bounce.mp3'], true);
         game.load.audio('laser_normal', ['assets/sfx/laser_normal.ogg', 'assets/sfx/laser_normal.mp3'], true);
+        
+        game.load.audio('laser_alien', ['assets/sfx/laser_alien.ogg', 'assets/sfx/laser_alien.mp3'], true);
+        game.load.audio('laser_transp_alien', ['assets/sfx/laser_transp_alien.ogg', 'assets/sfx/laser_transp_alien.mp3'], true);
+        
         game.load.audio('damage', ['assets/sfx/damage.ogg', 'assets/sfx/damage.mp3'], true);
         game.load.audio('death', ['assets/sfx/death.ogg', 'assets/sfx/death.mp3'], true);
         game.load.audio('puzzle_solved', ['assets/sfx/puzzle_solved.ogg', 'assets/sfx/puzzle_solved.mp3'], true);
