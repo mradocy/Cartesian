@@ -337,6 +337,7 @@ FullGame.makeAlien = function(cx, cy, color) {
             this.smokeTime = 0;
             FullGame.playSFX("damage_flesh");
             FullGame.playSFX("alien_death");
+            FullGame.fadeOutMusic(1.0);
             this.vx = 0;
             this.vy = 0;
             delete this.laserLines;

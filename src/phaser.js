@@ -58479,6 +58479,9 @@ Phaser.Sound.prototype = {
                 {
                     if (this.loop)
                     {
+                     
+                     //original code:
+                     /*
                         //  won't work with markers, needs to reset the position
                         this.onLoop.dispatch(this);
 
@@ -58488,10 +58491,28 @@ Phaser.Sound.prototype = {
                             this.startTime = this.game.time.time;
                         }
                         else
-                        {
+                        {console.log(1.1);
                             this.onMarkerComplete.dispatch(this.currentMarker, this);
                             this.play(this.currentMarker, 0, this.volume, true, true);
                         }
+                     */
+                     
+                     //new code:
+                     this.onLoop.dispatch(this);
+
+                        if (this.currentMarker === '')
+                        {
+                            this.currentTime = 0;
+                            this.startTime = this.game.time.time;
+                        }
+                        else
+                        {
+                            this.onMarkerComplete.dispatch(this.currentMarker, this);
+                            
+                        }
+                     this.play(this.currentMarker, 0, this.volume, true, true);
+                     //end new code
+                     
                     }
                     else
                     {
@@ -58501,7 +58522,7 @@ Phaser.Sound.prototype = {
                 else
                 {
                     if (this.loop)
-                    {
+                    {console.log(2);
                         this.onLoop.dispatch(this);
                         this.play(this.currentMarker, 0, this.volume, true, true);
                     }

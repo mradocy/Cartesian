@@ -21,7 +21,7 @@ FullGame.Vars = {
     screenshotMode:false,
     
     // desktop app stuff
-    desktopApp:true, //set to true when using node-webkit
+    desktopApp:false, //set to true when using node-webkit
     nw:null, //reference to node-webkit things
     win:null //reference to the window
     //call FullGame.Vars.win.close(); to close window
