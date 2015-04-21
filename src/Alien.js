@@ -22,21 +22,21 @@ FullGame.makeAlien = function(cx, cy, color) {
         break;
     }
     
-    backHand = game.add.sprite(cx, cy, handKey, undefined, FullGame.GI.objGroup);
+    backHand = game.add.sprite(cx, cy, handKey, undefined, FullGame.GI.frontGroup);
     backHand.animations.add("idle", [0], 30, true);
     backHand.animations.add("glow", [1], 30, true);
     backHand.animations.play("idle");
     backHand.anchor.setTo(.5, .5); //sprite is centered
-    al = game.add.sprite(cx, cy, key, undefined, FullGame.GI.objGroup);
+    al = game.add.sprite(cx, cy, key, undefined, FullGame.GI.frontGroup);
     al.animations.add("idle", [0], 30, true);
     al.animations.add("mouth", [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0], 15, false);
     al.animations.add("damage", [2, 3], 20, true);
     al.animations.play("idle");
-    eyes = game.add.sprite(cx, cy, eyesKey, undefined, FullGame.GI.objGroup);
+    eyes = game.add.sprite(cx, cy, eyesKey, undefined, FullGame.GI.frontGroup);
     eyes.animations.add("idle", [0], 30, true);
     eyes.animations.add("blink", [1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0], 90, false);
     eyes.animations.play("idle");
-    frontHand = game.add.sprite(cx, cy, handKey, undefined, FullGame.GI.objGroup);
+    frontHand = game.add.sprite(cx, cy, handKey, undefined, FullGame.GI.frontGroup);
     frontHand.animations.add("idle", [0], 30, true);
     frontHand.animations.add("glow", [1], 30, true);
     frontHand.animations.play("idle");

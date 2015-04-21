@@ -119,6 +119,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj = game.add.image(cx, cy, "medium_star", undefined, FullGame.GI.frontGroup);
             obj.anchor.setTo(.5, .5); //sprite is centered
             
+        } else if (type == "Spaceship"){
+            game.add.image(x, y, "spaceship", undefined, FullGame.GI.frontGroup);
+            
         } else if (type == "Path" || type == "AlienPath"){
             
             var points;
@@ -252,6 +255,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             
         } else if (type == "MinerSitting"){
             obj = FullGame.makeMinerSitting();
+            FullGame.GI.objs.push(obj);
+        } else if (type == "MinerScared"){
+            obj = FullGame.makeMinerScared();
             FullGame.GI.objs.push(obj);
             
         } else if (type == "SliderRed" || type == "SliderBlue" || type == "SliderGreen"){

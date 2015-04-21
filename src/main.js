@@ -61,7 +61,9 @@ var rooms = [
     "suits", //not using (secret level?)
     
     "portalEyebots", //39
-    "redStart" //40
+    "redStart", //40
+    
+    "tightReflect"
 ];
 
 //add a state for each level

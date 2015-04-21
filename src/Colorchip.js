@@ -52,6 +52,7 @@ FullGame.makeColorchip = function(cx, cy, color, laserType) {
         
         //bob up and down
         this.t += dt;
+        this.x = this.startX;
         this.y = this.startY + this.BOB_DIST/2 * Math.sin(this.t * this.BOB_SPEED);
         
         //check if should be used by player

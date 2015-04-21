@@ -1,6 +1,7 @@
 //contains all the dialogue
 FullGame.Messages = {
-    LEVEL_START_MESSAGE_DELAY:1.0
+    LEVEL_START_MESSAGE_DELAY:1.0,
+    PUZZLE_STUCK_DURATION:180.0
 };
 
 //called a bit after starting a level
@@ -83,6 +84,9 @@ FullGame.Messages.onLevelStart = function() {
     } else if (sm == "openArea" && vms.indexOf(sm) == -1){
         if (this.msgFromText(sm))
             vms.push(sm); //ensures message won't be said again
+    } else if (sm == "tightReflect" && vms.indexOf(sm) == -1){
+        this.msgFromText("minerScared");
+        //sm is NOT pushed to vms here; the MinerSitting object in the room will do this once the gem is placed
     }
     
     //message when backtracking
@@ -139,6 +143,9 @@ FullGame.Messages.onDoorOpen = function() {
     } else if (sm == "hiddenOrb" && vms.indexOf(sm+"doorOpen") == -1){
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
+    } else if (sm == "platforming2" && vms.indexOf(sm+"doorOpen") == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
     }
     
     if (msgs.length == 0){
@@ -149,6 +156,30 @@ FullGame.Messages.onDoorOpen = function() {
     FullGame.HUD.msg(msgs, msgName);
     
 };
+
+
+/* Called when player is taking too long to solve a level */
+FullGame.Messages.onPlayerStuck = function() {
+    var sm = FullGame.Vars.startMap;
+    var lm = FullGame.Vars.lastMap;
+    var vms = FullGame.Vars.messagesSaid;
+    
+    if (sm == "numbers"){
+        this.msgFromText("numbersHelp");
+    } else if (sm == "trapped"){
+        this.msgFromText("trappedHelp");
+    } else if (sm == "reflectOffDoor"){
+        this.msgFromText("reflectOffDoorHelp");
+    } else if (sm == "useShooter"){
+        this.msgFromText("useShooterHelp");
+    } else if (sm == "sandTime"){
+        this.msgFromText("sandTimeHelp");
+    }
+    
+};
+
+
+
 
 /* Called when leaving a level.
  * Should be used to make sure messages don't get repeated when reentering a level */

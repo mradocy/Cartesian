@@ -72,3 +72,73 @@ FullGame.makeMinerSitting = function() {
     
     return miner;
 };
+
+//returns made minerScared, but doesn't add it to FullGame.GI.objs (will be done in ParseObjects)
+FullGame.makeMinerScared = function() {
+    //initialization
+    var miner = game.add.sprite(
+        312, 265, //position
+        "miner_scared",
+        undefined, FullGame.GI.objGroup);
+    miner.animations.add("idle", [0], 20, true);
+    miner.animations.add("toss", [1, 2, 3, 4], 20, false);
+    miner.animations.add("retract", [3, 2, 1, 0], 20, false);
+    miner.animations.play("idle");
+    
+    miner.CC_X0 = 359;
+    miner.CC_Y0 = 270;
+    miner.CC_X1 = 448;
+    miner.CC_Y1 = 128;
+    
+    miner.threwCC = false;
+    miner.t = 0;
+    miner.cc = null;
+    
+    
+    if (FullGame.Vars.messagesSaid.indexOf("tightReflect") != -1){
+        //conversation with miner already happened, so put gem there
+        miner.cc = FullGame.makeColorchip(miner.CC_X1, miner.CC_Y1, FullGame.Til.RED, FullGame.Til.LASER_NORMAL); //copied from code in ParseObjects
+        FullGame.GI.objs.push(miner.cc);
+    }
+    
+    miner.update = function() {
+        var dt = game.time.physicsElapsed;
+        
+        if (miner.threwCC){
+            this.t += dt;
+            
+            if (this.t-dt < .2 && .2 <= this.t){
+                //create colorChip to throw
+                this.cc = FullGame.makeColorchip(this.CC_X0, this.CC_Y0, FullGame.Til.RED, FullGame.Til.LASER_NORMAL); //copied from code in ParseObjects
+                FullGame.GI.objs.push(this.cc);
+                //this indicates that colorChip should now be on the screen in this room
+                FullGame.Vars.messagesSaid.push("tightReflect");
+            }
+            
+            //moving colorChip
+            if (.2 < this.t && this.t < 1.2){
+                this.cc.startX = Math.easeInOutQuad(this.t-.2, this.CC_X0, this.CC_X1-this.CC_X0, 1.0);
+                this.cc.startY = Math.easeInOutQuad(this.t-.2, this.CC_Y0, this.CC_Y1-this.CC_Y0, 1.0);
+            } else if (this.t >= 1.2){
+                this.cc.startX = this.CC_X1;
+                this.cc.startY = this.CC_Y1;
+            }
+            
+            //retract animation
+            if (this.t-dt < 1.5 && 1.5 <= this.t){
+                this.animations.play("retract");
+            }
+            
+        } else {
+            if (FullGame.HUD.messageStrs.length == 1){
+                //throw colorChip
+                this.animations.play("toss");
+                
+                this.threwCC = true;
+            }
+        }
+    };
+    
+    
+    return miner;
+};

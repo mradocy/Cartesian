@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="27" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg3"/>
+  <property name="bgParallaxX" value=".6"/>
+  <property name="bgParallaxY" value=".6"/>
+  <property name="music" value="level_green"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="261" source="tiles/green_tiles.tsx"/>
+ <tileset firstgid="310" source="tiles/green_black_tiles.tsx"/>
+ <layer name="backTile" width="27" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="27" height="9">
+  <object type="DoorRed" x="64" y="256" width="128" height="64"/>
+  <object type="OrbRed" x="1440" y="128" width="64" height="64"/>
+  <object name="p1" type="Path" x="672" y="275">
+   <polyline points="0,0 320,0"/>
+  </object>
+  <object name="p2" type="Path" x="1120" y="275">
+   <polyline points="0,0 320,0"/>
+  </object>
+  <object type="ColorchipGreen" x="1440" y="384"/>
+  <object type="SliderRed" x="1180" y="256" width="106" height="42">
+   <properties>
+    <property name="path" value="p2"/>
+   </properties>
+  </object>
+  <object type="SliderRed" x="704" y="250" width="94" height="44">
+   <properties>
+    <property name="path" value="p1"/>
+   </properties>
+  </object>
+  <object type="OrbRed" x="800" y="352" width="64" height="64"/>
+  <object type="ShooterGreen" x="576" y="333">
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object type="MinerScared" x="357" y="287"/>
+ </objectgroup>
+ <layer name="tile" width="27" height="9">
+  <data encoding="csv">
+5,38,31,31,38,31,38,31,38,31,38,334,291,298,291,298,298,298,298,298,291,291,359,0,0,22,14,
+25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,42,
+25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,42,
+25,0,0,0,0,0,0,16,355,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,338,7,
+25,0,0,9,11,0,0,341,286,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,283,310,
+26,0,0,23,7,11,0,283,325,0,0,0,0,0,0,136,66,66,60,0,0,0,0,0,0,340,267,
+25,0,0,22,7,327,0,367,31,45,40,0,0,0,0,37,31,31,150,0,0,0,0,0,0,22,312,
+26,0,0,22,313,285,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,17,17,10,2,5,
+26,0,0,341,262,311,10,10,10,17,17,10,10,17,17,10,10,17,17,10,10,2,1,1,1,5,35
+</data>
+ </layer>
+ <objectgroup name="front" width="27" height="9">
+  <object type="Exit" x="1472" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="redStart"/>
+   </properties>
+  </object>
+  <object type="Exit" x="64" y="512" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="otherMap"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

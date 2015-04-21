@@ -44,6 +44,8 @@ FullGame.Preloader.prototype = {
         game.load.image('red_black_tiles', 'assets/tilemaps/tiles/red_black_tiles.png');
         game.load.image('blue_tiles', 'assets/tilemaps/tiles/blue_tiles.png');
         game.load.image('blue_black_tiles', 'assets/tilemaps/tiles/blue_black_tiles.png');
+        game.load.image('green_tiles', 'assets/tilemaps/tiles/green_tiles.png');
+        game.load.image('green_black_tiles', 'assets/tilemaps/tiles/green_black_tiles.png');
         game.load.image('glass_tiles', 'assets/tilemaps/tiles/glass_tiles.png');
         game.load.image('black_indestructable', 'assets/tilemaps/tiles/black_indestructable.png');
         game.load.image('sand_tiles', 'assets/tilemaps/tiles/sand_tiles.png');
@@ -157,6 +159,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("colorchip_green", 'assets/img/colorchip_green.png', 32, 32, 20);
         game.load.image("small_star", 'assets/img/small_star.png');
         game.load.image("medium_star", 'assets/img/medium_star.png');
+        game.load.image("spaceship", 'assets/img/spaceship.png');
         game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 4);
         game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 2);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
@@ -174,6 +177,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
         
         game.load.spritesheet("miner_sitting", 'assets/img/miner_sitting.png', 78, 78, 6);
+        game.load.spritesheet("miner_scared", 'assets/img/miner_scared.png', 50, 58, 5);
         
         
 

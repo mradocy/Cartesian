@@ -126,6 +126,7 @@
   <object type="Exit" x="64" y="0" width="128" height="64">
    <properties>
     <property name="mapTo" value="firstPortal"/>
+    <property name="noSensor" value="true"/>
    </properties>
   </object>
  </objectgroup>

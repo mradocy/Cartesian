@@ -327,6 +327,12 @@ FullGame.Game.prototype = {
             !FullGame.HUD.blackScreen.visible){
             FullGame.Messages.onLevelStart();
         }
+        if (this.timeSinceLevelStart-dt < FullGame.Messages.PUZZLE_STUCK_DURATION &&
+            this.timeSinceLevelStart >= FullGame.Messages.PUZZLE_STUCK_DURATION){
+            FullGame.Messages.onPlayerStuck();
+        }
+        
+        
         
         for (var i=0; i<this.objs.length; i++){
             var obj = this.objs[i];

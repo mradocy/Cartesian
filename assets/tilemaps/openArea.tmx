@@ -67,5 +67,6 @@
     <property name="mapTo" value="arena"/>
    </properties>
   </object>
+  <object type="Spaceship" x="963" y="13" width="192" height="306"/>
  </objectgroup>
 </map>

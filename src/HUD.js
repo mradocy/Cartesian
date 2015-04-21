@@ -73,6 +73,9 @@ FullGame.HUD.haltMsg = function(immediatelyHideTextArea) {
         this.textBG.visible = false;
         this.textNameBG.visible = false;
         this.messageAdvanceIcon.visible = false;
+        this.textAreaTransitionTime = 0;
+        this.textAreaTransitionDuration = 0;
+        this.textAreaTransitionIntro = false;
     } else {
         if (this.textBG.visible && !this.textAreaTransitioning()){
             this.textAreaOutro();

@@ -66,6 +66,19 @@
                  "width":0,
                  "x":1216,
                  "y":256
+                }, 
+                {
+                 "height":306,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"Spaceship",
+                 "visible":true,
+                 "width":192,
+                 "x":963,
+                 "y":10
                 }],
          "opacity":1,
          "type":"objectgroup",

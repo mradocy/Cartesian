@@ -105,6 +105,12 @@ It was neither Foll nor Rob's strong suit, but they had other useful skills.  Fo
 Including you, this team of four was all it took to form an interstellar excavation squad!  Our small group wasn't the best, but we made it work, didn't we?]
 
 
+%numbersHelp% (Daz)
+[Hey Sibro, I came across some weird red stars I haven't seen before.  Do you have any idea what they could mean?
+
+There are 4 stars clumped together in this one spot, and they're next to a laser that visually resembles the number 4.  Hmm...]
+
+
 %numbers% (Daz)
 [Whew, I managed to open another door.  That was certainly more challenging than the last one.
 What are these rooms even for anyway?
@@ -123,7 +129,16 @@ Wait, am I getting another call?
 This could be Foll or Rob!  I'll talk with you later Sibro.]
 
 
+%trappedHelp% (???)
+[--Yes, the oculroids are currently examining the robot visitor.  It won't be able to leave the room.--
 
+--Wait, the left wall?  What about the left wall?  Cut the transmission!--]
+
+
+%reflectOffDoorHelp% (???)
+[--You morons are a disgrace to the Evrolian species.  Your laser isn't fit for blasting through colored doors.  The door will reflect it!--
+
+--I expect those that carry the Evrolian legacy to at least remember that doors will reflect lasers of the same color.--]
 
 
 %backtrack% (Daz)
@@ -159,6 +174,14 @@ Oh, and check out this musgravite I managed to snag a while back!  All those mon
 
 Be on the lookout for them, okay 'bro?]
 
+
+%useShooterHelp% (Foll)
+[The aliens that created these caverns sure enjoy placing lasers and orbs everywhere... but they rarely seem to intersect.
+
+The lasers in these rooms are pretty similar to yours, right Sibro?  I bet it wouldn't matter which lasers pierce an orb as long as the colors match.]
+
+
+
 %openArea% (Foll)
 [Sibro!  One of those weird alien creatures attacked you!  Is everything okay?
 
@@ -169,6 +192,31 @@ But Rob and Daz are still out missing.  We're not leaving without them.  From wh
 Sibro, I'll have to ask you to continue searching for them.  I'm going to guard the ship and plan a flight out of this place.
 
 I don't like going along with the aliens' little game they have here, but it's our only chance of saving Rob and Daz.  Show 'em what you can do, Sibro!]
+
+
+%sandTimeHelp% (Foll)
+[You know what's strange?  When you enter a room for the second time, everything reverts back to the way it was.
+
+Even sand platforms that have crumbled away seem to come back untouched.  Do the aliens fix the rooms back up?  Is there some other mysterious force at work here?
+
+Nah, it's probably best not to think about it too much.]
+
+
+%platforming2% (Daz)
+[Sibro, It's Daz!  It wasn't Foll or Rob that called me... it was one of those weird alien creatures!
+
+They said if I didn't preform better they would find a "better use" for me... what does that mean?  What am I being tested on?  I... I think they want to kill me!
+
+Now I'm just trying to hide for as long as I can, but each room is more confusing than the last and I don't know where to go!  Sibro, you've got to save me!]
+
+
+%minerScared% (Daz)
+[Sibro!  I'm over here!  I am beyond glad you found me before those aliens did... I've been hearing noises and I think one is close by!
+
+I heard Foll made it out okay... and now that you found me, that only leaves Rob to be found.  Thanks so much for saving us Sibro.  I'd help... but I'm honestly too scared right now to do anything useful.
+
+But I did find this colorchip you could probably use.
+Where do you think those red sliding platforms should go?]
 
 
 

@@ -44,6 +44,7 @@
   <object type="ShooterBlue" x="704" y="224">
    <polyline points="0,0 426,274"/>
   </object>
+  <object type="ColorchipBlue" x="960" y="640"/>
  </objectgroup>
  <layer name="tile" width="20" height="13">
   <data encoding="csv">

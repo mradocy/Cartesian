@@ -116,6 +116,10 @@ Level order:
 
 - Super Meat Boy reference
 - Laser bounces in way that it goes through portal twice
+963, 10
+
+- A level where you can "laser skip" to get past it quickly, but only with the wrong color (a color that's useless on the next level)
+	- Results in humorous message in the next room
 
 - Need to get 3 musgravite "keys" to open a door
 - Backtracking, etc. to get them

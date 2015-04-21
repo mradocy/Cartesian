@@ -111,6 +111,19 @@
                  "width":0,
                  "x":704,
                  "y":224
+                }, 
+                {
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"ColorchipBlue",
+                 "visible":true,
+                 "width":0,
+                 "x":960,
+                 "y":640
                 }],
          "opacity":1,
          "type":"objectgroup",

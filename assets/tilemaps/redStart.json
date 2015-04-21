@@ -155,7 +155,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"tempLast"
+                     "mapTo":"tightReflect"
                     },
                  "type":"Exit",
                  "visible":true,
