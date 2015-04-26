@@ -212,7 +212,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"otherMap"
+                     "mapTo":"arena2"
                     },
                  "type":"Exit",
                  "visible":true,
@@ -230,7 +230,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "bg":"bg3",
+     "bg":"bg4",
      "bgParallaxX":".6",
      "bgParallaxY":".6",
      "music":"level_green"

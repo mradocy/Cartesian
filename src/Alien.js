@@ -265,7 +265,7 @@ FullGame.makeAlien = function(cx, cy, color) {
             
             var sm;
             if (this.smokeCache.length == 0){
-                sm = game.add.sprite(x, y, this.smokeKey, undefined, FullGame.GI.objGroup);
+                sm = game.add.sprite(x, y, this.smokeKey, undefined, FullGame.GI.frontGroup);
                 sm.animations.add("play", [0, 1, 2, 3, 4, 5, 6, 7], 15, false);
                 sm.alien = this;
                 sm.update = function() {
@@ -289,7 +289,7 @@ FullGame.makeAlien = function(cx, cy, color) {
             }
             sm.animations.play("play");
             if (source == this.backHand){
-                FullGame.GI.objGroup.setChildIndex(sm, 0);
+                FullGame.GI.frontGroup.setChildIndex(sm, 0);
             }
             if (this.dead){
                 sm.bringToTop();

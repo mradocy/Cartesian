@@ -63,7 +63,8 @@ var rooms = [
     "portalEyebots", //39
     "redStart", //40
     
-    "tightReflect"
+    "tightReflect",
+    "arena2"
 ];
 
 //add a state for each level

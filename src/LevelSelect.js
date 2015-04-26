@@ -29,6 +29,8 @@ FullGame.makeLevelSelect = function(title, backFunction) {
          startMap:"firstSlider", lastMap:"openArea", color:FullGame.Til.RED},
         {txt:"37 - Portals", desc:"",
          startMap:"firstPortal", lastMap:"sandTime", color:FullGame.Til.RED},
+        {txt:"41 - Second Rescue", desc:"",
+         startMap:"tightReflect", lastMap:"redStart", color:FullGame.Til.GREEN},
         
     ];
     ret.levels = [];
@@ -57,7 +59,7 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         }
     };
     
-    ret.HIT_AREA = {x:-5, y:0, width:300, height:30};
+    ret.HIT_AREA = {x:-5, y:0, width:300, height:29};
     
     ret.create = function() {
         this.clear();
@@ -80,9 +82,9 @@ FullGame.makeLevelSelect = function(title, backFunction) {
             var lvl = {};
             lvl.text = game.add.text(
                 this.headerText.x,
-                160 + i*30,
+                152 + i*29,
                 desc.txt,
-                { font: "21px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
+                { font: "20px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
             /*lvl.textDesc = game.add.text(
                 lvl.text.x + 30,
                 lvl.text.y + 25,

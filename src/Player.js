@@ -619,6 +619,8 @@ FullGame.makePlayer = function(game) {
             this.lowHealthTime = 0;
             this.body.velocity.x = 0; //will apply knockback velocity in a short amount of time in update()
             this.body.velocity.y = 0;
+            this.jumpTime = 9999; //no longer jumping
+            this.springJumping = false;
             this.knockbackRight = knockbackRight;
             this.animations.play("damaged");
             FullGame.playSFX("damage");

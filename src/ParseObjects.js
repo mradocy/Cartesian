@@ -240,6 +240,18 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 FullGame.GI.objs.push(obj.frontHand);
             }
             
+        } else if (type == "Midel"){
+            //do not add alien if already defeated it
+            if (FullGame.rooms.indexOf(FullGame.Vars.lastMap) <
+                FullGame.rooms.indexOf(FullGame.Vars.startMap)){
+                
+                obj = FullGame.makeMidel(cx, cy);
+                FullGame.GI.objs.push(obj);
+                FullGame.GI.objs.push(obj.eyes);
+                FullGame.GI.objs.push(obj.backHand);
+                FullGame.GI.objs.push(obj.frontHand);
+            }
+            
         } else if (type == "GemRed" || type == "GemBlue" || type == "GemGreen"){
             var color = FullGame.Til.RED;
             if (type == "GemRed"){

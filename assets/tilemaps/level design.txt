@@ -151,6 +151,14 @@ Level order:
 	- reflects off yourself, so safe to use.
 
 - World wrap introduction
+- Reflect off blue platform
+- Platforming section with a low ceiling
+- 
+
+- Introduce Evrolian/human hybrids as minor enemies that just walk forward
+	- Deals damage upon touching
+	- Dies in one hit from laser.  Explodes into small pool of blood
+	- Will need to get red colorchip and reflect laser off blood in a puzzle
 	
 - White laser introduction: reflects off everything except black
 	- colors player white, so everything (except black) reflects off player
@@ -167,6 +175,15 @@ Level order:
 		- Hand can be reflected off of at that moment, need to do this to defeat final form
 
 
+Map:
+
+
+     Portals
+	  |    |
+	       platforming2
+		         -portalEyebots-redFirst
+				                 |
+						 -tightReflect
 
 
 Tips:

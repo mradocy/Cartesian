@@ -68,6 +68,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("sand_parts", 'assets/img/bgs/particles/sand_parts.png', 16, 16, 5);
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
         game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
+        game.load.image('bg4', 'assets/img/bgs/bg4.jpg');
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
         game.load.image('bg_to3', 'assets/img/bgs/bg_to3.jpg');
         game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
@@ -108,6 +109,11 @@ FullGame.Preloader.prototype = {
         game.load.audio('alien_damage', ['assets/sfx/alien_damage.ogg', 'assets/sfx/alien_damage.mp3'], true);
         game.load.audio('alien_death', ['assets/sfx/alien_death.ogg', 'assets/sfx/alien_death.mp3'], true);
         game.load.audio('teleport', ['assets/sfx/teleport.ogg', 'assets/sfx/teleport.mp3'], true);
+        
+        game.load.audio('hair_snap', ['assets/sfx/hair_snap.ogg', 'assets/sfx/hair_snap.mp3'], true);
+        game.load.audio('midel_swing', ['assets/sfx/midel_swing.ogg', 'assets/sfx/midel_swing.mp3'], true);
+        
+        
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);
         game.load.audio('boop2', ['assets/sfx/boop2.ogg', 'assets/sfx/boop2.mp3'], true);
         game.load.audio('boop3', ['assets/sfx/boop3.ogg', 'assets/sfx/boop3.mp3'], true);
@@ -165,19 +171,30 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_smoke_red", 'assets/img/alien_smoke_red.png', 16, 16, 8);
+        game.load.spritesheet("alien_smoke_white", 'assets/img/alien_smoke_white.png', 16, 16, 8);
         game.load.spritesheet("msg_advance_icon", 'assets/img/msg_advance_icon.png', 22, 20, 2);
         game.load.image("slider_red", 'assets/img/slider_red.png');
         game.load.image("slider_blue", 'assets/img/slider_blue.png');
         game.load.image("slider_green", 'assets/img/slider_green.png');
         game.load.spritesheet("portal", 'assets/img/portal.png', 90, 90, 9);
-        
         game.load.image("gem_red", 'assets/img/gem_red.png');
         game.load.image("gem_blue", 'assets/img/gem_blue.png');
         game.load.image("gem_green", 'assets/img/gem_green.png');
-        game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
-        
         game.load.spritesheet("miner_sitting", 'assets/img/miner_sitting.png', 78, 78, 6);
         game.load.spritesheet("miner_scared", 'assets/img/miner_scared.png', 50, 58, 5);
+        
+        game.load.spritesheet("midel_body", 'assets/img/midel_body.png', 128, 256, 4);
+        game.load.spritesheet("midel_body_broken", 'assets/img/midel_body_broken.png', 128, 256, 4);
+        game.load.spritesheet("midel_hand", 'assets/img/midel_hand.png', 47, 34, 2);
+        game.load.spritesheet("midel_body", 'assets/img/midel_body.png', 128, 256, 1);
+        game.load.spritesheet("midel_sword", 'assets/img/midel_sword.png', 71, 158, 6);
+        game.load.spritesheet("midel_eyes", 'assets/img/midel_eyes.png', 51, 38, 1);
+        game.load.spritesheet("midel_blood", 'assets/img/midel_blood.png', 26, 52, 7);
+        
+        
+        game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
+        
+        
         
         
 
