@@ -118,7 +118,7 @@ FullGame.makePlayer = function(game) {
         var dt = game.time.physicsElapsed;
         var vx = this.body.velocity.x;
         var vy = this.body.velocity.y;
-        if (this.body.onFloor() || this.body.wasTouching.down)
+        if (this.body.onFloor() || this.body.touching.down)
             this.offFloorTime = 0;
         else
             this.offFloorTime += dt;
@@ -453,12 +453,12 @@ FullGame.makePlayer = function(game) {
         }
         this.firedNormalLastFrame = firedNormalThisFrame;
         
-        var onFloor = (this.body.onFloor() || this.body.wasTouching.down);
+        var onFloor = (this.body.onFloor() || this.body.touching.down);
         
         //detect step sound effect
         this.timeSinceStepSoundFX += dt;
         if (this.timeSinceStepSoundFX > .1 && this.visible){
-            if (onFloor && this.prevVY > 100){
+            if (onFloor && this.prevVY > 150){
                 //implement shake land either
                 if (false && this.stepSoundEffectCounter == 0 &&
                     ((FullGame.Vars.startMap == "firstLevel" && FullGame.Vars.lastMap != "firstOrb"))){

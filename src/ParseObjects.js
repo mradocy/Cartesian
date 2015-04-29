@@ -42,16 +42,20 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             }
             var autoClose = false;
             var cannotOpen = false;
+            var stopsMusic = false;
             if (od.properties != undefined){
                 if (od.properties.autoClose != undefined)
                     autoClose = (od.properties.autoClose == "true");
                 if (od.properties.cannotOpen != undefined)
                     cannotOpen = (od.properties.cannotOpen == "true");
+                if (od.properties.stopsMusic != undefined)
+                    stopsMusic = (od.properties.stopsMusic == "true");
             }
             obj = FullGame.makeDoor(game, (width > height), color, autoClose);
             obj.door1.setX(cx);
             obj.door1.setY(cy);
             obj.door1.cannotOpen = cannotOpen;
+            obj.door1.stopsMusic = stopsMusic;
             FullGame.GI.objs.push(obj.door1);
             FullGame.GI.objs.push(obj.door2); //this is required for lasers to hit door2
             
@@ -241,8 +245,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             }
             
         } else if (type == "Midel"){
-            //do not add alien if already defeated it
-            if (FullGame.rooms.indexOf(FullGame.Vars.lastMap) <
+            //do not add midel if already defeated it
+            if (FullGame.Vars.lastMap != "tempLast" &&
+                FullGame.rooms.indexOf(FullGame.Vars.lastMap) <
                 FullGame.rooms.indexOf(FullGame.Vars.startMap)){
                 
                 obj = FullGame.makeMidel(cx, cy);

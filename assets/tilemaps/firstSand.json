@@ -95,7 +95,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"numbers"
+                     "mapTo":"platforming1"
                     },
                  "type":"Exit",
                  "visible":true,

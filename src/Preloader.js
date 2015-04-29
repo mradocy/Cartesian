@@ -71,6 +71,7 @@ FullGame.Preloader.prototype = {
         game.load.image('bg4', 'assets/img/bgs/bg4.jpg');
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
         game.load.image('bg_to3', 'assets/img/bgs/bg_to3.jpg');
+        game.load.image('bg_to4', 'assets/img/bgs/bg_to4.jpg');
         game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
         game.load.image('controls', 'assets/img/bgs/controls.png');
         game.load.image('intro_bg', 'assets/img/bgs/intro_bg.jpg');
@@ -112,6 +113,8 @@ FullGame.Preloader.prototype = {
         
         game.load.audio('hair_snap', ['assets/sfx/hair_snap.ogg', 'assets/sfx/hair_snap.mp3'], true);
         game.load.audio('midel_swing', ['assets/sfx/midel_swing.ogg', 'assets/sfx/midel_swing.mp3'], true);
+        game.load.audio('midel_damage', ['assets/sfx/midel_damage.ogg', 'assets/sfx/midel_damage.mp3'], true);
+        game.load.audio('midel_death', ['assets/sfx/midel_death.ogg', 'assets/sfx/midel_death.mp3'], true);
         
         
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);

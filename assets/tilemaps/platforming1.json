@@ -172,7 +172,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"numbers"
+                     "mapTo":"firstSand"
                     },
                  "type":"Exit",
                  "visible":true,

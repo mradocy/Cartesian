@@ -74,6 +74,7 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door1.opened = false;
     door1.closing = false;
     door1.autoClose = autoClose;
+    door1.stopsMusic = false;
     door1.cannotOpen = false;
     door1.autoCloseTime = 0;
     door1.AUTO_CLOSE_DELAY = .6;
@@ -109,6 +110,7 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
         //play sound effect
         FullGame.playSFX("door_open");
         FullGame.HUD.solveFlash();
+        FullGame.fadeOutMusic(1.0);
         
         if (this.horiz){
             this.body.velocity.x = -this.HEIGHT / this.OPEN_DURATION;

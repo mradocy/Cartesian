@@ -579,7 +579,7 @@ FullGame.makeMidel = function(cx, cy) {
             this.animations.play("damage");
             this.smokeTime = 0;
             FullGame.playSFX("damage_flesh");
-            FullGame.playSFX("alien_death");
+            FullGame.playSFX("midel_death");
             FullGame.fadeOutMusic(1.0);
             this.vx = 0;
             this.vy = 0;
@@ -608,7 +608,7 @@ FullGame.makeMidel = function(cx, cy) {
                 this.animations.play("damage");
             }
             FullGame.playSFX("damage_flesh");
-            FullGame.playSFX("alien_damage");
+            FullGame.playSFX("midel_damage");
             this.mouthTime = 0;
             
             if (!this.broken && this.health <= this.BROKEN_HEALTH){

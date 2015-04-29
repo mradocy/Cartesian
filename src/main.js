@@ -27,10 +27,10 @@ var rooms = [
     "firstGlass",
     "firstMultOrb",
     "firstSand",
-    "numbers", //10
-    "platforming1", //11
+    //"numbers", //not using
+    "platforming1", //10
     "secret1",
-    "firstMovingLasers", //12
+    "firstMovingLasers", //11
     "trapped",
     "trapped2",
     "trapped3",
@@ -38,20 +38,20 @@ var rooms = [
     "blueEyebot",
     "blueEyebot2",
     "revisit",
-    "split", //20
+    "split", //19
     "firstRoplate",
     "roplate2",
     "useEyebot",
     "destroyEyebot",
-    "firstGem", //25
+    "firstGem", //24
     "hiddenOrb",
     "redRoplate",
     "multEyebots",
     "sandTrek",
-    "useShooter", //30
+    "useShooter", //29
     "star",
     "arena",
-    "openArea", //33 <- Need to still make space ship
+    "openArea", //32 <- Need to still make space ship
     "firstSlider",
     "slider2",
     "sandTime",
@@ -60,8 +60,8 @@ var rooms = [
     
     "suits", //not using (secret level?)
     
-    "portalEyebots", //39
-    "redStart", //40
+    "portalEyebots", //38
+    "redStart", //39
     
     "tightReflect",
     "arena2"

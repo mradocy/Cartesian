@@ -20,7 +20,7 @@
                  "name":"",
                  "properties":
                     {
-
+                     "stopsMusic":"true"
                     },
                  "type":"DoorBlack",
                  "visible":true,

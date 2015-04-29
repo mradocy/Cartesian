@@ -58,7 +58,7 @@
  <objectgroup name="front" width="28" height="14">
   <object type="Exit" x="1728" y="704" width="64" height="128">
    <properties>
-    <property name="mapTo" value="numbers"/>
+    <property name="mapTo" value="platforming1"/>
    </properties>
   </object>
   <object type="Exit" x="0" y="704" width="64" height="128">

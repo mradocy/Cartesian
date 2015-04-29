@@ -144,7 +144,7 @@ FullGame.HUD.makeGroup = function() {
     this.timerText = game.add.text(
         949, //x of text name area
         14, //y of text name area
-        "000:00",
+        "0:00:00",
         { font: "14px 'Lucida Console'", fill: "#FEFEFE" },
         this.group);
     this.timerText.visible = false;
@@ -238,7 +238,7 @@ FullGame.HUD.update = function() {
     var mins = Math.floor((FullGame.Vars.totalPlayTime - hours*3600) / 60);
     if (mins < 10) str += "0";
     str += "" + mins + ":";
-    var secs = Math.floor(FullGame.Vars.totalPlayTime - mins*60);
+    var secs = Math.floor(FullGame.Vars.totalPlayTime - hours*3600 - mins*60);
     if (secs < 10) str += "0";
     str += "" + secs;
     this.timerText.text = str;

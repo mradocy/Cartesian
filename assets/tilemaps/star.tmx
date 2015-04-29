@@ -26,7 +26,11 @@
 </data>
  </layer>
  <objectgroup name="obj" width="19" height="9">
-  <object type="DoorBlack" x="1024" y="256" width="64" height="128"/>
+  <object type="DoorBlack" x="1024" y="256" width="64" height="128">
+   <properties>
+    <property name="stopsMusic" value="true"/>
+   </properties>
+  </object>
   <object type="RoplateGreen" x="448" y="320">
    <polygon points="0,0 0,128 -22,66"/>
   </object>
