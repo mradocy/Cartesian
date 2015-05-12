@@ -1,7 +1,7 @@
 //contains all the dialogue
 FullGame.Messages = {
     LEVEL_START_MESSAGE_DELAY:1.0,
-    PUZZLE_STUCK_DURATION:180.0
+    PUZZLE_STUCK_DURATION:120.0
 };
 
 //called a bit after starting a level

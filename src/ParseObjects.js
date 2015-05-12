@@ -173,7 +173,8 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj);
             FullGame.GI.eyebots.push(obj);
             
-        } else if (type == "RoplateRed" || type == "RoplateBlue" || type == "RoplateGreen"){
+        } else if (type == "RoplateRed" || type == "RoplateBlue" || type == "RoplateGreen" ||
+                   type == "RoplateRedAll" || type == "RoplateBlueAll" || type == "RoplateGreenAll"){
             
             var color1 = FullGame.Til.RED;
             var color2 = FullGame.Til.BLACK;
@@ -183,6 +184,15 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 color1 = FullGame.Til.BLUE;
             } else if (type == "RoplateGreen"){
                 color1 = FullGame.Til.GREEN;
+            } else if (type == "RoplateRedAll"){
+                color1 = FullGame.Til.RED;
+                color2 = FullGame.Til.RED;
+            } else if (type == "RoplateBlueAll"){
+                color1 = FullGame.Til.BLUE;
+                color2 = FullGame.Til.BLUE;
+            } else if (type == "RoplateGreenAll"){
+                color1 = FullGame.Til.GREEN;
+                color2 = FullGame.Til.GREEN;
             }
             
             if (od.properties != undefined){
@@ -303,7 +313,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 if (od.properties.mapTo != undefined)
                     mapTo = od.properties.mapTo;
                 if (od.properties.right != undefined)
-                    goRight = (od.properties.right == "right");
+                    goRight = (od.properties.right == "true");
             }
             obj = FullGame.makePortal(cx, cy, od.name, portalTo, mapTo);
             FullGame.GI.objs.push(obj);

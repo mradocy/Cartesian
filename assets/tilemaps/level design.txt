@@ -124,6 +124,10 @@ Level order:
 - Need to get 3 musgravite "keys" to open a door
 - Backtracking, etc. to get them
 
+
+
+
+
 - Pre-boss level: Navigate through fake blocks
 - Boss: in sparkly cave
 	- Boss moves up/down/left/right on a grid
@@ -182,10 +186,18 @@ Map:
 	  |    |
 	       platforming2
 		         -portalEyebots-redFirst
-				                 |
-						 -tightReflect
+			|       	          |
+		deepDescent-arena2-tightReflect
+			|
+			|
+		keyRoom-twoGems
 
-
+Demo:
+- Pretend to have the game end at level where the oculroids look at Sibro
+	- "Thanks for playing demo, please like share etc."
+- But by ignoring that and continuing, get to play a few more levels.
+- Alien voice will complement you for not falling for the trick.
+		
 Tips:
 	- Sometimes it's best to think backwards.  Determine how the laser should go through the orbs, then figure out where the laser should start.
 	- Puzzle solutions rarely require the usage of every reflectable surface in a room.  It can help to figure out ahead of time which surfaces are too "out of the way" to be used.

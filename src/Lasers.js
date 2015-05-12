@@ -418,32 +418,36 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         
         //(if thick laser) destroy sand tiles it passed through immediately
         if (laserType == FullGame.Til.LASER_THICK){
-            console.log("Thick laser going through sand NOT TESTED!!!");
-            for (x = Math.min(x0, xHit); x <= Math.max(x0, xHit); x = Math.min(Math.max(x0, xHit), x+this.tileWidth)){
-                y = y0 + (x - x0) * (sin / cos);
-                i = Math.floor(x / game.tileWidth);
-                j = Math.floor(y / game.tileHeight);
-                if (i < 0 || i >= game.tileCols.length) break;
-                if (j < 0 || j >= game.tileCols[i].length) break;
-                if (FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
-                    var coords = "" + i + "," + j;
-                    game.tilesPressuredThisFrame.push(coords);
-                    game.destroyTileCounters[coords] = 99999; //so will be destroyed immediately
+            //console.log("Thick laser going through sand NOT TESTED!!!");
+            if (Math.abs(cos) > .0001){
+                for (x = Math.min(x0, xHit); x <= Math.max(x0, xHit); x = Math.min(Math.max(x0, xHit), x+this.tileWidth)){
+                    y = y0 + (x - x0) * (sin / cos);
+                    i = Math.floor(x / game.tileWidth);
+                    j = Math.floor(y / game.tileHeight);
+                    if (i < 0 || i >= game.tileCols.length) break;
+                    if (j < 0 || j >= game.tileCols[i].length) break;
+                    if (FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
+                        var coords = "" + i + "," + j;
+                        game.tilesPressuredThisFrame.push(coords);
+                        game.destroyTileCounters[coords] = 99999; //so will be destroyed immediately
+                    }
+                    if (x == Math.max(x0, xHit)) break;
                 }
-                if (x == Math.max(x0, xHit)) break;
             }
-            for (y = Math.min(y0, yHit); y <= Math.max(y0, yHit); y = Math.min(Math.max(y0, yHit), y+this.tileHeight)){
-                x = x0 + (y - y0) * (cos / sin);
-                i = Math.floor(x / game.tileWidth);
-                j = Math.floor(y / game.tileHeight);
-                if (i < 0 || i >= game.tileCols.length) break;
-                if (j < 0 || j >= game.tileCols[i].length) break;
-                if (FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
-                    var coords = "" + i + "," + j;
-                    game.tilesPressuredThisFrame.push(coords);
-                    game.destroyTileCounters[coords] = 99999; //so will be destroyed immediately
+            if (Math.abs(sin) > .0001){
+                for (y = Math.min(y0, yHit); y <= Math.max(y0, yHit); y = Math.min(Math.max(y0, yHit), y+this.tileHeight)){
+                    x = x0 + (y - y0) * (cos / sin);
+                    i = Math.floor(x / game.tileWidth);
+                    j = Math.floor(y / game.tileHeight);
+                    if (i < 0 || i >= game.tileCols.length) break;
+                    if (j < 0 || j >= game.tileCols[i].length) break;
+                    if (FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
+                        var coords = "" + i + "," + j;
+                        game.tilesPressuredThisFrame.push(coords);
+                        game.destroyTileCounters[coords] = 99999; //so will be destroyed immediately
+                    }
+                    if (y == Math.max(y0, yHit)) break;
                 }
-                if (y == Math.max(y0, yHit)) break;
             }
         }
         

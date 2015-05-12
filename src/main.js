@@ -58,13 +58,22 @@ var rooms = [
     "firstPortal",
     "platforming2",
     
-    "suits", //not using (secret level?)
+    //"suits", //not using (secret level?)
     
     "portalEyebots", //38
     "redStart", //39
     
     "tightReflect",
-    "arena2"
+    "arena2", //41
+    "deepDescent",
+    "keyRoom",
+    "twoGems",
+    "roplateSpecial",
+    "gemPortals", //46
+    "useEyebot2",
+    
+    "whiteArea",
+    "whiteArea2"
 ];
 
 //add a state for each level

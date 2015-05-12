@@ -27,10 +27,12 @@ FullGame.makeLevelSelect = function(title, backFunction) {
          startMap:"arena", lastMap:"star", color:FullGame.Til.BLUE},
         {txt:"33 - Slide Platforms", desc:"",
          startMap:"firstSlider", lastMap:"openArea", color:FullGame.Til.RED},
-        {txt:"36 - Portals", desc:"",
-         startMap:"firstPortal", lastMap:"sandTime", color:FullGame.Til.RED},
+        /*{txt:"36 - Portals", desc:"",
+         startMap:"firstPortal", lastMap:"sandTime", color:FullGame.Til.RED},*/
         {txt:"40 - Second Rescue", desc:"",
          startMap:"tightReflect", lastMap:"redStart", color:FullGame.Til.GREEN},
+        {txt:"43 - Gems", desc:"",
+         startMap:"keyRoom", lastMap:"deepDescent", color:FullGame.Til.RED},
         
     ];
     ret.levels = [];

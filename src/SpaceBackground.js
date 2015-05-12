@@ -151,3 +151,82 @@ FullGame.addSandParticles = function() {
     FullGame.GI.miscObjs.push(obj);
     
 };
+
+//adds background stuff to FullGame.GI.bgGroup
+FullGame.addWhiteThings = function() {
+    
+    var obj = {
+        
+        key:"white_thing",
+        parts:[],
+        recycledParts:[],
+        time:0,
+        nextSpawn:(1*Math.random()),
+        
+        makePart:function() {
+            var th = null;
+            if (this.recycledParts.length > 0){
+                th = this.recycledParts.pop();
+                th.visible = true;
+            } else {
+                th = game.add.sprite(0, 0, this.key, undefined, FullGame.GI.bgGroup);
+                th.anchor.setTo(.5, .5); //sprite is centered
+            }
+            th.rotation = Math.PI*2 * Math.random();
+            
+            th.vx = 150;
+            th.ax = 0;
+            if (Math.random() > .5){
+                th.startX = -30;
+            } else {
+                th.startX = 30 + FullGame.GI.worldWidth;
+                th.vx *= -1;
+                th.ax *= -1;
+            }
+            th.startY = FullGame.GI.worldHeight * Math.random();
+            th.vy = 0;
+            th.ay = 0;
+            th.vr = (Math.random()*2-1) * 2;
+            
+            this.parts.push(th);
+            return th;
+        },
+        
+        update:function() {
+            var dt = game.time.physicsElapsed;
+            //use startX and startY for movement, and games will take care of adjusting it to the camera
+            
+            //spawn parts
+            this.time += dt;
+            if (this.time >= this.nextSpawn){
+                this.makePart();
+                
+                this.time = 0;
+                this.nextSpawn = (1.0 + Math.random()) * 2000/FullGame.GI.worldHeight;
+            }
+            
+            //move parts
+            for (var i=0; i<this.parts.length; i++){
+                var th = this.parts[i];
+                
+                th.vx += th.ax * dt;
+                th.vy += th.ay * dt;
+                th.startX += th.vx * dt;
+                th.startY += th.vy * dt;
+                th.rotation += th.vr * dt;
+                
+                if (th.startY > FullGame.GI.worldHeight){
+                    th.visible = false;
+                    this.recycledParts.push(th);
+                    this.parts.splice(i, 1);
+                    i--;
+                }
+            }
+            
+        }
+        
+    };
+    
+    FullGame.GI.miscObjs.push(obj);
+    
+};

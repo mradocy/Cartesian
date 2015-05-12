@@ -130,6 +130,8 @@ FullGame.Game.prototype = {
                     FullGame.addSpaceBackground();
                 } else if (props.bg == "bg1"){
                     FullGame.addSandParticles();
+                } else if (props.bg == "bg_white"){
+                    FullGame.addWhiteThings();
                 }
                 
                 if (props.bgParallaxX == undefined) this.bgGroup.parallaxX = 1;

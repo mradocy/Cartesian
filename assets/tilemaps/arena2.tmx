@@ -4,7 +4,7 @@
   <property name="bg" value="bg4"/>
   <property name="bgParallaxX" value=".7"/>
   <property name="bgParallaxY" value=".7"/>
-  <property name="music" value="level_blue"/>
+  <property name="music" value="boss1"/>
  </properties>
  <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
  <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
@@ -96,7 +96,7 @@
   </object>
   <object type="Exit" x="0" y="192" width="64" height="128">
    <properties>
-    <property name="mapTo" value="tempLast"/>
+    <property name="mapTo" value="deepDescent"/>
    </properties>
   </object>
  </objectgroup>

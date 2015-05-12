@@ -5,14 +5,26 @@ FullGame.makeRoplate = function(cx, cy, rotation, color1, color2) {
     var spriteKey;
     switch (color1){
     case FullGame.Til.RED:
-        spriteKey = "roplate_red";
+        if (color2 == FullGame.Til.RED){
+            spriteKey = "roplate_red_all";
+        } else {
+            spriteKey = "roplate_red";
+        }
         break;
     case FullGame.Til.GREEN:
-        spriteKey = "roplate_green";
+        if (color2 == FullGame.Til.GREEN){
+            spriteKey = "roplate_green_all";
+        } else {
+            spriteKey = "roplate_green";
+        }
         break;
     case FullGame.Til.BLUE:
     default:
-        spriteKey = "roplate_blue";
+        if (color2 == FullGame.Til.BLUE){
+            spriteKey = "roplate_blue_all";
+        } else {
+            spriteKey = "roplate_blue";
+        }
     }
     rp = game.add.sprite(cx, cy, spriteKey, undefined, FullGame.GI.objGroup);
     rp.anchor.setTo(.5, .5); //sprite is centered

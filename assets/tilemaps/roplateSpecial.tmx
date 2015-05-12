@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="21" height="17" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg4"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="begin_red"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="21" height="17" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="21" height="17">
+  <object type="DoorRed" x="768" y="896" width="128" height="64"/>
+  <object type="OrbRed" x="429" y="864" width="64" height="64"/>
+  <object type="OrbRed" x="160" y="544" width="64" height="64"/>
+  <object type="RoplateRedAll" x="384" y="572">
+   <polygon points="0,0 127,7 68,18"/>
+  </object>
+  <object type="Spring" x="1024" y="768" width="128" height="64"/>
+  <object name="p1" type="Path" x="832" y="262">
+   <polyline points="0,0 0,128"/>
+  </object>
+  <object type="SliderBlue" x="766" y="291" width="124" height="48">
+   <properties>
+    <property name="path" value="p1"/>
+   </properties>
+  </object>
+  <object type="ShooterBlue" x="1280" y="64">
+   <polyline points="0,0 -741,481"/>
+  </object>
+  <object name="p2" type="Path" x="1152" y="128">
+   <polyline points="0,0 0,128"/>
+  </object>
+  <object type="SliderBlue" x="1092" y="231" width="124" height="48">
+   <properties>
+    <property name="path" value="p2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="tile" width="21" height="17">
+  <data encoding="csv">
+4,6,42,1,42,49,35,13,35,102,84,98,84,91,53,98,80,80,87,121,12,
+4,4,49,5,21,49,102,91,91,56,53,98,100,12,12,25,0,0,0,0,22,
+49,31,31,38,31,123,80,80,87,87,80,121,38,31,31,39,0,0,0,0,22,
+25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+14,66,67,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+1,98,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,17,3,
+5,4,224,212,0,0,0,0,0,0,0,65,66,10,11,0,0,0,127,1,1,
+2,4,224,212,0,0,0,0,0,46,45,31,38,38,39,0,0,0,71,99,14,
+35,7,2,2,40,0,0,0,0,0,0,0,0,0,0,0,0,0,129,91,99,
+5,21,49,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,77,70,
+276,276,276,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,101,70,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,17,17,17,49,28,101,
+0,0,0,0,0,0,0,0,0,0,16,11,0,0,22,3,6,21,6,42,42,
+59,59,106,10,18,0,0,0,0,0,22,25,0,0,22,35,5,5,6,49,12,
+50,50,52,21,5,10,10,10,10,10,14,25,0,0,22,2,5,2,2,28,35
+</data>
+ </layer>
+ <objectgroup name="front" width="21" height="17">
+  <object type="Exit" x="768" y="1024" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="gemPortals"/>
+   </properties>
+  </object>
+  <object type="Exit" x="0" y="832" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="twoGems"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

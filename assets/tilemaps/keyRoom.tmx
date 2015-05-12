@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="29" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg4"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="begin_red"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="261" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="29" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="29" height="9">
+  <object type="ColorchipRed" x="432" y="256"/>
+  <object type="GemBlue" x="800" y="178" width="64" height="64">
+   <ellipse/>
+  </object>
+  <object type="OrbRed" x="726" y="178" width="64" height="64"/>
+  <object type="GemGreen" x="763" y="242" width="64" height="64">
+   <ellipse/>
+  </object>
+  <object type="GemRed" x="837" y="242" width="64" height="64">
+   <ellipse/>
+  </object>
+  <object type="OrbBlue" x="800" y="306" width="64" height="64"/>
+  <object type="OrbBlue" x="800" y="114" width="64" height="64"/>
+  <object type="OrbGreen" x="873" y="178" width="64" height="64"/>
+  <object type="OrbBlue" x="948" y="178" width="64" height="64"/>
+  <object type="OrbRed" x="911" y="114" width="64" height="64"/>
+  <object type="OrbBlue" x="652" y="178" width="64" height="64"/>
+  <object type="OrbGreen" x="689" y="114" width="64" height="64"/>
+  <object type="OrbRed" x="892" y="274" width="64" height="64"/>
+  <object type="OrbGreen" x="708" y="274" width="64" height="64"/>
+  <object type="OrbGreen" x="837" y="370" width="64" height="64"/>
+  <object type="OrbRed" x="763" y="370" width="64" height="64"/>
+  <object type="DoorRed" x="1280" y="192" width="64" height="128"/>
+  <object type="DoorGreen" x="1344" y="192" width="64" height="128"/>
+  <object type="DoorBlue" x="1408" y="192" width="64" height="128"/>
+  <object type="ColorchipGreen" x="1248" y="256"/>
+  <object type="ColorchipBlue" x="832" y="480"/>
+ </objectgroup>
+ <layer name="tile" width="29" height="9">
+  <data encoding="csv">
+21,212,211,211,223,0,0,226,227,227,227,227,31,38,38,32,0,0,0,0,0,0,0,0,23,223,0,0,221,
+213,28,28,2,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,216,217,14,223,0,0,221,
+213,42,211,211,212,218,0,0,0,0,0,0,0,0,0,0,0,0,0,0,229,234,247,227,38,39,0,0,221,
+213,21,101,6,6,223,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,229,234,248,
+14,211,21,212,42,223,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+14,211,21,213,42,2,17,218,0,0,0,0,0,0,0,0,0,0,216,217,217,10,217,218,0,0,0,0,0,
+211,5,3,4,212,213,213,25,0,0,0,0,0,0,0,0,0,0,221,28,101,2,213,219,237,234,234,252,217,
+211,213,21,6,4,3,35,3,218,0,0,0,0,0,0,0,0,9,42,28,21,21,212,2,32,0,0,221,213,
+211,101,212,211,211,212,213,211,211,217,217,217,217,217,217,217,217,212,212,213,211,213,6,39,0,0,0,221,213
+</data>
+ </layer>
+ <objectgroup name="front" width="29" height="9">
+  <object type="Exit" x="1792" y="256" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="twoGems"/>
+   </properties>
+  </object>
+  <object type="Exit" x="320" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="deepDescent"/>
+    <property name="right" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
