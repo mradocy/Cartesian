@@ -39,7 +39,7 @@
    <properties>
     <property name="mobile" value="true"/>
     <property name="path" value="p1"/>
-    <property name="speed" value="18"/>
+    <property name="speed" value="13"/>
    </properties>
    <polyline points="0,0 192,0"/>
   </object>

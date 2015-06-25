@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg4_red"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="boss1"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="16" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="16" height="9">
+  <object type="DoorBlack" x="832" y="0" width="128" height="64">
+   <properties>
+    <property name="autoClose" value="true"/>
+    <property name="cannotOpen" value="true"/>
+   </properties>
+  </object>
+  <object type="GemRed" x="688" y="64" width="64" height="64">
+   <ellipse/>
+  </object>
+  <object type="GemRed" x="576" y="288" width="64" height="64">
+   <ellipse/>
+  </object>
+  <object type="Griddy" x="128" y="456"/>
+  <object type="DoorBlack" x="0" y="192" width="64" height="128"/>
+ </objectgroup>
+ <layer name="tile" width="16" height="9">
+  <data encoding="csv">
+28,6,7,7,3,21,7,7,7,87,87,80,39,0,0,23,
+7,87,87,80,2,2,2,7,25,0,0,0,0,0,0,127,
+32,0,0,0,23,4,80,80,88,0,0,0,0,0,0,128,
+0,0,0,0,37,32,0,0,0,0,0,0,16,10,10,1,
+0,0,0,0,0,0,0,0,0,0,0,0,23,4,7,7,
+10,224,224,219,172,169,217,0,0,0,0,211,4,7,1,5,
+26,0,0,223,0,0,0,0,0,0,0,220,2,7,4,3,
+26,0,0,223,0,0,0,0,0,214,213,220,2,7,3,4,
+1,66,66,52,59,59,66,59,66,51,53,54,7,7,7,4
+</data>
+ </layer>
+ <objectgroup name="front" width="16" height="9">
+  <object type="Exit" x="832" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="griddy2"/>
+    <property name="noSensor" value="true"/>
+   </properties>
+  </object>
+  <object type="Exit" x="-7" y="192" width="36" height="128">
+   <properties>
+    <property name="mapTo" value="lastRescue"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

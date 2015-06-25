@@ -30,8 +30,8 @@ FullGame.Game.prototype = {
     mapJSON:null, //JSON object with properties used to make the map, form Tiled
     tileWidth:0,
     tileHeight:0,
-    worldWidth:0,
-    worldHeight:0,
+    worldWidth:0, //in pixels
+    worldHeight:0, //in pixels
     bgGroup:null,
     backTileGroup:null,
     objGroup:null,
@@ -44,6 +44,8 @@ FullGame.Game.prototype = {
     eyebots:[], //array of eyebots in the level
     gems:[], //array of gems in the level
     portals:[], //array of portals in the level
+    griddys:[], //array of griddys in the level
+    blackFlames:[], //array of blackFlames in the level
     miscObjs:[], //array of objects that don't get update() called by Phaser (so we call their update() instead)
     bgMusic:"",
     pauseObj:null, //object for pauseUpdate() to be called during the pause update phase
@@ -306,6 +308,7 @@ FullGame.Game.prototype = {
         
         
         //making player
+        FullGame.Vars.playerLaserColorOnLevelStart = FullGame.Vars.playerLaserColor;
         this.player = FullGame.makePlayer(game);
         this.objs.push(this.player);
         
@@ -370,6 +373,7 @@ FullGame.Game.prototype = {
             }
         }
         var playSandCrumbleSFX = false;
+        var playTileCrumbleSFX = false;
         for (var key in this.destroyTileCounters) {
             this.destroyTileCounters[key] += dt;
             if (this.destroyTileCounters[key] >= FullGame.Til.TILE_DESTROY_DURATION){
@@ -382,21 +386,60 @@ FullGame.Game.prototype = {
                 var tileStr = this.tileCols[x][y];
                 if (tileStr != ""){
                     this.removeTile(x, y);
+                    
+                    var efSpriteKey = "";
+                    var efRotation = 0;
                     if (FullGame.Til.tileType(tileStr) == FullGame.Til.SAND){
-                        //sand destroy effect
-                        var ef = game.add.sprite((x+.5)*this.tileWidth, (y+.5)*this.tileHeight, "sand_crumble", undefined, FullGame.GI.objGroup);
+                        efSpriteKey = "sand_crumble";
+                        efRotation = Math.floor(Math.random()*4)*Math.PI/2; //random rotation for variety
+                    } else if (FullGame.Til.tileType(tileStr) == FullGame.Til.NORMAL){
+                        if (FullGame.Til.tileTopColor(tileStr) == FullGame.Til.BLACK){
+                            if (FullGame.Til.tileRightColor(tileStr) == FullGame.Til.BLACK){ //top and right are black
+                                if (FullGame.Til.tileBottomColor(tileStr) == FullGame.Til.BLACK){ //all black
+                                    efSpriteKey = "black_crumble";
+                                    efRotation = Math.floor(Math.random()*4)*Math.PI/2; //random rotation for variety
+                                } else {
+                                    efSpriteKey = "mixed_crumble";
+                                    efRotation = 0;
+                                }
+                            } else if (FullGame.Til.tileLeftColor(tileStr) == FullGame.Til.BLACK){ //left and top are black
+                                efSpriteKey = "mixed_crumble";
+                                efRotation = 3 * Math.PI / 2;
+                            }
+                        } else if (FullGame.Til.tileBottomColor(tileStr) == FullGame.Til.BLACK){
+                            if (FullGame.Til.tileRightColor(tileStr) == FullGame.Til.BLACK){ //right and bottom are black
+                                efSpriteKey = "mixed_crumble";
+                                efRotation = Math.PI / 2;
+                            } else { //bottom and left are black
+                                efSpriteKey = "mixed_crumble";
+                                efRotation = Math.PI;
+                            }
+                        } else { //all are white
+                            efSpriteKey = "white_crumble";
+                            efRotation = Math.floor(Math.random()*4)*Math.PI/2; //random rotation for variety
+                        }
+                    }
+                    
+                    if (efSpriteKey != ""){
+                        //tile destroy effect
+                        var ef = game.add.sprite((x+.5)*this.tileWidth, (y+.5)*this.tileHeight, efSpriteKey, undefined, FullGame.GI.objGroup);
                         ef.animations.add("destroy", [1, 2, 3, 4, 5], 30, false);
                         ef.animations.play("destroy");
                         ef.anchor.setTo(.5, .5); //sprite is centered
-                        ef.rotation = Math.floor(Math.random()*4)*Math.PI/2; //random rotation for variety
+                        ef.rotation = efRotation;
                         ef.lifespan = 1000* 5 / 30;
-                        playSandCrumbleSFX = true;
+                        if (efSpriteKey == "sand_crumble"){
+                            playSandCrumbleSFX = true;
+                        } else {
+                            playTileCrumbleSFX = true;
+                        }
                     }
                 }
                 
             }
         }
         if (playSandCrumbleSFX) FullGame.playSFX("sand_crumble");
+        if (playTileCrumbleSFX) FullGame.playSFX("tile_crumble");
         this.tilesPressuredThisFrame.splice(0, this.tilesPressuredThisFrame.length);
         
         //update bg parallax
@@ -460,6 +503,8 @@ FullGame.Game.prototype = {
         this.eyebots.splice(0, this.eyebots.length);
         this.gems.splice(0, this.gems.length);
         this.portals.splice(0, this.portals.length);
+        this.griddys.splice(0, this.griddys.length);
+        this.blackFlames.splice(0, this.blackFlames.length);
         this.miscObjs.splice(0, this.miscObjs.length);
         this.tileCols.splice(0, this.tileCols.length); this.tileCols = null;
         this.pauseObj = null;
@@ -479,6 +524,7 @@ FullGame.Game.prototype = {
     
     //restarts the level
     restart: function() {
+        FullGame.Vars.playerLaserColor = FullGame.Vars.playerLaserColorOnLevelStart;
         this.state.restart();
         //this.state.start(game.state.current);
     },

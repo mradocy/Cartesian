@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg4_red"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="boss1"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="16" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="16" height="9">
+  <object type="DoorBlack" x="448" y="0" width="128" height="64">
+   <properties>
+    <property name="autoClose" value="true"/>
+    <property name="cannotOpen" value="true"/>
+   </properties>
+  </object>
+  <object type="Griddy" x="865" y="413"/>
+  <object type="GemRed" x="640" y="224" width="64" height="64">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <layer name="tile" width="16" height="9">
+  <data encoding="csv">
+28,6,6,21,102,38,39,0,0,22,42,2,7,2,2,14,
+7,1,5,7,115,0,0,0,0,127,3,49,2,3,6,2,
+21,1,14,7,116,0,0,0,0,156,31,123,120,123,120,1,
+6,1,5,5,122,218,218,0,0,0,0,0,0,0,0,71,
+102,222,222,219,0,0,0,0,0,0,0,0,0,0,0,22,
+101,219,219,212,0,0,0,0,134,11,0,0,0,0,0,22,
+116,0,0,0,219,220,220,215,100,25,0,0,0,0,0,22,
+115,0,0,0,219,211,221,218,99,7,212,0,0,0,0,23,
+1,17,10,10,4,3,1,35,100,42,101,107,108,107,108,100
+</data>
+ </layer>
+ <objectgroup name="front" width="16" height="9">
+  <object type="Exit" x="448" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="griddy1"/>
+    <property name="noSensor" value="true"/>
+   </properties>
+  </object>
+  <object type="Exit" x="703" y="539" width="128" height="48">
+   <properties>
+    <property name="mapTo" value="griddy3"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

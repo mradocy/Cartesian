@@ -70,6 +70,10 @@ FullGame.Preloader.prototype = {
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
         game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
         game.load.image('bg4', 'assets/img/bgs/bg4.jpg');
+        
+        game.load.image('bg4_red', 'assets/img/bgs/bg4_red.jpg');
+        game.load.image('bg4_toRed', 'assets/img/bgs/bg4_toRed.jpg');
+        
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
         game.load.image('bg_to3', 'assets/img/bgs/bg_to3.jpg');
         game.load.image('bg_to4', 'assets/img/bgs/bg_to4.jpg');
@@ -103,6 +107,7 @@ FullGame.Preloader.prototype = {
         game.load.audio('puzzle_solved', ['assets/sfx/puzzle_solved.ogg', 'assets/sfx/puzzle_solved.mp3'], true);
         game.load.audio('door_open', ['assets/sfx/door_open.ogg', 'assets/sfx/door_open.mp3'], true);
         game.load.audio('sand_crumble', ['assets/sfx/sand_crumble.ogg', 'assets/sfx/sand_crumble.mp3'], true);
+        game.load.audio('tile_crumble', ['assets/sfx/tile_crumble.ogg', 'assets/sfx/tile_crumble.mp3'], true);
         game.load.audio('colorchip', ['assets/sfx/colorchip.ogg', 'assets/sfx/colorchip.mp3'], true);
         game.load.audio('msg_on', ['assets/sfx/msg_on.ogg', 'assets/sfx/msg_on.mp3'], true);
         game.load.audio('msg_off', ['assets/sfx/msg_off.ogg', 'assets/sfx/msg_off.mp3'], true);
@@ -116,6 +121,10 @@ FullGame.Preloader.prototype = {
         game.load.audio('midel_swing', ['assets/sfx/midel_swing.ogg', 'assets/sfx/midel_swing.mp3'], true);
         game.load.audio('midel_damage', ['assets/sfx/midel_damage.ogg', 'assets/sfx/midel_damage.mp3'], true);
         game.load.audio('midel_death', ['assets/sfx/midel_death.ogg', 'assets/sfx/midel_death.mp3'], true);
+        
+        game.load.audio('griddy_poof', ['assets/sfx/griddy_poof.ogg', 'assets/sfx/griddy_poof.mp3'], true);
+        game.load.audio('griddy_damage', ['assets/sfx/griddy_damage.ogg', 'assets/sfx/griddy_damage.mp3'], true);
+        game.load.audio('griddy_death', ['assets/sfx/griddy_death.ogg', 'assets/sfx/griddy_death.mp3'], true);
         
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);
         game.load.audio('boop2', ['assets/sfx/boop2.ogg', 'assets/sfx/boop2.mp3'], true);
@@ -162,6 +171,9 @@ FullGame.Preloader.prototype = {
         game.load.image('eyebot_blue', 'assets/img/eyebot_blue.png');
         game.load.image('eyebot_green', 'assets/img/eyebot_green.png');
         game.load.spritesheet("sand_crumble", 'assets/img/sand_crumble.png', 64, 64, 6);
+        game.load.spritesheet("black_crumble", 'assets/img/black_crumble.png', 64, 64, 6);
+        game.load.spritesheet("white_crumble", 'assets/img/white_crumble.png', 64, 64, 6);
+        game.load.spritesheet("mixed_crumble", 'assets/img/mixed_crumble.png', 64, 64, 6);
         game.load.image("roplate_red", 'assets/img/roplate_red.png');
         game.load.image("roplate_blue", 'assets/img/roplate_blue.png');
         game.load.image("roplate_green", 'assets/img/roplate_green.png');
@@ -180,6 +192,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
         game.load.spritesheet("alien_smoke_red", 'assets/img/alien_smoke_red.png', 16, 16, 8);
         game.load.spritesheet("alien_smoke_white", 'assets/img/alien_smoke_white.png', 16, 16, 8);
+        game.load.spritesheet("alien_smoke_purple", 'assets/img/alien_smoke_purple.png', 16, 16, 8);
         game.load.spritesheet("msg_advance_icon", 'assets/img/msg_advance_icon.png', 22, 20, 2);
         game.load.image("slider_red", 'assets/img/slider_red.png');
         game.load.image("slider_blue", 'assets/img/slider_blue.png');
@@ -199,6 +212,15 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("midel_eyes", 'assets/img/midel_eyes.png', 51, 38, 1);
         game.load.spritesheet("midel_blood", 'assets/img/midel_blood.png', 26, 52, 7);
         
+        game.load.image("griddy", 'assets/img/griddy.png');
+        game.load.image("griddy_l1", 'assets/img/griddy_l1.png');
+        game.load.image("griddy_l2", 'assets/img/griddy_l2.png');
+        game.load.spritesheet("griddy_damage", 'assets/img/griddy_damage.png', 96, 96, 2);
+        game.load.spritesheet("blackFlame", 'assets/img/blackFlame.png', 48, 48, 2);
+        game.load.image("purple_smoke", 'assets/img/purple_smoke.png');
+        game.load.spritesheet("griddy_damage", 'assets/img/griddy_damage.png', 96, 96, 2);
+        
+        game.load.image("final_boss", 'assets/img/final_boss.png');
         
         game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
         

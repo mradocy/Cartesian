@@ -17,6 +17,7 @@ FullGame.Lasers = {
     //for special levels
     number6Rendered:false,
     starRendered:false,
+    tilesFilled:[], //table of bool for each tile showing if the tile is filled by a laser or not
     
     //laser color constants
     COLOR_RED1:0xFF0000, //outer part of red laser
@@ -74,6 +75,14 @@ FullGame.Lasers = {
 //make graphics object to handle all lasers
 FullGame.Lasers.makeGraphics = function() {
     this.graphics = game.add.graphics(0, 0, FullGame.GI.laserGroup);
+    this.tilesFilled = [];
+    for (var x=0; x<FullGame.GI.tileCols.length; x++){
+        var col = [];
+        for (var y=0; y<FullGame.GI.tileCols[x].length; y++){
+            col.push(false);
+        }
+        this.tilesFilled.push(col);
+    }
     return this.graphics;
 };
 
@@ -314,6 +323,29 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             }
         }
         
+        //time until hit griddy
+        for (i=0; i<FullGame.GI.griddys.length; i++){
+            var grd = FullGame.GI.griddys[i];
+            if (grd.dead) continue;
+            if (laserType == FullGame.Til.LASER_TRANSPARENT){
+                continue; //decided that transparent lasers won't hit griddy either
+                var pts = this.laserHitCirclePoint(x0, y0, xHit, yHit, grd.x, grd.y, grd.RADIUS, true);
+                if (pts != null) {
+                    var ptx = (pts.p1.x+pts.p2.x)/2;
+                    var pty = (pts.p1.y+pts.p2.y)/2;
+                    var d = Math.sqrt((ptx-x0)*(ptx-x0)+(pty-y0)*(pty-y0));
+                    if (d < dToHit){
+                        dToHit = d;
+                        xHit = ptx;
+                        yHit = pty;
+                        objHit = grd;
+                        normalHit = Math.atan2(yHit-grd.y, xHit-grd.x);
+                        colorHit = FullGame.Til.BLACK;
+                    }
+                }
+            }
+        }
+        
         //time until hit another object
         for (i=0; i<FullGame.GI.objs.length; i++){
             var obj = FullGame.GI.objs[i];
@@ -389,10 +421,12 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 
                 //at this point, confirmed orb has been passed through
                 if (laserType == FullGame.Til.LASER_TRANSPARENT){
-                    if (orb.halfGlowThisFrame)
-                        orb.glowThisFrame = true;
-                    else
-                        orb.halfGlowThisFrame = true;
+                    if (orb.HALF_GLOW_MECHANIC_EXISTS){
+                        if (orb.halfGlowThisFrame)
+                            orb.glowThisFrame = true;
+                        else
+                            orb.halfGlowThisFrame = true;
+                    }
                 } else {
                     orb.glowThisFrame = true;
                 }
@@ -416,17 +450,34 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             }
         }
         
-        //(if thick laser) destroy sand tiles it passed through immediately
-        if (laserType == FullGame.Til.LASER_THICK){
-            //console.log("Thick laser going through sand NOT TESTED!!!");
-            if (Math.abs(cos) > .0001){
-                for (x = Math.min(x0, xHit); x <= Math.max(x0, xHit); x = Math.min(Math.max(x0, xHit), x+this.tileWidth)){
+        //check if laser passed through any griddys
+        if (laserType == FullGame.Til.LASER_NORMAL || laserType == FullGame.Til.LASER_THICK){
+            for (i=0; i<FullGame.GI.griddys.length; i++){
+                var grd = FullGame.GI.griddys[i];
+                
+                var pts = this.laserHitCirclePoint(x0, y0, xHit, yHit, grd.x, grd.y, grd.RADIUS, true);
+                if (pts == null) continue;
+                
+                //at this point, confirmed grd has been passed through
+                grd.shotAt();
+            }
+        }
+        
+        //record all tiles the laser passed through
+        //(if thick laser) also destroy sand tiles it passed through immediately
+        //console.log("Thick laser going through sand NOT TESTED!!!");
+        if (laserType != FullGame.Til.LASER_TRANSPARENT && laserType != FullGame.Til.LASER_FADEOUT){
+            if (Math.abs(cos) > .00001){
+                for (x = Math.min(x0, xHit); x <= Math.max(x0, xHit); x = Math.min(Math.max(x0, xHit), x+game.tileWidth)){
                     y = y0 + (x - x0) * (sin / cos);
                     i = Math.floor(x / game.tileWidth);
                     j = Math.floor(y / game.tileHeight);
                     if (i < 0 || i >= game.tileCols.length) break;
                     if (j < 0 || j >= game.tileCols[i].length) break;
-                    if (FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
+
+                    this.tilesFilled[i][j] = true;
+                    if (laserType == FullGame.Til.LASER_THICK &&
+                        FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
                         var coords = "" + i + "," + j;
                         game.tilesPressuredThisFrame.push(coords);
                         game.destroyTileCounters[coords] = 99999; //so will be destroyed immediately
@@ -434,14 +485,17 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     if (x == Math.max(x0, xHit)) break;
                 }
             }
-            if (Math.abs(sin) > .0001){
-                for (y = Math.min(y0, yHit); y <= Math.max(y0, yHit); y = Math.min(Math.max(y0, yHit), y+this.tileHeight)){
+            if (Math.abs(sin) > .00001){
+                for (y = Math.min(y0, yHit); y <= Math.max(y0, yHit); y = Math.min(Math.max(y0, yHit), y+game.tileHeight)){
                     x = x0 + (y - y0) * (cos / sin);
                     i = Math.floor(x / game.tileWidth);
                     j = Math.floor(y / game.tileHeight);
                     if (i < 0 || i >= game.tileCols.length) break;
                     if (j < 0 || j >= game.tileCols[i].length) break;
-                    if (FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
+
+                    this.tilesFilled[i][j] = true;
+                    if (laserType == FullGame.Til.LASER_THICK &&
+                        FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
                         var coords = "" + i + "," + j;
                         game.tilesPressuredThisFrame.push(coords);
                         game.destroyTileCounters[coords] = 99999; //so will be destroyed immediately
@@ -450,6 +504,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 }
             }
         }
+        
         
         //check what laser did
         var reflect = FullGame.Til.willReflect(c, colorHit);
@@ -463,8 +518,9 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             if (normalHit == Math.PI/2) //hit bottom side of tile
                 y--;
             tileStr = game.tileCols[x][y];
-            if ((laserType == FullGame.Til.LASER_NORMAL && FullGame.Til.tileType(tileStr) == FullGame.Til.SAND) ||
-                (laserType == FullGame.Til.LASER_THICK && FullGame.Til.tileType(tileStr) == FullGame.Til.NORMAL)){
+            if (!reflect &&
+                ((laserType == FullGame.Til.LASER_NORMAL && FullGame.Til.tileType(tileStr) == FullGame.Til.SAND) ||
+                (laserType == FullGame.Til.LASER_THICK && FullGame.Til.tileType(tileStr) == FullGame.Til.NORMAL))){
                 //hit tile that will be destroyed
                 var coords = "" + x + "," + y;
                 game.tilesPressuredThisFrame.push(coords);
@@ -929,6 +985,20 @@ FullGame.Lasers.updateGraphics = function() {
         this.graphics.endFill();
         
         this.recycledSights.push(s);
+    }
+    
+    
+    //move griddys
+    for (var i=0; i<FullGame.GI.griddys.length; i++){
+        var grd = FullGame.GI.griddys[i];
+        grd.dangerStep();
+    }
+    
+    //reset tilesFilled
+    for (var i=0; i<this.tilesFilled.length; i++){
+        for (var j=0; j<this.tilesFilled[i].length; j++){
+            this.tilesFilled[i][j] = false;
+        }
     }
     
 };

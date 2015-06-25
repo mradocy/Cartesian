@@ -94,7 +94,17 @@ FullGame.Menus.pauseMenu = function() {
         FullGame.GI.hudGroup);
     this.textSelected = txt.continueT;
     
-    //instructions on how to toggle fullscreen
+    //static text
+    var levelStr = FullGame.getCurrentLevelSelectName();
+    if (levelStr != ""){
+        levelStr = "Level " + levelStr;
+    }
+    txt.levelT = game.add.text(
+        30,
+        25,
+        levelStr,
+        { font: "16px Verdana", fill: this.UNSELECTED_COLOR },
+        FullGame.GI.hudGroup);
     txt.fullscreenInstructionsT = game.add.text(
         380,
         450,
@@ -176,7 +186,8 @@ FullGame.Menus.pauseMenu = function() {
                 var txt = FullGame.Menus.text[key];
                 if (!txt.visible) continue;
                 if (txt == FullGame.Menus.text.quitSureT ||
-                    txt == FullGame.Menus.text.fullscreenInstructionsT) continue;
+                    txt == FullGame.Menus.text.fullscreenInstructionsT ||
+                    txt == FullGame.Menus.text.levelT) continue;
                 if (txt.x+FullGame.Menus.HIT_AREA.x <= cursor.x &&
                     cursor.x <= txt.x+FullGame.Menus.HIT_AREA.x+FullGame.Menus.HIT_AREA.width &&
                     txt.y+FullGame.Menus.HIT_AREA.y <= cursor.y &&
@@ -313,6 +324,7 @@ FullGame.Menus.pauseMenu = function() {
             txt.howToPlayT.visible = true;
             txt.quitT.visible = true;
             txt.fullscreenInstructionsT.visible = true;
+            txt.levelT.visible = true;
             FullGame.Menus.textSelected = null;
         },
         pauseMenuInvisible:function() {
@@ -322,6 +334,7 @@ FullGame.Menus.pauseMenu = function() {
             txt.howToPlayT.visible = false;
             txt.quitT.visible = false;
             txt.fullscreenInstructionsT.visible = false;
+            txt.levelT.visible = false;
             FullGame.Menus.textSelected = null;
         }
         

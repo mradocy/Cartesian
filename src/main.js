@@ -51,7 +51,7 @@ var rooms = [
     "useShooter", //29
     "star",
     "arena",
-    "openArea", //32 <- Need to still make space ship
+    "openArea", //32
     "firstSlider",
     "slider2",
     "sandTime",
@@ -71,9 +71,18 @@ var rooms = [
     "roplateSpecial",
     "gemPortals", //46
     "useEyebot2",
-    
     "whiteArea",
-    "whiteArea2"
+    "whiteArea2",
+    "whiteArea3",
+    "whiteAreaBuffer",
+    "beforeBoss",
+    "griddy1", //53
+    "griddy2",
+    "griddy3",
+    
+    "lastRescue",
+    
+    "finalArena"
 ];
 
 //add a state for each level

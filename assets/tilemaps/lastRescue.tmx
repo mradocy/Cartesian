@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="24" height="11" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg4_red"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="begin_red"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <layer name="backTile" width="24" height="11" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="24" height="11">
+  <object type="Portal" x="608" y="96" width="64" height="64">
+   <properties>
+    <property name="mapTo" value="someMap"/>
+    <property name="right" value="false"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <layer name="tile" width="24" height="11">
+  <data encoding="csv">
+56,99,260,260,262,261,261,262,262,262,260,2,4,6,6,6,1,1,261,262,260,261,1,1,
+56,70,0,0,6,49,5,0,0,0,0,260,3,7,5,2,260,260,260,6,5,1,6,1,
+108,70,0,0,42,28,1,0,0,0,0,260,14,262,261,262,261,1,0,0,0,0,0,0,
+2,101,3,2,35,21,2,262,260,260,260,261,261,260,261,21,21,28,0,0,0,0,0,0,
+21,102,5,35,7,262,262,262,262,262,262,262,261,35,3,3,1,28,0,0,0,0,0,1,
+102,91,5,1,42,0,0,0,0,28,1,0,0,0,0,0,314,315,0,0,0,0,0,261,
+91,56,260,0,0,0,0,0,0,14,4,0,0,0,0,0,315,315,0,0,0,0,0,261,
+91,100,260,0,0,0,0,0,0,14,4,0,0,0,0,0,317,317,0,0,0,0,0,262,
+100,42,261,42,42,260,260,261,260,260,260,260,260,260,261,14,6,42,0,0,0,0,0,262,
+21,260,261,261,260,21,49,7,28,2,4,1,5,260,260,261,1,42,0,0,0,0,0,262,
+262,262,261,262,6,14,3,7,7,42,2,42,21,49,262,261,262,262,261,261,261,261,261,262
+</data>
+ </layer>
+ <objectgroup name="front" width="24" height="11">
+  <object type="Exit" x="1472" y="128" width="64" height="128">
+   <properties>
+    <property name="mapTo" value="griddy3"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

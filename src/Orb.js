@@ -40,6 +40,7 @@ FullGame.makeOrb = function(game, color) {
     orb.y = 0;
     orb.glowThisFrame = false; //set to true each frame orb is supposed to glow
     orb.halfGlowThisFrame = false; //set to true each frame orb has just a transparent laser going through it
+    orb.HALF_GLOW_MECHANIC_EXISTS = false;
     orb.openedDoors = false;
     orb.setX = function(x) {
         this.x = x;

@@ -11,7 +11,13 @@
  <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
  <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
  <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
- <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <tileset firstgid="310" name="sand_tiles" tilewidth="64" tileheight="64">
+  <properties>
+   <property name="allColor" value="0"/>
+   <property name="allType" value="3"/>
+  </properties>
+  <image source="tiles/sand_tiles.png" width="256" height="128"/>
+ </tileset>
  <layer name="backTile" width="21" height="11" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -47,6 +53,9 @@
   </object>
   <object type="OrbRed" x="576" y="32" width="64" height="64"/>
   <object type="OrbRed" x="384" y="448" width="64" height="64"/>
+  <object type="ShooterGreen" x="256" y="534">
+   <polyline points="0,0 98,100"/>
+  </object>
  </objectgroup>
  <layer name="tile" width="21" height="11">
   <data encoding="csv">
@@ -58,9 +67,9 @@
 26,0,0,0,0,46,40,0,0,0,0,0,0,0,0,0,0,0,22,2,7,
 25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,38,38,31,
 25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-35,17,17,10,11,0,0,0,16,10,11,0,0,0,0,0,0,0,0,0,0,
-21,3,3,6,26,0,0,0,22,102,98,66,66,66,59,106,10,10,17,10,10,
-21,3,3,2,28,17,17,109,51,63,54,54,63,50,50,54,54,54,99,1,5
+35,17,17,11,0,0,0,0,16,10,11,0,0,0,0,0,0,0,0,0,0,
+21,3,3,25,0,0,0,0,22,102,98,66,66,66,59,106,10,10,17,10,10,
+21,3,3,2,10,17,17,109,51,63,54,54,63,50,50,54,54,54,99,1,5
 </data>
  </layer>
  <objectgroup name="front" width="21" height="11">
