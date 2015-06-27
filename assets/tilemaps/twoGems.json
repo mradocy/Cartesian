@@ -33,7 +33,7 @@
                  "name":"",
                  "properties":
                     {
-
+                     "blackWhenPower":"true"
                     },
                  "type":"OrbRed",
                  "visible":true,
@@ -74,7 +74,7 @@
                  "name":"",
                  "properties":
                     {
-
+                     "blackWhenPower":"true"
                     },
                  "type":"OrbRed",
                  "visible":true,
@@ -87,7 +87,7 @@
                  "name":"",
                  "properties":
                     {
-
+                     "blackWhenPower":"true"
                     },
                  "type":"OrbRed",
                  "visible":true,
@@ -100,7 +100,7 @@
                  "name":"",
                  "properties":
                     {
-
+                     "blackWhenPower":"true"
                     },
                  "type":"OrbRed",
                  "visible":true,

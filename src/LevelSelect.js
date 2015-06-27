@@ -127,8 +127,8 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         {txt:"01 - First Level",
          desc:"The first few levels are spent introducing the player to the game's basic mechanics.",
          startMap:"firstLevel", lastMap:"none", color:FullGame.Til.RED},
-        {txt:"05 - Moving Lasers", desc:"",
-         startMap:"firstMultReflect", lastMap:"firstReflect", color:FullGame.Til.RED},
+        /*{txt:"05 - Moving Lasers", desc:"",
+         startMap:"firstMultReflect", lastMap:"firstReflect", color:FullGame.Til.RED},*/
         {txt:"08 - Multiple Orbs",
          desc:"For those condifent they'd understand how the game works without a tutorial.",
          startMap:"firstMultOrb", lastMap:"firstGlass", color:FullGame.Til.RED},
@@ -152,8 +152,10 @@ FullGame.makeLevelSelect = function(title, backFunction) {
          startMap:"tightReflect", lastMap:"redStart", color:FullGame.Til.GREEN},
         {txt:"43 - Gems", desc:"",
          startMap:"keyRoom", lastMap:"deepDescent", color:FullGame.Til.RED},
-        {txt:"53 - Reality Buffer", desc:"",
+        {txt:"52 - Reality Buffer", desc:"",
          startMap:"beforeBoss", lastMap:"whiteArea2", color:FullGame.Til.RED},
+        {txt:"56 - Final Rescue", desc:"",
+         startMap:"lastRescue", lastMap:"griddy3", color:FullGame.Til.RED},
         
     ];
     ret.levels = [];

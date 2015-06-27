@@ -27,7 +27,11 @@
  </layer>
  <objectgroup name="obj" width="27" height="9">
   <object type="DoorRed" x="1472" y="384" width="128" height="64"/>
-  <object type="OrbRed" x="1216" y="128" width="64" height="64"/>
+  <object type="OrbRed" x="1216" y="128" width="64" height="64">
+   <properties>
+    <property name="blackWhenPower" value="true"/>
+   </properties>
+  </object>
   <object name="por1" type="Portal" x="482" y="158" width="64" height="64">
    <properties>
     <property name="portalTo" value="por2"/>
@@ -52,7 +56,11 @@
    </properties>
    <ellipse/>
   </object>
-  <object type="OrbRed" x="1472" y="128" width="64" height="64"/>
+  <object type="OrbRed" x="1472" y="128" width="64" height="64">
+   <properties>
+    <property name="blackWhenPower" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="tile" width="27" height="9">
   <data encoding="csv">
@@ -63,8 +71,8 @@
 283,283,294,0,0,0,0,0,0,44,0,0,0,0,0,0,0,44,0,0,0,33,0,0,0,284,0,
 0,0,270,17,10,45,45,45,45,25,0,0,0,0,0,0,0,44,0,0,0,44,0,0,0,284,0,
 0,0,275,276,291,0,0,0,0,282,283,283,294,0,0,0,0,44,0,0,0,281,267,0,0,284,0,
-0,0,0,0,284,0,0,0,0,284,0,0,298,283,283,283,287,297,283,283,283,296,291,0,0,284,0,
-0,0,0,0,281,266,267,0,0,284,0,0,0,0,0,0,284,0,0,0,0,0,284,0,0,284,0
+0,0,0,0,284,0,0,0,0,284,0,0,282,283,283,283,287,297,283,283,283,296,291,0,0,284,0,
+0,0,0,0,281,266,267,0,0,281,266,266,302,0,0,0,284,0,0,0,0,0,284,0,0,284,0
 </data>
  </layer>
  <objectgroup name="front" width="27" height="9">
@@ -76,6 +84,12 @@
   <object type="Exit" x="0" y="128" width="64" height="128">
    <properties>
     <property name="mapTo" value="sandTime"/>
+   </properties>
+  </object>
+  <object type="Exit" x="448" y="512" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="thickOrbs"/>
+    <property name="right" value="false"/>
    </properties>
   </object>
  </objectgroup>

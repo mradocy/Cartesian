@@ -78,5 +78,11 @@
     <property name="right" value="false"/>
    </properties>
   </object>
+  <object type="Exit" x="1664" y="0" width="128" height="64">
+   <properties>
+    <property name="mapTo" value="blasting"/>
+    <property name="noSensor" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

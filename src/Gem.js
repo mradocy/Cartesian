@@ -20,7 +20,7 @@ FullGame.makeGem = function(cx, cy, color) {
     gem.radius = 25;
     gem.isGem = true;
     gem.lasersSpawnedThisFrame = 0;
-    gem.MAX_LASERS_SPAWNED = 50;
+    gem.MAX_LASERS_SPAWNED = 10;
     
     //argument is where the laser that passed through intersected the circle
     gem.spawnLasers = function(laserColor, laserType, x0, y0, x1, y1) {

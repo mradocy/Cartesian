@@ -164,7 +164,7 @@ FullGame.makeGriddy = function(cx, cy) {
         return choices[Math.floor(Math.random() * choices.length)];
     };
     gr.die = function() {
-        console.log("Griddy death");
+        //Griddy death
         //destroy all currently orbiting flames
         while (this.rotatingBlackFlames.length > 0){
             var bf = this.rotatingBlackFlames.pop();
@@ -202,7 +202,6 @@ FullGame.makeGriddy = function(cx, cy) {
                 this.y += this.deadVY * dt;
                 if (this.y-100 > FullGame.GI.worldHeight){
                     this.deadOffscreen = true;
-                    console.log("Griddy dead offscreen");
                     
                     for (var i=0; i<this.deadJumpTileBreakCoors.length; i++){
                         FullGame.GI.tilesPressuredThisFrame.push(this.deadJumpTileBreakCoors[i]);
@@ -224,7 +223,7 @@ FullGame.makeGriddy = function(cx, cy) {
                     if (door.opening) continue;
                     door.open();
                 }
-                console.log("Griddy final death");
+                //Griddy final death
             }
             
         } else if (this.state == "move"){

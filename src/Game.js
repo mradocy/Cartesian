@@ -309,6 +309,7 @@ FullGame.Game.prototype = {
         
         //making player
         FullGame.Vars.playerLaserColorOnLevelStart = FullGame.Vars.playerLaserColor;
+        FullGame.Vars.playerLaserTypeOnLevelStart = FullGame.Vars.playerLaserType;
         this.player = FullGame.makePlayer(game);
         this.objs.push(this.player);
         
@@ -525,6 +526,7 @@ FullGame.Game.prototype = {
     //restarts the level
     restart: function() {
         FullGame.Vars.playerLaserColor = FullGame.Vars.playerLaserColorOnLevelStart;
+        FullGame.Vars.playerLaserType = FullGame.Vars.playerLaserTypeOnLevelStart;
         this.state.restart();
         //this.state.start(game.state.current);
     },

@@ -1,10 +1,14 @@
 //returns made orb and glow, but doesn't add them to FullGame.GI.objs (will be done in ParseObjects)
-FullGame.makeOrb = function(game, color) {
+FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower) {
     //initialization
     var orb;
     var glow;
     var spriteKey;
     var glowSpriteKey;
+    var color = colorFromTiled;
+    if (blackWhenPower && FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK){
+        color = FullGame.Til.BLACK;
+    }
     switch (color){
     case FullGame.Til.BLUE:
         spriteKey = "orb_blue";
@@ -13,6 +17,10 @@ FullGame.makeOrb = function(game, color) {
     case FullGame.Til.GREEN:
         spriteKey = "orb_green";
         glowSpriteKey = "orb_green_glow";
+        break;
+    case FullGame.Til.BLACK:
+        spriteKey = "orb_black";
+        glowSpriteKey = "orb_black_glow";
         break;
     case FullGame.Til.RED:
     default:

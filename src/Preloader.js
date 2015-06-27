@@ -77,6 +77,7 @@ FullGame.Preloader.prototype = {
         game.load.image('bg_tall', 'assets/img/bgs/bg_tall.jpg');
         game.load.image('bg_to3', 'assets/img/bgs/bg_to3.jpg');
         game.load.image('bg_to4', 'assets/img/bgs/bg_to4.jpg');
+        game.load.image('bg_to4_2', 'assets/img/bgs/bg_to4_2.jpg');
         game.load.image('bg_top', 'assets/img/bgs/bg_top.png');
         game.load.image('controls', 'assets/img/bgs/controls.png');
         game.load.image('intro_bg', 'assets/img/bgs/intro_bg.jpg');
@@ -109,6 +110,7 @@ FullGame.Preloader.prototype = {
         game.load.audio('sand_crumble', ['assets/sfx/sand_crumble.ogg', 'assets/sfx/sand_crumble.mp3'], true);
         game.load.audio('tile_crumble', ['assets/sfx/tile_crumble.ogg', 'assets/sfx/tile_crumble.mp3'], true);
         game.load.audio('colorchip', ['assets/sfx/colorchip.ogg', 'assets/sfx/colorchip.mp3'], true);
+        game.load.audio('powerchip', ['assets/sfx/powerchip.ogg', 'assets/sfx/powerchip.mp3'], true);
         game.load.audio('msg_on', ['assets/sfx/msg_on.ogg', 'assets/sfx/msg_on.mp3'], true);
         game.load.audio('msg_off', ['assets/sfx/msg_off.ogg', 'assets/sfx/msg_off.mp3'], true);
         game.load.audio('msg_advance', ['assets/sfx/msg_advance.ogg', 'assets/sfx/msg_advance.mp3'], true);
@@ -134,6 +136,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("player_red", 'assets/img/player_red_sheet.png', 128, 128, 28);
         game.load.spritesheet("player_blue", 'assets/img/player_blue_sheet.png', 128, 128, 28);
         game.load.spritesheet("player_green", 'assets/img/player_green_sheet.png', 128, 128, 28);
+        game.load.image('power_player', 'assets/img/power_player.png');
         game.load.image('player_red_death_particle', 'assets/img/player_red_death_particle.png');
         game.load.image('player_blue_death_particle', 'assets/img/player_blue_death_particle.png');
         game.load.image('player_green_death_particle', 'assets/img/player_green_death_particle.png');
@@ -183,6 +186,8 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("colorchip_blue", 'assets/img/colorchip_blue.png', 32, 32, 20);
         game.load.spritesheet("colorchip_red", 'assets/img/colorchip_red.png', 32, 32, 20);
         game.load.spritesheet("colorchip_green", 'assets/img/colorchip_green.png', 32, 32, 20);
+        game.load.spritesheet("powerchip_blue", 'assets/img/powerchip_blue.png', 32, 32, 20);
+        game.load.spritesheet("powerchip_red", 'assets/img/powerchip_red.png', 32, 32, 20);
         game.load.image("small_star", 'assets/img/small_star.png');
         game.load.image("medium_star", 'assets/img/medium_star.png');
         game.load.image("spaceship", 'assets/img/spaceship.png');

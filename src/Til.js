@@ -61,7 +61,7 @@ FullGame.Til.tileHasCollision = function(tileString, thickLaser) {
     default:
         return false;
     case FullGame.Til.SAND: //note: if fired by thick laser it will go through sand as if it didn't collide
-        return !thickLaser;
+        //return !thickLaser; //mechanic not working
     case FullGame.Til.NORMAL:
     case FullGame.Til.INDESTRUCTABLE:
         return true;

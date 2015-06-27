@@ -81,6 +81,8 @@ var rooms = [
     "griddy3",
     
     "lastRescue",
+    "blasting",
+    "thickOrbs", //58
     
     "finalArena"
 ];

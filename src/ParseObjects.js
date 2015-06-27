@@ -1,6 +1,6 @@
 //converts object data from Tiled map into an actual game object
 FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
-    //console.log(data);
+    
     for (var i=0; i<data.objects.length; i++){
         var od = data.objects[i];
         var obj;
@@ -21,7 +21,12 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             } else if (type == "OrbGreen"){
                 color = FullGame.Til.GREEN;
             }
-            obj = FullGame.makeOrb(game, color);
+            var blackWhenPower = false;
+            if (od.properties != undefined){
+                if (od.properties.blackWhenPower != undefined)
+                    blackWhenPower = (od.properties.blackWhenPower == "true");
+            }
+            obj = FullGame.makeOrb(game, color, blackWhenPower);
             obj.orb.setX(cx);
             obj.orb.setY(cy);
             FullGame.GI.objs.push(obj.glow);
@@ -225,7 +230,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj = FullGame.makeRoplate(cx, cy, rotation, color1, color2);
             FullGame.GI.objs.push(obj);
             
-        } else if (type == "ColorchipRed" || type == "ColorchipBlue" || type == "ColorchipGreen"){
+        } else if (type == "ColorchipRed" || type == "ColorchipBlue" || type == "ColorchipGreen" || type == "Powerchip"){
             var color = FullGame.Til.BLUE;
             var laserType = FullGame.Til.LASER_NORMAL;
             if (type == "ColorchipRed"){
@@ -234,6 +239,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 color = FullGame.Til.GREEN;
             } else if (type == "ColorchipBlue"){
                 color = FullGame.Til.BLUE;
+            } else if (type == "Powerchip"){
+                color = FullGame.Til.RED;
+                laserType = FullGame.Til.LASER_THICK;
             }
             obj = FullGame.makeColorchip(cx, cy, color, laserType);
             FullGame.GI.objs.push(obj);

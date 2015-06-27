@@ -26,11 +26,13 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door1 = game.add.sprite(0, 0, spriteKey1, undefined, FullGame.GI.objGroup);
     door2 = game.add.sprite(0, 0, spriteKey2, undefined, FullGame.GI.objGroup);
     door1.door2 = door2;
+    door2.door1 = door1;
     
     //constants
     door1.WIDTH = 48;
     door1.HEIGHT = 64;
     door1.OPEN_DURATION = 1.0;
+    door1.BREAK_OPEN_DURATION = .4;
     door1.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND = .5;
     door1.CLOSE_DURATION = .5;
     
@@ -42,6 +44,8 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door2.body.checkCollision.any = false;
     door1.body.immovable = true;
     door2.body.immovable = true;
+    door1.isDoor = true;
+    door2.isDoor = true;
     
     if (horizontally){
         door1.horiz = true;
@@ -72,6 +76,8 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
     door1.color = color;
     door1.opening = false;
     door1.opened = false;
+    door1.brokenOpenAnimation = false;
+    door1.breakOpenDirection = ""; //right, up, left, down
     door1.closing = false;
     door1.autoClose = autoClose;
     door1.stopsMusic = false;
@@ -124,6 +130,52 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
         this.openTime = 0;
         
         this.opening = true;
+        this.brokenOpenAnimation = false;
+    };
+    door1.breakOpen = function(direction) {
+        if (this.opening) return;
+        if (this.cannotOpen) return;
+        
+        //play sound effect
+        FullGame.playSFX("tile_crumble");
+        
+        var speed = 150;
+        var rSpeed = 6;
+        this.vx = 0; this.vy = 0; this.vr = 0;
+        this.door2.vx = 0; this.door2.vy = 0; this.door2.vr = 0;
+        if (direction == "right"){
+            this.vx = speed;
+            this.door2.vx = speed;
+            this.vr = -rSpeed;
+            this.door2.vr = rSpeed;
+        } else if (direction == "up"){
+            this.vy = -speed;
+            this.door2.vy = -speed;
+            this.vr = -rSpeed;
+            this.door2.vr = rSpeed;
+        } else if (direction == "left"){
+            this.vx = -speed;
+            this.door2.vx = -speed;
+            this.vr = rSpeed;
+            this.door2.vr = -rSpeed;
+        } else if (direction == "down"){
+            this.vy = speed;
+            this.door2.vy = speed;
+            this.vr = rSpeed;
+            this.door2.vr = -rSpeed;
+        }
+        this.body.enable = false;
+        this.door2.body.enable = false;
+        delete this.laserLines;
+        delete this.door2.laserLines;
+        
+        this.openTime = 0;
+        
+        this.opening = true;
+        this.brokenOpenAnimation = true;
+    };
+    door2.breakOpen = function(direction) {
+        this.door1.breakOpen(direction);
     };
     
     door1.close = function(delay) {
@@ -178,23 +230,47 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
         }
         
         if (this.opening && !this.opened){
-            if (this.openTime < this.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND &&
-                this.openTime+dt >= this.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND){
-                FullGame.playSFX("puzzle_solved");
-            }
             this.openTime += dt;
-            if (this.openTime >= this.OPEN_DURATION){
-                this.body.velocity.set(0, 0);
-                this.door2.body.velocity.set(0, 0);
-                this.visible = false;
-                this.body.enable = false;
-                this.door2.visible = false;
-                this.door2.body.enable = false;
-                delete this.laserLines;
-                delete this.door2.laserLines;
-                FullGame.Messages.onDoorOpen();
+            if (this.brokenOpenAnimation){
                 
-                this.opened = true;
+                this.x += this.vx * dt;
+                this.y += this.vy * dt;
+                this.rotation += this.vr * dt;
+                this.alpha = Math.max(0, 1 - this.openTime / this.BREAK_OPEN_DURATION);
+                this.door2.x += this.door2.vx * dt;
+                this.door2.y += this.door2.vy * dt;
+                this.door2.rotation += this.door2.vr * dt;
+                this.door2.alpha = this.alpha;
+                
+                if (this.openTime >= this.BREAK_OPEN_DURATION){
+                    this.body.velocity.set(0, 0);
+                    this.door2.body.velocity.set(0, 0);
+                    this.visible = false;
+                    this.door2.visible = false;
+                    FullGame.Messages.onDoorOpen();
+                    
+                    this.opened = true;
+                }
+                
+            } else {
+                
+                if (this.openTime < this.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND &&
+                    this.openTime+dt >= this.OPEN_DELAY_UNTIL_PUZZLE_SOLVED_SOUND){
+                    FullGame.playSFX("puzzle_solved");
+                }
+                if (this.openTime >= this.OPEN_DURATION){
+                    this.body.velocity.set(0, 0);
+                    this.door2.body.velocity.set(0, 0);
+                    this.visible = false;
+                    this.body.enable = false;
+                    this.door2.visible = false;
+                    this.door2.body.enable = false;
+                    delete this.laserLines;
+                    delete this.door2.laserLines;
+                    FullGame.Messages.onDoorOpen();
+
+                    this.opened = true;
+                }
             }
         } else if (this.closing){
             

@@ -1,32 +1,32 @@
-{ "height":9,
+{ "height":11,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":9,
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":11,
          "name":"backTile",
          "opacity":1,
          "type":"tilelayer",
          "visible":false,
-         "width":29,
+         "width":19,
          "x":0,
          "y":0
         }, 
         {
-         "height":9,
+         "height":11,
          "name":"obj",
          "objects":[
                 {
-                 "height":0,
+                 "height":128,
                  "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"ColorchipRed",
+                 "type":"DoorBlack",
                  "visible":true,
-                 "width":0,
-                 "x":432,
-                 "y":256
+                 "width":64,
+                 "x":288,
+                 "y":320
                 }, 
                 {
                  "ellipse":true,
@@ -34,330 +34,54 @@
                  "name":"",
                  "properties":
                     {
-
+                     "mapTo":"lastRescue",
+                     "right":"false"
                     },
-                 "type":"GemBlue",
+                 "type":"Portal",
                  "visible":true,
                  "width":64,
-                 "x":800,
-                 "y":178
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbRed",
-                 "visible":true,
-                 "width":64,
-                 "x":726,
-                 "y":178
-                }, 
-                {
-                 "ellipse":true,
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"GemGreen",
-                 "visible":true,
-                 "width":64,
-                 "x":763,
-                 "y":242
-                }, 
-                {
-                 "ellipse":true,
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"GemRed",
-                 "visible":true,
-                 "width":64,
-                 "x":837,
-                 "y":242
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbBlue",
-                 "visible":true,
-                 "width":64,
-                 "x":800,
-                 "y":306
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbBlue",
-                 "visible":true,
-                 "width":64,
-                 "x":800,
-                 "y":114
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbGreen",
-                 "visible":true,
-                 "width":64,
-                 "x":873,
-                 "y":178
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbBlue",
-                 "visible":true,
-                 "width":64,
-                 "x":948,
-                 "y":178
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbRed",
-                 "visible":true,
-                 "width":64,
-                 "x":911,
-                 "y":114
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbBlue",
-                 "visible":true,
-                 "width":64,
-                 "x":652,
-                 "y":178
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbGreen",
-                 "visible":true,
-                 "width":64,
-                 "x":689,
-                 "y":114
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbRed",
-                 "visible":true,
-                 "width":64,
-                 "x":892,
-                 "y":274
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbGreen",
-                 "visible":true,
-                 "width":64,
-                 "x":708,
-                 "y":274
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbGreen",
-                 "visible":true,
-                 "width":64,
-                 "x":837,
-                 "y":370
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"OrbRed",
-                 "visible":true,
-                 "width":64,
-                 "x":763,
-                 "y":370
-                }, 
-                {
-                 "height":128,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"DoorRed",
-                 "visible":true,
-                 "width":64,
-                 "x":1280,
-                 "y":192
-                }, 
-                {
-                 "height":128,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"DoorGreen",
-                 "visible":true,
-                 "width":64,
-                 "x":1344,
-                 "y":192
-                }, 
-                {
-                 "height":128,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"DoorBlue",
-                 "visible":true,
-                 "width":64,
-                 "x":1408,
-                 "y":192
-                }, 
-                {
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"ColorchipGreen",
-                 "visible":true,
-                 "width":0,
-                 "x":1248,
-                 "y":256
-                }, 
-                {
-                 "height":0,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "type":"ColorchipBlue",
-                 "visible":true,
-                 "width":0,
-                 "x":832,
-                 "y":480
+                 "x":1056,
+                 "y":224
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":29,
+         "width":19,
          "x":0,
          "y":0
         }, 
         {
-         "data":[21, 212, 211, 211, 223, 0, 0, 226, 227, 227, 227, 227, 31, 38, 38, 32, 0, 0, 0, 0, 0, 0, 0, 0, 23, 223, 0, 0, 221, 213, 28, 28, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 216, 217, 14, 223, 0, 0, 221, 213, 42, 211, 211, 212, 218, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 229, 234, 247, 227, 38, 39, 0, 0, 221, 213, 21, 101, 6, 6, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 229, 234, 248, 14, 211, 21, 212, 42, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 211, 21, 213, 42, 2, 17, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 216, 217, 217, 10, 217, 218, 0, 0, 0, 0, 0, 211, 5, 3, 4, 212, 213, 213, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 221, 28, 101, 2, 213, 219, 237, 234, 234, 252, 217, 211, 213, 21, 6, 4, 3, 35, 3, 218, 0, 0, 0, 0, 0, 0, 0, 0, 9, 42, 28, 21, 21, 212, 2, 32, 0, 0, 221, 213, 211, 101, 212, 211, 211, 212, 213, 211, 219, 217, 217, 217, 217, 217, 217, 217, 217, 212, 212, 213, 211, 213, 6, 39, 0, 0, 0, 221, 213],
-         "height":9,
+         "data":[1, 7, 7, 35, 49, 6, 7, 99, 99, 101, 101, 100, 102, 115, 115, 115, 115, 115, 103, 100, 160, 161, 101, 101, 99, 100, 159, 158, 4, 21, 1, 25, 0, 0, 0, 0, 0, 109, 99, 160, 162, 100, 101, 101, 100, 157, 162, 4, 14, 14, 25, 0, 0, 0, 0, 0, 109, 101, 157, 159, 101, 101, 100, 100, 157, 162, 255, 6, 100, 111, 0, 0, 0, 0, 0, 109, 102, 187, 187, 115, 115, 115, 115, 187, 187, 207, 35, 100, 111, 0, 0, 0, 0, 0, 109, 111, 0, 0, 0, 0, 0, 0, 0, 0, 227, 255, 1, 6, 166, 166, 105, 105, 105, 101, 111, 0, 0, 0, 0, 0, 0, 0, 0, 227, 256, 2, 6, 160, 161, 101, 99, 100, 101, 111, 0, 0, 104, 105, 105, 106, 0, 0, 284, 1, 157, 163, 6, 3, 3, 6, 2, 6, 111, 0, 0, 109, 99, 101, 111, 0, 0, 23, 5, 157, 161, 1, 3, 3, 2, 1, 2, 111, 0, 0, 109, 99, 99, 107, 105, 105, 108, 101, 101, 100, 99, 99, 100, 99, 101, 99, 111, 0, 0, 109, 100, 99, 99, 101, 100, 100, 99, 99, 99, 100, 100, 99, 99, 100, 100],
+         "height":11,
          "name":"tile",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":29,
+         "width":19,
          "x":0,
          "y":0
         }, 
         {
-         "height":9,
+         "height":11,
          "name":"front",
          "objects":[
                 {
-                 "height":128,
-                 "name":"",
-                 "properties":
-                    {
-                     "mapTo":"twoGems"
-                    },
-                 "type":"Exit",
-                 "visible":true,
-                 "width":64,
-                 "x":1792,
-                 "y":256
-                }, 
-                {
                  "height":64,
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"deepDescent",
-                     "right":"false"
+                     "mapTo":"keyRoom"
                     },
                  "type":"Exit",
                  "visible":true,
                  "width":128,
-                 "x":320,
-                 "y":0
-                }, 
-                {
-                 "height":64,
-                 "name":"",
-                 "properties":
-                    {
-                     "mapTo":"blasting",
-                     "noSensor":"true"
-                    },
-                 "type":"Exit",
-                 "visible":true,
-                 "width":128,
-                 "x":1664,
-                 "y":0
+                 "x":64,
+                 "y":640
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":29,
+         "width":19,
          "x":0,
          "y":0
         }],
@@ -389,6 +113,69 @@
         }, 
         {
          "firstgid":50,
+         "image":"tiles\/glass_tiles.png",
+         "imageheight":448,
+         "imagewidth":448,
+         "margin":0,
+         "name":"glass_tiles",
+         "properties":
+            {
+             "allType":"2"
+            },
+         "spacing":0,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "firstgid":99,
+         "image":"tiles\/black_indestructable.png",
+         "imageheight":640,
+         "imagewidth":320,
+         "margin":0,
+         "name":"black_indestructable",
+         "properties":
+            {
+             "allColor":"0",
+             "allType":"4"
+            },
+         "spacing":0,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "firstgid":149,
+         "image":"tiles\/sand_tiles.png",
+         "imageheight":128,
+         "imagewidth":256,
+         "margin":0,
+         "name":"sand_tiles",
+         "properties":
+            {
+             "allColor":"0",
+             "allType":"3"
+            },
+         "spacing":0,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "firstgid":157,
+         "image":"tiles\/red_tiles.png",
+         "imageheight":448,
+         "imagewidth":448,
+         "margin":0,
+         "name":"red_tiles",
+         "properties":
+            {
+             "allColor":"2",
+             "allType":"1"
+            },
+         "spacing":0,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "firstgid":206,
          "image":"tiles\/white_tiles.png",
          "imageheight":448,
          "imagewidth":448,
@@ -404,7 +191,7 @@
          "tilewidth":64
         }, 
         {
-         "firstgid":99,
+         "firstgid":255,
          "image":"tiles\/mixed_tiles.png",
          "imageheight":1024,
          "imagewidth":448,
@@ -868,40 +655,8 @@
                 }
             },
          "tilewidth":64
-        }, 
-        {
-         "firstgid":211,
-         "image":"tiles\/black_indestructable.png",
-         "imageheight":640,
-         "imagewidth":320,
-         "margin":0,
-         "name":"black_indestructable",
-         "properties":
-            {
-             "allColor":"0",
-             "allType":"4"
-            },
-         "spacing":0,
-         "tileheight":64,
-         "tilewidth":64
-        }, 
-        {
-         "firstgid":261,
-         "image":"tiles\/sand_tiles.png",
-         "imageheight":128,
-         "imagewidth":256,
-         "margin":0,
-         "name":"sand_tiles",
-         "properties":
-            {
-             "allColor":"0",
-             "allType":"3"
-            },
-         "spacing":0,
-         "tileheight":64,
-         "tilewidth":64
         }],
  "tilewidth":64,
  "version":1,
- "width":29
+ "width":19
 }

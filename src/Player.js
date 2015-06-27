@@ -5,6 +5,7 @@ FullGame.makePlayer = function(game) {
     var p;
     var spriteKey;
     var deathParticleKey;
+    var powerKey;
     switch (laserColor){
     case FullGame.Til.BLUE:
         spriteKey = "player_blue";
@@ -19,6 +20,7 @@ FullGame.makePlayer = function(game) {
         spriteKey = "player_red";
         deathParticleKey = "player_red_death_particle";
     }
+    powerKey = "power_player";
     p = game.add.sprite(FullGame.Vars.startX, FullGame.Vars.startY, spriteKey, undefined, FullGame.GI.objGroup);
     p.animations.add("idle", [0], 30, true);
     p.animations.add("walk_forward", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 25, true);
@@ -35,6 +37,13 @@ FullGame.makePlayer = function(game) {
     p.body.setSize(80, 102, 0, 4);
     p.body.tilePadding.x = 100;
     p.body.tilePadding.y = 100;
+    
+    p.powerSprite = game.add.sprite(0, 0, powerKey, undefined, FullGame.GI.objGroup);
+    p.powerSprite.anchor.setTo(.5, .5); //sprite is centered
+    p.powerSprite.scale.set(.5, .5);
+    if (laserType != FullGame.Til.LASER_THICK){
+        p.powerSprite.visible = false;
+    }
     
     p.deathParticleKey = deathParticleKey;
     
@@ -369,6 +378,16 @@ FullGame.makePlayer = function(game) {
     //setting reticle based on laser type
     FullGame.HUD.setReticle(p.laserType, p.laserColor);
     
+    //getting power ability
+    p.getPoweredUp = function() {
+        this.laserType = FullGame.Til.LASER_THICK;
+        this.powerSprite.visible = true;
+    };
+    p.losePowerAbility = function() {
+        this.laserType = FullGame.Til.LASER_NORMAL;
+        this.powerSprite.visible = false;
+    };
+    
     //do things that do not invlove moving
     p.afterCollision = function() {
         
@@ -421,7 +440,7 @@ FullGame.makePlayer = function(game) {
             
             //camera shaking (testing for now)
             if (this.laserType == FullGame.Til.LASER_THICK){
-                this.shakeCamera(3);
+                this.shakeCamera(2);
             }
             
         } else if (FullGame.Keys.rmbHeld && !this.laserFireInterrupt){
@@ -485,6 +504,10 @@ FullGame.makePlayer = function(game) {
         }
         
         this.prevVY = this.body.velocity.y;
+        
+        //move power sprite
+        this.powerSprite.x = firePt.x;
+        this.powerSprite.y = firePt.y;
         
         //pause game if asked
         if (willPause){
@@ -583,6 +606,7 @@ FullGame.makePlayer = function(game) {
             this.body.velocity.x = 0;
             this.body.velocity.y = 0;
             this.visible = false;
+            this.powerSprite.visible = false;
             this.knockbackTime = 0;
             FullGame.playSFX("death");
             FullGame.stopMusic();
@@ -670,6 +694,7 @@ FullGame.makePlayer = function(game) {
             this.behaviorTime = 0;
             this.behaviorDuration = .44;
             this.visible = false;
+            this.powerSprite.visible = false;
             this.body.velocity.x = 0;
             this.body.velocity.y = 0;
             this.state = this.STATE_PORTAL;

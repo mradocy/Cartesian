@@ -149,6 +149,10 @@ Level order:
 	- Explosion stuff happens, but will still move on to the next section
 - 
 
+
+- Destroy tiles to make path for other (red) lasers
+
+
 - Section where use laser to navigate in zero gravity
 
 - Black laser introduction
@@ -158,7 +162,7 @@ Level order:
 - World wrap introduction
 - Reflect off blue platform
 - Platforming section with a low ceiling
-- 
+- Moving orbs?
 
 - Introduce Evrolian/human hybrids as minor enemies that just walk forward
 	- Deals damage upon touching

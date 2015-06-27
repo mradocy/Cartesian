@@ -465,8 +465,8 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         
         //record all tiles the laser passed through
         //(if thick laser) also destroy sand tiles it passed through immediately
-        //console.log("Thick laser going through sand NOT TESTED!!!");
-        if (laserType != FullGame.Til.LASER_TRANSPARENT && laserType != FullGame.Til.LASER_FADEOUT){
+        //This isn't working.  Feature wasn't great anyway
+        if (false && laserType != FullGame.Til.LASER_TRANSPARENT && laserType != FullGame.Til.LASER_FADEOUT){
             if (Math.abs(cos) > .00001){
                 for (x = Math.min(x0, xHit); x <= Math.max(x0, xHit); x = Math.min(Math.max(x0, xHit), x+game.tileWidth)){
                     y = y0 + (x - x0) * (sin / cos);
@@ -519,7 +519,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 y--;
             tileStr = game.tileCols[x][y];
             if (!reflect &&
-                ((laserType == FullGame.Til.LASER_NORMAL && FullGame.Til.tileType(tileStr) == FullGame.Til.SAND) ||
+                (((laserType == FullGame.Til.LASER_NORMAL || laserType == FullGame.Til.LASER_THICK) && FullGame.Til.tileType(tileStr) == FullGame.Til.SAND) ||
                 (laserType == FullGame.Til.LASER_THICK && FullGame.Til.tileType(tileStr) == FullGame.Til.NORMAL))){
                 //hit tile that will be destroyed
                 var coords = "" + x + "," + y;
@@ -554,6 +554,22 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 } else if (laserType == FullGame.Til.LASER_THICK){
                     objHit.applyThickForce(normalHit+Math.PI, Math.atan2(yHit-y0, xHit-x0));
                 }
+            }
+        } else if (objHit.isDoor != undefined && objHit.isDoor){
+            //hit door, can destroy it if laser is thick
+            if (!reflect && laserType == FullGame.Til.LASER_THICK){
+                var dirS = "right";
+                if (Math.abs(normalHit + Math.PI/2) < .1){ //hit top side
+                    dirS = "down";
+                } else if (Math.angleDiff(normalHit, 0) < .1){ //hit right side
+                    dirS = "left";
+                } else if (Math.angleDiff(normalHit, Math.PI/2) < .1){ //hit bottom side
+                    dirS = "up";
+                } else if (Math.angleDiff(normalHit, Math.PI) < .1){ //hit left side
+                    dirS = "right";
+                }
+                
+                objHit.breakOpen(dirS);
             }
         } else if (objHit.isAlien != undefined && objHit.isAlien) {
             //hit alien, can damage it

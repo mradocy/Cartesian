@@ -71,5 +71,11 @@
     <property name="right" value="false"/>
    </properties>
   </object>
+  <object type="Exit" x="64" y="0" width="127" height="44">
+   <properties>
+    <property name="mapTo" value="thickOrbs"/>
+    <property name="right" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

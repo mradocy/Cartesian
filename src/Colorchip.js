@@ -14,6 +14,9 @@ FullGame.makeColorchip = function(cx, cy, color, laserType) {
     default:
         spriteKey = "colorchip_blue";
     }
+    if (laserType == FullGame.Til.LASER_THICK){
+        spriteKey = "powerchip_red";
+    }
     c = game.add.sprite(cx, cy, spriteKey, undefined, FullGame.GI.objGroup);
     c.anchor.setTo(.5, .5); //sprite is centered
     
@@ -43,7 +46,8 @@ FullGame.makeColorchip = function(cx, cy, color, laserType) {
         
         if (this.firstFrameCheck){
             if (plr != null){
-                if (plr.laserColor != this.color){
+                if (plr.laserType != FullGame.Til.LASER_THICK &&
+                    (plr.laserColor != this.color || this.laserType == FullGame.Til.LASER_THICK)){
                     this.makeUsable();
                 }
             }
@@ -66,16 +70,32 @@ FullGame.makeColorchip = function(cx, cy, color, laserType) {
     };
     
     c.useColorchip = function() {
-        FullGame.playSFX("colorchip");
-        FullGame.Vars.playerLaserColor = this.color;
-        FullGame.Vars.playerLaserType = this.laserType;
-        FullGame.GI.recreatePlayerAtFrameEnd = true;
+        if (this.laserType == FullGame.Til.LASER_THICK){
+            FullGame.playSFX("powerchip");
+            FullGame.Vars.playerLaserColor = this.color;
+            FullGame.Vars.playerLaserType = this.laserType;
+            
+            var plr = FullGame.GI.player;
+            if (plr != null){
+                plr.getPoweredUp();
+            }
+            
+        } else {
+            FullGame.playSFX("colorchip");
+            FullGame.Vars.playerLaserColor = this.color;
+            FullGame.Vars.playerLaserType = this.laserType;
+            FullGame.GI.recreatePlayerAtFrameEnd = true;
+            
+            //update HUD
+            FullGame.HUD.setReticle(this.laserType, this.color);
+        }
         
         //make this and other colorchips usable/unusable
         for (var i=0; i<FullGame.GI.objs.length; i++){
             var obj = FullGame.GI.objs[i];
             if (obj.isColorchip == undefined || !obj.isColorchip) continue;
-            if (obj.color == this.color){
+            if (obj.color == this.color &&
+                obj.laserType == this.laserType){
                 obj.animations.play("noGlow");
                 obj.alpha = this.USED_ALPHA;
                 obj.usable = false;
@@ -83,9 +103,6 @@ FullGame.makeColorchip = function(cx, cy, color, laserType) {
                 obj.makeUsable();
             }
         }
-        
-        //update HUD
-        FullGame.HUD.setReticle(this.laserType, this.color);
         
     };
     
