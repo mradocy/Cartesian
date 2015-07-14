@@ -466,7 +466,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         //record all tiles the laser passed through
         //(if thick laser) also destroy sand tiles it passed through immediately
         //This isn't working.  Feature wasn't great anyway
-        if (false && laserType != FullGame.Til.LASER_TRANSPARENT && laserType != FullGame.Til.LASER_FADEOUT){
+        if (laserType != FullGame.Til.LASER_TRANSPARENT && laserType != FullGame.Til.LASER_FADEOUT){
             if (Math.abs(cos) > .00001){
                 for (x = Math.min(x0, xHit); x <= Math.max(x0, xHit); x = Math.min(Math.max(x0, xHit), x+game.tileWidth)){
                     y = y0 + (x - x0) * (sin / cos);
@@ -476,7 +476,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     if (j < 0 || j >= game.tileCols[i].length) break;
 
                     this.tilesFilled[i][j] = true;
-                    if (laserType == FullGame.Til.LASER_THICK &&
+                    if (false && laserType == FullGame.Til.LASER_THICK &&
                         FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
                         var coords = "" + i + "," + j;
                         game.tilesPressuredThisFrame.push(coords);
@@ -494,7 +494,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                     if (j < 0 || j >= game.tileCols[i].length) break;
 
                     this.tilesFilled[i][j] = true;
-                    if (laserType == FullGame.Til.LASER_THICK &&
+                    if (false && laserType == FullGame.Til.LASER_THICK &&
                         FullGame.Til.tileType(game.tileCols[i][j]) == FullGame.Til.SAND){
                         var coords = "" + i + "," + j;
                         game.tilesPressuredThisFrame.push(coords);

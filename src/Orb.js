@@ -1,5 +1,5 @@
 //returns made orb and glow, but doesn't add them to FullGame.GI.objs (will be done in ParseObjects)
-FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower) {
+FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower, finalEye) {
     //initialization
     var orb;
     var glow;
@@ -9,23 +9,30 @@ FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower) {
     if (blackWhenPower && FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK){
         color = FullGame.Til.BLACK;
     }
-    switch (color){
-    case FullGame.Til.BLUE:
-        spriteKey = "orb_blue";
-        glowSpriteKey = "orb_blue_glow";
-        break;
-    case FullGame.Til.GREEN:
-        spriteKey = "orb_green";
-        glowSpriteKey = "orb_green_glow";
-        break;
-    case FullGame.Til.BLACK:
-        spriteKey = "orb_black";
-        glowSpriteKey = "orb_black_glow";
-        break;
-    case FullGame.Til.RED:
-    default:
-        spriteKey = "orb_red";
-        glowSpriteKey = "orb_red_glow";
+    var scaleSmaller = true;
+    if (finalEye){
+        spriteKey = "final_eye";
+        glowSpriteKey = "final_eye_glow";
+        scaleSmaller = false;
+    } else {
+        switch (color){
+        case FullGame.Til.BLUE:
+            spriteKey = "orb_blue";
+            glowSpriteKey = "orb_blue_glow";
+            break;
+        case FullGame.Til.GREEN:
+            spriteKey = "orb_green";
+            glowSpriteKey = "orb_green_glow";
+            break;
+        case FullGame.Til.BLACK:
+            spriteKey = "orb_black";
+            glowSpriteKey = "orb_black_glow";
+            break;
+        case FullGame.Til.RED:
+        default:
+            spriteKey = "orb_red";
+            glowSpriteKey = "orb_red_glow";
+        }
     }
     glow = game.add.sprite(0, 0, glowSpriteKey, undefined, FullGame.GI.objGroup);
     orb = game.add.sprite(0, 0, spriteKey, undefined, FullGame.GI.objGroup);
@@ -35,17 +42,27 @@ FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower) {
     orb.LASER_DEACTIVATE_DURATION = .3; //how fast an orb will be deactivated when not pointed at by laser
     
     orb.anchor.setTo(.5, .5); //sprite is centered
-    orb.scale.set(.5, .5);
     glow.anchor.setTo(.5, .5); //sprite is centered
-    glow.scale.set(.5, .5);
+    if (scaleSmaller){
+        orb.scale.set(.5, .5);
+        glow.scale.set(.5, .5);
+    }
     glow.alpha = 0;
     
     orb.type = "orb";
     orb.glow = glow;
     orb.color = color;
-    orb.radius = 28;
+    orb.finalEye = finalEye;
+    if (orb.finalEye){
+        orb.radius = 20;
+    } else {
+        orb.radius = 28;
+    }
     orb.x = 0;
     orb.y = 0;
+    orb.relX = 0; //not used unless finalEye
+    orb.relY = 0; //not used unless finalEye
+    orb.relR = 0; //not used unless finalEye
     orb.glowThisFrame = false; //set to true each frame orb is supposed to glow
     orb.halfGlowThisFrame = false; //set to true each frame orb has just a transparent laser going through it
     orb.HALF_GLOW_MECHANIC_EXISTS = false;
@@ -57,6 +74,10 @@ FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower) {
     orb.setY = function(y) {
         this.y = y;
         this.glow.y = y;
+    };
+    orb.setR = function(r) {
+        this.rotation = r;
+        this.glow.rotation = r;
     };
     
     orb.activated = function() {
@@ -85,19 +106,25 @@ FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower) {
                     allActivated = false;
             }
             if (allActivated){
-                //open doors of the same color
-                for (var i=0; i<FullGame.GI.objs.length; i++){
-                    var door = FullGame.GI.objs[i];
-                    if (door.type == undefined || door.type != "door") continue;
-                    if (door.color != this.color) continue;
-                    if (door.opening) continue;
-                    door.open();
-                }
-                //the orbs can't be used again
-                for (var i=0; i<FullGame.GI.orbs.length; i++){
-                    var orb = FullGame.GI.orbs[i];
-                    if (orb.color != this.color) continue;
-                    orb.openedDoors = true;
+                if (this.finalEye){
+                    if (FullGame.GI.finalBoss != null){
+                        FullGame.GI.finalBoss.dealDamage();
+                    }
+                } else {
+                    //open doors of the same color
+                    for (var i=0; i<FullGame.GI.objs.length; i++){
+                        var door = FullGame.GI.objs[i];
+                        if (door.type == undefined || door.type != "door") continue;
+                        if (door.color != this.color) continue;
+                        if (door.opening) continue;
+                        door.open();
+                    }
+                    //the orbs can't be used again
+                    for (var i=0; i<FullGame.GI.orbs.length; i++){
+                        var orb = FullGame.GI.orbs[i];
+                        if (orb.color != this.color) continue;
+                        orb.openedDoors = true;
+                    }
                 }
             }
         }

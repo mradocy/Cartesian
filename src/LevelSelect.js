@@ -115,6 +115,7 @@ FullGame.levelNames = [
     
     
     
+    
 ];
 
 FullGame.makeLevelSelect = function(title, backFunction) {
@@ -156,6 +157,9 @@ FullGame.makeLevelSelect = function(title, backFunction) {
          startMap:"beforeBoss", lastMap:"whiteArea2", color:FullGame.Til.RED},
         {txt:"56 - Final Rescue", desc:"",
          startMap:"lastRescue", lastMap:"griddy3", color:FullGame.Til.RED},
+        
+        {txt:"TEST - Final Boss", desc:"",
+         startMap:"finalArena", lastMap:"beforeFinal", color:FullGame.Til.RED},
         
     ];
     ret.levels = [];

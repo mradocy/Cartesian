@@ -83,6 +83,7 @@ var rooms = [
     "lastRescue",
     "blasting",
     "thickOrbs", //58
+    "backToOpen",
     
     "finalArena"
 ];

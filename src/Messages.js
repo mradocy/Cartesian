@@ -12,6 +12,7 @@ FullGame.Messages.onLevelStart = function() {
     var sm = FullGame.Vars.startMap;
     var lm = FullGame.Vars.lastMap;
     var vms = FullGame.Vars.messagesSaid;
+    var hasPower = (FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK);
     
     if (sm == "firstLevel" && vms.indexOf(sm) == -1){
         if (this.msgFromText(sm))
@@ -81,12 +82,21 @@ FullGame.Messages.onLevelStart = function() {
         
         //using a different name so that message won't be repeated if player dies
         vms.push("useShooterText"); //ensures message won't be said again
-    } else if (sm == "openArea" && vms.indexOf(sm) == -1){
+    } else if (sm == "openArea" && !hasPower && vms.indexOf(sm) == -1){
         if (this.msgFromText(sm))
             vms.push(sm); //ensures message won't be said again
     } else if (sm == "tightReflect" && vms.indexOf(sm) == -1){
         this.msgFromText("minerScared");
         //sm is NOT pushed to vms here; the MinerSitting object in the room will do this once the gem is placed
+    } else if (sm == "lastRescue" && vms.indexOf(sm) == -1){
+        this.msgFromText("minerStanding");
+        //sm is NOT pushed to vms here; the MinerStanding object in the room will do this once the gem is placed
+    } else if (sm == "keyRoom" && hasPower && vms.indexOf(sm+"Power") == -1){
+        if (this.msgFromText(sm+"Power"))
+            vms.push(sm+"Power"); //ensures message won't be said again
+    } else if (sm == "whiteAreaBuffer" && vms.indexOf(sm) == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     }
     
     //message when backtracking
@@ -144,6 +154,9 @@ FullGame.Messages.onDoorOpen = function() {
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "platforming2" && vms.indexOf(sm+"doorOpen") == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm+"doorOpen"); //ensures message won't be said again
+    } else if (sm == "gemPortals" && vms.indexOf(sm+"doorOpen") == -1){
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
     }
@@ -215,16 +228,26 @@ FullGame.Messages.onPlayerDeath = function() {
     var sm = FullGame.Vars.startMap;
     var lm = FullGame.Vars.lastMap;
     var vms = FullGame.Vars.messagesSaid;
+    var hasPower = (FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK);
     
     //if went in rooms in correct order, get rid of opening message
     var lastIndex = FullGame.rooms.indexOf(lm);
     var startIndex = FullGame.rooms.indexOf(sm);
+    var index = 0;
     if (lastIndex != -1 && startIndex > lastIndex){
-        var index = FullGame.Vars.messagesSaid.indexOf(sm);
+        index = FullGame.Vars.messagesSaid.indexOf(sm);
         if (index != -1){
             FullGame.Vars.messagesSaid.splice(index, 1);
         }
         index = FullGame.Vars.messagesSaid.indexOf(sm+"doorOpen");
+        if (index != -1){
+            FullGame.Vars.messagesSaid.splice(index, 1);
+        }
+    }
+    
+    //special cases
+    if (sm == "keyRoom" && hasPower){
+        index = FullGame.Vars.messagesSaid.indexOf("keyRoomPower");
         if (index != -1){
             FullGame.Vars.messagesSaid.splice(index, 1);
         }

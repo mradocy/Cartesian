@@ -91,7 +91,7 @@ FullGame.makeGriddy = function(cx, cy) {
         if (x < 1 || x >= FullGame.GI.tileCols.length-1) return false;
         if (y < 1 || y >= FullGame.GI.tileCols[0].length-1) return false;
         if (FullGame.GI.tileCols[x][y] != "") return false;
-        if (FullGame.Lasers.tilesFilled[x][y]) return false; //not tested yet
+        if (FullGame.Lasers.tilesFilled[x][y]) return false;
         return true;
     };
     

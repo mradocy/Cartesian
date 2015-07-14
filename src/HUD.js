@@ -411,7 +411,7 @@ FullGame.HUD.reticleUpdate = function() {
     
     if (FullGame.GI.player == null){
         this.reticle.rotation = 0;
-    } else if (FullGame.GI.player.dead()){
+    } else if (FullGame.GI.player.dead() || !FullGame.GI.player.visible){
         this.reticle.visible = false;
     } else {
         var firePt = FullGame.GI.player.globalFirePt();

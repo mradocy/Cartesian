@@ -142,3 +142,73 @@ FullGame.makeMinerScared = function() {
     
     return miner;
 };
+
+//returns made minerStanding, but doesn't add it to FullGame.GI.objs (will be done in ParseObjects)
+FullGame.makeMinerStanding = function() {
+    //initialization
+    var miner = game.add.sprite(
+        768, 433, //position
+        "miner_standing",
+        undefined, FullGame.GI.objGroup);
+    miner.animations.add("idle", [0], 20, true);
+    miner.animations.add("toss", [1, 2, 3, 4], 20, false);
+    miner.animations.add("retract", [3, 2, 1, 0], 20, false);
+    miner.animations.play("idle");
+    
+    miner.PC_X0 = 825;
+    miner.PC_Y0 = 445;
+    miner.PC_X1 = 960;
+    miner.PC_Y1 = 448;
+    
+    miner.threwPC = false;
+    miner.t = 0;
+    miner.pc = null;
+    
+    
+    if (FullGame.Vars.messagesSaid.indexOf("lastRescue") != -1){
+        //conversation with miner already happened, so put gem there
+        miner.pc = FullGame.makeColorchip(miner.PC_X1, miner.PC_Y1, FullGame.Til.RED, FullGame.Til.LASER_THICK); //copied from code in ParseObjects
+        FullGame.GI.objs.push(miner.pc);
+    }
+    
+    miner.update = function() {
+        var dt = game.time.physicsElapsed;
+        
+        if (miner.threwPC){
+            this.t += dt;
+            
+            if (this.t-dt < .2 && .2 <= this.t){
+                //create powerChip to throw
+                this.pc = FullGame.makeColorchip(this.PC_X0, this.PC_Y0, FullGame.Til.RED, FullGame.Til.LASER_THICK); //copied from code in ParseObjects
+                FullGame.GI.objs.push(this.pc);
+                //this indicates that powerChip should now be on the screen in this room
+                FullGame.Vars.messagesSaid.push("lastRescue");
+            }
+            
+            //moving powerChip
+            if (.2 < this.t && this.t < 1.2){
+                this.pc.startX = Math.easeInOutQuad(this.t-.2, this.PC_X0, this.PC_X1-this.PC_X0, 1.0);
+                this.pc.startY = Math.easeInOutQuad(this.t-.2, this.PC_Y0, this.PC_Y1-this.PC_Y0, 1.0);
+            } else if (this.t >= 1.2){
+                this.pc.startX = this.PC_X1;
+                this.pc.startY = this.PC_Y1;
+            }
+            
+            //retract animation
+            if (this.t-dt < 1.5 && 1.5 <= this.t){
+                this.animations.play("retract");
+            }
+            
+        } else {
+            if (FullGame.HUD.messageStrs.length == 1){
+                //throw powerChip
+                this.animations.play("toss");
+                
+                this.threwPC = true;
+            }
+        }
+    };
+    
+    
+    return miner;
+};

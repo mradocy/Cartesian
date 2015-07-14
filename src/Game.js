@@ -46,6 +46,7 @@ FullGame.Game.prototype = {
     portals:[], //array of portals in the level
     griddys:[], //array of griddys in the level
     blackFlames:[], //array of blackFlames in the level
+    finalBoss:null, //the final boss
     miscObjs:[], //array of objects that don't get update() called by Phaser (so we call their update() instead)
     bgMusic:"",
     pauseObj:null, //object for pauseUpdate() to be called during the pause update phase
@@ -506,6 +507,7 @@ FullGame.Game.prototype = {
         this.portals.splice(0, this.portals.length);
         this.griddys.splice(0, this.griddys.length);
         this.blackFlames.splice(0, this.blackFlames.length);
+        this.finalBoss = null;
         this.miscObjs.splice(0, this.miscObjs.length);
         this.tileCols.splice(0, this.tileCols.length); this.tileCols = null;
         this.pauseObj = null;

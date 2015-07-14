@@ -34,7 +34,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object type="Powerchip" x="960" y="448"/>
+  <object type="MinerStanding" x="790" y="478"/>
  </objectgroup>
  <layer name="tile" width="24" height="11">
   <data encoding="csv">

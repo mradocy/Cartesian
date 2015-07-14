@@ -37,11 +37,11 @@
                     {
 
                     },
-                 "type":"Powerchip",
+                 "type":"MinerStanding",
                  "visible":true,
                  "width":0,
-                 "x":960,
-                 "y":448
+                 "x":790,
+                 "y":478
                 }],
          "opacity":1,
          "type":"objectgroup",

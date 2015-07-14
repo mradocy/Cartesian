@@ -26,7 +26,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 if (od.properties.blackWhenPower != undefined)
                     blackWhenPower = (od.properties.blackWhenPower == "true");
             }
-            obj = FullGame.makeOrb(game, color, blackWhenPower);
+            obj = FullGame.makeOrb(game, color, blackWhenPower, false);
             obj.orb.setX(cx);
             obj.orb.setY(cy);
             FullGame.GI.objs.push(obj.glow);
@@ -129,7 +129,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             obj.anchor.setTo(.5, .5); //sprite is centered
             
         } else if (type == "Spaceship"){
-            game.add.image(x, y, "spaceship", undefined, FullGame.GI.frontGroup);
+            FullGame.makeSpaceship(x, y);
             
         } else if (type == "Path" || type == "AlienPath"){
             
@@ -294,6 +294,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 
                 obj = FullGame.makeFinalBoss(cx, cy);
                 FullGame.GI.objs.push(obj);
+                FullGame.GI.finalBoss = obj;
             }
             
         } else if (type == "GemRed" || type == "GemBlue" || type == "GemGreen"){
@@ -314,6 +315,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj);
         } else if (type == "MinerScared"){
             obj = FullGame.makeMinerScared();
+            FullGame.GI.objs.push(obj);
+        } else if (type == "MinerStanding"){
+            obj = FullGame.makeMinerStanding();
             FullGame.GI.objs.push(obj);
             
         } else if (type == "SliderRed" || type == "SliderBlue" || type == "SliderGreen"){

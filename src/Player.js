@@ -78,6 +78,7 @@ FullGame.makePlayer = function(game) {
     p.STATE_DAMAGE_KNOCKBACK = 1;
     p.STATE_DEATH = 2;
     p.STATE_PORTAL = 3;
+    p.STATE_SPACESHIP = 4;
     
     //camera constants
     p.CAMERA_MAX_HORIZ_OFFSET = SCREEN_WIDTH/2 - 128; //maximum horizontal part of camera will move from the center (player)
@@ -334,6 +335,8 @@ FullGame.makePlayer = function(game) {
             
         case this.STATE_PORTAL:
             break;
+        case this.STATE_SPACESHIP:
+            break;
         }
         
         this.body.velocity.x = vx;
@@ -438,9 +441,9 @@ FullGame.makePlayer = function(game) {
                 this.cameraYWhenStartedFiring = firePt.y + this.cameraVertOffset;
             }
             
-            //camera shaking (testing for now)
+            //camera shaking when firing thick laser
             if (this.laserType == FullGame.Til.LASER_THICK){
-                this.shakeCamera(2);
+                this.shakeCamera(3);
             }
             
         } else if (FullGame.Keys.rmbHeld && !this.laserFireInterrupt){
@@ -508,6 +511,9 @@ FullGame.makePlayer = function(game) {
         //move power sprite
         this.powerSprite.x = firePt.x;
         this.powerSprite.y = firePt.y;
+        this.powerSprite.scale.x = this.scale.x;
+        this.powerSprite.scale.y = this.scale.y;
+        this.powerSprite.rotation = this.rotation;
         
         //pause game if asked
         if (willPause){
@@ -542,6 +548,12 @@ FullGame.makePlayer = function(game) {
         var my = FullGame.Keys.mouseY;
         var ratio;
         
+        //stupid fix to make camera pan up during spaceship part
+        if (this.state == this.STATE_SPACESHIP){
+            mx = SCREEN_WIDTH/2;
+            my = 0;
+        }
+        
         var prevCameraHorizOffset = this.cameraHorizOffset;
         var prevCameraVertOffset = this.cameraVertOffset;
         if (mx < this.CAMERA_HORIZ_BORDER){ //move camera left
@@ -558,7 +570,7 @@ FullGame.makePlayer = function(game) {
             ratio = 1 - (SCREEN_HEIGHT - my) / this.CAMERA_VERT_BORDER;
             this.cameraVertOffset += ratio * this.CAMERA_VERT_OFFSET_MAX_SPEED * dt;
         }
-        var noCameraMovementWhenFiring = FullGame.Keys.rmbHeld;
+        var noCameraMovementWhenFiring = false; //NEW: holding RMB doesn't lock camera.  //FullGame.Keys.rmbHeld;
         if (noCameraMovementWhenFiring && this.firing){ //currently firing, try to not have camera move
             
             //weird fix so that camera will still move when mouse goes to the borders
@@ -589,8 +601,9 @@ FullGame.makePlayer = function(game) {
         this.camShakeX = (Math.random()*2-1) * this.camShakeAmplitude;
         this.camShakeY = (Math.random()*2-1) * this.camShakeAmplitude;
         
-        FullGame.GI.camera.setPosition(cx - SCREEN_WIDTH/2 + this.camShakeX,
-                                       cy - SCREEN_HEIGHT/2 + this.camShakeY);
+        FullGame.GI.camera.setPosition(
+            Math.max(0, Math.min(FullGame.GI.worldWidth-SCREEN_WIDTH, cx - SCREEN_WIDTH/2 + this.camShakeX)),
+            Math.max(0, Math.min(FullGame.GI.worldHeight-SCREEN_HEIGHT, cy - SCREEN_HEIGHT/2 + this.camShakeY)));
         
     };
     
@@ -698,6 +711,14 @@ FullGame.makePlayer = function(game) {
             this.body.velocity.x = 0;
             this.body.velocity.y = 0;
             this.state = this.STATE_PORTAL;
+        } else if (behavior == "spaceship"){
+            this.behaviorTime = 0;
+            this.behaviorDuration = 3;
+            this.visible = false;
+            this.powerSprite.visible = false;
+            this.body.velocity.x = 0;
+            this.body.velocity.y = 0;
+            this.state = this.STATE_SPACESHIP;
         } else if (behavior == "none"){
             this.behaviorTime = 0;
             this.behaviorDuration = 0;
@@ -728,7 +749,7 @@ FullGame.makePlayer = function(game) {
     };
     p.damageInvincible = function() {
         return (this.damageInvincibleTime < this.DAMAGE_INVINCIBILITY_DURATION || this.dead()
-               || this.behavior == "portal");
+               || this.behavior == "portal" || this.behavior == "spaceship");
     };
     p.lowHealth = function() {
         return (this.lowHealthTime < this.HEALTH_RECHARGE_DURATION || this.dead());
@@ -761,6 +782,10 @@ FullGame.makePlayer = function(game) {
 Math.easeOutQuad = function (t, b, c, d) {
 	t /= d;
 	return -c * t*(t-2) + b;
+};
+Math.easeInQuad = function (t, b, c, d) {
+	t /= d;
+	return c*t*t + b;
 };
 Math.easeInOutQuad = function (t, b, c, d) {
 	t /= d/2;

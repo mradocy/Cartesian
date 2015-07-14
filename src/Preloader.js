@@ -50,6 +50,7 @@ FullGame.Preloader.prototype = {
         game.load.image('black_indestructable', 'assets/tilemaps/tiles/black_indestructable.png');
         game.load.image('sand_tiles', 'assets/tilemaps/tiles/sand_tiles.png');
         game.load.image('novis_editor', 'assets/tilemaps/tiles/novis.png'); //switched with invisible tile
+        game.load.image('red_indestructable', 'assets/tilemaps/tiles/red_indestructable.png');
         
         //loading backgrounds
         game.load.image('space1', 'assets/img/bgs/space1.png');
@@ -85,6 +86,9 @@ FullGame.Preloader.prototype = {
         game.load.image('intro_lighting', 'assets/img/bgs/intro_lighting.png');
         game.load.image('bg_white', 'assets/img/bgs/bg_white.png');
         game.load.spritesheet("white_thing", 'assets/img/bgs/particles/white_thing.png', 78, 78, 1);
+        game.load.image("ship_ex_1", 'assets/img/bgs/particles/ship_ex_1.png');
+        game.load.image("ship_ex_2", 'assets/img/bgs/particles/ship_ex_2.png');
+        
         game.load.image('bg_tempLast', 'assets/img/bgs/bg_tempLast.png');
         
         
@@ -123,10 +127,12 @@ FullGame.Preloader.prototype = {
         game.load.audio('midel_swing', ['assets/sfx/midel_swing.ogg', 'assets/sfx/midel_swing.mp3'], true);
         game.load.audio('midel_damage', ['assets/sfx/midel_damage.ogg', 'assets/sfx/midel_damage.mp3'], true);
         game.load.audio('midel_death', ['assets/sfx/midel_death.ogg', 'assets/sfx/midel_death.mp3'], true);
-        
         game.load.audio('griddy_poof', ['assets/sfx/griddy_poof.ogg', 'assets/sfx/griddy_poof.mp3'], true);
         game.load.audio('griddy_damage', ['assets/sfx/griddy_damage.ogg', 'assets/sfx/griddy_damage.mp3'], true);
         game.load.audio('griddy_death', ['assets/sfx/griddy_death.ogg', 'assets/sfx/griddy_death.mp3'], true);
+        
+        game.load.audio('spaceship_takeoff', ['assets/sfx/spaceship_takeoff.ogg', 'assets/sfx/spaceship_takeoff.mp3'], true);
+        
         
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);
         game.load.audio('boop2', ['assets/sfx/boop2.ogg', 'assets/sfx/boop2.mp3'], true);
@@ -190,7 +196,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("powerchip_red", 'assets/img/powerchip_red.png', 32, 32, 20);
         game.load.image("small_star", 'assets/img/small_star.png');
         game.load.image("medium_star", 'assets/img/medium_star.png');
-        game.load.image("spaceship", 'assets/img/spaceship.png');
+        game.load.spritesheet("spaceship", 'assets/img/spaceship.png', 184, 311, 2);
         game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 4);
         game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 2);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
@@ -208,6 +214,7 @@ FullGame.Preloader.prototype = {
         game.load.image("gem_green", 'assets/img/gem_green.png');
         game.load.spritesheet("miner_sitting", 'assets/img/miner_sitting.png', 78, 78, 6);
         game.load.spritesheet("miner_scared", 'assets/img/miner_scared.png', 50, 58, 5);
+        game.load.spritesheet("miner_standing", 'assets/img/miner_standing.png', 50, 82, 5);
         
         game.load.spritesheet("midel_body", 'assets/img/midel_body.png', 128, 256, 4);
         game.load.spritesheet("midel_body_broken", 'assets/img/midel_body_broken.png', 128, 256, 4);
@@ -226,6 +233,10 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("griddy_damage", 'assets/img/griddy_damage.png', 96, 96, 2);
         
         game.load.image("final_boss", 'assets/img/final_boss.png');
+        game.load.image("final_eye", 'assets/img/final_eye.png');
+        game.load.image("final_eye_glow", 'assets/img/final_eye_glow.png');
+        game.load.image("final_blocker", 'assets/img/final_blocker.png');
+        game.load.image("final_claw", 'assets/img/final_claw.png');
         
         game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
         

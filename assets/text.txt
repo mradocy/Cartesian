@@ -209,7 +209,6 @@ They said if I didn't preform better they would find a "better use" for me... wh
 
 Now I'm just trying to hide for as long as I can, but each room is more confusing than the last and I don't know where to go!  Sibro, you've got to save me!]
 
-
 %minerScared% (Daz)
 [Sibro!  I'm over here!  I am beyond glad you found me before those aliens did... I've been hearing noises and I think one is close by!
 
@@ -217,6 +216,27 @@ I heard Foll made it out okay... and now that you found me, that only leaves Rob
 
 But I did find this colorchip you could probably use.
 Where do you think those red sliding platforms should go?]
+
+
+%gemPortals% (Rob)
+[Hey, it's Rob.  I just got contacted by Daz, and it seems that he and Foll are resting fine on the ship.
+
+That's great to hear, but I'm still lost down here.  I've done well to not gain the attention of wandering aliens, but that won't last forever.  Please hurry!]
+
+%whiteAreaBuffer% (Rob)
+[I have a feeling you'll soon be encountering the toughest enemy yet Sibro.  The thing moves so fast it'll be able to dodge anything you fire at it.
+
+But what if it had nowhere to hide?  Try to use your laser in a way such that it won't have anywhere to run!]
+
+%minerStanding% (Rob)
+[Excellent, you made it Sibro.  Not that I wouldn't have made it back to the top myself eventually, but it's nice to see a familiar 'face'.
+
+And with Foll and Daz also safe, we ought to get out of here.  The only way forward is up.
+
+And to mark the occasion, try out this upgrade to your laser I managed to piece together.  I call it a powerchip!  Think you can make use of it during the escape?]
+
+%keyRoomPower% (Rob)
+[Remember, we're trying to get back to the surface!  Try to keep moving up, even if it means going backwards through rooms you've already visited!]
 
 
 
