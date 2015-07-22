@@ -80,6 +80,9 @@ FullGame.makeColorchip = function(cx, cy, color, laserType) {
                 plr.getPoweredUp();
             }
             
+            //update HUD
+            FullGame.HUD.setReticle(this.laserType, this.color);
+            
         } else {
             FullGame.playSFX("colorchip");
             FullGame.Vars.playerLaserColor = this.color;

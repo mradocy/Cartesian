@@ -7,12 +7,20 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.CENTER_X = 720/2.0;
     fb.CENTER_Y = 720/2.0;
     fb.anchor.setTo(fb.CENTER_X / 720, fb.CENTER_Y / 720); //sprite is centered
+    fb.animations.add("idle", [0], 30, true);
+    fb.animations.add("flash", [1, 2], 20, true);
+    fb.animations.play("idle");
     fb.dead = false;
     fb.eyes = [];
+    fb.laserTranspSound = game.sound.add("laser_transp_alien", 1, true);
+    fb.laserThickSound = game.sound.add("laser_thick_alien", 1, true);
+    fb.encounter = (FullGame.Vars.startMap != "finalArena");
     
     // EYE LOCATIONS
     fb.eyeLocs = [];
-    fb.currentEyeLoc = 2;
+    fb.currentEyeLoc = 0;
+    if (fb.encounter)
+        fb.currentEyeLoc = 0;
     fb.NUM_EYES = 4;
     //0th eyes location
     fb.eyeLocs.push([
@@ -23,16 +31,16 @@ FullGame.makeFinalBoss = function(cx, cy) {
         ]);
     //1th eyes location
     fb.eyeLocs.push([
-        {x:360, y:225, r:0*Math.PI/180},
+        {x:360, y:227, r:0*Math.PI/180},
         {x:360, y:315, r:90*Math.PI/180},
         {x:242, y:260, r:20*Math.PI/180},
         {x:720-242, y:260, r:-20*Math.PI/180}
         ]);
     //2th eyes location
     fb.eyeLocs.push([
-        {x:223, y:203, r:50*Math.PI/180},
+        {x:227, y:205, r:50*Math.PI/180},
         {x:307, y:276, r:40*Math.PI/180},
-        {x:720-223, y:203, r:-50*Math.PI/180},
+        {x:720-227, y:205, r:-50*Math.PI/180},
         {x:720-307, y:276, r:-40*Math.PI/180}
         ]);
     //alter
@@ -50,6 +58,15 @@ FullGame.makeFinalBoss = function(cx, cy) {
             FullGame.GI.objs.push(eye.glow);
             FullGame.GI.objs.push(eye.orb);
             FullGame.GI.orbs.push(eye.orb);
+            eye.orb.morph = game.add.sprite(0, 0, "final_eye_morph", undefined, FullGame.GI.objGroup);
+            eye.orb.morph.anchor.setTo(.5, .5); //sprite is centered
+            eye.orb.morph.animations.add("idle", [0], 20, true);
+            eye.orb.morph.animations.add("open", [0, 1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], 18, true);
+            eye.orb.morph.animations.add("close", [4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 18, true);
+            eye.orb.morph.visible = false;
+            eye.orb.morph.time = 9999;
+            eye.orb.morph.duration = 5 / 18.0;
+            eye.orb.morph.opening = false;
             this.eyes.push(eye.orb);
         }
         this.currentEyeLoc = locationIndex;
@@ -62,10 +79,28 @@ FullGame.makeFinalBoss = function(cx, cy) {
             //reuse eyes/orbs
             eye.openedDoors = false;
             eye.glow.alpha = 0;
+            //set morphs
+            eye.morph.visible = true;
+            eye.morph.animations.play("open");
+            eye.morph.time = 0;
+            eye.morph.opening = true;
+            eye.visible = false;
         }
     };
     fb.setEyes(fb.currentEyeLoc);
+    fb.closeEyes = function(){
+        for (var i=0; i<this.NUM_EYES; i++){
+            var eye = this.eyes[i];
+            //set morphs
+            eye.morph.visible = true;
+            eye.morph.animations.play("close");
+            eye.morph.time = 0;
+            eye.morph.opening = false;
+            eye.visible = false;
+        }
+    };
     fb.updateEyeLocations = function(){
+        var dt = game.time.physicsElapsed;
         var c = Math.cos(this.rotation);
         var s = Math.sin(this.rotation);
         for (var i=0; i<this.eyes.length; i++){
@@ -75,40 +110,167 @@ FullGame.makeFinalBoss = function(cx, cy) {
             eye.setX(this.x + x0*c - y0*s);
             eye.setY(this.y + x0*s + y0*c);
             eye.setR(this.rotation + eye.relR);
+            //morphs
+            eye.morph.x = eye.x;
+            eye.morph.y = eye.y;
+            eye.morph.rotation = eye.rotation;
+            if (eye.morph.time < eye.morph.duration){
+                eye.morph.time += dt;
+                if (eye.morph.time >= eye.morph.duration){
+                    if (eye.morph.opening){
+                        eye.morph.visible = false;
+                        eye.visible = true;
+                    } else {
+                        eye.morph.visible = false;
+                        eye.visible = false;
+                    }
+                }
+            }
         }
     };
+    
+    
+    // BLOCKER
+    fb.blocker = game.add.sprite(cx, cy, "final_blocker", undefined, FullGame.GI.objGroup);
+    FullGame.GI.objs.push(fb.blocker);
+    fb.blocker.CENTER_X = 60/2.0;
+    fb.blocker.CENTER_Y = 86/2.0;
+    fb.blocker.anchor.setTo(fb.blocker.CENTER_X / 60, fb.blocker.CENTER_Y / 86); //sprite is centered
+    fb.blocker.relX = 0;
+    fb.blocker.relY = 0;
+    fb.blocker.falling = false; //will fall from head during the final blow
+    fb.blocker.vx = 0;
+    fb.blocker.vy = 0;
+    var color = FullGame.Til.BLUE;
+    fb.blocker.laserLines = [];
+    fb.blocker.baseLaserLines = [
+        {x0:4, y0:7, x1:12, y1:39, color:color},
+        {x0:12, y0:39, x1:14, y1:74, color:color},
+        {x0:14, y0:74, x1:30, y1:79, color:color},
+        {x0:30, y0:79, x1:60-14, y1:74, color:color},
+        {x0:60-14, y0:74, x1:60-12, y1:39, color:color},
+        {x0:60-12, y0:39, x1:60-4, y1:7, color:color}
+        ];
+    //alter and create current laser lines
+    for (var i=0; i<fb.blocker.baseLaserLines.length; i++){
+        fb.blocker.baseLaserLines[i].x0 -= fb.blocker.CENTER_X;
+        fb.blocker.baseLaserLines[i].y0 -= fb.blocker.CENTER_Y;
+        fb.blocker.baseLaserLines[i].x1 -= fb.blocker.CENTER_X;
+        fb.blocker.baseLaserLines[i].y1 -= fb.blocker.CENTER_Y;
+        fb.blocker.laserLines.push(
+            {x0:fb.blocker.baseLaserLines[i].x0,
+             y0:fb.blocker.baseLaserLines[i].y0,
+             x1:fb.blocker.baseLaserLines[i].x1,
+             y1:fb.blocker.baseLaserLines[i].y1,
+             color:fb.blocker.baseLaserLines[i].color}
+        );
+    }
+    fb.currentBlockerLoc = 0;
+    fb.prevBlockerLoc = -1;
+    fb.blockerTime = 9999;
+    fb.BLOCKER_DURATION = 2.0;
+    fb.blockerLocs = [
+        {x:360, y:136},
+        {x:360, y:160},
+        {x:360, y:220}
+        ];
+    //alter
+    for (var i=0; i<fb.blockerLocs.length; i++){
+        fb.blockerLocs[i].x -= fb.CENTER_X;
+        fb.blockerLocs[i].y -= fb.CENTER_Y;
+    }
+    fb.setBlocker = function(locationIndex){
+        if (this.prevBlockerLoc == -1){
+            this.blocker.relX = fb.blockerLocs[locationIndex].x;
+            this.blocker.relY = fb.blockerLocs[locationIndex].y;
+        } else {
+            this.blockerTime = 0;
+        }
+        this.prevBlockerLoc = this.currentBlockerLoc;
+        this.currentBlockerLoc = locationIndex;
+    };
+    fb.setBlocker(fb.currentBlockerLoc);
+    fb.updateBlockerLocation = function(){
+        var dt = game.time.physicsElapsed;
+        var blocker = this.blocker;
+        if (blocker.falling){
+            if (blocker.y < FullGame.GI.worldHeight + 200){
+                var GRAVITY = 600;
+                blocker.vx = 100;
+                blocker.vy += GRAVITY * dt;
+                blocker.x += blocker.vx * dt;
+                blocker.y += blocker.vy * dt;
+                blocker.rotation += 3 * dt;
+            }
+        } else {
+            if (this.blockerTime < this.BLOCKER_DURATION){
+                this.blockerTime += dt;
+                var x0 = this.blockerLocs[this.prevBlockerLoc].x;
+                var y0 = this.blockerLocs[this.prevBlockerLoc].y;
+                var x1 = this.blockerLocs[this.currentBlockerLoc].x;
+                var y1 = this.blockerLocs[this.currentBlockerLoc].y;
+                if (this.blockerTime >= this.BLOCKER_DURATION){
+                    blocker.relX = x1;
+                    blocker.relY = y1;
+                } else {
+                    blocker.relX = x0 + (x1-x0) * this.blockerTime / this.BLOCKER_DURATION;
+                    blocker.relY = y0 + (y1-y0) * this.blockerTime / this.BLOCKER_DURATION;
+                }
+            }
+            var c = Math.cos(this.rotation);
+            var s = Math.sin(this.rotation);
+            var x0 = blocker.relX;
+            var y0 = blocker.relY;
+            blocker.x = this.x + x0*c - y0*s;
+            blocker.y = this.y + x0*s + y0*c;
+            blocker.rotation = this.rotation;
+        }
+    };
+    fb.hair = game.add.sprite(cx, cy, "final_hair", undefined, FullGame.GI.objGroup);
+    fb.hair.anchor.setTo(fb.CENTER_X / 720, fb.CENTER_Y / 330); //sprite is centered
+    fb.hair.animations.add("idle", [0], 30, true);
+    fb.hair.animations.add("flash", [0, 1], 20, true);
+    fb.hair.animations.play("idle");
+    
     
     // CLAWS
     fb.claw1 = game.add.sprite(cx, cy, "final_claw", undefined, FullGame.GI.objGroup);
     fb.claw1.anchor.setTo(.5, .5); //sprite is centered
+    fb.claw1.animations.add("idle", [0], 30, true);
+    fb.claw1.animations.add("glow", [1], 30, true);
+    fb.claw1.animations.play("idle");
     var claw1 = fb.claw1;
     claw1.relX = 0;
     claw1.relY = 0;
     claw1.relR = 0;
     claw1.LASER1_X = 66 -107;
     claw1.LASER1_Y = 104 -82;
-    claw1.LASER1_ANGLE = 65 *Math.PI/180;
+    claw1.LASER1_ANGLE = 64 *Math.PI/180;
     claw1.LASER2_X = 144 -107;
     claw1.LASER2_Y = 79 -82;
-    claw1.LASER2_ANGLE = 70 *Math.PI/180;
+    claw1.LASER2_ANGLE = 71 *Math.PI/180;
     claw1.START_ANGLE_H3 = 20 *Math.PI/180;
-    claw1.END_ANGLE_H3 = -30 *Math.PI/180;
+    claw1.END_ANGLE_H3 = -25 *Math.PI/180;
     claw1.START_ANGLE_H2 = 25 *Math.PI/180;
-    claw1.END_ANGLE_H2 = -35 *Math.PI/180;
+    claw1.END_ANGLE_H2 = -40 *Math.PI/180;
     claw1.START_ANGLE_H1 = 30 *Math.PI/180;
-    claw1.END_ANGLE_H1 = -40 *Math.PI/180;
-    claw1.angleState = "idle"; //idle, start, sweep, end, damage
+    claw1.END_ANGLE_H1 = -55 *Math.PI/180;
+    claw1.angleState = "idle"; //idle, start, sweep, end, damage, deadClear
     claw1.angleTime = 0;
     claw1.angleDuration = 0;
     claw1.anglePrev = 0;
     claw1.BOB_DURATION = 4.0;
     claw1.BOB0_X = 20 -360;
-    claw1.BOB0_Y = 320 -360;
+    claw1.BOB0_Y = 330 -360;
     claw1.BOB1_X = 60 -360;
     claw1.BOB1_Y = 370 -360;
     claw1.bobTime = 0;
     claw1.DAMAGE_ANGLE = 40 *Math.PI/180;
+    claw1.smokeTime = 0;
     fb.claw2 = game.add.sprite(cx, cy, "final_claw", undefined, FullGame.GI.objGroup);
+    fb.claw2.animations.add("idle", [0], 30, true);
+    fb.claw2.animations.add("glow", [1], 30, true);
+    fb.claw2.animations.play("idle");
     fb.claw2.anchor.setTo(.5, .5); //sprite is centered
     fb.claw2.scale.x = -1; //reflected, but we'll try to pretend it's not
     var claw2 = fb.claw2;
@@ -127,23 +289,27 @@ FullGame.makeFinalBoss = function(cx, cy) {
     claw2.END_ANGLE_H2 = -claw1.END_ANGLE_H2;
     claw2.START_ANGLE_H1 = -claw1.START_ANGLE_H1;
     claw2.END_ANGLE_H1 = -claw1.END_ANGLE_H1;
-    claw2.angleState = "idle"; //idle, start, sweep, end, damage
+    claw2.angleState = "idle"; //idle, start, sweep, end, damage, deadClear
     claw2.angleTime = 0;
     claw2.angleDuration = 0;
     claw2.anglePrev = 0;
     claw2.BOB_DURATION = claw1.BOB_DURATION;
     claw2.BOB0_X = 360- 20;
-    claw2.BOB0_Y = 320 -360;
+    claw2.BOB0_Y = 330 -360;
     claw2.BOB1_X = 360- 60;
     claw2.BOB1_Y = 370 -360;
     claw2.bobTime = claw2.BOB_DURATION / 4;
     claw2.DAMAGE_ANGLE = -claw1.DAMAGE_ANGLE;
+    claw2.smokeTime = 0;
     fb.moveClaws = function() {
         var dt = game.time.physicsElapsed;
+        var plr = FullGame.GI.player;
         var c = Math.cos(this.rotation);
         var s = Math.sin(this.rotation);
         
         var claw;
+        var transpPlaying = false;
+        var thickPlaying = false;
         for (var i=0; i<2; i++){
             if (i == 0) claw = this.claw1;
             else claw = this.claw2;
@@ -162,7 +328,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                     targetAngle = claw.START_ANGLE_H2;
                     break;
                 case 1:
-                    targetAngle = claw.START_ANGLE_H2;
+                    targetAngle = claw.START_ANGLE_H1;
                     break;
                 }
                 claw.relR = Math.easeInOutQuad(claw.angleTime, claw.anglePrev, targetAngle - claw.anglePrev, claw.angleDuration);
@@ -177,7 +343,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                     targetAngle = claw.END_ANGLE_H2;
                     break;
                 case 1:
-                    targetAngle = claw.END_ANGLE_H2;
+                    targetAngle = claw.END_ANGLE_H1;
                     break;
                 }
                 claw.relR = Math.easeInOutQuad(claw.angleTime, claw.anglePrev, targetAngle - claw.anglePrev, claw.angleDuration);
@@ -187,6 +353,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                 claw.relR = Math.easeInOutQuad(claw.angleTime, claw.anglePrev, targetAngle - claw.anglePrev, claw.angleDuration);
                 if (claw.angleTime >= claw.angleDuration){
                     claw.angleState = "idle";
+                    claw.animations.play("idle");
                 }
             } else if (claw.angleState == "damage"){
                 claw.angleTime = Math.min(claw.angleTime, claw.angleDuration);
@@ -194,6 +361,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                 claw.relR = Math.easeOutQuad(claw.angleTime, claw.anglePrev, targetAngle - claw.anglePrev, claw.angleDuration);
                 if (claw.angleTime >= claw.angleDuration){
                     claw.angleState = "end";
+                    claw.animations.play("idle");
                     claw.angleTime = 0;
                     claw.angleDuration = this.CLAW_ANGLE_END_DURATION;
                     claw.anglePrev = claw.rotation;
@@ -228,7 +396,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
             var x2 = claw.x + x_2*lc - y_2*ls;
             var y2 = claw.y + x_2*ls + y_2*lc;
             var r2 = r_2 + claw.rotation;
-            var color = FullGame.Til.BLUE;
+            var color = FullGame.Til.PURPLE;
             if (claw.angleState == "start"){
                 FullGame.Lasers.fireLaser(
                     x1, y1,
@@ -238,6 +406,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                     x2, y2,
                     Math.cos(r2), Math.sin(r2),
                     color, FullGame.Til.LASER_TRANSPARENT);
+                transpPlaying = true;
             } else if (claw.angleState == "sweep"){
                 FullGame.Lasers.fireLaser(
                     x1, y1,
@@ -247,92 +416,32 @@ FullGame.makeFinalBoss = function(cx, cy) {
                     x2, y2,
                     Math.cos(r2), Math.sin(r2),
                     color, FullGame.Til.LASER_THICK);
+                thickPlaying = true;
             }
             
         }
-    };
-    
-    // BLOCKER
-    fb.blocker = game.add.sprite(cx, cy, "final_blocker", undefined, FullGame.GI.objGroup);
-    FullGame.GI.objs.push(fb.blocker);
-    fb.blocker.CENTER_X = 60/2.0;
-    fb.blocker.CENTER_Y = 86/2.0;
-    fb.blocker.anchor.setTo(fb.blocker.CENTER_X / 60, fb.blocker.CENTER_Y / 86); //sprite is centered
-    fb.blocker.relX = 0;
-    fb.blocker.relY = 0;
-    var color = FullGame.Til.BLUE;
-    fb.blocker.laserLines = [];
-    fb.blocker.baseLaserLines = [
-        {x0:4, y0:7, x1:12, y1:39, color:color},
-        {x0:12, y0:39, x1:14, y1:74, color:color},
-        {x0:14, y0:74, x1:30, y1:79, color:color},
-        {x0:30, y0:79, x1:60-14, y1:74, color:color},
-        {x0:60-14, y0:74, x1:60-12, y1:39, color:color},
-        {x0:60-12, y0:39, x1:60-4, y1:7, color:color}
-        ];
-    //alter and create current laser lines
-    for (var i=0; i<fb.blocker.baseLaserLines.length; i++){
-        fb.blocker.baseLaserLines[i].x0 -= fb.blocker.CENTER_X;
-        fb.blocker.baseLaserLines[i].y0 -= fb.blocker.CENTER_Y;
-        fb.blocker.baseLaserLines[i].x1 -= fb.blocker.CENTER_X;
-        fb.blocker.baseLaserLines[i].y1 -= fb.blocker.CENTER_Y;
-        fb.blocker.laserLines.push(
-            {x0:fb.blocker.baseLaserLines[i].x0,
-             y0:fb.blocker.baseLaserLines[i].y0,
-             x1:fb.blocker.baseLaserLines[i].x1,
-             y1:fb.blocker.baseLaserLines[i].y1,
-             color:fb.blocker.baseLaserLines[i].color}
-        );
-    }
-    fb.currentBlockerLoc = 0;
-    fb.prevBlockerLoc = -1;
-    fb.blockerTime = 9999;
-    fb.BLOCKER_DURATION = 1.0;
-    fb.blockerLocs = [
-        {x:360, y:136},
-        {x:360, y:160},
-        {x:360, y:220}
-        ];
-    //alter
-    for (var i=0; i<fb.blockerLocs.length; i++){
-        fb.blockerLocs[i].x -= fb.CENTER_X;
-        fb.blockerLocs[i].y -= fb.CENTER_Y;
-    }
-    fb.setBlocker = function(locationIndex){
-        if (this.prevBlockerLoc == -1){
-            this.blocker.relX = fb.blockerLocs[locationIndex].x;
-            this.blocker.relY = fb.blockerLocs[locationIndex].y;
-        } else {
-            this.blockerTime = 0;
-        }
-        this.prevBlockerLoc = this.currentBlockerLoc;
-        this.currentBlockerLoc = locationIndex;
-    };
-    fb.setBlocker(fb.currentBlockerLoc);
-    fb.updateBlockerLocation = function(){
-        var dt = game.time.physicsElapsed;
-        var blocker = this.blocker;
-        if (this.blockerTime < this.BLOCKER_DURATION){
-            this.blockerTime += dt;
-            var x0 = this.blockerLocs[this.prevBlockerLoc].x;
-            var y0 = this.blockerLocs[this.prevBlockerLoc].y;
-            var x1 = this.blockerLocs[this.currentBlockerLoc].x;
-            var y1 = this.blockerLocs[this.currentBlockerLoc].y;
-            if (this.blockerTime >= this.BLOCKER_DURATION){
-                blocker.relX = x1;
-                blocker.relY = y1;
-            } else {
-                blocker.relX = x0 + (x1-x0) * this.blockerTime;
-                blocker.relY = y0 + (y1-y0) * this.blockerTime;
+        
+        if (plr.dead()) transpPlaying = false;
+        if (transpPlaying){
+            if (!this.laserTranspSound.isPlaying && !FullGame.Vars.sfxMuted &&
+                (plr != null && !plr.dead())){
+                this.laserTranspSound.play("", 0, 1, true);
             }
+        } else {
+            if (this.laserTranspSound.isPlaying)
+                this.laserTranspSound.stop();
         }
-        var c = Math.cos(this.rotation);
-        var s = Math.sin(this.rotation);
-        var x0 = blocker.relX;
-        var y0 = blocker.relY;
-        blocker.x = this.x + x0*c - y0*s;
-        blocker.y = this.y + x0*s + y0*c;
-        blocker.rotation = this.rotation;
+        if (plr.dead()) thickPlaying = false;
+        if (thickPlaying){
+            if (!this.laserThickSound.isPlaying && !FullGame.Vars.sfxMuted &&
+                (plr != null && !plr.dead())){
+                this.laserThickSound.play("", 0, 1, true);
+            }
+        } else {
+            if (this.laserThickSound.isPlaying)
+                this.laserThickSound.stop();
+        }
+        
     };
     
     // LASER LINES
@@ -438,15 +547,17 @@ FullGame.makeFinalBoss = function(cx, cy) {
         });
     };
     fb.health = 3;
-    fb.moveState = "begin"; //begin, idle, rise, move
+    if (fb.encounter)
+        fb.health = 2;
+    fb.moveState = "begin"; //begin, idle, rise, move, deadClear
     fb.moveTime = 0;
     fb.moveDuration = 0;
     fb.movingRight = false;
     fb.prevX = 0;
     fb.prevY = 0;
     fb.MOVE_HORIZ_SPEED_H3 = 70; //determins move duration
-    fb.MOVE_HORIZ_SPEED_H2 = 110;
-    fb.MOVE_HORIZ_SPEED_H1 = 150;
+    fb.MOVE_HORIZ_SPEED_H2 = 100;
+    fb.MOVE_HORIZ_SPEED_H1 = 130;
     fb.IDLE_DURATION_H3 = 5.0;
     fb.IDLE_DURATION_H2 = 4.5;
     fb.IDLE_DURATION_H1 = 4.0;
@@ -459,6 +570,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.MOVE_ROTATION_MAX = 15 *Math.PI/180;
     fb.DAMAGE_DIST = 100;
     fb.DAMAGE_DURATION = 1.3;
+    fb.DAMAGE_DEAD_DURATION = 6;
     
     fb.idle = function(){
         this.moveState = "idle";
@@ -514,35 +626,220 @@ FullGame.makeFinalBoss = function(cx, cy) {
         this.health--;
         if (this.health == 2){
             this.setBlocker(1);
-        }
-        if (this.health == 1){
+        } else if (this.health == 1){
             this.setBlocker(2);
+        } else if (this.health == 0){
+            this.blocker.falling = true;
+            this.dead = true;
         }
+        this.closeEyes();
+        FullGame.playSFX("damage_flesh");
+        if (this.health == 0){
+            FullGame.playSFX("final_death");
+            FullGame.HUD.solveFlash();
+        } else {
+            FullGame.playSFX("final_damage");
+        }
+        
         this.moveState = "damage";
         this.damageShake(10 *Math.PI/180);
+        this.animations.play("flash");
+        this.hair.animations.play("flash");
         this.moveTime = 0;
         this.prevX = this.x;
         this.prevY = this.y;
         this.moveDuration = this.DAMAGE_DURATION;
+        if (this.dead){
+            this.moveDuration = this.DAMAGE_DEAD_DURATION;
+        }
         this.setLaserLinesTempBlack(); //temporarily set to black so player does hit himself by mistake
         
         //claws behavior
         claw1.angleState = "damage";
+        claw1.animations.play("idle");
         claw1.anglePrev = claw1.rotation;
         claw1.angleTime = 0;
         claw1.angleDuration = this.moveDuration - this.CLAW_ANGLE_END_DURATION - .1;
         claw2.angleState = "damage";
+        claw2.animations.play("idle");
         claw2.anglePrev = claw2.rotation;
         claw2.angleTime = 0;
         claw2.angleDuration = claw1.angleDuration;
         
     };
     
-    
+    // SMOKE
+    fb.SMOKE_SPAWN_BOX = {
+        x:-170,
+        y:590 - 360,
+        w:340,
+        h:30,
+        r:0
+    };
+    fb.DEAD_SMOKE_SPAWN_BOX = {
+        x:-190,
+        y:155 - 360,
+        w:380,
+        h:460,
+        r:0
+    };
+    fb.SMOKE_SPEED = 100;
+    fb.SMOKE_ACCEL = 250;
+    fb.SMOKE_PERIOD = .012;
+    fb.DEAD_SMOKE_PERIOD = .030;
+    fb.CLAW_SMOKE_SPAWN_BOX = {
+        x:160 - 107,
+        y:100 - 82,
+        w:110,
+        h:30,
+        r:-140 *Math.PI/180
+    };
+    fb.CLAW_SMOKE_PERIOD = .040;
+    fb.CLAW_SMOKE_SPEED = 40;
+    fb.CLAW_SMOKE_ACCEL = 0;
+    fb.smokeTime = 0;
+    fb.smokeCache = []; //recycles smoke particles
+    fb.smokeClawCache = [];
+    fb.uniformT = 0;
+    fb.uniformTPeriod = 1.0/5;
+    fb.spawnSmoke = function(numSmokes, source) {
+        var spawnBox;
+        var smokeKey = "final_smoke";
+        if (source == this){
+            if (this.dead){
+                spawnBox = this.DEAD_SMOKE_SPAWN_BOX;
+            } else {
+                spawnBox = this.SMOKE_SPAWN_BOX;
+            }
+            smokeKey = "final_smoke";
+        } else if (source == this.claw1 || source == this.claw2){
+            spawnBox = this.CLAW_SMOKE_SPAWN_BOX;
+            smokeKey = "final_claw_smoke";
+        }
+        
+        var c = Math.cos(spawnBox.r);
+        var s = Math.sin(spawnBox.r);
+        var c2 = Math.cos(source.rotation);
+        var s2 = Math.sin(source.rotation);
+        var heading;
+        if (source.scale.x > 0){
+            heading = spawnBox.r + source.rotation + Math.PI/2;
+        } else {
+            heading = -spawnBox.r + source.rotation + Math.PI/2;
+        }
+        var ch = Math.cos(heading);
+        var sh = Math.sin(heading);
+        for (var i=0; i<numSmokes; i++){
+            
+            var x0 = 0;
+            if (source == this){
+                this.uniformT += this.uniformTPeriod;
+                if (this.uniformT > 1.0001)
+                    this.uniformT = 0;
+                x0 = this.uniformT * spawnBox.w;
+            } else {
+                x0 = Math.random() * spawnBox.w;
+            }
+            var y0 = Math.random() * spawnBox.h;
+            var x = x0*c - y0*s;
+            var y = x0*s + y0*c;
+            if (false && this.dead){
+                x = x0 + spawnBox.x;
+                y = y0 + spawnBox.y;
+                heading = Math.atan2(y, x);
+                ch = Math.cos(heading);
+                sh = Math.sin(heading);
+            } else {
+                x0 = (x + spawnBox.x) * source.scale.x;
+                y0 = (y + spawnBox.y) * source.scale.y;
+                x = x0*c2 - y0*s2;
+                y = x0*s2 + y0*c2;
+            }
+            x += source.x;
+            y += source.y;
+            
+            var sm;
+            if (smokeKey == "final_smoke"){
+                if (this.smokeCache.length == 0){
+                    sm = game.add.sprite(x, y, smokeKey, undefined, FullGame.GI.objGroup);
+                    sm.animations.add("play", [0, 1, 2, 3, 4, 5], 10, false);
+                    sm.fb = this;
+                    sm.update = function() {
+                        var dt = game.time.physicsElapsed;
+                        this.vx += this.ax * dt;
+                        this.vy += this.ay * dt;
+                        this.x += this.vx * dt;
+                        this.y += this.vy * dt;
+                        this.t += dt;
+                        if (this.t > this.duration){
+                            this.visible = false;
+                            this.fb.smokeCache.push(this);
+                        }
+                    };
+                } else {
+                    sm = this.smokeCache.pop();
+                    sm.x = x;
+                    sm.y = y;
+                    sm.visible = true;
+                    sm.animations.stop();
+                }
+            } else {
+                if (this.smokeClawCache.length == 0){
+                    sm = game.add.sprite(x, y, smokeKey, undefined, FullGame.GI.objGroup);
+                    sm.animations.add("play", [0, 1, 2, 3, 4, 5], 10, false);
+                    sm.fb = this;
+                    sm.update = function() {
+                        var dt = game.time.physicsElapsed;
+                        this.vx += this.ax * dt;
+                        this.vy += this.ay * dt;
+                        this.x += this.vx * dt;
+                        this.y += this.vy * dt;
+                        this.t += dt;
+                        if (this.t > this.duration){
+                            this.visible = false;
+                            this.fb.smokeClawCache.push(this);
+                        }
+                    };
+                } else {
+                    sm = this.smokeClawCache.pop();
+                    sm.x = x;
+                    sm.y = y;
+                    sm.visible = true;
+                    sm.animations.stop();
+                }
+            }
+            sm.animations.play("play");
+            if (source == this){
+                //FullGame.GI.objGroup.setChildIndex(sm, FullGame.GI.objGroup.getChildIndex(this)+1);
+                FullGame.GI.objGroup.setChildIndex(sm, 0);
+            } else if (source == this.claw1 || source == this.claw2){
+                FullGame.GI.objGroup.setChildIndex(sm, 0);
+            }
+            if (this.dead){
+                sm.bringToTop();
+            }
+            sm.t = 0;
+            sm.duration = 6 / 10.0 + .5;
+            sm.anchor.setTo(.5, .5);
+            if (source == this) {
+                sm.vx = this.SMOKE_SPEED * ch + 0;
+                sm.vy = this.SMOKE_SPEED * sh + 0;
+                sm.ax = this.SMOKE_ACCEL * ch;
+                sm.ay = this.SMOKE_ACCEL * sh;
+            } else {
+                sm.vx = this.CLAW_SMOKE_SPEED * ch + 0;
+                sm.vy = this.CLAW_SMOKE_SPEED * sh + 0;
+                sm.ax = this.CLAW_SMOKE_ACCEL * ch;
+                sm.ay = this.CLAW_SMOKE_ACCEL * sh;
+            }
+            
+        }
+    };
     
     // SHAKING
     fb.shakeTime = 99999;
     fb.shakeDuration = 2.5;
+    fb.shakeDeadDuration = 7;
     fb.shakeAmplitdue = 0;
     fb.DAMAGE_SHAKE_PERIOD = .6;
     fb.damageShake = function(amplitude) {
@@ -562,7 +859,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
         //moveState
         this.moveTime += dt;
         if (this.moveState == "begin"){
-            this.rise(2);
+            this.rise(1);
         } else if (this.moveState == "idle"){
             
             if (this.moveTime >= this.moveDuration-this.CLAW_ANGLE_START_DURATION &&
@@ -580,6 +877,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                 var claw = this.claw1;
                 if (!this.movingRight) claw = this.claw2;
                 claw.angleState = "start";
+                claw.animations.play("idle");
                 claw.anglePrev = claw.rotation;
                 claw.angleTime = 0;
                 claw.angleDuration = this.CLAW_ANGLE_START_DURATION;
@@ -616,6 +914,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                 var claw = this.claw1;
                 if (!this.movingRight) claw = this.claw2;
                 claw.angleState = "sweep";
+                claw.animations.play("glow");
                 claw.anglePrev = claw.rotation;
                 claw.angleTime = 0;
                 claw.angleDuration = this.moveDuration;
@@ -660,6 +959,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
                 var claw = this.claw1;
                 if (!this.movingRight) claw = this.claw2;
                 claw.angleState = "end";
+                claw.animations.play("idle");
                 claw.anglePrev = claw.rotation;
                 claw.angleTime = 0;
                 claw.angleDuration = this.CLAW_ANGLE_END_DURATION;
@@ -675,22 +975,62 @@ FullGame.makeFinalBoss = function(cx, cy) {
                 }
                 
             } else {
+                //go back to idle
                 this.setLaserLinesRevertColor();
                 this.idle();
+                if (this.health == 2){
+                    this.setEyes(1);
+                }
+                if (this.health <= 1){
+                    this.setEyes(2);
+                }
+                this.animations.play("idle");
+                this.hair.animations.play("idle");
                 this.moveTime = this.moveDuration - this.CLAW_ANGLE_START_DURATION - .1; //so can start attacking earlier
+            }
+            
+            if (this.dead){
+                //final explosion events
+                if (this.moveTime >= 1.1 &&
+                    this.moveTime-dt < 1.1){
+                    FullGame.playSFX("damage_flesh");
+                    FullGame.HUD.solveFlash();
+                }
+                if (this.moveTime >= 1.6 &&
+                    this.moveTime-dt < 1.6){
+                    FullGame.playSFX("damage_flesh");
+                    FullGame.HUD.solveFlash();
+                }
+                if (this.moveTime >= 1.9 &&
+                    this.moveTime-dt < 1.9){
+                    FullGame.playSFX("final_explode");
+                    FullGame.HUD.beatFinalBoss();
+                }
+                if (this.moveTime >= 2.5 &&
+                    this.moveTime-dt < 2.5){
+                    this.deadClear();
+                }
             }
         }
         
         //shaking
         if (this.moveState != "move"){
-            if (this.shakeTime < this.shakeDuration){
-                this.shakeTime = Math.min(this.shakeDuration, this.shakeTime+dt);
-                var ampl = this.shakeAmplitude * Math.easeOutQuad(this.shakeTime, 1, -1, this.shakeDuration);
+            var dur = this.shakeDuration;
+            if (this.dead)
+                dur = this.shakeDeadDuration;
+            if (this.shakeTime < dur){
+                this.shakeTime = Math.min(dur, this.shakeTime+dt);
+                var ampl = this.shakeAmplitude * Math.easeOutQuad(this.shakeTime, 1, -1, dur);
                 this.rotation = ampl * Math.sin(this.shakeTime / this.DAMAGE_SHAKE_PERIOD *Math.PI*2);
             } else {
                 this.rotation = 0;
             }
         }
+        
+        //update hair position
+        this.hair.x = this.x;
+        this.hair.y = this.y;
+        this.hair.rotation = this.rotation;
         
         this.updateEyeLocations();
         this.updateBlockerLocation();
@@ -701,6 +1041,63 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.afterCollision = function() {
         var dt = game.time.physicsElapsed;
         var plr = FullGame.GI.player;
+        
+        //spawning smoke
+        if (this.moveState != "deadClear"){
+            this.smokeTime += dt;
+            if (this.dead){
+                if (this.smokeTime >= this.DEAD_SMOKE_PERIOD/* && this.state == "dead1"*/){
+                    var smokes = Math.floor(this.smokeTime / this.DEAD_SMOKE_PERIOD);
+                    this.spawnSmoke(smokes, this);
+                    this.smokeTime -= this.DEAD_SMOKE_PERIOD * smokes;
+                }
+            } else {
+                if (this.smokeTime >= this.SMOKE_PERIOD){
+                    var smokes = Math.floor(this.smokeTime / this.SMOKE_PERIOD);
+                    this.spawnSmoke(smokes, this);
+                    this.smokeTime -= this.SMOKE_PERIOD * smokes;
+                }
+            }
+            this.claw1.smokeTime += dt;
+            if (this.claw1.smokeTime >= this.CLAW_SMOKE_PERIOD){
+                var smokes = Math.floor(this.claw1.smokeTime / this.CLAW_SMOKE_PERIOD);
+                this.spawnSmoke(smokes, this.claw1);
+                this.claw1.smokeTime -= this.CLAW_SMOKE_PERIOD * smokes;
+            }
+            this.claw2.smokeTime += dt;
+            if (this.claw2.smokeTime >= this.CLAW_SMOKE_PERIOD){
+                var smokes = Math.floor(this.claw2.smokeTime / this.CLAW_SMOKE_PERIOD);
+                this.spawnSmoke(smokes, this.claw2);
+                this.claw2.smokeTime -= this.CLAW_SMOKE_PERIOD * smokes;
+            }
+        }
+        
+        
+    };
+    
+    //makes stuff invisible during the flash of light
+    fb.deadClear = function(){
+        this.visible = false;
+        this.hair.visible = false;
+        this.moveState = "deadClear";
+        this.moveTime = 0;
+        for (var i=0; i<this.NUM_EYES; i++){
+            var eye = this.eyes[i];
+            eye.visible = false;
+            eye.glow.visible = false;
+            eye.morph.visible = false;
+            eye.morph.time = 9999;
+        }
+        this.claw1.visible = false;
+        this.claw1.angleState = "deadClear";
+        this.claw2.visible = false;
+        this.claw2.angleState = "deadClear";
+        this.laserLines.splice(this.laserLines.length);
+        delete this.laserLines;
+        this.baseLaserLines.splice(this.baseLaserLines.length);
+        delete this.baseLaserLines;
+        
+        
         
     };
     

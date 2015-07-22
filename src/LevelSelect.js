@@ -128,15 +128,15 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         {txt:"01 - First Level",
          desc:"The first few levels are spent introducing the player to the game's basic mechanics.",
          startMap:"firstLevel", lastMap:"none", color:FullGame.Til.RED},
-        /*{txt:"05 - Moving Lasers", desc:"",
-         startMap:"firstMultReflect", lastMap:"firstReflect", color:FullGame.Til.RED},*/
+        {txt:"05 - Moving Lasers", desc:"",
+         startMap:"firstMultReflect", lastMap:"firstReflect", color:FullGame.Til.RED},
         {txt:"08 - Multiple Orbs",
          desc:"For those condifent they'd understand how the game works without a tutorial.",
          startMap:"firstMultOrb", lastMap:"firstGlass", color:FullGame.Til.RED},
         {txt:"12 - Descent", desc:"",
          startMap:"trapped", lastMap:"firstMovingLasers", color:FullGame.Til.RED},
-        /*{txt:"16 - Hazardus Oculroids", desc:"",
-         startMap:"blueEyebot", lastMap:"reflectOffDoor", color:FullGame.Til.RED},*/
+        {txt:"16 - Hazardus Oculroids", desc:"",
+         startMap:"blueEyebot", lastMap:"reflectOffDoor", color:FullGame.Til.RED},
         {txt:"20 - Roplates", desc:"",
          startMap:"firstRoplate", lastMap:"split", color:FullGame.Til.RED},
         {txt:"24 - First Rescue", desc:"",
@@ -147,16 +147,21 @@ FullGame.makeLevelSelect = function(title, backFunction) {
          startMap:"arena", lastMap:"star", color:FullGame.Til.BLUE},
         {txt:"33 - Slide Platforms", desc:"",
          startMap:"firstSlider", lastMap:"openArea", color:FullGame.Til.RED},
-        /*{txt:"36 - Portals", desc:"",
-         startMap:"firstPortal", lastMap:"sandTime", color:FullGame.Til.RED},*/
+        {txt:"36 - Portals", desc:"",
+         startMap:"firstPortal", lastMap:"sandTime", color:FullGame.Til.RED},
         {txt:"40 - Second Rescue", desc:"",
          startMap:"tightReflect", lastMap:"redStart", color:FullGame.Til.GREEN},
         {txt:"43 - Gems", desc:"",
          startMap:"keyRoom", lastMap:"deepDescent", color:FullGame.Til.RED},
+        {txt:"48 - Dimension Blanc", desc:"",
+         startMap:"whiteArea", lastMap:"useEyebot2", color:FullGame.Til.RED},
         {txt:"52 - Reality Buffer", desc:"",
          startMap:"beforeBoss", lastMap:"whiteArea2", color:FullGame.Til.RED},
         {txt:"56 - Final Rescue", desc:"",
          startMap:"lastRescue", lastMap:"griddy3", color:FullGame.Til.RED},
+        
+        {txt:"60 - Landed Again", desc:"",
+         startMap:"landedAgain", lastMap:"openArea", color:FullGame.Til.RED},
         
         {txt:"TEST - Final Boss", desc:"",
          startMap:"finalArena", lastMap:"beforeFinal", color:FullGame.Til.RED},
@@ -188,7 +193,9 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         }
     };
     
-    ret.HIT_AREA = {x:-5, y:0, width:300, height:29};
+    ret.HIT_AREA = {x:-5, y:0, width:250, height:29};
+    ret.NUM_ROWS = 12;
+    ret.COLUMN_SPACING = 270;
     
     ret.create = function() {
         this.clear();
@@ -208,10 +215,12 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         
         for (var i=0; i<this.levelDescs.length; i++){
             var desc = this.levelDescs[i];
+            var row = i % this.NUM_ROWS;
+            var col = Math.floor(i / this.NUM_ROWS);
             var lvl = {};
             lvl.text = game.add.text(
-                this.headerText.x,
-                152 + i*29,
+                this.headerText.x + col*this.COLUMN_SPACING,
+                152 + row*29,
                 desc.txt,
                 { font: "20px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
             /*lvl.textDesc = game.add.text(

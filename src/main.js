@@ -85,6 +85,11 @@ var rooms = [
     "thickOrbs", //58
     "backToOpen",
     
+    "landedAgain", //60
+    "artifactRoom",
+    "evriEncounter",
+    "pinkLevel",
+    
     "finalArena"
 ];
 
@@ -98,6 +103,7 @@ game.state.add("tempLast", FullGame.Game);
 //add other states
 game.state.add("Title", FullGame.Title);
 game.state.add("Intro", FullGame.Intro);
+game.state.add("SpaceshipCutscene", FullGame.SpaceshipCutscene);
 
 // start the Boot state.
 game.state.add('Boot', FullGame.Boot, true);

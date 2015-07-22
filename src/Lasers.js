@@ -11,12 +11,22 @@ FullGame.Lasers = {
     recycledParticles:[], //pool of particles used already
     sights:[], //array of data used to draw laser sights
     recycledSights:[], //pool of sights used already
+    
+    laserburnReds:[], //pool of recycled laserburnRed sprites
+    laserburnBlues:[],
+    laserburnGreens:[],
+    laserburnWhites:[],
+    laserburnBlacks:[],
+    laserburnPowers:[], //pool of recycled laserburnPower sprites
+    laserburnPowerPurples:[],
+    
     flicker:0, //this number will slightly alter the color of the lasers. It cycles every frame
     particleTime:0,
     
     //for special levels
     number6Rendered:false,
     starRendered:false,
+    artifactRendered:false,
     tilesFilled:[], //table of bool for each tile showing if the tile is filled by a laser or not
     
     //laser color constants
@@ -36,6 +46,10 @@ FullGame.Lasers = {
     COLOR_BLACK2:0x262626,
     COLOR_BLACK1_F1:0x080808,
     COLOR_BLACK2_F1:0x2A2A2A,
+    COLOR_PURPLE1:0x910F91,
+    COLOR_PURPLE2:0xA512A5,
+    COLOR_PURPLE1_F1:0x940F94,
+    COLOR_PURPLE2_F1:0xA812A8,
     
     //laser thickness, alpha constants
     THICKNESS_NORMAL1:4, //outer part of normal laser
@@ -54,11 +68,11 @@ FullGame.Lasers = {
     THICKNESS_RETICLE:1, //not an actual laser, but part of the reticle
     ALPHA_RETICLE:.3,
     
-    PARTICLE_SPAWN_DURATION:.020, //the time interval between 2 particles spawn at the same spot
+    PARTICLE_SPAWN_DURATION:.017, //the time interval between 2 particles spawn at the same spot
     PARTICLE_SPEED_MIN:50,
     PARTICLE_SPEED_MAX:200,
     PARTICLE_GRAVITY:300,
-    PARTICLE_LIFE_DURATION:.2,
+    PARTICLE_LIFE_DURATION:.25,
     PARTICLE_ALPHA1:1,
     PARTICLE_ALPHA2:1,
     PARTICLE_THICKNESS1_MIN:1,
@@ -67,6 +81,8 @@ FullGame.Lasers = {
     
     SIGHT_ALPHA:.9,
     SIGHT_RADIUS:7,
+    SIGHT_THICK_ALPHA:.6,
+    SIGHT_THICK_RADIUS:12,
     
     MAX_LASER_DIST:20000 //maximum distance reflected laser can travel
         
@@ -394,6 +410,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         
         
         //create render for laser
+        var reflect = FullGame.Til.willReflect(c, colorHit);
         var r;
         if (this.recycledRenders.length > 0){
             r = this.recycledRenders.pop();
@@ -416,6 +433,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 var orb = FullGame.GI.orbs[i];
                 if (orb.type == undefined || orb.type != "orb") continue;
                 if (orb.color != c) continue;
+                if (!orb.visible) continue;
                 var pt = this.laserHitCirclePoint(x0, y0, xHit, yHit, orb.x, orb.y, orb.radius);
                 if (pt == null) continue;
                 
@@ -507,7 +525,6 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
         
         
         //check what laser did
-        var reflect = FullGame.Til.willReflect(c, colorHit);
         dist += dToHit;
         if (objHit == null){
             //hit tile
@@ -518,13 +535,87 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             if (normalHit == Math.PI/2) //hit bottom side of tile
                 y--;
             tileStr = game.tileCols[x][y];
+            var tileWillBeDestroyed = false;
             if (!reflect &&
                 (((laserType == FullGame.Til.LASER_NORMAL || laserType == FullGame.Til.LASER_THICK) && FullGame.Til.tileType(tileStr) == FullGame.Til.SAND) ||
                 (laserType == FullGame.Til.LASER_THICK && FullGame.Til.tileType(tileStr) == FullGame.Til.NORMAL))){
                 //hit tile that will be destroyed
                 var coords = "" + x + "," + y;
                 game.tilesPressuredThisFrame.push(coords);
+                tileWillBeDestroyed = true;
             }
+            
+            //create laserburn
+            if (!tileWillBeDestroyed &&
+                (laserType == FullGame.Til.LASER_NORMAL ||
+                 laserType == FullGame.Til.LASER_THICK)) {
+                
+                var lb;
+                var lbKey = "laserburn_red";
+                var lbCache = this.laserburnReds;
+                if (laserType == FullGame.Til.LASER_THICK){
+                    switch (c){
+                    case FullGame.Til.PURPLE:
+                        lbCache = this.laserburnPowerPurples;
+                        lbKey = "laserburn_power_purple";
+                        break;
+                    case FullGame.Til.RED:
+                    default:
+                        lbCache = this.laserburnPowers;
+                        lbKey = "laserburn_power";
+                        break;
+                    }
+                } else {
+                    switch (c){
+                    case FullGame.Til.BLUE:
+                        lbCache = this.laserburnBlues;
+                        lbKey = "laserburn_blue";
+                        break;
+                    case FullGame.Til.GREEN:
+                        lbCache = this.laserburnGreens;
+                        lbKey = "laserburn_green";
+                        break;
+                    case FullGame.Til.BLACK:
+                        lbCache = this.laserburnBlacks;
+                        lbKey = "laserburn_black";
+                        break;
+                    case FullGame.Til.WHITE:
+                        lbCache = this.laserburnWhites;
+                        lbKey = "laserburn_white";
+                        break;
+                    case FullGame.Til.RED:
+                    default:
+                        lbCache = this.laserburnReds;
+                        lbKey = "laserburn_red";
+                        break;
+                    }
+                }
+                if (lbCache.length == 0){
+                    lb = game.add.sprite(xHit, yHit, lbKey, undefined, FullGame.GI.frontGroup);
+                    lb.anchor.setTo(0, .5);
+                    lb.animations.add("play", [0, 1, 2, 3], 20, false);
+                    lb.duration = 4 / 20.0;
+                    lb.lbCache = lbCache;
+                    lb.update = function() {
+                        var dt = game.time.physicsElapsed;
+                        this.t += dt;
+                        if (this.t > this.duration){
+                            this.visible = false;
+                            this.lbCache.push(this);
+                        }
+                    };
+                } else {
+                    lb = lbCache.pop();
+                    lb.x = xHit;
+                    lb.y = yHit;
+                    lb.visible = true;
+                    lb.animations.stop();
+                }
+                lb.animations.play("play");
+                lb.t = 0;
+                lb.rotation = normalHit + Math.PI;
+            }
+            
         } else if (objHit == FullGame.GI.player){
             //hit player
             if (!reflect &&
@@ -794,6 +885,15 @@ FullGame.Lasers.updateGraphics = function() {
                 color2 = this.COLOR_BLACK2;
             }
             break;
+        case FullGame.Til.PURPLE:
+            if (this.flicker == 1 && r.type != FullGame.Til.LASER_TRANSPARENT){
+                color1 = this.COLOR_PURPLE1_F1;
+                color2 = this.COLOR_PURPLE2_F1;
+            } else {
+                color1 = this.COLOR_PURPLE1;
+                color2 = this.COLOR_PURPLE2;
+            }
+            break;
         }
         
         //thickness and alpha from type
@@ -839,6 +939,7 @@ FullGame.Lasers.updateGraphics = function() {
     //check if anything special was drawn
     this.number6Rendered = false;
     this.starRendered = false;
+    this.artifactRendered = false;
     var plr = FullGame.GI.player;
     if (plr != null){
         if (FullGame.Vars.startMap == "numbers"){
@@ -884,6 +985,27 @@ FullGame.Lasers.updateGraphics = function() {
             }
             if (line2 && line3 && line4 && line5)
                 this.starRendered = true;
+        } else if (FullGame.Vars.startMap == "landedAgain"){
+            var line1 = false;
+            var line2 = false;
+            for (var i=0; i<this.renders.length; i++){
+                var r = this.renders[i];
+                if (r.type != FullGame.Til.LASER_NORMAL) continue;
+                if (r.color != FullGame.Til.GREEN) continue;
+                
+                if (Math.abs(r.y0 - 640) < .1 &&
+                    Math.abs(r.y1 - 768) < .1 &&
+                    (1344 < r.x1 && r.x1 <= 1408)){
+                    line1 = true;
+                }
+                if (Math.abs(r.y0 - 640) < .1 &&
+                    Math.abs(r.y1 - 768) < .1 &&
+                    (1280 <= r.x1 && r.x1 < 1344)){
+                    line2 = true;
+                }
+            }
+            if (line1 && line2)
+                this.artifactRendered = true;
         }
     }
     
@@ -951,6 +1073,15 @@ FullGame.Lasers.updateGraphics = function() {
                 color2 = this.COLOR_BLACK2;
             }
             break;
+        case FullGame.Til.PURPLE:
+            if (p.flicker == 1){
+                color1 = this.COLOR_PURPLE1_F1;
+                color2 = this.COLOR_PURPLE2_F1;
+            } else {
+                color1 = this.COLOR_PURPLE1;
+                color2 = this.COLOR_PURPLE2;
+            }
+            break;
         }
         
         //draw
@@ -979,6 +1110,10 @@ FullGame.Lasers.updateGraphics = function() {
         
         alpha1 = this.SIGHT_ALPHA;
         var rad = this.SIGHT_RADIUS;
+        if (s.thick){
+            alpha1 = this.SIGHT_THICK_ALPHA;
+            rad = this.SIGHT_THICK_RADIUS;
+        }
         switch (s.color){
         case FullGame.Til.RED:
             color1 = this.COLOR_RED2;
@@ -991,6 +1126,9 @@ FullGame.Lasers.updateGraphics = function() {
             break;
         case FullGame.Til.BLACK:
             color1 = this.COLOR_BLACK2;
+            break;
+        case FullGame.Til.PURPLE:
+            color1 = this.COLOR_PURPLE2;
             break;
         }
         
@@ -1023,8 +1161,9 @@ FullGame.Lasers.spawnParticles = function(x, y, color, laserType, reflected, nor
     
     if (laserType == FullGame.Til.LASER_FADEOUT)
         return;
-    if (laserType == FullGame.Til.LASER_TRANSPARENT){
-        //todo: make laser sight
+    if (laserType == FullGame.Til.LASER_TRANSPARENT ||
+        laserType == FullGame.Til.LASER_THICK){
+        //make laser sight
         var sight;
         if (this.recycledSights.length > 0){
             sight = this.recycledSights.pop();
@@ -1034,9 +1173,11 @@ FullGame.Lasers.spawnParticles = function(x, y, color, laserType, reflected, nor
         sight.x = x;
         sight.y = y;
         sight.color = color;
+        sight.thick = (laserType == FullGame.Til.LASER_THICK);
         
         this.sights.push(sight);
-        return;
+        if (laserType == FullGame.Til.LASER_TRANSPARENT)
+            return;
     }
     
    
@@ -1085,4 +1226,13 @@ FullGame.Lasers.destroy = function() {
     while (this.sights.length > 0){
         this.recycledSights.push(this.sights.pop());
     }
+    
+    //destroy laserburns
+    this.laserburnReds.splice(0, this.laserburnReds.length);
+    this.laserburnBlues.splice(0, this.laserburnBlues.length);
+    this.laserburnGreens.splice(0, this.laserburnGreens.length);
+    this.laserburnWhites.splice(0, this.laserburnWhites.length);
+    this.laserburnBlacks.splice(0, this.laserburnBlacks.length);
+    this.laserburnPowers.splice(0, this.laserburnPowers.length);
+    this.laserburnPowerPurples.splice(0, this.laserburnPowerPurples.length);
 };

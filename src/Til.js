@@ -14,6 +14,7 @@ FullGame.Til.WHITE = 1;
 FullGame.Til.RED = 2;
 FullGame.Til.GREEN = 3;
 FullGame.Til.BLUE = 4;
+FullGame.Til.PURPLE = 5;
 
 //laser type enumeration
 FullGame.Til.LASER_NORMAL = 0;

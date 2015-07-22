@@ -48,6 +48,7 @@ FullGame.makePlayer = function(game) {
     p.deathParticleKey = deathParticleKey;
     
     p.laserNormalSound = game.sound.add("laser_normal", 1, true);
+    p.laserThickSound = game.sound.add("laser_thick", 1, true);
     p.NUM_BOOP_SOUNDS = 3;
     
     //movement constants
@@ -434,8 +435,17 @@ FullGame.makePlayer = function(game) {
                 this.laserColor, this.laserType);
             this.firing = true;
             firedNormalThisFrame = true;
-            if (!this.laserNormalSound.isPlaying && !FullGame.Vars.sfxMuted)
-                this.laserNormalSound.play("", 0, 1, true);
+            if (this.laserType == FullGame.Til.LASER_NORMAL){
+                if (!this.laserNormalSound.isPlaying && !FullGame.Vars.sfxMuted)
+                    this.laserNormalSound.play("", 0, 1, true);
+                if (this.laserThickSound.isPlaying)
+                    this.laserThickSound.stop();
+            } else if (this.laserType == FullGame.Til.LASER_THICK){
+                if (!this.laserThickSound.isPlaying && !FullGame.Vars.sfxMuted)
+                    this.laserThickSound.play("", 0, 1, true);
+                if (this.laserNormalSound.isPlaying)
+                    this.laserNormalSound.stop();
+            }
             if (FullGame.Keys.lmbPressed){
                 this.cameraXWhenStartedFiring = firePt.x + this.cameraHorizOffset;
                 this.cameraYWhenStartedFiring = firePt.y + this.cameraVertOffset;
@@ -460,10 +470,14 @@ FullGame.makePlayer = function(game) {
             //going from lmb to rmb immediately
             if (this.laserNormalSound.isPlaying)
                 this.laserNormalSound.stop();
+            if (this.laserThickSound.isPlaying)
+                this.laserThickSound.stop();
         } else {
             this.firing = false;
             if (this.laserNormalSound.isPlaying)
                 this.laserNormalSound.stop();
+            if (this.laserThickSound.isPlaying)
+                this.laserThickSound.stop();
         }
         
         //fire fadeout laser if just stopped firing
@@ -626,9 +640,20 @@ FullGame.makePlayer = function(game) {
             FullGame.Vars.totalDeaths++;
             FullGame.Messages.onPlayerDeath();
             
+            var powerPlayer = (FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK);
+            
             //particle effect (bullshit phaser emitter didn't work at all)
-            for (var i=0; i<8; i++){
-                var part = game.add.sprite(this.x, this.y, this.deathParticleKey, undefined, FullGame.GI.objGroup);
+            var numParts = 8;
+            if (powerPlayer)
+                numParts++;
+            for (var i=0; i<numParts; i++){
+                var part;
+                if (powerPlayer && i == numParts-1){
+                    part = game.add.sprite(this.x, this.y, "power_player", undefined, FullGame.GI.objGroup);
+                    part.scale.set(.5, .5);
+                } else {
+                    part = game.add.sprite(this.x, this.y, this.deathParticleKey, undefined, FullGame.GI.objGroup);
+                }
                 part.anchor.setTo(.5, .5); //sprite is centered
                 game.physics.enable(part, Phaser.Physics.ARCADE);
                 part.body.setSize(15, 15, 0, 0);

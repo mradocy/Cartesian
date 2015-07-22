@@ -38,9 +38,15 @@ FullGame.makeSpaceship = function(x, y) {
         var plr = FullGame.GI.player;
         
         if (this.leaving){
-            if (this.y > -500){
+            
+            if (this.y > -400){
                 this.vy += this.TAKEOFF_ACCEL * dt;
                 this.y += this.vy * dt;
+                if (this.y < -200 && this.y-this.vy*dt >= -200){
+                    FullGame.HUD.fadeOut();
+                }
+            } else {
+                FullGame.GI.state.start("SpaceshipCutscene");
             }
             
             this.exTime += dt;
@@ -48,6 +54,10 @@ FullGame.makeSpaceship = function(x, y) {
                 this.exTime -= this.EX_PERIOD;
                 this.spawnEx(1);
             }
+            
+            
+            
+            
         } else if (this.readyToLeave && plr != null){
             //check if player is close enough to take off
             if (plr.x < this.x+100 && plr.y < this.y+311){

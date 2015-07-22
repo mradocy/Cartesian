@@ -35,6 +35,7 @@ FullGame.Title.prototype = {
     text:null, //holds Text objects as options
     reticle:null,
     playerSprite:null,
+    powerSprite:null,
     PLAYER_X:250,
     PLAYER_Y:447,
     textSelected:null,
@@ -66,6 +67,7 @@ FullGame.Title.prototype = {
         var playerKey = "";
         var logoKey = "";
         var dustKey = "";
+        var powerKey = "";
         switch (FullGame.Vars.playerLaserColor){
         case FullGame.Til.BLUE:
             reticleSpriteKey = "reticle_blue";
@@ -85,6 +87,10 @@ FullGame.Title.prototype = {
             playerKey = "player_red";
             logoKey = "title_logo_red";
             dustKey = "dust_red";
+            if (FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK){
+                reticleSpriteKey = "reticle_power";
+                powerKey = "power_player";
+            }
             break;
         }
         this.reticle = game.add.sprite(0, 0, reticleSpriteKey, 0);
@@ -109,6 +115,11 @@ FullGame.Title.prototype = {
         this.playerSprite.scale.set(.5, .5);
         this.bgDust2.push(game.add.image(0, 0, dustKey2));
         this.bgDust2.push(game.add.image(0, 0, dustKey2));
+        if (powerKey != ""){
+            this.powerSprite = game.add.sprite(this.playerSprite.x, this.playerSprite.y, powerKey, undefined);
+            this.powerSprite.anchor.setTo(.5, .5); //sprite is centered
+            this.powerSprite.scale.set(.5, .5);
+        }
         
         //title logo
         this.logo = game.add.image(421, 32, logoKey);
@@ -284,11 +295,16 @@ FullGame.Title.prototype = {
                 this.blackScreen.alpha = this.blackScreenFadeTime / this.BLACK_SCREEN_FADE_DURATION;
                 if (this.blackScreen.alpha > .9999){
                     if (this.beginGameAfterFadeToBlack){
+                        
+                        //this.state.start("SpaceshipCutscene");
+                        
                         if (this.goToIntro){
                             this.state.start("Intro");
                         } else {
                             this.state.start(FullGame.Vars.startMap);
                         }
+                        
+                        
                     }
                 }
             } else {
@@ -512,6 +528,11 @@ FullGame.Title.prototype = {
             
             
             
+        }
+        
+        if (this.powerSprite != null){
+            this.powerSprite.x = this.playerSprite.x;
+            this.powerSprite.y = this.playerSprite.y;
         }
         
         

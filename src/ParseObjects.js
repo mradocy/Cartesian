@@ -5,6 +5,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
         var od = data.objects[i];
         var obj;
         var type = od.type;
+        var name = od.name;
         var x = od.x;
         var y = od.y;
         var width = od.width;
@@ -123,6 +124,9 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             
         } else if (type == "SmallStar"){
             game.add.image(cx, cy, "small_star", undefined, FullGame.GI.frontGroup);
+            
+        } else if (type == "Img"){
+            game.add.image(cx, cy, name, undefined, FullGame.GI.frontGroup);
             
         } else if (type == "MediumStar"){
             obj = game.add.image(cx, cy, "medium_star", undefined, FullGame.GI.frontGroup);

@@ -71,6 +71,7 @@ FullGame.Preloader.prototype = {
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
         game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
         game.load.image('bg4', 'assets/img/bgs/bg4.jpg');
+        game.load.image('bg5', 'assets/img/bgs/bg5.png');
         
         game.load.image('bg4_red', 'assets/img/bgs/bg4_red.jpg');
         game.load.image('bg4_toRed', 'assets/img/bgs/bg4_toRed.jpg');
@@ -91,6 +92,14 @@ FullGame.Preloader.prototype = {
         
         game.load.image('bg_tempLast', 'assets/img/bgs/bg_tempLast.png');
         
+        game.load.spritesheet("laserburn_red", 'assets/img/bgs/particles/laserburn_red.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_blue", 'assets/img/bgs/particles/laserburn_blue.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_green", 'assets/img/bgs/particles/laserburn_green.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_black", 'assets/img/bgs/particles/laserburn_black.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_white", 'assets/img/bgs/particles/laserburn_white.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_power", 'assets/img/bgs/particles/laserburn_power.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_power_purple", 'assets/img/bgs/particles/laserburn_power_purple.png', 8, 16, 4);
+        
         
         //loading background music
         game.load.audio('begin_red', ['assets/music/begin_red.ogg', 'assets/music/begin_red.mp3'], true);
@@ -107,6 +116,8 @@ FullGame.Preloader.prototype = {
         game.load.audio('laser_normal', ['assets/sfx/laser_normal.ogg', 'assets/sfx/laser_normal.mp3'], true);
         game.load.audio('laser_alien', ['assets/sfx/laser_alien.ogg', 'assets/sfx/laser_alien.mp3'], true);
         game.load.audio('laser_transp_alien', ['assets/sfx/laser_transp_alien.ogg', 'assets/sfx/laser_transp_alien.mp3'], true);
+        game.load.audio('laser_thick', ['assets/sfx/laser_thick.ogg', 'assets/sfx/laser_thick.mp3'], true);
+        game.load.audio('laser_thick_alien', ['assets/sfx/laser_thick_alien.ogg', 'assets/sfx/laser_thick_alien.mp3'], true);
         game.load.audio('damage', ['assets/sfx/damage.ogg', 'assets/sfx/damage.mp3'], true);
         game.load.audio('death', ['assets/sfx/death.ogg', 'assets/sfx/death.mp3'], true);
         game.load.audio('puzzle_solved', ['assets/sfx/puzzle_solved.ogg', 'assets/sfx/puzzle_solved.mp3'], true);
@@ -131,6 +142,11 @@ FullGame.Preloader.prototype = {
         game.load.audio('griddy_damage', ['assets/sfx/griddy_damage.ogg', 'assets/sfx/griddy_damage.mp3'], true);
         game.load.audio('griddy_death', ['assets/sfx/griddy_death.ogg', 'assets/sfx/griddy_death.mp3'], true);
         
+        game.load.audio('final_damage', ['assets/sfx/final_damage.ogg', 'assets/sfx/final_damage.mp3'], true);
+        game.load.audio('final_death', ['assets/sfx/final_death.ogg', 'assets/sfx/final_death.mp3'], true);
+        game.load.audio('final_explode', ['assets/sfx/final_explode.ogg', 'assets/sfx/final_explode.mp3'], true);
+        
+        
         game.load.audio('spaceship_takeoff', ['assets/sfx/spaceship_takeoff.ogg', 'assets/sfx/spaceship_takeoff.mp3'], true);
         
         
@@ -149,6 +165,7 @@ FullGame.Preloader.prototype = {
         game.load.image('reticle_red', 'assets/img/reticle_red.png');
         game.load.image('reticle_blue', 'assets/img/reticle_blue.png');
         game.load.image('reticle_green', 'assets/img/reticle_green.png');
+        game.load.image('reticle_power', 'assets/img/reticle_power.png');
         game.load.image('orb_red', 'assets/img/orb_red.png');
         game.load.image('orb_red_glow', 'assets/img/orb_red_glow.png');
         game.load.image('orb_blue', 'assets/img/orb_blue.png');
@@ -196,7 +213,10 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("powerchip_red", 'assets/img/powerchip_red.png', 32, 32, 20);
         game.load.image("small_star", 'assets/img/small_star.png');
         game.load.image("medium_star", 'assets/img/medium_star.png');
+        game.load.image("artifact", 'assets/img/artifact.png');
         game.load.spritesheet("spaceship", 'assets/img/spaceship.png', 184, 311, 2);
+        game.load.image("spaceship_damaged", 'assets/img/spaceship_damaged.png');
+        game.load.image("spaceship_repaired", 'assets/img/spaceship_repaired.png');
         game.load.spritesheet("alien_red", 'assets/img/alien_red.png', 82, 143, 4);
         game.load.spritesheet("alien_hand_red", 'assets/img/alien_hand_red.png', 47, 34, 2);
         game.load.spritesheet("alien_eyes_red", 'assets/img/alien_eyes_red.png', 25, 21, 6);
@@ -232,11 +252,16 @@ FullGame.Preloader.prototype = {
         game.load.image("purple_smoke", 'assets/img/purple_smoke.png');
         game.load.spritesheet("griddy_damage", 'assets/img/griddy_damage.png', 96, 96, 2);
         
-        game.load.image("final_boss", 'assets/img/final_boss.png');
+        game.load.spritesheet("final_boss", 'assets/img/final_boss.png', 720, 720, 3);
+        game.load.spritesheet("final_hair", 'assets/img/final_hair.png', 720, 330, 2);
         game.load.image("final_eye", 'assets/img/final_eye.png');
         game.load.image("final_eye_glow", 'assets/img/final_eye_glow.png');
+        game.load.spritesheet("final_eye_morph", 'assets/img/final_eye_morph.png', 70, 70, 5);
         game.load.image("final_blocker", 'assets/img/final_blocker.png');
-        game.load.image("final_claw", 'assets/img/final_claw.png');
+        game.load.spritesheet("final_claw", 'assets/img/final_claw.png', 214, 164, 2);
+        game.load.spritesheet("final_smoke", 'assets/img/final_smoke.png', 212, 212, 6);
+        game.load.spritesheet("final_claw_smoke", 'assets/img/final_claw_smoke.png', 53, 53, 6);
+        
         
         game.load.spritesheet("gem_pickup_red", 'assets/img/gem_pickup_red.png', 28, 28, 20);
         

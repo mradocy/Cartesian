@@ -13,6 +13,8 @@ FullGame.HUD = {
     solveFlashTime:9999,
     lowHealthFG:null, //large overlay that changes the screen when player is low on health
     LOW_HEALTH_FG_FADEOUT_DURATION:.5, //extra time for overlay to exist after player's health recharged
+    beatFinalG:null,
+    beatFinalTime:9999,
     TEXT_AREA_NUM_LINES:3,
     TEXT_AREA_NUM_CHARACTERS:80,
     MESSAGE_SPEED:85,
@@ -153,6 +155,13 @@ FullGame.HUD.makeGroup = function() {
     this.solveFlashG.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     this.solveFlashG.endFill();
     this.solveFlashG.visible = false;
+    
+    this.beatFinalG = game.add.graphics(0, 0, this.group);
+    this.beatFinalG.beginFill(0xEAEAEA, 1);
+    this.beatFinalG.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    this.beatFinalG.endFill();
+    this.beatFinalG.visible = false;
+    
     this.blackScreen = game.add.graphics(0, 0, this.group);
     this.blackScreen.beginFill(0x000000, 1);
     this.blackScreen.drawRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -173,23 +182,24 @@ FullGame.HUD.setReticle = function(laserType, laserColor) {
             this.reticle.group.remove(this.reticle);
         }
     }
-    var spriteKey = "";
+    var spriteKey = "reticle_red";
     switch (laserColor){
     case FullGame.Til.BLUE:
-        if (laserType == FullGame.Til.LASER_THICK && false){
+        if (laserType == FullGame.Til.LASER_THICK){
         } else {
             spriteKey = "reticle_blue";
         }
         break;
     case FullGame.Til.GREEN:
-        if (laserType == FullGame.Til.LASER_THICK && false){
+        if (laserType == FullGame.Til.LASER_THICK){
         } else {
             spriteKey = "reticle_green";
         }
         break;
     case FullGame.Til.RED:
     default:
-        if (laserType == FullGame.Til.LASER_THICK && false){
+        if (laserType == FullGame.Til.LASER_THICK){
+            spriteKey = "reticle_power";
         } else {
             spriteKey = "reticle_red";
         }
@@ -228,6 +238,21 @@ FullGame.HUD.update = function() {
             this.solveFlashG.visible = false;
         } else {
             this.solveFlashG.visible = true;
+        }
+    }
+    
+    //beat final boss flash
+    if (this.beatFinalTime < 4.0){
+        this.beatFinalTime += dt;
+        this.beatFinalG.visible = true;
+        if (this.beatFinalTime >= 4.0){
+            this.beatFinalG.visible = false;
+        } else if (this.beatFinalTime < .5) {
+            this.beatFinalG.alpha = this.beatFinalTime / .5;
+        } else if (this.beatFinalTime < 1.0){
+            this.beatFinalG.alpha = 1.0;
+        } else {
+            this.beatFinalG.alpha = 1 - (this.beatFinalTime-1.0) / 3.0;
         }
     }
     
@@ -465,6 +490,10 @@ FullGame.HUD.solveFlash = function() {
     this.solveFlashTime = 0;
 };
 
+FullGame.HUD.beatFinalBoss = function() {
+    this.beatFinalTime = 0;
+};
+
 //if text area in a transition phase
 FullGame.HUD.textAreaTransitioning = function() {
     return (this.textAreaTransitionTime < this.textAreaTransitionDuration);
@@ -551,7 +580,10 @@ FullGame.HUD.destroy = function() {
     this.blackScreenFadeIn = false;
     this.solveFlashG.clear();
     this.solveFlashG = null;
-    this.solveFlashtime = 0;
+    this.solveFlashTime = 9999;
+    this.beatFinalG.clear();
+    this.beatFinalG = null;
+    this.beatFinalTime = 9999;
     this.lowHealthFG = null;
     this.textBG.clear();
     this.textBG = null;

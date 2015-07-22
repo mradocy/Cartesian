@@ -216,6 +216,15 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
             } else {
                 this.specialTime = 0;
             }
+        } else if (FullGame.Vars.startMap == "landedAgain"){
+            if (FullGame.Lasers.artifactRendered){
+                this.specialTime += dt;
+                if (this.specialTime > .4){
+                    this.open();
+                }
+            } else {
+                this.specialTime = 0;
+            }
         }
         
         

@@ -160,9 +160,28 @@ Level order:
 	- reflects off yourself, so safe to use.
 
 - World wrap introduction
+	- Anex boss with world wrap
 - Reflect off blue platform
 - Platforming section with a low ceiling
+- Easy way to complete puzzle be damaging self, elicits funny response from Evri
+	- And need to do the real way to have the correct color for the next puzzle anyway.
 - Moving orbs?
+
+- Recap of all the mechanics introduced in the game
+	1. Reflecting off white walls, moving lasers
+	2. Springs
+		- Need to reflect blue laser off spring
+	3. Oculroids, use to hit orbs
+	4. Roplates, chaining together
+	5. Anex boss fight
+		- Only if world wrap works
+	6. Sliders
+	7. Portals
+	8. Gems
+	9. Fake walls (white area)
+		- Have impossible puzzle, but can be bypassed entirely by finding secret tunnel.
+	10. Thick laser
+		- Angle thick laser with alt colored roplates?
 
 - Coordinate points highlighted
 - Need to mimic an angle to solve puzzle
