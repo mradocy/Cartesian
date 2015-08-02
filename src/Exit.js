@@ -19,7 +19,8 @@ FullGame.makeExit = function(x, y, width, height, playerBehavior, mapTo) {
             if (plr.dead()) return;
             if ((this.playerBehavior == "springJumpLeft" || this.playerBehavior == "springJumpRight") &&
                 !plr.springJumping) return;
-            var hw = 24;
+            if (FullGame.GI.timeSinceLevelStart < .5) return;
+            var hw = 20;//24;
             var hh = 20;
             if (this.x < plr.x+hw && plr.x-hw < this.x+this.width &&
                 this.y < plr.y+hh && plr.y-hh < this.y+this.height){

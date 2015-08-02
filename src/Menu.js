@@ -52,9 +52,6 @@ FullGame.Menus.pauseMenu = function() {
     this.musicWasMuted = FullGame.Vars.musicMuted;
     
     //text
-    /*this.X = 400;
-    this.Y = 200;
-    this.H = 35;*/
     this.HIT_AREA.x = -5;
     this.HIT_AREA.y = -5;
     this.HIT_AREA.width = 200;
@@ -134,9 +131,16 @@ FullGame.Menus.pauseMenu = function() {
         { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
     txt.toggleMusicT.visible = false;
-    txt.backFromOptionsT = game.add.text(
+    txt.toggleTimerT = game.add.text(
         this.X,
         this.Y + this.H*3,
+        "SHOW TIMER",
+        { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
+        FullGame.GI.hudGroup);
+    txt.toggleTimerT.visible = false;
+    txt.backFromOptionsT = game.add.text(
+        this.X,
+        this.Y + this.H*4,
         "BACK",
         { font: "24px Verdana", fill: this.UNSELECTED_COLOR },
         FullGame.GI.hudGroup);
@@ -242,6 +246,12 @@ FullGame.Menus.pauseMenu = function() {
                     } else {
                         txt.toggleMusicT.text = "MUTE MUSIC";
                     }
+                    txt.toggleTimerT.visible = true;
+                    if (FullGame.Vars.showTimer){
+                        txt.toggleTimerT.text = "HIDE TIMER";
+                    } else {
+                        txt.toggleTimerT.text = "SHOW TIMER";
+                    }
                     txt.backFromOptionsT.visible = true;
                     
                     
@@ -283,12 +293,23 @@ FullGame.Menus.pauseMenu = function() {
                         FullGame.Menus.text.toggleMusicT.text = "UNMUTE MUSIC";
                     }
                     
+                } else if (FullGame.Menus.textSelected == FullGame.Menus.text.toggleTimerT){
+                    
+                    if (FullGame.Vars.showTimer){
+                        FullGame.Vars.showTimer = false;
+                        FullGame.Menus.text.toggleTimerT.text = "SHOW TIMER";
+                    } else {
+                        FullGame.Vars.showTimer = true;
+                        FullGame.Menus.text.toggleTimerT.text = "HIDE TIMER";
+                    }
+                    
                 } else if (FullGame.Menus.textSelected == FullGame.Menus.text.backFromOptionsT){
                     
                     var txt = FullGame.Menus.text;
                     txt.toggleFullscreenT.visible = false;
                     txt.toggleSFXT.visible = false;
                     txt.toggleMusicT.visible = false;
+                    txt.toggleTimerT.visible = false;
                     txt.backFromOptionsT.visible = false;
                     this.pauseMenuVisible();
                     

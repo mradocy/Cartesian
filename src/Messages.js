@@ -20,9 +20,6 @@ FullGame.Messages.onLevelStart = function() {
     } else if (sm == "firstOrb" && vms.indexOf(sm) == -1){
         if (this.msgFromText(sm))
             vms.push(sm); //ensures message won't be said again
-    } else if (sm == "redEyebot" && vms.indexOf(sm) == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm); //ensures message won't be said again
     } else if (sm == "trapped2" && vms.indexOf(sm) == -1){
         
         msgName = "???";
@@ -97,6 +94,21 @@ FullGame.Messages.onLevelStart = function() {
     } else if (sm == "whiteAreaBuffer" && vms.indexOf(sm) == -1){
         if (this.msgFromText(sm))
             vms.push(sm); //ensures message won't be said again
+    } else if (sm == "openArea" && hasPower && vms.indexOf(sm+"Power") == -1){
+        if (this.msgFromText(sm+"Power"))
+            vms.push(sm+"Power"); //ensures message won't be said again
+    } else if (sm == "landedAgain" && vms.indexOf(sm) == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
+    } else if (sm == "pinkLevel" && vms.indexOf(sm) == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
+    } else if (sm == "thickRoplate" && FullGame.Vars.playerLaserColor == FullGame.Til.BLUE && vms.indexOf("laserSkip") == -1){
+        if (this.msgFromText("laserSkip"))
+            vms.push("laserSkip"); //ensures message won't be said again
+    } else if (sm == "beforeFinal" && vms.indexOf(sm) == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     }
     
     //message when backtracking
@@ -120,37 +132,10 @@ FullGame.Messages.onDoorOpen = function() {
     if (sm == "firstReflect" && vms.indexOf(sm+"doorOpen") == -1){
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "firstMultReflect" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "firstSpring" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "firstGlass" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "firstMultOrb" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "firstSand" && vms.indexOf(sm+"doorOpen") == -1){
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "numbers" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if ((sm == "platforming1" || sm == "secret1") && vms.indexOf("platforming1"+"doorOpen") == -1){
-        if (this.msgFromText("platforming1"))
-            vms.push("platforming1"+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "blueEyebot2" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "revisit" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "firstRoplate" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "hiddenOrb" && vms.indexOf(sm+"doorOpen") == -1){
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "platforming2" && vms.indexOf(sm+"doorOpen") == -1){
@@ -211,6 +196,9 @@ FullGame.Messages.onLevelLeave = function(mapTo) {
     }
     */
     if (sm == "firstGem" && mapTo == "split"){ //special case where message will be reapeated again upon reentering the room
+        haltMessage = true;
+    }
+    if (sm == "beforeFinal" && mapTo == "finalArena"){
         haltMessage = true;
     }
     

@@ -18,6 +18,8 @@ FullGame.Lasers = {
     laserburnWhites:[],
     laserburnBlacks:[],
     laserburnPowers:[], //pool of recycled laserburnPower sprites
+    laserburnPowerBlues:[],
+    laserburnPowerGreens:[],
     laserburnPowerPurples:[],
     
     flicker:0, //this number will slightly alter the color of the lasers. It cycles every frame
@@ -35,9 +37,9 @@ FullGame.Lasers = {
     COLOR_RED1_F1:0xFF1717, //outer part of red laser when flicker==1
     COLOR_RED2_F1:0xFF2A2A, //inner part of red laser when flicker==1
     COLOR_BLUE1:0x0000FF,
-    COLOR_BLUE2:0x3838FF,
+    COLOR_BLUE2:0x2828FF,
     COLOR_BLUE1_F1:0x1515FF,
-    COLOR_BLUE2_F1:0x4141FF,
+    COLOR_BLUE2_F1:0x3131FF,
     COLOR_GREEN1:0x00FF00,
     COLOR_GREEN2:0x14FF14,
     COLOR_GREEN1_F1:0x12FF12,
@@ -57,7 +59,7 @@ FullGame.Lasers = {
     ALPHA_NORMAL1:.6, //outer part of normal laser
     ALPHA_NORMAL2:.9, //inner part of normal laser
     THICKNESS_TRANSPARENT:4,
-    ALPHA_TRANSPARENT:.2,
+    ALPHA_TRANSPARENT:.15,
     THICKNESS_THICK1:12,
     THICKNESS_THICK2:3,
     ALPHA_THICK1:.6,
@@ -111,9 +113,7 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
     var game = FullGame.GI;
     var dt = game.time.physicsElapsed;
     
-    //todo: world wrap
-    var worldWrap = false;
-    
+    var worldWrap = FullGame.GI.worldWrap;
     var dist = 0; //(rough estimate) makes sure lasers don't go on forever
     var x0 = startX;
     var y0 = startY;
@@ -559,6 +559,14 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                         lbCache = this.laserburnPowerPurples;
                         lbKey = "laserburn_power_purple";
                         break;
+                    case FullGame.Til.BLUE:
+                        lbCache = this.laserburnPowerBlues;
+                        lbKey = "laserburn_power_blue";
+                        break;
+                    case FullGame.Til.GREEN:
+                        lbCache = this.laserburnPowerGreens;
+                        lbKey = "laserburn_power_green";
+                        break;
                     case FullGame.Til.RED:
                     default:
                         lbCache = this.laserburnPowers;
@@ -668,16 +676,17 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
                 colorHit == FullGame.Til.BLACK){
                 objHit.damage();
             }
-        } else if (objHit.isWorldBounds != undefined && objHit.isWorldBounds){
-            //is going out of bounds
-            break;
         }
+        
+        var goingOutOfBounds = false;
+        if (objHit != null)
+            goingOutOfBounds = (objHit.isWorldBounds != undefined && objHit.isWorldBounds);
         
         var wentThroughPortal = (objHit != null && objHit.isPortal != undefined && objHit.isPortal
             && (objHit.portalTo != null || objHit.mapTo != ""));
         
         //particles
-        if (!wentThroughPortal){
+        if (!wentThroughPortal && !goingOutOfBounds){
             this.spawnParticles(xHit, yHit, c, laserType, reflect, normalHit);
         }
         
@@ -696,6 +705,24 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             sin = Math.sin(angle);
             x0 = xHit;
             y0 = yHit;
+            
+        } else if (goingOutOfBounds && worldWrap){
+            //create new laser with world wrap
+            if (xHit <= 0){
+                x0 = game.worldWidth - 1;
+            } else if (xHit >= game.worldWidth){
+                x0 = 0;
+            } else {
+                x0 = xHit;
+            }
+            if (yHit <= 0){
+                y0 = game.worldHeight - 1;
+            } else if (yHit >= game.worldHeight){
+                y0 = 0;
+            } else {
+                y0 = yHit;
+            }
+            //angle stays the same
             
         } else { //no new laser created
             
@@ -1234,5 +1261,7 @@ FullGame.Lasers.destroy = function() {
     this.laserburnWhites.splice(0, this.laserburnWhites.length);
     this.laserburnBlacks.splice(0, this.laserburnBlacks.length);
     this.laserburnPowers.splice(0, this.laserburnPowers.length);
+    this.laserburnPowerBlues.splice(0, this.laserburnPowerBlues.length);
+    this.laserburnPowerGreens.splice(0, this.laserburnPowerGreens.length);
     this.laserburnPowerPurples.splice(0, this.laserburnPowerPurples.length);
 };

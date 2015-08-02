@@ -45,11 +45,6 @@ mission: solve the mysteries of the
 asteroid and rescue the excavation
 team!]
 
-  2
- 1
-2
-   3
-
 -----
 
 %firstLevel% (Daz)
@@ -59,50 +54,18 @@ Press A or ← to move left;
 press D or → to move right;
 press W, SPACE, or ↑ to jump.
 
-It seems everything is working fine.  You're equipped with self-repair micro-machines, so you'll be fine as long as you don't get hurt too badly.
-
-Ha, look at me talking with a robot.  I didn't think being alone in this room would make me go crazy that fast.  But with you walking around, there's still some hope for us!]
+It seems everything is working fine.  You're equipped with self-repair micro-machines, so you'll be fine as long as you don't get hurt too badly.  Ha, look at me telling a robot all this.]
 
 %firstOrb% (Daz)
 [I'm not sure how I got here... the last thing I remember is exploring a cavern with Foll and Rob, yet I don't see them here.  I must have gotten knocked out some point, somehow.
 
 It seems most of the walls here are would be impervious to a laser like yours.  But try shooting it at things that look interesting anyway.  That's always worked for us in the past, hasn't it?]
 
-%redEyebot% (Daz)
-[We saw some intriguing eye-like creatures on our way in, but they seem pretty harmless.  My theory is they were the ones that created these passages.
-
-It must have been pretty hard, like without limbs and all.  The inability to move probably didn't help either.  On second thought, it seems they'd be really lousy workers, huh?  Hmm...]
-
 %firstReflect% (Daz)
 [You can also fire a 'preview' laser that won't damage you if reflected back.
-Hold the right mouse button or SHIFT to fire the 'preview' laser.
+Hold the RIGHT MOUSE BUTTON or SHIFT to fire the 'preview' laser.
 
-And press ESC or ENTER to refresh yourself if you need it.  Well with nothing better to do, I suppose I'll lie down myself.  Ahh...
-
-Wait, what is this red circular thing on the ceiling?
-... I'll talk to you later.]
-
-
-%firstSpring% (Daz)
-[Hey Sibro, check out what I discovered!  By pointing my laser pistol at this red orb up there, I was able to open the door leading out of my room!  Neat!
-
-Impressive how quickly I was able to escape, isn't it?  Try doing something similar if you come across an orb like that!  We're going to find Foll and Rob in no time.]
-
-
-%firstMultOrb% (Daz)
-[It's been about 5 months since Foll, Rob and I started this adventure into the unknown together.  Personal space travel has been getting popular lately, and it's something we've always wanted to do.
-
-So we all pitched in and bought a ship.  A flyer of reasonable quality with room to transport a few passengers and cargo.  Rob even spent a bit on machinery to build you, Sibro.
-
-All in all it was quite a heavy investment!]
-
-
-%firstSand% (Daz)
-[We needed a way to pay back the money we owed, so we decided to enter the interstellar excavation market.  It was my idea, since I had some experience from the mining I had done back on Earth.
-
-It was neither Foll nor Rob's strong suit, but they had other useful skills.  Foll with his flight skills became our team's navigator, and Rob became an all-purpose mechanic that did repairs.
-
-Including you, this team of four was all it took to form an interstellar excavation squad!  Our small group wasn't the best, but we made it work, didn't we?]
+And press ESC or ENTER to refresh yourself if you need it.]
 
 
 %numbersHelp% (Daz)
@@ -111,22 +74,10 @@ Including you, this team of four was all it took to form an interstellar excavat
 There are 4 stars clumped together in this one spot, and they're next to a laser that visually resembles the number 4.  Hmm...]
 
 
-%numbers% (Daz)
-[Whew, I managed to open another door.  That was certainly more challenging than the last one.
-What are these rooms even for anyway?
-
-It's clear this was the work of intelligent extraterrestrials, but they serve no purpose.  There's no storage, appliances, or life, save for the occasional eyeball thing.
+%firstSand% (Daz)
+[What are these rooms even for anyway?  It's clear this was the work of intelligent extraterrestrials, but they serve no purpose.  There's no storage, appliances, or life, save for the occasional eyeball thing.
 
 And yet, there are still signs of deliberateness in how these rooms were constructed.  It's strange and unsettling.]
-
-
-%platforming1% (Daz)
-[I also can't get over the feeling that I'm being watched.  It's like I'm some hamster in a playpen, and everyone around is just silently observing everything I do.
-
-It's probably just those weird eyeballs freaking me out--
-Wait, am I getting another call?
-
-This could be Foll or Rob!  I'll talk with you later Sibro.]
 
 
 %trappedHelp% (???)
@@ -144,22 +95,11 @@ This could be Foll or Rob!  I'll talk with you later Sibro.]
 %backtrack% (Daz)
 [Out of curiosity I tried going back to my original room, but the door closed while I was gone.  I suppose whatever put us here wants us to keep moving forward.]
 
-
-
-%blueEyebot2% (Foll)
+%revisit% (Foll)
 [...is this Sibro?  It's Foll, I've been trying to contact you guys for a while now.  Guess what?  I finally found some musgravite!  Awesome, right?
 
-Oh, these gems are even more radiant than they appear in pictures.  Rob and Daz need to see these as soon as they can.
+Oh, these gems are even more radiant than they appear in pictures.  Rob and Daz need to see these as soon as they can.  Did those guys get lost?  Admittedly I'm a little lost too...]
 
-On that note, where are those guys anyway?  Did they get lost?]
-
-%revisit% (Foll)
-[...yeah yeah, admittedly I'm a little lost too.  One moment I'm in a cavern with shiny rocks, and the next I'm in some dim passageway.  I'm not really sure how that happened.
-
-I am slowly forging a path forward.  But it's so exhausting...
-I might just take a break for a bit.  You're not tired yet, right Sibro?  You'll be able to find me soon enough.
-
-The great thing about robots is that they don't get tired!]
 
 %minerSitting% (Foll)
 [Sibro, you're here!  I like the new look; blue suits you well.  Anyway, it's good to see you here 'bro.  After walking around for so long, it's a relief to see anybody.  I'm just so tired...
@@ -168,11 +108,6 @@ I'm gonna take a breather for a little while.  My instinct tells me we don't hav
 
 Oh, and check out this musgravite I managed to snag a while back!  All those months of searching, and we'll finally have something to show for it.  It's beautiful!]
 (Then throws musgravite into the air, where it just hovers.  Need to shine laser through it to solve the puzzle)
-
-%hiddenOrb% (Foll)
-[One more thing... earlier I caught a glimpse of some weird, vicious looking creatures moving around.  They definitely looked more threatening than those eyeball things.
-
-Be on the lookout for them, okay 'bro?]
 
 
 %useShooterHelp% (Foll)
@@ -203,9 +138,7 @@ Nah, it's probably best not to think about it too much.]
 
 
 %platforming2% (Daz)
-[Sibro, It's Daz!  It wasn't Foll or Rob that called me... it was one of those weird alien creatures!
-
-They said if I didn't preform better they would find a "better use" for me... what does that mean?  What am I being tested on?  I... I think they want to kill me!
+[Sibro, It's Daz!  One of those weird alien creatures called me, and said if I didn't preform better they would find a "better use" for me... what does that mean?  What am I being tested on?  I... I think they want to kill me!
 
 Now I'm just trying to hide for as long as I can, but each room is more confusing than the last and I don't know where to go!  Sibro, you've got to save me!]
 
@@ -237,6 +170,74 @@ And to mark the occasion, try out this upgrade to your laser I managed to piece 
 
 %keyRoomPower% (Rob)
 [Remember, we're trying to get back to the surface!  Try to keep moving up, even if it means going backwards through rooms you've already visited!]
+
+%openAreaPower% (Daz)
+[You made it!  Quick, get in the ship so we can get out of here!]
+
+%landedAgain% ( ??? )
+[How insolent.  You tamper with our faulty specimens, murder some of our kind, then try to escape yourself?  You have personally angered me, little robot.  Your destruction will come here, by my hands.]
+
+%pinkLevel% (Evri)
+[Grahhhh hah ha ha.  You may have slipped by me, but observe where you ended up.  Now your true test begins!]
+
+%laserSkip% (Evri)
+[HEY!  DON'T THINK YOU CAN GET AWAY WITH THAT LASER-SKIP TRICK.
+
+You can't even use the blue laser in this room!  NOW GO BACK AND SOLVE IT THE RIGHT WAY!]
+
+%beforeFinal% (Evri)
+[We Evrolians develop as a species by acquiring and building upon traits from other intelligent beings, biotic or otherwise.  This collection of mazes and puzzles were built to cull the most commendable subjects.
+
+The human specimens faltered under fear and could barely progress.  But not you, little robot.  With unwavering precision you passed every test, as if you could foresee and prevent failure before it occurred.
+
+The parts of your intelligence that make you selectively hostile infuriate me.  But your unsuitable attributes will not matter when you're crushed into scraps!  I'll take you apart and see what makes you tick!]
+
+
+%ending1%
+[The excavation team escaped from
+the Evrolian planetoid.  The ship,
+though damaged from Evri's attack,
+managed to hold together.
+                                             
+											 
+Sibro was declared a hero, and
+the unassuming robot look the praise
+silently as always.  Rob was to be
+congratulated as Sibro's creator,
+but he had a confession to make.]
+
+%ending2%
+[While Rob installed its laser
+apparatus, he never actually put
+Sibro together.  He encountered the
+robot in a junkyard a few years ago.
+                                             
+											 
+Sibro was found wandering around
+without purpose.  Its programming
+was never determined either.  Rob
+strangely never brought himself to
+disassemble Sibro to find out.]
+
+%ending3%
+[The other miners also decided to
+leave it a mystery.  Other matters,
+like cashing in the musgravite Foll
+took, were more important anyway. 
+                                             
+											 
+Right now, the miners were just
+relieved to have Sibro by their
+side, as a friend to accompany them
+on many adventures to come.]
+
+
+
+
+Foll Musgravite 
+
+
+
 
 
 

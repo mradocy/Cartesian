@@ -57,6 +57,7 @@ FullGame.Game.prototype = {
     tilesPressuredThisFrame:[], //add coordinates in string format of tiles that are getting pressured (will break soon)
     destroyTileCounters:{}, //map of string->number, where key is coordinates of a sand tile, and number is time since it's been hit by a laser
     hudGroup:null, //group to display HUD elements (like the reticle)
+    worldWrap:false,
     timeSinceLevelStart:0.0,
     
     preload: function () {
@@ -129,7 +130,7 @@ FullGame.Game.prototype = {
             if (props.bg != undefined){
                 
                 //add space back-background for some bgs
-                if (props.bg == "bg_top"){
+                if (props.bg == "bg_top" || props.bg == "space_no_bg"){
                     FullGame.addSpaceBackground();
                 } else if (props.bg == "bg1"){
                     FullGame.addSandParticles();
@@ -157,6 +158,11 @@ FullGame.Game.prototype = {
                         bg.startY = bg.y;
                     }
                 }
+            }
+            if (props.worldWrap == undefined){
+                this.worldWrap = false;
+            } else {
+                this.worldWrap = (props.worldWrap == "true");
             }
         }
         
@@ -521,6 +527,7 @@ FullGame.Game.prototype = {
         this.objGroup.destroy(true); this.objGroup = null;
         this.backTileGroup.destroy(true); this.backTileGroup = null;
         this.bgGroup.destroy(true); this.bgGroup = null;
+        this.worldWrap = false;
         this.timeSinceLevelStart = 0;
         
     },
@@ -536,6 +543,25 @@ FullGame.Game.prototype = {
     newLevel: function(mapName) {
         FullGame.Vars.lastMap = game.state.current;
         FullGame.Vars.startMap = mapName;
+        
+        //update levels visited
+        var lVis = FullGame.Vars.startMap;
+        var power = (FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK);
+        if (power)
+            lVis = lVis + "P";
+        var doNotAdd = false;
+        for (var i=0; i<FullGame.Vars.levelsVisited.length; i++){
+            if (FullGame.Vars.levelsVisited[i] == lVis){
+                doNotAdd = true;
+                break;
+            }
+        }
+        if (lVis == "thickRoplate" && FullGame.Vars.playerLaserColor == FullGame.Til.BLUE) //preventing skipping the level before this
+            doNotAdd = true;
+        if (!doNotAdd){
+            FullGame.Vars.levelsVisited.push(lVis);
+        }
+        
         FullGame.Vars.saveData();
         this.state.start(mapName);
         
@@ -563,6 +589,8 @@ FullGame.Game.prototype = {
                 this.player.laserNormalSound.stop();
             var i = this.objs.indexOf(this.player);
             this.objs.splice(i, 1);
+            this.player.powerSprite.destroy();
+            this.player.dummyWrapSprite.destroy();
             this.player.destroy();
             this.player = null;
         }

@@ -167,22 +167,31 @@ Level order:
 	- And need to do the real way to have the correct color for the next puzzle anyway.
 - Moving orbs?
 
+- Since world wrap works, move between levels with portals from now on.
 - Recap of all the mechanics introduced in the game
-	1. Reflecting off white walls, moving lasers
-	2. Springs
+	1. Easy fake walls puzzle to ease into new area
+	2. World wrap intro
+	3. World wrap 2
+		- Reflect off colored surface, not white surface
+	4. Springs
 		- Need to reflect blue laser off spring
-	3. Oculroids, use to hit orbs
-	4. Roplates, chaining together
-	5. Anex boss fight
+	5. Oculroids, use to hit orbs
+	6. Roplates, chaining together
+		- Pick which orbs are done with roplates, and which are done by player
+	7. Anex boss fight
 		- Only if world wrap works
-	6. Sliders
-	7. Portals
-	8. Gems
-	9. Fake walls (white area)
-		- Have impossible puzzle, but can be bypassed entirely by finding secret tunnel.
-	10. Thick laser
+	8. Sliders
+		- Do the "laser skip" bonus dialogue here
+			- Skip can only be done with blue laser, but need red laser in next level.
+	9. Thick laser
 		- Angle thick laser with alt colored roplates?
-
+			- Can possibly kill player
+	10. Gems
+		- Need to use the short jump at the beginning.
+		- Pure platforming?
+	
+	
+		
 - Coordinate points highlighted
 - Need to mimic an angle to solve puzzle
 - Secret challenges reward coordinates that should be filled.
@@ -235,3 +244,27 @@ Tips:
 	- No solution requires pixel-perfect accuracy or taking damage.  If you find yourself trying to squeeze the laser into awkward angles, you may want to try a different position entirely.
 	- Some rooms are expansive, but orbs are usually in close proximity to each other.  You can trust that all the orbs will be on-screen when solving a puzzle.
 	
+Trailer:
+- Introducing an innovative new puzzle game
+- Cartesian
+- Descend into the depths of an alien planetoid
+	- and rescue your stranded crew members
+- Reflect,
+- Rotate,
+- Push,
+- Divide,
+- Destroy,
+- and Outwit hostile enemies
+- Over 70 varied levels to solve
+	- Show reveal sections
+- Winner of "Excellence in Puzzle Gameplay"
+	- RPI Gamefest 2015
+- Support Cartesian on Steam Greenlight!
+	- Sights set on releasing this September.
+
+Cartesian is an innovative new puzzle game starring Sibro, a laser-equipped robot.
+
+An interstellar excavation crew is trapped within the depths of an alien planetoid, so their trusty laser-equipped robot Sibro begins the search for them.
+  
+Play as a robot exploring the depths of an alien planetoid looking for its lost 
+

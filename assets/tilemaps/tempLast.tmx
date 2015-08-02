@@ -4,6 +4,7 @@
   <property name="bg" value="bg_tempLast"/>
   <property name="bgParallaxX" value=".6"/>
   <property name="bgParallaxY" value=".6"/>
+  <property name="music" value="level_blue"/>
  </properties>
  <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
  <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
@@ -27,21 +28,21 @@
  <objectgroup name="obj" width="16" height="9"/>
  <layer name="tile" width="16" height="9">
   <data encoding="csv">
-53,63,98,55,54,53,52,51,98,70,77,70,52,55,70,70,
-56,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,
-51,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,
-54,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,53,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,63,
-55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,63,
-50,63,63,53,84,51,91,77,70,51,51,98,77,98,70,51
+53,87,87,87,87,80,81,0,0,0,79,87,87,87,87,70,
+75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,
+75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,71,
+75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,
+50,66,66,66,66,59,66,66,59,59,66,59,59,66,59,51
 </data>
  </layer>
  <objectgroup name="front" width="16" height="9">
-  <object type="Exit" x="982" y="192" width="42" height="126">
+  <object type="Exit" x="448" y="0" width="192" height="64">
    <properties>
-    <property name="mapTo" value="arena2"/>
+    <property name="mapTo" value="firstMovingLasers"/>
    </properties>
   </object>
  </objectgroup>

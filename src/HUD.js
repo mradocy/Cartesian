@@ -18,8 +18,11 @@ FullGame.HUD = {
     TEXT_AREA_NUM_LINES:3,
     TEXT_AREA_NUM_CHARACTERS:80,
     MESSAGE_SPEED:85,
-    MESSAGE_FINISH_DELAY:8.0, //new: need to press down to advance message
-    MESSAGE_COLOR_NORMAL:"#00FF21",
+    MESSAGE_FINISH_DELAY:8.0,
+    MESSAGE_COLOR_RED:"#FF3D40",
+    MESSAGE_COLOR_GREEN:"#21FF21",
+    MESSAGE_COLOR_BLUE:"#3AA6FF",
+    MESSAGE_COLOR_PURPLE:"#C259FF",
     MESSAGE_COLOR_UNKNOWN:"#CCCCCC",
     textArea:null, //large text object
     textBG:null, //bg for textArea
@@ -102,7 +105,7 @@ FullGame.HUD.makeGroup = function() {
         this.TEXT_BG_X,
         487, //y of text bg
         this.group);
-    this.textBG.beginFill(0x191919/*0x191E19*/, .9);
+    this.textBG.beginFill(0x0A0A0A, .95);
     this.textBG.drawRect(0, 0, this.TEXT_BG_WIDTH, 77);
     this.textBG.endFill();
     this.textBG.visible = false;
@@ -118,7 +121,7 @@ FullGame.HUD.makeGroup = function() {
         this.TEXT_NAME_BG_X, //x of text bg
         487, //y of text bg
         this.group);
-    this.textNameBG.beginFill(0x191919/*0x191E19*/, .9);
+    this.textNameBG.beginFill(0x0A0A0A, .95);
     this.textNameBG.drawRect(0, 0, this.TEXT_NAME_BG_WIDTH, 77);
     this.textNameBG.endFill();
     this.textNameBG.visible = false;
@@ -332,16 +335,23 @@ FullGame.HUD.update = function() {
             this.displayText(messageStr, Math.floor(this.messageIndex));
             this.textNameArea.text = this.messageName + "\n             "; //extra space is needed to keep text centered
             //changing text color based on message name
-            if (this.messageName == "???"){
-                this.textArea.clearColors();
+            this.textArea.clearColors();
+            this.textNameArea.clearColors();
+            if (this.messageName == "Daz"){
+                this.textArea.addColor(this.MESSAGE_COLOR_RED, 0);
+                this.textNameArea.addColor(this.MESSAGE_COLOR_RED, 0);
+            } else if (this.messageName == "Foll"){
+                this.textArea.addColor(this.MESSAGE_COLOR_BLUE, 0);
+                this.textNameArea.addColor(this.MESSAGE_COLOR_BLUE, 0);
+            } else if (this.messageName == "Evri" || this.messageName == " ??? "){
+                this.textArea.addColor(this.MESSAGE_COLOR_PURPLE, 0);
+                this.textNameArea.addColor(this.MESSAGE_COLOR_PURPLE, 0);
+            } else if (this.messageName == "???"){
                 this.textArea.addColor(this.MESSAGE_COLOR_UNKNOWN, 0);
-                this.textNameArea.clearColors();
                 this.textNameArea.addColor(this.MESSAGE_COLOR_UNKNOWN, 0);
             } else {
-                this.textArea.clearColors();
-                this.textArea.addColor(this.MESSAGE_COLOR_NORMAL, 0);
-                this.textNameArea.clearColors();
-                this.textNameArea.addColor(this.MESSAGE_COLOR_NORMAL, 0);
+                this.textArea.addColor(this.MESSAGE_COLOR_GREEN, 0);
+                this.textNameArea.addColor(this.MESSAGE_COLOR_GREEN, 0);
             }
             
             //skipping dialogue

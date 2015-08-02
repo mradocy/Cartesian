@@ -32,11 +32,11 @@
   <object type="OrbRed" x="736" y="224" width="64" height="64"/>
   <object type="DoorRed" x="192" y="64" width="64" height="128"/>
   <object type="Spring" x="64" y="640" width="128" height="64"/>
-  <object type="ShooterRed" x="256" y="736">
-   <polyline points="66,-2 544,84"/>
-  </object>
   <object type="ShooterRed" x="1024" y="192">
    <polyline points="0,0 -355,440"/>
+  </object>
+  <object type="ShooterRed" x="704" y="800">
+   <polyline points="0,0 -384,-61"/>
   </object>
  </objectgroup>
  <layer name="tile" width="19" height="14">
@@ -53,7 +53,7 @@
 26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,6,
 25,0,0,0,0,0,0,0,0,0,46,40,0,0,0,0,0,0,22,
 35,10,10,17,11,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
-2,2,2,28,28,228,228,227,227,225,233,219,212,10,17,18,0,0,23,
+2,2,2,28,28,228,228,227,227,225,233,17,17,10,17,18,0,0,23,
 1,2,3,14,14,28,4,4,6,3,5,6,4,7,7,25,0,0,23
 </data>
  </layer>

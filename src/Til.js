@@ -22,7 +22,7 @@ FullGame.Til.LASER_TRANSPARENT = 1;
 FullGame.Til.LASER_THICK = 2;
 FullGame.Til.LASER_FADEOUT = 3;
 
-FullGame.Til.TILE_DESTROY_DURATION = .15; //amount of time tile needs to be pressured before it's destroyed
+FullGame.Til.TILE_DESTROY_DURATION = .18;//.15; //amount of time tile needs to be pressured before it's destroyed
 
 FullGame.Til.propToString = function(type, topColor, rightColor, bottomColor, leftColor) {
      return String.fromCharCode(type+65) +

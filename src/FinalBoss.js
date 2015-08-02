@@ -14,6 +14,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.eyes = [];
     fb.laserTranspSound = game.sound.add("laser_transp_alien", 1, true);
     fb.laserThickSound = game.sound.add("laser_thick_alien", 1, true);
+    fb.spaceship = null;
     fb.encounter = (FullGame.Vars.startMap != "finalArena");
     
     // EYE LOCATIONS
@@ -38,10 +39,10 @@ FullGame.makeFinalBoss = function(cx, cy) {
         ]);
     //2th eyes location
     fb.eyeLocs.push([
-        {x:227, y:205, r:50*Math.PI/180},
-        {x:307, y:276, r:40*Math.PI/180},
-        {x:720-227, y:205, r:-50*Math.PI/180},
-        {x:720-307, y:276, r:-40*Math.PI/180}
+        {x:223, y:199, r:50*Math.PI/180},
+        {x:309, y:276, r:55*Math.PI/180},
+        {x:720-223, y:199, r:-50*Math.PI/180},
+        {x:720-309, y:276, r:-55*Math.PI/180}
         ]);
     //alter
     for (var i=0; i<fb.eyeLocs.length; i++){
@@ -171,7 +172,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.BLOCKER_DURATION = 2.0;
     fb.blockerLocs = [
         {x:360, y:136},
-        {x:360, y:160},
+        {x:360, y:162},
         {x:360, y:220}
         ];
     //alter
@@ -254,7 +255,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
     claw1.START_ANGLE_H2 = 25 *Math.PI/180;
     claw1.END_ANGLE_H2 = -40 *Math.PI/180;
     claw1.START_ANGLE_H1 = 30 *Math.PI/180;
-    claw1.END_ANGLE_H1 = -55 *Math.PI/180;
+    claw1.END_ANGLE_H1 = -50 *Math.PI/180;
     claw1.angleState = "idle"; //idle, start, sweep, end, damage, deadClear
     claw1.angleTime = 0;
     claw1.angleDuration = 0;
@@ -421,7 +422,11 @@ FullGame.makeFinalBoss = function(cx, cy) {
             
         }
         
-        if (plr.dead()) transpPlaying = false;
+        if (plr.dead() ||
+            FullGame.HUD.blackScreen.visible){
+            transpPlaying = false;
+            thickPlaying = false;
+        }
         if (transpPlaying){
             if (!this.laserTranspSound.isPlaying && !FullGame.Vars.sfxMuted &&
                 (plr != null && !plr.dead())){
@@ -431,7 +436,6 @@ FullGame.makeFinalBoss = function(cx, cy) {
             if (this.laserTranspSound.isPlaying)
                 this.laserTranspSound.stop();
         }
-        if (plr.dead()) thickPlaying = false;
         if (thickPlaying){
             if (!this.laserThickSound.isPlaying && !FullGame.Vars.sfxMuted &&
                 (plr != null && !plr.dead())){
@@ -637,6 +641,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
         if (this.health == 0){
             FullGame.playSFX("final_death");
             FullGame.HUD.solveFlash();
+            FullGame.fadeOutMusic(1.0);
         } else {
             FullGame.playSFX("final_damage");
         }
@@ -1011,6 +1016,8 @@ FullGame.makeFinalBoss = function(cx, cy) {
                     this.deadClear();
                 }
             }
+        } else if (this.moveState == "deadClear"){
+            this.spaceshipUpdate();
         }
         
         //shaking
@@ -1041,6 +1048,10 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.afterCollision = function() {
         var dt = game.time.physicsElapsed;
         var plr = FullGame.GI.player;
+        
+        if (this.moveState == "deadClear"){
+            this.spaceshipAfterCollision();
+        }
         
         //spawning smoke
         if (this.moveState != "deadClear"){
@@ -1097,7 +1108,21 @@ FullGame.makeFinalBoss = function(cx, cy) {
         this.baseLaserLines.splice(this.baseLaserLines.length);
         delete this.baseLaserLines;
         
+        //prepare spaceship
+        this.spaceship = FullGame.makeSpaceship(1330, -370, true);
+        this.spaceship.landing = true;
+        this.spaceship.endShip = true;
         
+        
+    };
+    
+    fb.spaceshipUpdate = function() {
+        var dt = game.time.physicsElapsed;
+        var plr = FullGame.GI.player;
+    };
+    fb.spaceshipAfterCollision = function() {
+        var dt = game.time.physicsElapsed;
+        var plr = FullGame.GI.player;
         
     };
     

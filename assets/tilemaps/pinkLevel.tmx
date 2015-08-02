@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="16" height="9" tilewidth="64" tileheight="64">
  <properties>
-  <property name="bg" value="bg5"/>
+  <property name="bg" value="bg1"/>
   <property name="bgParallaxX" value=".6"/>
   <property name="bgParallaxY" value=".6"/>
-  <property name="music" value="level_white"/>
+  <property name="music" value="begin_red"/>
  </properties>
  <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
  <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
@@ -12,45 +12,45 @@
  <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
  <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
  <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
- <layer name="backTile" width="16" height="9" visible="0">
+ <layer name="backTile" width="16" height="9" opacity="0.47">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,53,53,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,56,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,56,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,261,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,21,21,28,14,7,49,1,21,5,4,262,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup name="obj" width="16" height="9">
-  <object type="DoorBlue" x="832" y="256" width="64" height="128"/>
-  <object type="ShooterRed" x="512" y="153">
-   <polyline points="0,0 152,-46"/>
+  <object type="Portal" x="864" y="416" width="64" height="64">
+   <properties>
+    <property name="mapTo" value="worldWrap1"/>
+    <property name="right" value="false"/>
+   </properties>
+   <ellipse/>
   </object>
-  <object type="OrbRed" x="448" y="256" width="64" height="64"/>
+  <object type="EyebotRed" x="640" y="256" width="64" height="64">
+   <ellipse/>
+  </object>
  </objectgroup>
  <layer name="tile" width="16" height="9">
   <data encoding="csv">
-262,262,0,0,261,261,261,261,5,3,2,7,5,1,6,1,
-261,261,0,0,0,0,0,0,0,0,0,0,0,2,2,7,
-261,261,0,0,0,0,0,0,0,0,0,0,0,4,1,6,
-260,262,0,0,0,0,0,0,0,0,0,0,0,3,6,6,
-261,262,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-261,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-260,2,35,0,0,0,0,0,0,0,0,0,0,1,1,2,
-260,5,1,0,0,0,0,0,0,0,0,0,7,2,4,261,
-261,260,261,262,262,261,260,261,260,261,260,261,262,260,261,261
+262,262,0,0,261,5,4,5,5,3,2,7,5,1,6,1,
+261,261,0,0,30,31,31,0,0,31,38,38,31,38,1,7,
+261,32,0,0,0,0,0,0,0,0,0,0,0,0,0,7,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,
+25,0,0,0,0,16,11,0,0,0,0,0,0,0,37,2,
+25,0,0,0,0,23,26,0,0,0,0,0,0,0,0,22,
+1,0,10,17,17,3,49,17,17,10,10,11,0,0,0,23,
+21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+3,21,14,28,5,2,3,2,49,35,6,5,10,10,10,42
 </data>
  </layer>
  <objectgroup name="front" width="16" height="9">
-  <object type="Exit" x="960" y="256" width="64" height="128">
-   <properties>
-    <property name="mapTo" value="someMap"/>
-   </properties>
-  </object>
   <object type="Exit" x="128" y="0" width="128" height="64">
    <properties>
     <property name="mapTo" value="evriEncounter"/>

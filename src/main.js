@@ -79,16 +79,23 @@ var rooms = [
     "griddy1", //53
     "griddy2",
     "griddy3",
-    
     "lastRescue",
     "blasting",
     "thickOrbs", //58
     "backToOpen",
-    
     "landedAgain", //60
     "artifactRoom",
     "evriEncounter",
     "pinkLevel",
+    "worldWrap1",
+    "worldWrap2", //65
+    "reflectOffSpring",
+    "eyebots",
+    "roplates3",
+    "wrapArena",
+    "slider3",
+    "thickRoplate",
+    "beforeFinal",
     
     "finalArena"
 ];
@@ -104,6 +111,7 @@ game.state.add("tempLast", FullGame.Game);
 game.state.add("Title", FullGame.Title);
 game.state.add("Intro", FullGame.Intro);
 game.state.add("SpaceshipCutscene", FullGame.SpaceshipCutscene);
+game.state.add("EndScene", FullGame.EndScene);
 
 // start the Boot state.
 game.state.add('Boot', FullGame.Boot, true);

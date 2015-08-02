@@ -54,7 +54,7 @@ FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower, finalEye) {
     orb.color = color;
     orb.finalEye = finalEye;
     if (orb.finalEye){
-        orb.radius = 20;
+        orb.radius = 21;
     } else {
         orb.radius = 28;
     }

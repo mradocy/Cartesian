@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="bg5"/>
+  <property name="bgParallaxX" value=".6"/>
+  <property name="bgParallaxY" value=".6"/>
+  <property name="music" value="level_white"/>
+  <property name="worldWrap" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="149" source="tiles/sand_tiles.tsx"/>
+ <tileset firstgid="157" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="206" source="tiles/mixed_tiles.tsx"/>
+ <layer name="backTile" width="25" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="25" height="9">
+  <object type="Portal" x="160" y="416" width="64" height="64">
+   <properties>
+    <property name="mapTo" value="wrapArena"/>
+    <property name="right" value="false"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object type="DoorBlue" x="64" y="256" width="128" height="64"/>
+  <object type="Portal" x="1442" y="90" width="64" height="64">
+   <properties>
+    <property name="mapTo" value="eyebots"/>
+    <property name="right" value="false"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object type="OrbBlue" x="1056" y="128" width="64" height="64"/>
+  <object type="ShooterBlue" x="576" y="352">
+   <polyline points="0,0 192,0"/>
+  </object>
+  <object type="RoplateBlue" x="834" y="426">
+   <polygon points="-64,-2 66,-122 16,-54"/>
+  </object>
+  <object type="RoplateBlue" x="1210" y="434">
+   <polygon points="-52,-66 80,-88 16,-60"/>
+  </object>
+  <object type="OrbBlue" x="608" y="128" width="64" height="64"/>
+  <object type="ColorchipBlue" x="1408" y="448"/>
+  <object type="OrbBlue" x="864" y="416" width="64" height="64"/>
+  <object type="OrbBlue" x="416" y="384" width="64" height="64"/>
+ </objectgroup>
+ <layer name="tile" width="25" height="9">
+  <data encoding="csv">
+3,21,31,31,31,31,31,31,31,31,31,31,38,31,31,187,187,38,38,38,38,31,31,31,5,
+5,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+26,0,0,0,0,0,0,0,0,0,0,0,46,40,0,0,0,0,0,46,40,0,0,0,23,
+26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+25,0,0,16,18,0,0,0,33,0,59,59,0,0,0,46,40,0,0,0,0,46,45,17,1,
+26,0,0,30,26,0,0,0,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,1,
+25,0,0,0,22,18,0,0,0,0,0,0,0,0,0,0,57,50,0,0,0,0,0,23,6,
+25,0,0,0,22,25,0,0,0,0,0,0,0,0,0,0,51,50,0,0,0,0,0,22,14,
+14,10,10,10,1,7,17,17,10,10,10,17,10,10,17,10,7,7,17,17,10,17,10,2,35
+</data>
+ </layer>
+ <objectgroup name="front" width="25" height="9"/>
+</map>

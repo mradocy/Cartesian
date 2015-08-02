@@ -45,6 +45,11 @@ FullGame.makePlayer = function(game) {
         p.powerSprite.visible = false;
     }
     
+    p.dummyWrapSprite = game.add.sprite(0, 0, spriteKey, undefined, FullGame.GI.objGroup);
+    p.dummyWrapSprite.anchor.setTo(.5, .5); //sprite is centered
+    p.dummyWrapSprite.scale.set(.5, .5);
+    p.dummyWrapSprite.visible = false;
+    
     p.deathParticleKey = deathParticleKey;
     
     p.laserNormalSound = game.sound.add("laser_normal", 1, true);
@@ -362,6 +367,7 @@ FullGame.makePlayer = function(game) {
             this.rotation = 0;
         }
         
+        
         //failsafe in case player glitches and is falling out bottom of world
         if (this.state == this.STATE_NORMAL &&
             this.y > FullGame.GI.worldHeight + 20 && this.behavior == "none" && this.startLevelAfterMap == ""){
@@ -396,6 +402,38 @@ FullGame.makePlayer = function(game) {
     p.afterCollision = function() {
         
         var dt = game.time.physicsElapsed;
+        
+        //world wrap
+        if (FullGame.GI.worldWrap){
+            if (this.x < 0){
+                this.x += FullGame.GI.worldWidth;
+            } else if (this.x >= FullGame.GI.worldWidth){
+                this.x -= FullGame.GI.worldWidth;
+            }
+            if (this.y < 0){
+                this.y += FullGame.GI.worldHeight;
+            } else if (this.y >= FullGame.GI.worldHeight){
+                this.y -= FullGame.GI.worldHeight;
+            }
+            //update dummy sprite
+            p.dummyWrapSprite.visible = this.visible;
+            if (this.x < 64){
+                this.dummyWrapSprite.x = this.x + FullGame.GI.worldWidth;
+                this.dummyWrapSprite.y = this.y;
+            } else if (this.x > FullGame.GI.worldWidth-64) {
+                this.dummyWrapSprite.x = this.x - FullGame.GI.worldWidth;
+                this.dummyWrapSprite.y = this.y;
+            } else if (this.y < 64){
+                this.dummyWrapSprite.y = this.y + FullGame.GI.worldHeight;
+                this.dummyWrapSprite.x = this.x;
+            } else if (this.y > FullGame.GI.worldHeight-64) {
+                this.dummyWrapSprite.y = this.y - FullGame.GI.worldHeight;
+                this.dummyWrapSprite.x = this.x;
+            }
+            this.dummyWrapSprite.scale.set(this.scale.x, this.scale.y);
+            this.dummyWrapSprite.animations.frame = this.animations.frame;
+        }
+        
         
         //move camera
         this.positionCamera();
@@ -532,11 +570,6 @@ FullGame.makePlayer = function(game) {
         //pause game if asked
         if (willPause){
             FullGame.Menus.pauseMenu();
-        }
-        
-        //test removing tiles
-        if (FullGame.Keys.rmbPressed){
-            //FullGame.GI.removeTile(Math.floor(localPt.x/FullGame.GI.tileWidth), Math.floor(localPt.y/FullGame.GI.tileHeight));
         }
         
         

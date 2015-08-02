@@ -19,28 +19,22 @@ FullGame.Vars = {
     totalPlayTime:0, //includes deaths, does not include pausing.  note: Game has a timeSinceLevelStart property
     totalDeaths:0,
     totalDamages:0,
+    levelsVisited:[],
     showTimer:false,
     screenshotMode:false,
     
     // desktop app stuff
     desktopApp:false, //set to true when using node-webkit
     nw:null, //reference to node-webkit things
-    win:null //reference to the window
+    win:null, //reference to the window
+    demo:false  //set to true when running in demo mode
     //call FullGame.Vars.win.close(); to close window
 };
 
 FullGame.Vars.fillDefaultValues = function() {
-    FullGame.Vars.startMap = "firstLevel"; //first level
-    //FullGame.Vars.startMap = "openArea"; //last level made
-    //FullGame.Vars.startMap = "suits"; //work on this too
-    //FullGame.Vars.startMap = "blueEyebot";
-    //startX, startY, startBehavior are set through a Entrance object in Tiled
-    FullGame.Vars.lastMap = "none"; //first level
-    //FullGame.Vars.lastMap = "arena"; //last level made
-    //FullGame.Vars.lastMap = "platforming2"; //work on this too
-    //FullGame.Vars.lastMap = "reflectOffDoor";
+    FullGame.Vars.startMap = "firstLevel";
+    FullGame.Vars.lastMap = "none";
     FullGame.Vars.playerLaserColor = FullGame.Til.RED;
-    //FullGame.Vars.playerLaserColor = FullGame.Til.BLUE;
     FullGame.Vars.playerLaserType = FullGame.Til.LASER_NORMAL;
     FullGame.Vars.playerLaserColorOnLevelStart = FullGame.Til.RED;
     FullGame.Vars.playerLaserTypeOnLevelStart = FullGame.Til.LASER_NORMAL;
@@ -48,76 +42,107 @@ FullGame.Vars.fillDefaultValues = function() {
     FullGame.Vars.totalPlayTime = 0;
     FullGame.Vars.totalDeaths = 0;
     FullGame.Vars.totalDamages = 0;
+    FullGame.Vars.levelsVisited.splice(0, FullGame.Vars.levelsVisited.length);
+    FullGame.Vars.levelsVisited.push("firstLevel");
     FullGame.Vars.showTimer = false;
-    
-    //test start at later level
-    if (FullGame.Keys.downHeld){
-        FullGame.Vars.startMap = "useShooter";
-        FullGame.Vars.lastMap = "sandTrek";
-        FullGame.Vars.playerLaserColor = FullGame.Til.BLUE;
-    }
 };
 
 FullGame.Vars.saveData = function() {
+    
+    var lStorage;
+    //as a desktop app, stored in appdata/local
     if (typeof(Storage) == "undefined"){
         console.log("Local storage not supported");
         return;
     }
-    localStorage.created = "true";
-    localStorage.startMap = FullGame.Vars.startMap;
-    localStorage.startX = String(FullGame.Vars.startX);
-    localStorage.startY = String(FullGame.Vars.startY);
-    localStorage.startBehavior = FullGame.Vars.startBehavior;
-    localStorage.lastMap = FullGame.Vars.lastMap;
-    localStorage.playerLaserColor = String(FullGame.Vars.playerLaserColor);
-    localStorage.playerLaserType = String(FullGame.Vars.playerLaserType);
-    if (FullGame.Vars.sfxMuted) localStorage.sfxMuted = "true";
-    else localStorage.sfxMuted = "false";
-    if (FullGame.Vars.musicMuted) localStorage.musicMuted = "true";
-    else localStorage.musicMuted = "false";
-    localStorage.messagesSaid = FullGame.Vars.messagesSaid.join();
-    localStorage.totalPlayTime = String(FullGame.Vars.totalPlayTime);
-    localStorage.totalDeaths = String(FullGame.Vars.totalDeaths);
-    localStorage.totalDamages = String(FullGame.Vars.totalDamages);
-    if (FullGame.Vars.showTimer) localStorage.showTimer = "true";
-    else localStorage.showTimer = "false";
+    var lStorageStr = localStorage.getItem("storage");
+    if (lStorageStr == null){
+        lStorage = {};
+    } else {
+        lStorage = JSON.parse(lStorageStr);
+    }
+    
+    lStorage.created = "true";
+    lStorage.startMap = FullGame.Vars.startMap;
+    lStorage.startX = String(FullGame.Vars.startX);
+    lStorage.startY = String(FullGame.Vars.startY);
+    lStorage.startBehavior = FullGame.Vars.startBehavior;
+    lStorage.lastMap = FullGame.Vars.lastMap;
+    lStorage.playerLaserColor = String(FullGame.Vars.playerLaserColor);
+    lStorage.playerLaserType = String(FullGame.Vars.playerLaserType);
+    if (FullGame.Vars.sfxMuted) lStorage.sfxMuted = "true";
+    else lStorage.sfxMuted = "false";
+    if (FullGame.Vars.musicMuted) lStorage.musicMuted = "true";
+    else lStorage.musicMuted = "false";
+    lStorage.messagesSaid = FullGame.Vars.messagesSaid.join();
+    lStorage.totalPlayTime = String(FullGame.Vars.totalPlayTime);
+    lStorage.totalDeaths = String(FullGame.Vars.totalDeaths);
+    lStorage.totalDamages = String(FullGame.Vars.totalDamages);
+    lStorage.levelsVisited = FullGame.Vars.levelsVisited.join();
+    if (FullGame.Vars.showTimer) lStorage.showTimer = "true";
+    else lStorage.showTimer = "false";
+    
+    //web way
+    localStorage.setItem("storage", JSON.stringify(lStorage));
     
 };
 
 FullGame.Vars.loadData = function() {
+    
+    var lStorage;
+    //as a desktop app, stored in appdata/local
     if (typeof(Storage) == "undefined"){
         console.log("Local storage not supported");
         return;
     }
-    if (localStorage.created == undefined || localStorage.created != "true"){
+    var lStorageStr = localStorage.getItem("storage");
+    if (lStorageStr == null){
+        lStorage = {};
+    } else {
+        lStorage = JSON.parse(lStorageStr);
+    }
+    
+    if (lStorage.levelsVisited == undefined){ //so old save files won't crash the game
+        lStorage.levelsVisited = [];
+    }
+    if (lStorage.created == undefined || lStorage.created != "true"){ 
         FullGame.Vars.fillDefaultValues();
         return;
     }
     FullGame.Vars.saveCreated = true;
-    FullGame.Vars.startMap = localStorage.startMap;
-    FullGame.Vars.startX = Number(localStorage.startX);
-    FullGame.Vars.startY = Number(localStorage.startY);
-    FullGame.Vars.startBehavior = localStorage.startBehavior;
-    FullGame.Vars.lastMap = localStorage.lastMap;
-    FullGame.Vars.playerLaserColor = Number(localStorage.playerLaserColor);
-    FullGame.Vars.playerLaserType = Number(localStorage.playerLaserType);
-    FullGame.Vars.sfxMuted = (localStorage.sfxMuted == "true");
-    FullGame.Vars.musicMuted = (localStorage.musicMuted == "true");
-    FullGame.Vars.messagesSaid = localStorage.messagesSaid.split(",");
-    FullGame.Vars.totalPlayTime = Number(localStorage.totalPlayTime);
-    FullGame.Vars.totalDeaths = Number(localStorage.totalDeaths);
-    FullGame.Vars.totalDamages = Number(localStorage.totalDamages);
-    FullGame.Vars.showTimer = (localStorage.showTimer == "true");
+    FullGame.Vars.startMap = lStorage.startMap;
+    FullGame.Vars.startX = Number(lStorage.startX);
+    FullGame.Vars.startY = Number(lStorage.startY);
+    FullGame.Vars.startBehavior = lStorage.startBehavior;
+    FullGame.Vars.lastMap = lStorage.lastMap;
+    FullGame.Vars.playerLaserColor = Number(lStorage.playerLaserColor);
+    FullGame.Vars.playerLaserType = Number(lStorage.playerLaserType);
+    FullGame.Vars.sfxMuted = (lStorage.sfxMuted == "true");
+    FullGame.Vars.musicMuted = (lStorage.musicMuted == "true");
+    FullGame.Vars.messagesSaid = lStorage.messagesSaid.split(",");
+    FullGame.Vars.totalPlayTime = Number(lStorage.totalPlayTime);
+    FullGame.Vars.totalDeaths = Number(lStorage.totalDeaths);
+    FullGame.Vars.totalDamages = Number(lStorage.totalDamages);
+    FullGame.Vars.levelsVisited = lStorage.levelsVisited.split(",");
+    FullGame.Vars.showTimer = (lStorage.showTimer == "true");
     
 };
 
 
 FullGame.getCurrentLevelSelectName = function() {
     var map = FullGame.Vars.startMap;
-    for (var i=0; i<FullGame.levelNames.length; i++){
-        var obj = FullGame.levelNames[i];
-        if (obj.startMap == map){
-            return obj.name;
+    var power = (FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK);
+    while (true){
+        for (var i=0; i<FullGame.levelNames.length; i++){
+            var obj = FullGame.levelNames[i];
+            if (obj.startMap == map && obj.power == power){
+                return obj.name;
+            }
+        }
+        if (power){
+            power = false;
+        } else {
+            break;
         }
     }
     return "";

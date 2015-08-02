@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="38" height="9" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="bg" value="space_no_bg"/>
+  <property name="bgParallaxX" value=".7"/>
+  <property name="bgParallaxY" value=".7"/>
+  <property name="music" value="level_blue"/>
+ </properties>
+ <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
+ <tileset firstgid="50" source="tiles/white_tiles.tsx"/>
+ <tileset firstgid="99" source="tiles/mixed_tiles.tsx"/>
+ <tileset firstgid="211" source="tiles/glass_tiles.tsx"/>
+ <tileset firstgid="260" source="tiles/black_indestructable.tsx"/>
+ <tileset firstgid="310" source="tiles/sand_tiles.tsx"/>
+ <tileset firstgid="318" source="tiles/novis_editor.tsx"/>
+ <layer name="backTile" width="38" height="9" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="obj" width="38" height="9">
+  <object type="Portal" x="2272" y="32" width="64" height="64">
+   <properties>
+    <property name="mapTo" value="thickRoplate"/>
+    <property name="right" value="false"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object type="ShooterPurple" x="1344" y="352">
+   <properties>
+    <property name="type" value="thick"/>
+   </properties>
+   <polyline points="0,0 128,0"/>
+  </object>
+  <object type="Powerchip" x="1184" y="416"/>
+  <object type="ShooterPurple" x="1024" y="416">
+   <properties>
+    <property name="type" value="thick"/>
+   </properties>
+   <polyline points="0,0 -128,0"/>
+  </object>
+  <object type="ShooterPurple" x="1792" y="96">
+   <properties>
+    <property name="type" value="thick"/>
+   </properties>
+   <polyline points="0,0 128,0"/>
+  </object>
+ </objectgroup>
+ <layer name="tile" width="38" height="9">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,22,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,23,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,271,0,0,0,0,0,271,0,0,0,273,
+0,0,0,0,0,0,0,0,0,0,0,23,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,284,
+0,0,0,0,0,0,0,0,0,0,278,87,303,274,0,0,0,0,0,0,0,0,0,271,0,0,0,0,0,0,0,0,0,0,0,0,0,284,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,273,0,0,0,273,0,0,0,0,0,278,94,283,274,0,0,278,283,283,283,283,302,
+0,0,0,0,0,0,0,265,266,318,0,318,318,318,318,318,292,0,0,0,284,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,318,
+0,0,0,0,0,0,0,300,277,0,0,0,0,0,0,0,279,0,0,0,96,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,284,0,0,0,0,0,0,0,0,0,278,283,274,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,284,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="front" width="38" height="9">
+  <object type="Exit" x="0" y="512" width="448" height="64">
+   <properties>
+    <property name="mapTo" value="finalArena"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -397,6 +397,7 @@ FullGame.makeGriddy = function(cx, cy) {
             bf.y = y;
             bf.alpha = 0;
             bf.destroyed = false;
+            bf.damaged = false;
             bf.state = "none";
         } else {
             bf = game.add.sprite(x, y, "blackFlame", undefined, FullGame.GI.frontGroup);
@@ -419,6 +420,7 @@ FullGame.makeGriddy = function(cx, cy) {
             bf.speed = 0;
             bf.launchTime = 0;
             bf.destroyed = false;
+            bf.damaged = false;
             bf.state = "none"; //"none", "orbiting", or "launching"
             
             //set bf.ORBIT_SPEED and bt.orbitX, bf.orbitY beforehand
@@ -479,10 +481,11 @@ FullGame.makeGriddy = function(cx, cy) {
                 
                 //detect hitting player
                 var plr = FullGame.GI.player;
-                if (plr != null){
+                if (plr != null && !this.damaged){
                     if ((plr.x-this.x)*(plr.x-this.x) + (plr.y-this.y)*(plr.y-this.y) <
                         (plr.RADIUS+this.RADIUS)*(plr.RADIUS+this.RADIUS)){
                         plr.damage(this.x < plr.x, false);
+                        this.damaged = true;
                     }
                 }
                 

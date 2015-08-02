@@ -93,6 +93,9 @@ FullGame.Title.prototype = {
             }
             break;
         }
+        if (FullGame.Vars.demo){
+            logoKey = "title_logo_demo";
+        }
         this.reticle = game.add.sprite(0, 0, reticleSpriteKey, 0);
         this.reticle.anchor.setTo(.5, .5);
         this.reticle.scale.set(.5, .5);
@@ -129,6 +132,9 @@ FullGame.Title.prototype = {
         var creditsOption = false;
         var closeGameOption = FullGame.Vars.desktopApp;
         var levelSelectOption = true;
+        if (!continueOption && !FullGame.Vars.demo)
+            levelSelectOption = false;
+        
         this.text = {};
         var textA = [];
         if (continueOption){
@@ -153,12 +159,6 @@ FullGame.Title.prototype = {
             "NEW GAME",
             { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
         textA.push(this.text.newGameT);
-        /*this.text.howToPlayT = game.add.text(
-            this.TEXT_X,
-            0,
-            "HOW TO PLAY",
-            { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
-        textA.push(this.text.howToPlayT);*/
         if (creditsOption){
             this.text.creditsT = game.add.text(
                 this.TEXT_X,
@@ -228,6 +228,12 @@ FullGame.Title.prototype = {
             "MUTE MUSIC",
             { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
         this.text.toggleMusicT.visible = false;
+        this.text.toggleTimerT = game.add.text(
+            FullGame.Menus.X,
+            FullGame.Menus.Y + FullGame.Menus.H*3,
+            "SHOW TIMER",
+            { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
+        this.text.toggleTimerT.visible = false;
         //instructions on how to toggle fullscreen
         this.text.fullscreenInstructionsT = game.add.text(
             380,
@@ -237,7 +243,7 @@ FullGame.Title.prototype = {
         this.text.fullscreenInstructionsT.visible = false;
         this.text.backFromOptionsT = game.add.text(
             FullGame.Menus.X,
-            FullGame.Menus.Y + FullGame.Menus.H*3,
+            FullGame.Menus.Y + FullGame.Menus.H*4,
             "BACK",
             { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
         this.text.backFromOptionsT.visible = false;
@@ -296,14 +302,12 @@ FullGame.Title.prototype = {
                 if (this.blackScreen.alpha > .9999){
                     if (this.beginGameAfterFadeToBlack){
                         
-                        //this.state.start("SpaceshipCutscene");
-                        
                         if (this.goToIntro){
                             this.state.start("Intro");
                         } else {
+                            //this.state.start("EndScene");
                             this.state.start(FullGame.Vars.startMap);
                         }
-                        
                         
                     }
                 }
@@ -415,11 +419,18 @@ FullGame.Title.prototype = {
                     this.text.saveWarningYesT.x = this.text.saveWarningNoT.x;
                 } else {
                     this.text.saveWarningT.visible = true;
-                    this.text.saveWarningT.text =
-                        "This game uses an automatic save system.\n\n" +
-                        "Save data is stored in your browser's local cache.  Note that if your\n" +
-                        " browser cache is cleared, your save data will be lost.";
-                    this.text.saveWarningT.x = 139;
+                    if (FullGame.Vars.desktopApp){
+                        this.text.saveWarningT.text =
+                            "This game uses an automatic save system.\n\n" +
+                            "Please do not exit the game while transitioning levels.\n";
+                        this.text.saveWarningT.x = 220;
+                    } else {
+                        this.text.saveWarningT.text =
+                            "This game uses an automatic save system.\n\n" +
+                            "Save data is stored in your browser's local cache.  Note that if your\n" +
+                            " browser cache is cleared, your save data will be lost.";
+                        this.text.saveWarningT.x = 139;
+                    }
                     this.text.saveWarningYesT.text = "CONTINUE";
                     this.text.saveWarningYesT.visible = true;
                     this.text.saveWarningYesT.x = 450;
@@ -442,6 +453,12 @@ FullGame.Title.prototype = {
                     this.text.toggleMusicT.text = "UNMUTE MUSIC";
                 } else {
                     this.text.toggleMusicT.text = "MUTE MUSIC";
+                }
+                this.text.toggleTimerT.visible = true;
+                if (FullGame.Vars.showTimer){
+                    this.text.toggleTimerT.text = "HIDE TIMER";
+                } else {
+                    this.text.toggleTimerT.text = "SHOW TIMER";
                 }
                 this.text.backFromOptionsT.visible = true;
                 this.text.fullscreenInstructionsT.visible = true;
@@ -507,12 +524,23 @@ FullGame.Title.prototype = {
                     this.text.toggleMusicT.text = "UNMUTE MUSIC";
                 }
                 
+            } else if (this.textSelected == this.text.toggleTimerT){
+
+                if (FullGame.Vars.showTimer){
+                    FullGame.Vars.showTimer = false;
+                    this.text.toggleTimerT.text = "SHOW TIMER";
+                } else {
+                    FullGame.Vars.showTimer = true;
+                    this.text.toggleTimerT.text = "HIDE TIMER";
+                }
+                
             } else if (this.textSelected == this.text.backFromOptionsT){
                 
                 var txt = this.text;
                 txt.toggleFullscreenT.visible = false;
                 txt.toggleSFXT.visible = false;
                 txt.toggleMusicT.visible = false;
+                txt.toggleTimerT.visible = false;
                 txt.fullscreenInstructionsT.visible = false;
                 txt.backFromOptionsT.visible = false;
                 this.saveWarningBlackScreen.visible = false;

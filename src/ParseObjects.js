@@ -65,7 +65,7 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
             FullGame.GI.objs.push(obj.door1);
             FullGame.GI.objs.push(obj.door2); //this is required for lasers to hit door2
             
-        } else if (type == "ShooterRed" || type == "ShooterBlue" || type == "ShooterGreen" || type == "ShooterBlack"){
+        } else if (type == "ShooterRed" || type == "ShooterBlue" || type == "ShooterGreen" || type == "ShooterBlack" || type == "ShooterPurple"){
             var laserColor = FullGame.Til.RED;
             var laserType;
             if (type == "ShooterRed"){
@@ -76,6 +76,8 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 laserColor = FullGame.Til.GREEN;
             } else if (type == "ShooterBlack"){
                 laserColor = FullGame.Til.BLACK;
+            } else if (type == "ShooterPurple"){
+                laserColor = FullGame.Til.PURPLE;
             }
             laserType = FullGame.Til.LASER_NORMAL;
             if (od.properties != undefined && od.properties.type != undefined){
@@ -425,12 +427,12 @@ FullGame.parseObjectsInTiledObjectgroup = function(data, groupTo){
                 //this is the Exit player entered from, so set properties for player starting
                 if (x < FullGame.GI.tileWidth){
                     FullGame.Vars.startBehavior = "walkRight";
-                    FullGame.Vars.startX = x +10;
-                    FullGame.Vars.startY = sY -10;
+                    FullGame.Vars.startX = x +15;
+                    FullGame.Vars.startY = sY -12;
                 } else if (x+width > FullGame.GI.worldWidth - FullGame.GI.tileWidth){
                     FullGame.Vars.startBehavior = "walkLeft";
-                    FullGame.Vars.startX = x + width -10;
-                    FullGame.Vars.startY = sY -10;
+                    FullGame.Vars.startX = x + width -15;
+                    FullGame.Vars.startY = sY -12;
                 } else if (y < FullGame.GI.tileHeight){
                     FullGame.Vars.startBehavior = "fall";
                     FullGame.Vars.startX = x + width/2;

@@ -54,12 +54,14 @@ FullGame.Preloader.prototype = {
         
         //loading backgrounds
         game.load.image('space1', 'assets/img/bgs/space1.png');
+        game.load.image('space_no_bg', 'assets/img/bgs/space_no_bg.png');
         game.load.image('title_fg', 'assets/img/bgs/title_fg.png');
         game.load.image('title_logo_red', 'assets/img/bgs/title_logo_red.png');
         game.load.image('title_logo_blue', 'assets/img/bgs/title_logo_blue.png');
         game.load.image('title_logo_green', 'assets/img/bgs/title_logo_green.png');
         game.load.image('title_logo_white', 'assets/img/bgs/title_logo_white.png');
         game.load.image('title_logo_black', 'assets/img/bgs/title_logo_black.png');
+        game.load.image('title_logo_demo', 'assets/img/bgs/title_logo_demo.png');
         game.load.image('dust_red1', 'assets/img/bgs/dust_red1.png');
         game.load.image('dust_red2', 'assets/img/bgs/dust_red2.png');
         game.load.image('dust_blue1', 'assets/img/bgs/dust_blue1.png');
@@ -85,6 +87,7 @@ FullGame.Preloader.prototype = {
         game.load.image('intro_bg', 'assets/img/bgs/intro_bg.jpg');
         game.load.image('intro_fg', 'assets/img/bgs/intro_fg.png');
         game.load.image('intro_lighting', 'assets/img/bgs/intro_lighting.png');
+        game.load.image('endscene_lighting', 'assets/img/bgs/endscene_lighting.png');
         game.load.image('bg_white', 'assets/img/bgs/bg_white.png');
         game.load.spritesheet("white_thing", 'assets/img/bgs/particles/white_thing.png', 78, 78, 1);
         game.load.image("ship_ex_1", 'assets/img/bgs/particles/ship_ex_1.png');
@@ -98,6 +101,8 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("laserburn_black", 'assets/img/bgs/particles/laserburn_black.png', 8, 16, 4);
         game.load.spritesheet("laserburn_white", 'assets/img/bgs/particles/laserburn_white.png', 8, 16, 4);
         game.load.spritesheet("laserburn_power", 'assets/img/bgs/particles/laserburn_power.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_power_blue", 'assets/img/bgs/particles/laserburn_power_blue.png', 8, 16, 4);
+        game.load.spritesheet("laserburn_power_green", 'assets/img/bgs/particles/laserburn_power_green.png', 8, 16, 4);
         game.load.spritesheet("laserburn_power_purple", 'assets/img/bgs/particles/laserburn_power_purple.png', 8, 16, 4);
         
         
@@ -141,14 +146,11 @@ FullGame.Preloader.prototype = {
         game.load.audio('griddy_poof', ['assets/sfx/griddy_poof.ogg', 'assets/sfx/griddy_poof.mp3'], true);
         game.load.audio('griddy_damage', ['assets/sfx/griddy_damage.ogg', 'assets/sfx/griddy_damage.mp3'], true);
         game.load.audio('griddy_death', ['assets/sfx/griddy_death.ogg', 'assets/sfx/griddy_death.mp3'], true);
-        
         game.load.audio('final_damage', ['assets/sfx/final_damage.ogg', 'assets/sfx/final_damage.mp3'], true);
         game.load.audio('final_death', ['assets/sfx/final_death.ogg', 'assets/sfx/final_death.mp3'], true);
         game.load.audio('final_explode', ['assets/sfx/final_explode.ogg', 'assets/sfx/final_explode.mp3'], true);
-        
-        
         game.load.audio('spaceship_takeoff', ['assets/sfx/spaceship_takeoff.ogg', 'assets/sfx/spaceship_takeoff.mp3'], true);
-        
+        game.load.audio('spaceship_land', ['assets/sfx/spaceship_land.ogg', 'assets/sfx/spaceship_land.mp3'], true);
         
         game.load.audio('boop1', ['assets/sfx/boop1.ogg', 'assets/sfx/boop1.mp3'], true);
         game.load.audio('boop2', ['assets/sfx/boop2.ogg', 'assets/sfx/boop2.mp3'], true);
@@ -187,6 +189,7 @@ FullGame.Preloader.prototype = {
         game.load.image('shooter_blue', 'assets/img/shooter_blue.png');
         game.load.image('shooter_green', 'assets/img/shooter_green.png');
         game.load.image('shooter_black', 'assets/img/shooter_black.png');
+        game.load.image('shooter_purple', 'assets/img/shooter_purple.png');
         game.load.spritesheet("spring", 'assets/img/spring_sheet.png', 128, 80, 14);
         game.load.image('mobile_shooter_path', 'assets/img/mobile_shooter_path.png');
         game.load.image('mobile_shooter_red', 'assets/img/mobile_shooter_red.png');
@@ -293,7 +296,6 @@ FullGame.Preloader.prototype = {
             FullGame.Vars.fillDefaultValues();
             
             this.state.start("Title");
-			//this.state.start(FullGame.Vars.startMap);
 		}
         
 	}
