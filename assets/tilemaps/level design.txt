@@ -237,7 +237,24 @@ Demo:
 	- "Thanks for playing demo, please like share etc."
 - But by ignoring that and continuing, get to play a few more levels.
 - Alien voice will complement you for not falling for the trick.
-		
+
+ToDo:
+x Ending credits
+- Ending stats
+x Make Midel boss easier
+	- Can attack from farther away
+x Make Evri boss easier
+	- More time in-between attacks to aim.
+x Completely redo Gridod 3?
+	- Only need 1 gem, but no hints
+- The bonus levels
+x Fix reticle flicker with colorchip
+- Fix Evri's graphics
+x Fix aiming glitch with world wrap in Anex rematch
+	x If go to other side of screen, stop looking for player
+x Second slider level should be fixed so that correct position of slider is at top of path
+
+
 Tips:
 	- Sometimes it's best to think backwards.  Determine how the laser should go through the orbs, then figure out where the laser should start.
 	- Puzzle solutions rarely require the usage of every reflectable surface in a room.  It can help to figure out ahead of time which surfaces are too "out of the way" to be used.
@@ -267,4 +284,20 @@ Cartesian is an innovative new puzzle game starring Sibro, a laser-equipped robo
 An interstellar excavation crew is trapped within the depths of an alien planetoid, so their trusty laser-equipped robot Sibro begins the search for them.
   
 Play as a robot exploring the depths of an alien planetoid looking for its lost 
+
+
+
+
+I am a former Pokemon fangame developer whose project was shut down by Nintendo.  Today I release my first "real" game, AMA.
+
+
+I just wanted a decent game that I could call mine.
+  So I made Cartesian.
+  
+Graphical presentation is overall mediocre, and the game could have more content.
+
+It has a beginning, middle, and end.  There's context for the player's actions.  Responsive, intuitive controls that feel good.
+Different levels.  Difficulty progression, 
+
+I had a good friend make the music, but
 

@@ -134,6 +134,7 @@ FullGame.EndScene.prototype = {
         this.blackScreenFadeTime = 0;
         this.blackScreenFadeIn = false;
         this.fadeIn();
+        FullGame.playMusic("level_blue", .5);
         
     },
     
@@ -204,8 +205,7 @@ FullGame.EndScene.prototype = {
                 this.blackScreen.alpha = this.blackScreenFadeTime / this.BLACK_SCREEN_FADE_DURATION;
                 if (this.blackScreen.alpha > .9999){
                     if (this.beginGameAfterFadeToBlack){
-                        this.state.start("Title");
-                        //this.state.start(FullGame.Vars.startMap);
+                        this.state.start("Credits");
                     }
                 }
             } else {
@@ -301,6 +301,14 @@ FullGame.EndScene.prototype = {
         this.blackScreen.destroy();
         this.blackScreen = null;
         this.messages.splice(0, this.messages.length);
+        
+        this.messageIndex = 0;
+        this.messageSelected = 0;
+        this.partsTime = 0;
+        this.partsSpawn = 0;
+        this.moveTime = 0;
+        this.exTime = 0;
+        this.exCache.splice(0, this.exCache.length);
     },
     
 

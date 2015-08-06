@@ -62,10 +62,13 @@ It seems everything is working fine.  You're equipped with self-repair micro-mac
 It seems most of the walls here are would be impervious to a laser like yours.  But try shooting it at things that look interesting anyway.  That's always worked for us in the past, hasn't it?]
 
 %firstReflect% (Daz)
+[You can see more of the room by moving the mouse towards the borders of the screen.  Some of these rooms are quite large, so look around to make sure you didn't miss something!]
+
+%firstMultReflect% (Daz)
 [You can also fire a 'preview' laser that won't damage you if reflected back.
 Hold the RIGHT MOUSE BUTTON or SHIFT to fire the 'preview' laser.
 
-And press ESC or ENTER to refresh yourself if you need it.]
+And press ESC or ENTER to refresh yourself if you need it.  Additional help and tips are in the pause menu as well.]
 
 
 %numbersHelp% (Daz)
@@ -226,16 +229,110 @@ like cashing in the musgravite Foll
 took, were more important anyway. 
                                              
 											 
-Right now, the miners were just
-relieved to have Sibro by their
+Right now, the excavation team was
+just relieved to have Sibro by their
 side, as a friend to accompany them
 on many adventures to come.]
 
 
+%credits%
+[Created by Mark Radocy
 
 
-Foll Musgravite 
 
+Programming, Level Design, Art, Sound Design
+--
+Mark Radocy
+
+
+
+Music
+--
+Will TK
+
+
+
+Promotional Art
+--
+Joy Ling
+
+
+
+Business Development
+--
+Wade Horsey
+
+
+
+Testing
+--
+Ryan O'Malley
+Matthew Mashayekhi
+
+
+
+Special Thanks
+--
+RPI Game Development Club
+"Evoas" fans
+My supportive friends and family
+
+
+
+Completing development of a game that a few can truly enjoy
+was a huge accomplishment for me.  It has been one heck of
+a ride, but the journey has just begun.  I promise here
+to always be improving as a programmer, artist, designer,
+and every other skill a game developer must learn.  Here's
+to the future.
+
+
+
+
+Thank you for playing!
+
+
+
+
+
+
+
+
+
+
+
+
+Developed by
+]
+
+
+Developed by Betashark
+
+Time: 
+Secrets found: 0/3
+
+
+
+
+Secret area:
+Completing development of a game that a few can truly enjoy
+was a huge accomplishment for me.  It has been one heck of
+a ride, but the journey has just begun.  I promise here
+to always be improving as a programmer, artist, designer,
+and every other skill a game developer must learn.  Here's
+to the future.
+
+There is no greater sense of accomplishment for a developer
+than completing a game that others can truly enjoy.  And
+after all the setbacks and failed projects, I finally did it.
+Despite its mediocre presentation and length, somebody out
+there enjoyed Cartesian enough to overcome every challenge
+the game presented.  This fact makes me happy, but not
+completely satisfied, and I promise I will improve.  I will
+be a better programmer, a better artist, a better designer,
+a better leader, a master of every skill a developer must
+learn.  It has been one heck of a ride, but the journey has
+just begun.  Here's to the future.
 
 
 

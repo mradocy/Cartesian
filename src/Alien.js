@@ -650,9 +650,15 @@ FullGame.makeAlien = function(cx, cy, color) {
         var frontHandAngle = 0;
         var backHandAngle = 0;
         if (plr != null){
-            frontHandAngle = Math.atan2(plr.y - this.frontHand.y, plr.x - this.frontHand.x);
-            backHandAngle = Math.atan2(plr.y - this.backHand.y, plr.x - this.backHand.x);
+            if ((this.scale.x > 0) == (plr.x > this.x)){
+                frontHandAngle = Math.atan2(plr.y - this.frontHand.y, plr.x - this.frontHand.x);
+                backHandAngle = Math.atan2(plr.y - this.backHand.y, plr.x - this.backHand.x);
+            } else {
+                frontHandAngle = Math.atan2(plr.y - this.frontHand.y, this.frontHand.x - plr.x);
+                backHandAngle = Math.atan2(plr.y - this.backHand.y, this.backHand.x - plr.x);
+            }
         }
+        
         if (this.laserState != "aim" ||
            (plr != null && plr.dead())){
             if (this.laserTranspSound.isPlaying)

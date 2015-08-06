@@ -112,6 +112,7 @@ game.state.add("Title", FullGame.Title);
 game.state.add("Intro", FullGame.Intro);
 game.state.add("SpaceshipCutscene", FullGame.SpaceshipCutscene);
 game.state.add("EndScene", FullGame.EndScene);
+game.state.add("Credits", FullGame.Credits);
 
 // start the Boot state.
 game.state.add('Boot', FullGame.Boot, true);

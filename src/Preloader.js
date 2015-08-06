@@ -2,7 +2,7 @@ FullGame.Preloader = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
-
+    
 	this.ready = false;
 };
 
@@ -88,10 +88,12 @@ FullGame.Preloader.prototype = {
         game.load.image('intro_fg', 'assets/img/bgs/intro_fg.png');
         game.load.image('intro_lighting', 'assets/img/bgs/intro_lighting.png');
         game.load.image('endscene_lighting', 'assets/img/bgs/endscene_lighting.png');
+        game.load.image('credits_bg', 'assets/img/bgs/credits_bg.png');
         game.load.image('bg_white', 'assets/img/bgs/bg_white.png');
         game.load.spritesheet("white_thing", 'assets/img/bgs/particles/white_thing.png', 78, 78, 1);
         game.load.image("ship_ex_1", 'assets/img/bgs/particles/ship_ex_1.png');
         game.load.image("ship_ex_2", 'assets/img/bgs/particles/ship_ex_2.png');
+        game.load.image('credits_logo', 'assets/img/bgs/credits_logo.png');
         
         game.load.image('bg_tempLast', 'assets/img/bgs/bg_tempLast.png');
         
@@ -112,6 +114,8 @@ FullGame.Preloader.prototype = {
         game.load.audio('boss1', ['assets/music/boss1.ogg', 'assets/music/boss1.mp3'], true);
         game.load.audio('level_green', ['assets/music/level_green.ogg', 'assets/music/level_green.mp3'], true);
         game.load.audio('level_white', ['assets/music/level_white.ogg', 'assets/music/level_white.mp3'], true);
+        game.load.audio('title', ['assets/music/title.ogg', 'assets/music/title.mp3'], true);
+        game.load.audio('boss2', ['assets/music/boss2.ogg', 'assets/music/boss2.mp3'], true);
         
         
         //loading audio
@@ -238,6 +242,7 @@ FullGame.Preloader.prototype = {
         game.load.spritesheet("miner_sitting", 'assets/img/miner_sitting.png', 78, 78, 6);
         game.load.spritesheet("miner_scared", 'assets/img/miner_scared.png', 50, 58, 5);
         game.load.spritesheet("miner_standing", 'assets/img/miner_standing.png', 50, 82, 5);
+        game.load.image("betashark", 'assets/img/betashark.png');
         
         game.load.spritesheet("midel_body", 'assets/img/midel_body.png', 128, 256, 4);
         game.load.spritesheet("midel_body_broken", 'assets/img/midel_body_broken.png', 128, 256, 4);
@@ -289,8 +294,8 @@ FullGame.Preloader.prototype = {
 
 	update: function () {
         
-        var musicDecoded = true;
-		if (musicDecoded && !this.ready) {
+        var musicDecoded = this.cache.isSoundDecoded('title') && this.cache.isSoundDecoded('colorchip');
+        if (musicDecoded && !this.ready) {
 			this.ready = true;
             FullGame.rooms = rooms;
             FullGame.Vars.fillDefaultValues();

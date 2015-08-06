@@ -89,11 +89,11 @@ FullGame.makeMidel = function(cx, cy) {
     m.vx = 0;
     m.vy = 0;
     m.timeSinceMove = 0;
-    m.MAX_SPEED_H5 = 110; //max speed when health>=5
-    m.MAX_SPEED_H4 = 130;
-    m.MAX_SPEED_H3 = 130;
-    m.MAX_SPEED_H2 = 155;
-    m.MAX_SPEED_H1 = 170;
+    m.MAX_SPEED_H5 = 85; //max speed when health>=5
+    m.MAX_SPEED_H4 = 100;
+    m.MAX_SPEED_H3 = 100;
+    m.MAX_SPEED_H2 = 115;
+    m.MAX_SPEED_H1 = 130;
     m.ACCEL = 350;
     m.FRICTION = 500;
     m.ROTATE_ZENO = .05;
@@ -203,12 +203,12 @@ FullGame.makeMidel = function(cx, cy) {
     m.RUSH_DURATION = m.PS1_DURATION + m.S1_DURATION + m.PS2_DURATION + m.S2_DURATION;
     m.RUSH_X_DIST = 100; //target distance from player during a rush
     m.RUSH_Y_DIST = -40; //
-    m.RUSH_TRIGGER_X_DIST = 600; //how close have to be to player to start a rush
+    m.RUSH_TRIGGER_X_DIST = 400; //how close have to be to player to start a rush
     m.RUSH_TRIGGER_Y_DIST = 150;
     //during a rush, x accel and velocity is high, y accel and velocity is low
     m.RUSH_X_SPEED_H3 = 250;
-    m.RUSH_X_SPEED_H2 = 300;
-    m.RUSH_X_SPEED_H1 = 350;
+    m.RUSH_X_SPEED_H2 = 275;
+    m.RUSH_X_SPEED_H1 = 300;
     m.RUSH_X_ACCEL = 1200;
     m.RUSH_Y_SPEED = 100;
     m.RUSH_Y_ACCEL = 400;

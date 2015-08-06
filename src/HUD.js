@@ -179,7 +179,11 @@ FullGame.HUD.makeGroup = function() {
 
 //sets reticle based on laserType (Til.LASER_NORMAL or Til.LASER_THICK) and color
 FullGame.HUD.setReticle = function(laserType, laserColor) {
+    var reticleX = 0;
+    var reticleY = 0;
     if (this.reticle != null){
+        reticleX = this.reticle.x;
+        reticleY = this.reticle.y;
         this.reticle.kill();
         if (this.reticle.group != null){
             this.reticle.group.remove(this.reticle);
@@ -210,7 +214,7 @@ FullGame.HUD.setReticle = function(laserType, laserColor) {
     
     this.reticleSpriteKey = spriteKey;
     if (this.group != null){
-        this.reticle = game.add.sprite(0, 0, spriteKey, 0, this.group);
+        this.reticle = game.add.sprite(reticleX, reticleY, spriteKey, 0, this.group);
         this.reticle.anchor.setTo(.5, .5);
         this.reticle.scale.set(.5, .5);
     }

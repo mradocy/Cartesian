@@ -171,7 +171,7 @@ FullGame.stopMusic = function() {
 FullGame.fadeOutMusic = function(duration) {
     if (FullGame.currentMusicPlaying == "")
         return;
-    FullGame.currentMusicSound.fadeOut(duration);
+    FullGame.currentMusicSound.fadeOut(duration*1000);
     FullGame.currentMusicFadingOut = true;
 };
 
@@ -183,7 +183,6 @@ FullGame.playMusic = function(musicKey, fadeDuration) {
         return;
     
     FullGame.stopMusic();
-    
     if (!game.cache.checkSoundKey(musicKey))
         return;
     
@@ -208,7 +207,7 @@ FullGame.playMusic = function(musicKey, fadeDuration) {
     }
     
     if (fadeDuration > 0){
-        FullGame.currentMusicSound.fadeIn(fadeDuration, (introMusicKey == ""));
+        FullGame.currentMusicSound.fadeIn(fadeDuration*1000, (introMusicKey == ""));
     }
     FullGame.currentMusicFadingOut = false;
     

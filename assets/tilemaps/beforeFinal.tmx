@@ -4,7 +4,7 @@
   <property name="bg" value="space_no_bg"/>
   <property name="bgParallaxX" value=".7"/>
   <property name="bgParallaxY" value=".7"/>
-  <property name="music" value="level_blue"/>
+  <property name="music" value="title"/>
  </properties>
  <tileset firstgid="1" source="tiles/black_tiles.tsx"/>
  <tileset firstgid="50" source="tiles/white_tiles.tsx"/>

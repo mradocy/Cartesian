@@ -527,7 +527,7 @@ FullGame.makeFinalBoss = function(cx, cy) {
     };
     fb.setLaserLines();
     fb.setLaserLinesTempBlack = function() {
-        if (this.dead) return;
+        if (this.laserLines == null) return;
         for (var i=0; i<this.laserLines.length; i++){
             this.laserLines[i].color = FullGame.Til.BLACK;
         }
@@ -562,9 +562,12 @@ FullGame.makeFinalBoss = function(cx, cy) {
     fb.MOVE_HORIZ_SPEED_H3 = 70; //determins move duration
     fb.MOVE_HORIZ_SPEED_H2 = 100;
     fb.MOVE_HORIZ_SPEED_H1 = 130;
-    fb.IDLE_DURATION_H3 = 5.0;
-    fb.IDLE_DURATION_H2 = 4.5;
-    fb.IDLE_DURATION_H1 = 4.0;
+    fb.IDLE_DURATION_H3 = 6.0;
+    fb.IDLE_DURATION_H2 = 6.0;
+    fb.IDLE_DURATION_H1 = 6.0;
+    if (fb.encounter){
+        fb.IDLE_DURATION_H2 = 3.5;
+    }
     fb.CLAW_ANGLE_START_DURATION = .8;
     fb.CLAW_ANGLE_END_DURATION = .4;
     fb.RISE_DURATION = 4.0;

@@ -51,6 +51,7 @@ FullGame.Title.prototype = {
     goToIntro:false,
     levelSelectScreen:false,
     levelSelectMenu:null,
+    musicMutedAtStart:false,
     
     preload: function () {
         
@@ -260,6 +261,7 @@ FullGame.Title.prototype = {
         this.blackScreenFadeTime = 0;
         this.blackScreenFadeIn = false;
         this.fadeIn();
+        FullGame.playMusic("title", .5);
     },
     
     update: function() {
@@ -301,14 +303,13 @@ FullGame.Title.prototype = {
                 this.blackScreen.alpha = this.blackScreenFadeTime / this.BLACK_SCREEN_FADE_DURATION;
                 if (this.blackScreen.alpha > .9999){
                     if (this.beginGameAfterFadeToBlack){
-                        
                         if (this.goToIntro){
                             this.state.start("Intro");
                         } else {
-                            //this.state.start("EndScene");
+                            //this.state.start("Credits");
                             this.state.start(FullGame.Vars.startMap);
                         }
-                        
+                        FullGame.fadeOutMusic(.5);
                     }
                 }
             } else {
@@ -462,6 +463,7 @@ FullGame.Title.prototype = {
                 }
                 this.text.backFromOptionsT.visible = true;
                 this.text.fullscreenInstructionsT.visible = true;
+                this.musicMutedAtStart = FullGame.Vars.musicMuted;
                 
             } else if (this.textSelected == this.text.saveWarningNoT){
                 
@@ -544,6 +546,14 @@ FullGame.Title.prototype = {
                 txt.fullscreenInstructionsT.visible = false;
                 txt.backFromOptionsT.visible = false;
                 this.saveWarningBlackScreen.visible = false;
+                
+                if (this.musicMutedAtStart != FullGame.Vars.musicMuted){
+                    if (FullGame.Vars.musicMuted){
+                        FullGame.stopMusic();
+                    } else {
+                        FullGame.playMusic("title", 0);
+                    }
+                }
 
             } else if (this.textSelected == this.text.closeGameT){
                 

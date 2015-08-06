@@ -157,7 +157,7 @@
      "bg":"space_no_bg",
      "bgParallaxX":".7",
      "bgParallaxY":".7",
-     "music":"level_blue"
+     "music":"title"
     },
  "tileheight":64,
  "tilesets":[

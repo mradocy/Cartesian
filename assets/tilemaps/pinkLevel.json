@@ -92,7 +92,7 @@
      "bg":"bg1",
      "bgParallaxX":".6",
      "bgParallaxY":".6",
-     "music":"begin_red"
+     "music":"title"
     },
  "tileheight":64,
  "tilesets":[

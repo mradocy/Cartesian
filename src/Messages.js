@@ -20,6 +20,12 @@ FullGame.Messages.onLevelStart = function() {
     } else if (sm == "firstOrb" && vms.indexOf(sm) == -1){
         if (this.msgFromText(sm))
             vms.push(sm); //ensures message won't be said again
+    } else if (sm == "firstReflect" && vms.indexOf(sm) == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
+    } else if (sm == "firstMultReflect" && vms.indexOf(sm) == -1){
+        if (this.msgFromText(sm))
+            vms.push(sm); //ensures message won't be said again
     } else if (sm == "trapped2" && vms.indexOf(sm) == -1){
         
         msgName = "???";
@@ -37,9 +43,7 @@ FullGame.Messages.onLevelStart = function() {
             msg = "And it has only been " + mins + " minutes so far!  That might just be a new record.";
         } else {
             var secs = Math.floor(playTime - (mins*60));
-            msg = "Your current time is " + mins + ":";
-            if (secs < 10) msg += "0";
-            msg += secs + "!  That's incredible!";
+            msg = "Not even 10 minutes have passed yet!  That's incredible!";
         }
         msgs.push(msg);
         msg = "Keep up the good work little robot.  You are certainly proving your worth.";
@@ -129,10 +133,7 @@ FullGame.Messages.onDoorOpen = function() {
     var lm = FullGame.Vars.lastMap;
     var vms = FullGame.Vars.messagesSaid;
     
-    if (sm == "firstReflect" && vms.indexOf(sm+"doorOpen") == -1){
-        if (this.msgFromText(sm))
-            vms.push(sm+"doorOpen"); //ensures message won't be said again
-    } else if (sm == "firstSand" && vms.indexOf(sm+"doorOpen") == -1){
+    if (sm == "firstSand" && vms.indexOf(sm+"doorOpen") == -1){
         if (this.msgFromText(sm))
             vms.push(sm+"doorOpen"); //ensures message won't be said again
     } else if (sm == "revisit" && vms.indexOf(sm+"doorOpen") == -1){

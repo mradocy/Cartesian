@@ -225,9 +225,11 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         var start = 0;
         var end = 0;
         var showAll = false;
+        var visibleMoreButton = false;
         if (this.secondPart){
             start = this.NUM_ROWS*this.NUM_COLUMNS;
             end = FullGame.levelNames.length;
+            visibleMoreButton = true;
         } else {
             start = 0;
             end = Math.min(FullGame.levelNames.length, this.NUM_ROWS*this.NUM_COLUMNS);
@@ -238,6 +240,7 @@ FullGame.makeLevelSelect = function(title, backFunction) {
         }
         if (this.konamiCode){
             showAll = true;
+            visibleMoreButton = true;
         }
         for (var i=start; i<end; i++){
             var ln = FullGame.levelNames[i];
@@ -256,6 +259,16 @@ FullGame.makeLevelSelect = function(title, backFunction) {
                 color:ln.color,
                 power:ln.power
             });
+        }
+        //if there exists visited levels that aren't being displayed, then the more button should be visible
+        for (i=end; i<FullGame.levelNames.length; i++){
+            ln = FullGame.levelNames[i];
+            var lnStr = ln.startMap;
+            if (ln.power)
+                lnStr += "P";
+            if (FullGame.Vars.levelsVisited.indexOf(lnStr) != -1){
+                visibleMoreButton = true;
+            }
         }
         
         
@@ -298,6 +311,7 @@ FullGame.makeLevelSelect = function(title, backFunction) {
             this.backText.y,
             "MORE",
             { font: "24px Verdana", fill: FullGame.Menus.UNSELECTED_COLOR });
+        this.moreText.visible = visibleMoreButton;
     };
     
     ret.textSelected = null;
