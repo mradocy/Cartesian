@@ -32,7 +32,7 @@
     <property name="blackWhenPower" value="true"/>
    </properties>
   </object>
-  <object name="por1" type="Portal" x="482" y="158" width="64" height="64">
+  <object name="por1" type="Portal" x="480" y="160" width="64" height="64">
    <properties>
     <property name="portalTo" value="por2"/>
    </properties>

@@ -48,6 +48,7 @@ var rooms = [
     "redRoplate",
     "multEyebots",
     "sandTrek",
+    "secret2",
     "useShooter", //29
     "star",
     "arena",

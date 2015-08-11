@@ -86,7 +86,7 @@
                  "name":"",
                  "properties":
                     {
-                     "mapTo":"otherMap"
+                     "mapTo":"secret2"
                     },
                  "type":"Exit",
                  "visible":true,

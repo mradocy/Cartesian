@@ -20,6 +20,9 @@ FullGame.Vars = {
     totalDeaths:0,
     totalDamages:0,
     levelsVisited:[],
+    secret1Obtained:false,
+    secret2Obtained:false,
+    secret3Obtained:false,
     showTimer:false,
     screenshotMode:false,
     
@@ -44,6 +47,9 @@ FullGame.Vars.fillDefaultValues = function() {
     FullGame.Vars.totalDamages = 0;
     FullGame.Vars.levelsVisited.splice(0, FullGame.Vars.levelsVisited.length);
     FullGame.Vars.levelsVisited.push("firstLevel");
+    FullGame.Vars.secret1Obtained = false;
+    FullGame.Vars.secret2Obtained = false;
+    FullGame.Vars.secret3Obtained = false;
     FullGame.Vars.showTimer = false;
 };
 
@@ -79,6 +85,12 @@ FullGame.Vars.saveData = function() {
     lStorage.totalDeaths = String(FullGame.Vars.totalDeaths);
     lStorage.totalDamages = String(FullGame.Vars.totalDamages);
     lStorage.levelsVisited = FullGame.Vars.levelsVisited.join();
+    if (FullGame.Vars.secret1Obtained) lStorage.secret1Obtained = "true";
+    else lStorage.secret1Obtained = "false";
+    if (FullGame.Vars.secret2Obtained) lStorage.secret2Obtained = "true";
+    else lStorage.secret2Obtained = "false";
+    if (FullGame.Vars.secret3Obtained) lStorage.secret3Obtained = "true";
+    else lStorage.secret3Obtained = "false";
     if (FullGame.Vars.showTimer) lStorage.showTimer = "true";
     else lStorage.showTimer = "false";
     
@@ -105,6 +117,11 @@ FullGame.Vars.loadData = function() {
     if (lStorage.levelsVisited == undefined){ //so old save files won't crash the game
         lStorage.levelsVisited = [];
     }
+    if (lStorage.secret1Obtained == undefined){
+        lStorage.secret1Obtained = "false";
+        lStorage.secret2Obtained = "false";
+        lStorage.secret3Obtained = "false";
+    }
     if (lStorage.created == undefined || lStorage.created != "true"){ 
         FullGame.Vars.fillDefaultValues();
         return;
@@ -124,6 +141,9 @@ FullGame.Vars.loadData = function() {
     FullGame.Vars.totalDeaths = Number(lStorage.totalDeaths);
     FullGame.Vars.totalDamages = Number(lStorage.totalDamages);
     FullGame.Vars.levelsVisited = lStorage.levelsVisited.split(",");
+    FullGame.Vars.secret1Obtained = (lStorage.secret1Obtained == "true");
+    FullGame.Vars.secret2Obtained = (lStorage.secret2Obtained == "true");
+    FullGame.Vars.secret3Obtained = (lStorage.secret3Obtained == "true");
     FullGame.Vars.showTimer = (lStorage.showTimer == "true");
     
 };

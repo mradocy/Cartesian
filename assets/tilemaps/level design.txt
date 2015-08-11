@@ -253,6 +253,14 @@ x Fix reticle flicker with colorchip
 x Fix aiming glitch with world wrap in Anex rematch
 	x If go to other side of screen, stop looking for player
 x Second slider level should be fixed so that correct position of slider is at top of path
+- SECRETS
+	- Ghost that appears briefly and flies away if you're getting through the game fast
+	- Only appear in levels with the secret rooms nearby?
+	- 3 secret rooms can be accessed by going through fake tiles in 3 levels.
+	- Lead to another puzzle.  Solving it will get you one of 3 gems.
+	- Unlocks a secret room underneath the "artifactRoom" level.
+		- Contains Evoas reference with fourth wall breaking?
+		- "THE SONATA NEVER ENDS", trace meloetta trapped scene from the pokemon anime
 
 
 Tips:
@@ -300,4 +308,29 @@ It has a beginning, middle, and end.  There's context for the player's actions. 
 Different levels.  Difficulty progression, 
 
 I had a good friend make the music, but
+
+
+
+
+
+Before we make an agreement, can I get a taste of how your art will look like?  Try recreating this screenshot https://i.imgur.com/udcMKyC.png.  Just a quick sketch is fine.  Read the first page of this doc for some more direction: https://docs.google.com/document/d/1HCpDtUScwwy74BkRfZSy6BO1A3ZHf8-GanoMkXaYDpU/edit?usp=sharing
+
+
+Workload:  This summarizes the above document.
+---
+Preferred: 6 tilesets, 6 backgrounds.
+Bare minimum: 4 tilesets.
+Maximum: the entire game.
+The workload is flexible.  I'd also like advice from you, as an artist, to what additionally should be done to polish the look of the game.
+
+Deadline:
+---
+August 23.  Can be extended to August 28 if you think it's not enough.  Unfortunately it won't be long until I can no longer dedicate my time to Cartesian, thus the tight deadline.
+
+Pay: I don't have a budget (and yet I'm still in the hole for spending a lot on legal business stuff).  I still want to grant a fair pay, to ensure a good relationship between us and decent quality work.
+---
+Here's what I'm thinking:
+$150 upfront,
+then 30/70 revenue share up to an additional $500 (so max is $650).
+So if the graphics can really sell the game, your cut can get more than quadrupled.  This entire offer is flexible, and I don't want you to feel you're getting ripped off.
 

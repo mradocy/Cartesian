@@ -161,6 +161,8 @@ FullGame.levelNames = [
     
     {name:"S1 - ???",
      startMap:"secret1", lastMap:"platforming1", color:FullGame.Til.RED, power:false},
+    {name:"S2 - ???",
+     startMap:"secret2", lastMap:"sandTrek", color:FullGame.Til.RED, power:false},
     
     
     

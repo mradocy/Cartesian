@@ -76,5 +76,10 @@
     <property name="springJump" value="false"/>
    </properties>
   </object>
+  <object type="Exit" x="0" y="128" width="64" height="192">
+   <properties>
+    <property name="mapTo" value="secret2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
