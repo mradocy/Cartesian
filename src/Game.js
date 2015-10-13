@@ -70,20 +70,22 @@ FullGame.Game.prototype = {
     create: function () {
         /* map will be created from the bottom up.
          * 0. bgGroup - Group of images with parallax implementation; does not follow camera conventionally
-         * 1. backTileGroup - Group that contains the backTile TilemapLayer
-         * 2. objGroup - Group of objects with collision, including the Player, orbs, switches, etc.
+         * 1. back2TileGroup - Another (optional) Group that contains the back2Tile TilemapLayer
+         * 2. backTileGroup - Group that contains the backTile TilemapLayer
+         * 3. objGroup - Group of objects with collision, including the Player, orbs, switches, etc.
          *      - player
          *      - objs []
-         * 3. laserGroup - Group that contains the Graphics for the lasers, and for laser particle effects
+         * 4. laserGroup - Group that contains the Graphics for the lasers, and for laser particle effects
          *      - laserG
-         * 4. tileGroup - Group that contains the main TilemapLayer, and animations for tiles breaking, etc.
+         * 5. tileGroup - Group that contains the main TilemapLayer, and animations for tiles breaking, etc.
          *      - map
-         * 5. frontGroup - Group that contains misc. objects in the front with no collision
+         * 6. frontGroup - Group that contains misc. objects in the front with no collision
          * X. HUD - the HUD.  This should be added to the Stage anyway
          *      - reticle
         */
         
         this.bgGroup = game.add.group(undefined, "bgGroup", false, false);
+        this.back2TileGroup = game.add.group(undefined, "back2TileGroup", false, false);
         this.backTileGroup = game.add.group(undefined, "backTileGroup", false, false);
         this.objGroup = game.add.group(undefined, "objGroup", false);
         this.laserGroup = game.add.group(undefined, "laserGroup", false, false);
@@ -181,7 +183,16 @@ FullGame.Game.prototype = {
         for (i=0; i<this.mapJSON.layers.length; i++){
             var layerName = this.mapJSON.layers[i].name;
             var layerType = this.mapJSON.layers[i].type;
-            if (layerName == "backTile"){
+            if (layerName == "back2Tile"){
+                if (layerType == "tilelayer"){
+                    this.back2TileLayer = this.tileMap.createLayer(layerName, undefined, undefined, this.back2TileGroup);
+                    if (game.device.safari || game.device.mobileSafari){
+                        this.backTileLayer.enableScrollData = false;
+                    }
+                } else {
+                    console.log("ERROR: Tiled layer '" + layerName + "' should be of type tilelayer");
+                }
+            } else if (layerName == "backTile"){
                 if (layerType == "tilelayer"){
                     this.backTileLayer = this.tileMap.createLayer(layerName, undefined, undefined, this.backTileGroup);
                     if (game.device.safari || game.device.mobileSafari){

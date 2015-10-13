@@ -24,7 +24,9 @@ FullGame.makeDoor = function(game, horizontally, color, autoClose) {
         spriteKey2 = "door_red_2";
     }
     door1 = game.add.sprite(0, 0, spriteKey1, undefined, FullGame.GI.objGroup);
+    door1.anchor.setTo(3.0/67, 0);
     door2 = game.add.sprite(0, 0, spriteKey2, undefined, FullGame.GI.objGroup);
+    door2.anchor.setTo(3.0/67, 0);
     door1.door2 = door2;
     door2.door1 = door1;
     

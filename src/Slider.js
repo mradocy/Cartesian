@@ -16,11 +16,12 @@ FullGame.makeSlider = function(cx, cy, color) {
     }
     sl = game.add.sprite(cx, cy, spriteKey, undefined, FullGame.GI.objGroup);
     sl.anchor.setTo(.5, .5); //sprite is centered
-    game.physics.enable(sl, Phaser.Physics.ARCADE);
-    sl.body.immovable = true;
-    sl.color = color;
     sl.WIDTH = 115;
     sl.HEIGHT = 59;
+    game.physics.enable(sl, Phaser.Physics.ARCADE);
+    sl.body.immovable = true;
+    sl.body.setSize(sl.WIDTH, sl.HEIGHT, 0, 0);
+    sl.color = color;
     sl.isSlider = true;
     sl.pathName = "";
     sl.searchedForPath = false;

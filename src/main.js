@@ -12,7 +12,7 @@ var DOMElement = 'game';
  * param 6: use transparent canvas or not (bool)
  * param 7: use anti-aliasing (default is true)
  * param 8: physics configuration obect to pass to the Physics world on creation */
-var game = new Phaser.Game(SCREEN_WIDTH, SCREEN_HEIGHT, /*Phaser.AUTO*/Phaser.CANVAS, DOMElement, null, false, true);
+var game = new Phaser.Game(SCREEN_WIDTH, SCREEN_HEIGHT, /*Phaser.AUTO*//*Phaser.CANVAS*/Phaser.WEBGL, DOMElement, null, false, true);
 
 game.state.add('Preloader', FullGame.Preloader);
 

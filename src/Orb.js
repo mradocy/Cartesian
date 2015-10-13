@@ -9,7 +9,7 @@ FullGame.makeOrb = function(game, colorFromTiled, blackWhenPower, finalEye) {
     if (blackWhenPower && FullGame.Vars.playerLaserType == FullGame.Til.LASER_THICK){
         color = FullGame.Til.BLACK;
     }
-    var scaleSmaller = true;
+    var scaleSmaller = false; //new sprites so this is always false
     if (finalEye){
         spriteKey = "final_eye";
         glowSpriteKey = "final_eye_glow";

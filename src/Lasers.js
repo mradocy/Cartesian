@@ -54,10 +54,10 @@ FullGame.Lasers = {
     COLOR_PURPLE2_F1:0xA812A8,
     
     //laser thickness, alpha constants
-    THICKNESS_NORMAL1:4, //outer part of normal laser
-    THICKNESS_NORMAL2:1, //inner part of normal laser
-    ALPHA_NORMAL1:.6, //outer part of normal laser
-    ALPHA_NORMAL2:.9, //inner part of normal laser
+    THICKNESS_NORMAL1:5, //outer part of normal laser
+    THICKNESS_NORMAL2:3, //inner part of normal laser
+    ALPHA_NORMAL1:.9,//.6, //outer part of normal laser
+    ALPHA_NORMAL2:1.0,//.9, //inner part of normal laser
     THICKNESS_TRANSPARENT:4,
     ALPHA_TRANSPARENT:.15,
     THICKNESS_THICK1:12,
@@ -77,9 +77,9 @@ FullGame.Lasers = {
     PARTICLE_LIFE_DURATION:.25,
     PARTICLE_ALPHA1:1,
     PARTICLE_ALPHA2:1,
-    PARTICLE_THICKNESS1_MIN:1,
-    PARTICLE_THICKNESS1_MAX:2,
-    PARTICLE_THICKNESS2:1,
+    PARTICLE_THICKNESS1_MIN:2,//1,
+    PARTICLE_THICKNESS1_MAX:3,//2,
+    PARTICLE_THICKNESS2:2,
     
     SIGHT_ALPHA:.9,
     SIGHT_RADIUS:7,
@@ -93,6 +93,12 @@ FullGame.Lasers = {
 //make graphics object to handle all lasers
 FullGame.Lasers.makeGraphics = function() {
     this.graphics = game.add.graphics(0, 0, FullGame.GI.laserGroup);
+    
+    var blurX = game.add.filter('BlurX');
+    var blurY = game.add.filter('BlurY');
+    this.graphics.filters = [blurX, blurY];
+    
+    
     this.tilesFilled = [];
     for (var x=0; x<FullGame.GI.tileCols.length; x++){
         var col = [];
@@ -546,7 +552,8 @@ FullGame.Lasers.fireLaser = function(startX, startY, cosHeading, sinHeading, col
             }
             
             //create laserburn
-            if (!tileWillBeDestroyed &&
+            if (false && //disabled for now
+                !tileWillBeDestroyed &&
                 (laserType == FullGame.Til.LASER_NORMAL ||
                  laserType == FullGame.Til.LASER_THICK)) {
                 
@@ -863,7 +870,11 @@ FullGame.Lasers.withinDist = function(x0, y0, x1, y1, dist){
 FullGame.Lasers.updateGraphics = function() {
     
     var dt = game.time.physicsElapsed;
-    this.flicker = (this.flicker+1) % 2;
+    
+    //disabling flicker for now
+    //this.flicker = (this.flicker+1) % 2;
+    
+    
     //purposefully applying particle time threshold out of order so particles get a chance to spawn
     this.particleTime -= this.PARTICLE_SPAWN_DURATION * Math.floor(this.particleTime / this.PARTICLE_SPAWN_DURATION);
     this.particleTime += dt;

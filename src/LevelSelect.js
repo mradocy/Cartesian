@@ -28,7 +28,7 @@ FullGame.levelNames = [
     {name:"14 - Perception",
      startMap:"trapped3", lastMap:"trapped2", color:FullGame.Til.RED, power:false},
     {name:"15 - Red Door",
-     startMap:"reflectOffDoor", lastMap:"trapped3", color:FullGame.Til.RED, power:false},
+    /*work here */ startMap:"reflectOffDoor", lastMap:"trapped3", color:FullGame.Til.RED, power:false},
     {name:"16 - Hazardous Oculroids",
      startMap:"blueEyebot", lastMap:"reflectOffDoor", color:FullGame.Til.RED, power:false},
     {name:"17 - Another Angle",

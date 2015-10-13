@@ -40,6 +40,14 @@ FullGame.Preloader.prototype = {
         game.load.image('black_tiles', 'assets/tilemaps/tiles/black_tiles.png');
         game.load.image('white_tiles', 'assets/tilemaps/tiles/white_tiles.png');
         game.load.image('mixed_tiles', 'assets/tilemaps/tiles/mixed_tiles.png');
+        
+        game.load.image('black_tiles_extra', 'assets/tilemaps/tiles/black_tiles_extra.png');
+        game.load.image('glow_purple', 'assets/tilemaps/tiles/glow_purple_transp.png');
+        game.load.image('glow_white', 'assets/tilemaps/tiles/glow_white_transp.png');
+        game.load.image('glow_red', 'assets/tilemaps/tiles/glow_red_transp.png');
+        game.load.image('glow_blue', 'assets/tilemaps/tiles/glow_blue_transp.png');
+        game.load.image('glow_green', 'assets/tilemaps/tiles/glow_green_transp.png');
+        
         game.load.image('red_tiles', 'assets/tilemaps/tiles/red_tiles.png');
         game.load.image('red_black_tiles', 'assets/tilemaps/tiles/red_black_tiles.png');
         game.load.image('blue_tiles', 'assets/tilemaps/tiles/blue_tiles.png');
@@ -51,6 +59,12 @@ FullGame.Preloader.prototype = {
         game.load.image('sand_tiles', 'assets/tilemaps/tiles/sand_tiles.png');
         game.load.image('novis_editor', 'assets/tilemaps/tiles/novis.png'); //switched with invisible tile
         game.load.image('red_indestructable', 'assets/tilemaps/tiles/red_indestructable.png');
+        
+        game.load.image('shadow_black', 'assets/tilemaps/tiles/shadow_black.png');
+        
+        game.load.script('filterX', 'src/BlurX.js');
+        game.load.script('filterY', 'src/BlurY.js');
+        
         
         //loading backgrounds
         game.load.image('space1', 'assets/img/bgs/space1.png');
@@ -68,11 +82,12 @@ FullGame.Preloader.prototype = {
         game.load.image('dust_blue2', 'assets/img/bgs/dust_blue2.png');
         game.load.image('dust_green1', 'assets/img/bgs/dust_green1.png');
         game.load.image('dust_green2', 'assets/img/bgs/dust_green2.png');
-        game.load.image('bg1', 'assets/img/bgs/bg1.jpg');
+        game.load.image('bg1', 'assets/img/bgs/bg1.png');
         game.load.spritesheet("sand_parts", 'assets/img/bgs/particles/sand_parts.png', 16, 16, 5);
         game.load.image('bg2', 'assets/img/bgs/bg2.jpg');
         game.load.image('bg3', 'assets/img/bgs/bg3.jpg');
-        game.load.image('bg4', 'assets/img/bgs/bg4.jpg');
+        //game.load.image('bg4', 'assets/img/bgs/bg4.jpg');
+        game.load.image('bg4', 'assets/img/bgs/bg4.png');
         game.load.image('bg5', 'assets/img/bgs/bg5.png');
         
         game.load.image('bg4_red', 'assets/img/bgs/bg4_red.jpg');

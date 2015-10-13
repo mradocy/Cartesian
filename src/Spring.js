@@ -72,7 +72,7 @@ FullGame.makeSpring = function(x, y, jumpHeight) {
         this.laserLines[3].x1 = left;
         this.laserLines[3].y1 = top;
     };
-    sp.setLaserLines(-64, -6, 64, 40);
+    sp.setLaserLines(-60, -6, 60, 38);
     sp.frameHeightDiff = [-12, -22, -29, -34, -29, -24, -19, -15, -11, -8, -5, -2, 0];
     
     sp.afterCollision = function() {

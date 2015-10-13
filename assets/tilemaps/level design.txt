@@ -334,3 +334,6 @@ $150 upfront,
 then 30/70 revenue share up to an additional $500 (so max is $650).
 So if the graphics can really sell the game, your cut can get more than quadrupled.  This entire offer is flexible, and I don't want you to feel you're getting ripped off.
 
+
+Todo:
+roplate and slider sprites are a bit bigger, fix this
